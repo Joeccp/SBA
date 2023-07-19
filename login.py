@@ -31,33 +31,36 @@ def login() -> int:
 	relative_path = "accounts.toml"
 	full_path = os.path.join(absolute_path, relative_path)
 	# ****************************************************
-	
-	with open(full_path, 'rb') as file:
-		file_data: dict[str, Any] = tomllib.load(file)
-		account_list: list[dict[str, str]] = list(file_data.values())
-		while True:
-			username: str = input("Username: ")
-			username: str = username.strip()
-			username_exists: bool = False
-			for account in account_list:
-				if account["name"] == username:
-					username_exists: bool = True
-					user_account: dict[str, str] = account
-			if not username_exists:
-				print("Username does not exists, please try again.")
-				continue
-			# Make sure you use cmd.exe or powershell.exe
-			# getpass() in python terminal inside IDE may not work
-			password: str = getpass("\rPassword: ")
-			hashed_password: str = hash(password)
-			if user_account["hashed_password"] == hashed_password:
-				if user_account["name"] == "admin":
-					return 1
+	try:
+		with open(full_path, 'rb') as file:
+			file_data: dict[str, Any] = tomllib.load(file)
+			account_list: list[dict[str, str]] = list(file_data.values())
+			while True:
+				username: str = input("Username: ")
+				username: str = username.strip()
+				username_exists: bool = False
+				for account in account_list:
+					if account["name"] == username:
+						username_exists: bool = True
+						user_account: dict[str, str] = account
+				if not username_exists:
+					print("Username does not exists, please try again.")
+					continue
+				# Make sure you use cmd.exe or powershell.exe
+				# getpass() in python terminal inside IDE may not work
+				password: str = getpass("\rPassword: ")
+				hashed_password: str = hash(password)
+				if user_account["hashed_password"] == hashed_password:
+					if user_account["name"] == "admin":
+						return 1
+					else:
+						return 0
 				else:
-					return 0
-			else:
-				print("Password incorrect, please try again.")
-				continue
+					print("Password incorrect, please try again.")
+					continue
+	except FileNotFoundError as error:
+		print("Cannot find accounts.toml which is necessary for the login function.")
+		print("Exiting the program...")
 
 
 if __name__ == '__main__':

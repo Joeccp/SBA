@@ -39,8 +39,14 @@ class House:
 		if n_column < 1:
 			err_msg: str = f"Number of columns must be larger than 0"
 			raise ValueError(err_msg)
+		# A-Z & AA-ZZ represents (26 + 26*26) = 702 possibilities,
+		# it is believed that this is very enough for any normal use case
+		if n_row > 702:
+			err_msg: str = f"Number of row too big (>702)"
+			raise ValueError(err_msg)
 		
-		# Update information of House
+		
+		# Update information of inside the House class
 		House.house_count += 1
 		House.house_table[House.house_count] = self
 		
