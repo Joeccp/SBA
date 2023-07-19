@@ -1,1 +1,1 @@
-from __main__ import main
+# EMPTY AS INTENDED

@@ -6,7 +6,7 @@ import os
 
 
 def hash(password: str) -> str:
-	"""Hash the given password using sha3_512
+	"""Hash the given password using `sha3_512`
 	:param password: Password to be hashed
 	:type password: str
 	:return: Hashed password (hexadecimal)
