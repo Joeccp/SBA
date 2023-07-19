@@ -48,7 +48,7 @@ def login() -> int:
 					continue
 				# Make sure you use cmd.exe or powershell.exe
 				# getpass() in python terminal inside IDE may not work
-				password: str = getpass("\rPassword: ")
+				password: str = getpass("Password: ")
 				hashed_password: str = hash(password)
 				if user_account["hashed_password"] == hashed_password:
 					if user_account["name"] == "admin":
