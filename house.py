@@ -176,6 +176,7 @@ class House:
 		
 		Please use `House.getSeatStatus()` to check the status of the seat,
 		and use `House.plan` for iteration and loops instead.
+		(As `House.getSeatStatus()` does more checking and may provide more detailed information when something is wrong)
 		
 		It does not do any checking.
 		
@@ -187,12 +188,14 @@ class House:
 	
 	def __setitem__(self, key, value) -> None:
 		"""
+		(Equals to `house[key] = value` where `house` is a `House` instance)
+		It is ***NOT RECOMMENDED*** to use this method or do `house[key] = value`.
 		
-		...
 		
-		Please use `House.buy()`, `House.reserve()`, `House.setSeatEmpty()` to set the status of the seat instead.
+		Please use `House.buy()`, `House.reserve()`, `House.setSeatEmpty()` to change the status of the seat instead.
+		(As these methods do more checking and may provide more detailed information when something is wrong)
 		
-		...
+		It does not do any checking.
 		
 		
 		:param key:
