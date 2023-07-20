@@ -57,7 +57,7 @@ class House:
 		self.max: int = n_row * n_column
 		self.plan: list = [[Status.EMPTY for i in range(n_column)] for j in range(n_row)]
 		self.id: int = House.house_count
-		self.available: int = self.max
+		self.available: int = self.max  # Number of empty seats
 	
 	def __str__(self) -> str:
 		...
@@ -72,7 +72,7 @@ class House:
 		It does not check whether the seat is already sold or not.
 		(However it does check whether row and column number of the seat is valid or not.)
 		
-		:param row_number: Row number of the seat, starts from 1
+		:param row_number: Row number of the seat, starts from 0
 		:type row_number: int
 		:param column_number: Column number of the seat, is an integer instead of an alphabet, starts from 1
 		:type column_number: int
@@ -109,7 +109,49 @@ class House:
 		
 	
 	def reserve(self, row_number, column_number) -> None:
-		...
+		"""
+		Reserve the seat with the corresponding row and column number.
+		Column number is an integer instead of an alphabet.
+		Row and column number starts from 0.
+		
+		Specifically it changes the seat status to `Status.RESERVED`.
+		It does check whether the seat is already reserved or not,
+		but the checking will not affect anything other than `self.available`.
+		(Also it does check whether row and column number of the seat is valid or not.)
+		
+		:param row_number: Row number of the seat, starts from 0
+		:type row_number: int
+		:param column_number: Column number of the seat, is an integer instead of an alphabet, starts from 1
+		:type column_number: int
+		"""
+		if type(row_number) is not int:
+			err_msg: str = f"Row number must be a string, not {type(row_number).__name__}"
+			raise TypeError(err_msg)
+		if type(column_number) is not int:
+			err_msg: str = f"Column number must be a string, not {type(column_number).__name__}"
+			raise TypeError(err_msg)
+		if row_number < 0:
+			err_msg: str = f"Row number must be larger than 0"
+			raise ValueError(err_msg)
+		if column_number < 0:
+			err_msg: str = f"Column number must be larger than 0"
+			raise ValueError(err_msg)
+		if row_number == self.n_row:
+			err_msg: str = f"No such row (row number too big) (row number starts from 0)"
+			raise ValueError(err_msg)
+		if column_number == self.n_column:
+			err_msg: str = f"No such column (column number too big) (column number starts from 0)"
+			raise ValueError(err_msg)
+		if row_number >= self.n_row:
+			err_msg: str = f"No such row (row number too big)"
+			raise ValueError(err_msg)
+		if column_number >= self.n_column:
+			err_msg: str = f"No such column (column number too big)"
+			raise ValueError(err_msg)
+		
+		if self.plan[row_number][column_number] == Status.SOLD:
+			self.available: int = self.available + 1
+		self.plan[row_number][column_number]: Status = Status.RESERVED
 	
 	def getSeatStatus(self, row_number, column_number) -> Status:
 		...
@@ -124,33 +166,41 @@ class House:
 	# implications should be understood and the case carefully weighed
 	# before implementing any behavior described with this label.
 	#
-	# Human language: Just DON'T!
+	# Human language: Just don't!
 	
 	def __getitem__(self, item: int) -> list[Status]:
 		"""
 		(Equals to `house[item]` where `house` is a `House` instance)
 		It is ***NOT RECOMMENDED*** to use this method or do `House[item]`.
 		
+		It returns the whole row based on the item,
+		which is in here, the row number starts from 0.
 		
 		Please use `House.getSeatStatus()` to check the status of the seat,
 		and use `House.plan` for iteration and loops instead.
+		(As `House.getSeatStatus()` does more checking and may provide more detailed information when something is wrong)
 		
 		It does not do any checking.
 		
 		:param item: Row number
 		:type item: int
-		:return: list[Status]
+		:return: The whole row based on the item, which is the row number (starts from 0)
+		:rtype: list[Status]
 		"""
+		row: list[Status] = self.plan[index]
+		return row
 		
 	
 	def __setitem__(self, key, value) -> None:
 		"""
+		(Equals to `house[key] = value` where `house` is a `House` instance)
+		It is ***NOT RECOMMENDED*** to use this method or do `house[key] = value`.
 		
-		...
 		
-		Please use `House.buy()`, `House.reserve()`, `House.setSeatEmpty()` to set the status of the seat instead.
+		Please use `House.buy()`, `House.reserve()`, `House.setSeatEmpty()` to change the status of the seat instead.
+		(As these methods do more checking and may provide more detailed information when something is wrong)
 		
-		...
+		It does not do any checking.
 		
 		
 		:param key:
