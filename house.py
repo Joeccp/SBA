@@ -173,6 +173,8 @@ class House:
 		(Equals to `house[item]` where `house` is a `House` instance)
 		It is ***NOT RECOMMENDED*** to use this method or do `House[item]`.
 		
+		It returns the whole row based on the item,
+		which is in here, the row number starts from 0.
 		
 		Please use `House.getSeatStatus()` to check the status of the seat,
 		and use `House.plan` for iteration and loops instead.
@@ -182,8 +184,11 @@ class House:
 		
 		:param item: Row number
 		:type item: int
-		:return: list[Status]
+		:return: The whole row based on the item, which is the row number (starts from 0)
+		:rtype: list[Status]
 		"""
+		row: list[Status] = self.plan[index]
+		return row
 		
 	
 	def __setitem__(self, key, value) -> None:
