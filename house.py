@@ -124,7 +124,7 @@ class House:
 	# implications should be understood and the case carefully weighed
 	# before implementing any behavior described with this label.
 	#
-	# Human language: Just DON'T!
+	# Human language: Just don't!
 	
 	def __getitem__(self, item: int) -> list[Status]:
 		"""
