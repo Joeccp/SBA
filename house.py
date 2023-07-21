@@ -1,225 +1,66 @@
-"""Defines the House class"""
-
-from seatstatus import Status
+"""Defines House"""
 from typing import Self
+from common import clearScreen
 
 
 class House:
-	"""A 2D rectangular house in a cinema"""
+	"""
+	A rectangular house of a cinema
 	
-	house_count: int = 0
-	house_table: dict[int, Self] = {}
+	In the seating plan,
+	0 = Empty (O)
+	1 = Sold (X)
+	2 = Reserved (!)
+	"""
 	
-	def __init__(self, name: str, n_row: int, n_column: int) -> None:
+	n_House: int = 0
+	table: dict[int, Self] = {}
+	
+	def __init__(self, *,  row_number: int, column_number: int) -> None:
 		"""
-		Create a House instance.
-		
-		:param name: Name of the house. Leading, and trailing whitespaces will be removed automatically.
-		:type name: str
-		:param n_row: Number of rows in the house, must be an int >= 1
-		:type n_row: int
-		:param n_column: Number of columns in the house, must be an int >= 1
-		:type n_column: int
+		0 < row_number < 100
+		0 < column_number < 27
 		"""
-		
-		# Check arguments
-		if type(name) is not str:
-			err_msg: str = f"House name must be a string, not {type(name).__name__}"
-			raise TypeError(err_msg)
-		name: str = name.strip()
-		if type(n_row) is not int:
-			err_msg: str = f"Number of rows must be a string, not {type(name).__name__}"
-			raise TypeError(err_msg)
-		if type(n_column) is not int:
-			err_msg: str = f"HNumber of columns must be a string, not {type(name).__name__}"
-			raise TypeError(err_msg)
-		if n_row < 1:
-			err_msg: str = f"Number of rows must be larger than 0"
-			raise ValueError(err_msg)
-		if n_column < 1:
-			err_msg: str = f"Number of columns must be larger than 0"
-			raise ValueError(err_msg)
-		# A-Z & AA-ZZ represents (26 + 26*26) = 702 possibilities,
-		# it is believed that this is very enough for any normal use case
-		if n_row > 702:
-			err_msg: str = f"Number of row too big (>702)"
-			raise ValueError(err_msg)
-		
-		
-		# Update information of inside the House class
-		House.house_count += 1
-		House.house_table[House.house_count] = self
-		
-		# Initialize properties
-		self.name: str = name
-		self.n_row: int = n_row
-		self.n_column: int = n_column
-		self.max: int = n_row * n_column
-		self.plan: list = [[Status.EMPTY for i in range(n_column)] for j in range(n_row)]
-		self.id: int = House.house_count
-		self.available: int = self.max  # Number of empty seats
+		self.n_row: int = row_number
+		self.n_column: int = column_number
+		self.plan: list[list[int]] = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
+		House.n_House += 1
+		self.house_number: int = House.n_House
+		House.table[self.house_number] = self
+		self.movie = ''
+
 	
-	def __str__(self) -> str:
-		...
-	
-	def buy(self, row_number: int, column_number: int) -> None:
-		"""
-		Buy the seat with the corresponding row and column number.
-		Column number is an integer instead of an alphabet.
-		Row and column number starts from 0.
-		
-		Specifically it changes the seat status to `Status.SOLD`.
-		It does not check whether the seat is already sold or not.
-		(However it does check whether row and column number of the seat is valid or not.)
-		
-		:param row_number: Row number of the seat, starts from 0
-		:type row_number: int
-		:param column_number: Column number of the seat, is an integer instead of an alphabet, starts from 1
-		:type column_number: int
-		"""
-		if type(row_number) is not int:
-			err_msg: str = f"Row number must be a string, not {type(row_number).__name__}"
-			raise TypeError(err_msg)
-		if type(column_number) is not int:
-			err_msg: str = f"Column number must be a string, not {type(column_number).__name__}"
-			raise TypeError(err_msg)
-		if row_number < 0:
-			err_msg: str = f"Row number must be larger than 0"
-			raise ValueError(err_msg)
-		if column_number < 0:
-			err_msg: str = f"Column number must be larger than 0"
-			raise ValueError(err_msg)
-		if row_number == self.n_row:
-			err_msg: str = f"No such row (row number too big) (row number starts from 0)"
-			raise ValueError(err_msg)
-		if column_number == self.n_column:
-			err_msg: str = f"No such column (column number too big) (column number starts from 0)"
-			raise ValueError(err_msg)
-		if row_number >= self.n_row:
-			err_msg: str = f"No such row (row number too big)"
-			raise ValueError(err_msg)
-		if column_number >= self.n_column:
-			err_msg: str = f"No such column (column number too big)"
-			raise ValueError(err_msg)
-		
-		
-		self.plan[row_number][column_number]: Status = Status.SOLD
-		self.available: int = self.available - 1
-		
-		
-	
-	def reserve(self, row_number, column_number) -> None:
-		"""
-		Reserve the seat with the corresponding row and column number.
-		Column number is an integer instead of an alphabet.
-		Row and column number starts from 0.
-		
-		Specifically it changes the seat status to `Status.RESERVED`.
-		It does check whether the seat is already reserved or not,
-		but the checking will not affect anything other than `self.available`.
-		(Also it does check whether row and column number of the seat is valid or not.)
-		
-		:param row_number: Row number of the seat, starts from 0
-		:type row_number: int
-		:param column_number: Column number of the seat, is an integer instead of an alphabet, starts from 1
-		:type column_number: int
-		"""
-		if type(row_number) is not int:
-			err_msg: str = f"Row number must be a string, not {type(row_number).__name__}"
-			raise TypeError(err_msg)
-		if type(column_number) is not int:
-			err_msg: str = f"Column number must be a string, not {type(column_number).__name__}"
-			raise TypeError(err_msg)
-		if row_number < 0:
-			err_msg: str = f"Row number must be larger than 0"
-			raise ValueError(err_msg)
-		if column_number < 0:
-			err_msg: str = f"Column number must be larger than 0"
-			raise ValueError(err_msg)
-		if row_number == self.n_row:
-			err_msg: str = f"No such row (row number too big) (row number starts from 0)"
-			raise ValueError(err_msg)
-		if column_number == self.n_column:
-			err_msg: str = f"No such column (column number too big) (column number starts from 0)"
-			raise ValueError(err_msg)
-		if row_number >= self.n_row:
-			err_msg: str = f"No such row (row number too big)"
-			raise ValueError(err_msg)
-		if column_number >= self.n_column:
-			err_msg: str = f"No such column (column number too big)"
-			raise ValueError(err_msg)
-		
-		if self.plan[row_number][column_number] == Status.SOLD:
-			self.available: int = self.available + 1
-		self.plan[row_number][column_number]: Status = Status.RESERVED
-	
-	def getSeatStatus(self, row_number, column_number) -> Status:
-		...
-	
-	def setSeatEmpty(self, row_number, column, number) -> None:
-		...
-	
-	# RFC 2119 --
-	# The phrase "NOT RECOMMENDED" means that
-	# there may exist valid reasons in particular circumstances when the
-	# particular behavior is acceptable or even useful, but the full
-	# implications should be understood and the case carefully weighed
-	# before implementing any behavior described with this label.
-	#
-	# Human language: Just don't!
-	
-	def __getitem__(self, item: int) -> list[Status]:
-		"""
-		(Equals to `house[item]` where `house` is a `House` instance)
-		It is ***NOT RECOMMENDED*** to use this method or do `House[item]`.
-		
-		It returns the whole row based on the item,
-		which is in here, the row number starts from 0.
-		
-		Please use `House.getSeatStatus()` to check the status of the seat,
-		and use `House.plan` for iteration and loops instead.
-		(As `House.getSeatStatus()` does more checking and may provide more detailed information when something is wrong)
-		
-		It does not do any checking.
-		
-		:param item: Row number
-		:type item: int
-		:return: The whole row based on the item, which is the row number (starts from 0)
-		:rtype: list[Status]
-		"""
-		row: list[Status] = self.plan[index]
-		return row
-		
-	
-	def __setitem__(self, key, value) -> None:
-		"""
-		(Equals to `house[key] = value` where `house` is a `House` instance)
-		It is ***NOT RECOMMENDED*** to use this method or do `house[key] = value`.
-		
-		
-		Please use `House.buy()`, `House.reserve()`, `House.setSeatEmpty()` to change the status of the seat instead.
-		(As these methods do more checking and may provide more detailed information when something is wrong)
-		
-		It does not do any checking.
-		
-		
-		:param key:
-		:param value:
-		:return:
-		"""
+	def clearPlan(self) -> None:
+		self.plan: list[list[int]] = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
 	
 	
-	def __class_getitem__(cls, item) -> Self:
-		"""
-		Equals to `House[item]`
-		
-		:param item:
-		:return:
-		"""
-	
-	
-	
-	
+	def printPlan(self) -> None:
+		line_length: int = self.n_column * 2 + 1
+		print(f"    {'[Screen]':^{line_length}}")
+		print('    ' + '_' * line_length)
+		print('    |', end='')
+		for i in range(self.n_column):
+			print(chr(i+65), end='|')
+		print()
+		print('    ' + '-' * line_length)
+		for row in range(self.n_row):
+			print(f'{row+1:<2}  |', end='')
+			for column in range(self.n_column):
+				match self.plan[row][column]:
+					case 0:
+						symbol = 'O'
+					case 1:
+						symbol = 'X'
+					case 2:
+						symbol = '!'
+				print(symbol, end='|')
+			print(f'  {row+1:>2}')
+			print('    ' + '-' * line_length)
+
+
 
 if __name__ == '__main__':
-	...
+	r = int(input("Row number:"))
+	c = int(input("Column number:"))
+	house = House(row_number=r, column_number=c)
+	house.print()
