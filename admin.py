@@ -3,6 +3,7 @@
 from colour import Colour, normal, row_colour, column_colour
 from House import House
 from common import clearScreen
+import pickle
 
 
 def adminMode() -> None:
@@ -109,11 +110,21 @@ def adminMode() -> None:
 		
 		# Save data
 		elif mode == '3':
-			...
+			"""JUST A TEST. NEED REWRITE"""
+			with open("data/table", 'wb') as file:
+				# No need dump House.n_house, just count it later
+				pickle.dump(House.table, file)
 		
 		# Load data
 		elif mode == '4':
-			...
+			"""JUST A TEST. NEED REWRITE"""
+			with open("data/table", 'rb') as file:
+				data: dict = pickle.load(file)
+				print(data)
+				print(data.items())
+				for house in data.values():
+					print(f"House {house} is playing {house.house_number}")
+					house.printPlan()
 		
 		# Check houses information
 		elif mode == '5':
