@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3a94878-c2cf-4ee4-a230-c114be96411f" name="更改" comment="Admin mode -- buy, reserve and empty a seat">
+    <list default="true" id="c3a94878-c2cf-4ee4-a230-c114be96411f" name="更改" comment="Last save before opening new branch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/House.py" beforeDir="false" afterPath="$PROJECT_DIR$/House.py" afterDir="false" />
     </list>
@@ -97,7 +97,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690029924536</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Last save before opening new branch">
+      <option name="closed" value="true" />
+      <created>1690030644056</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1690030644056</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -117,6 +125,7 @@
     <MESSAGE value="Create different colour codes" />
     <MESSAGE value="Admin mode -- House creation and movie update" />
     <MESSAGE value="Admin mode -- buy, reserve and empty a seat" />
-    <option name="LAST_COMMIT_MESSAGE" value="Admin mode -- buy, reserve and empty a seat" />
+    <MESSAGE value="Last save before opening new branch" />
+    <option name="LAST_COMMIT_MESSAGE" value="Last save before opening new branch" />
   </component>
 </project>
