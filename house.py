@@ -1,6 +1,5 @@
 """Defines House"""
 from typing import Self
-from common import clearScreen
 
 
 class House:
@@ -66,3 +65,4 @@ if __name__ == '__main__':
 	c = int(input("Column number:"))
 	house = House(row_number=r, column_number=c)
 	house.printPlan()
+	
