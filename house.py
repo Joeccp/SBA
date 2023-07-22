@@ -38,7 +38,7 @@ class House:
 	
 	def printPlan(self) -> None:
 		line_length: int = self.n_column * 2 + 1
-		print(f"    {'[Screen]':^{line_length}}")
+		print(f"{'[Screen Here]':^{line_length+8}}")
 		print('    ' + '_' * line_length)
 		print('    |', end='')
 		for i in range(self.n_column):

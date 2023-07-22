@@ -21,6 +21,11 @@ def main() -> None:
 		else:
 			break
 	adminMode()
+	while True:
+		if login() == 1:
+			adminMode()
+		else:
+			...
 	
 
 
