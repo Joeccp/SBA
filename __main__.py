@@ -1,6 +1,15 @@
+"""Main program"""
+from House import House
+from common import clearScreen, checkPythonVersion
+from login import login
+from typing import *
+
+
 def main() -> None:
-	"""Main function of the program"""
-	print("This is a main function")
+	checkPythonVersion()
+	clearScreen()
+	print("")
+
 
 
 if __name__ == '__main__':

@@ -27,7 +27,9 @@ class House:
 		House.n_House += 1
 		self.house_number: int = House.n_House
 		House.table[self.house_number] = self
-		self.movie = ''
+		self.movie: str = ''
+		self.n_seat: int = self.n_row * self.n_column
+		self.available: int = self.n_seat
 
 	
 	def clearPlan(self) -> None:
@@ -63,4 +65,4 @@ if __name__ == '__main__':
 	r = int(input("Row number:"))
 	c = int(input("Column number:"))
 	house = House(row_number=r, column_number=c)
-	house.print()
+	house.printPlan()
