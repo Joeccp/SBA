@@ -24,13 +24,10 @@ def login() -> int:
 	:rtype: int
 	"""
 	
-	# Obtain the relative path
-	# Credit: https://towardsthecloud.com/get-relative-path-python
-	# ****************************************************
+	# Obtain the full path of the file
 	absolute_path = os.path.dirname(__file__)
 	relative_path = "accounts.toml"
 	full_path = os.path.join(absolute_path, relative_path)
-	# ****************************************************
 	try:
 		with open(full_path, 'rb') as file:
 			file_data: dict[str, Any] = tomllib.load(file)
@@ -57,8 +54,8 @@ def login() -> int:
 						return 0
 				else:
 					print("Password incorrect, please try again.")
-					continue
-	except FileNotFoundError as error:
+
+	except FileNotFoundError:
 		print("Cannot find accounts.toml which is necessary for the login function.")
 		print("Exiting the program...")
 
