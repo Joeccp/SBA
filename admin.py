@@ -110,6 +110,11 @@ def adminMode() -> None:
 		elif mode == '3':
 			absolute_path = os.path.dirname(__file__)
 			
+			relative_path = 'data'
+			full_path = os.path.join(absolute_path, relative_path)
+			if not os.path.isdir(full_path):
+				os.makedirs(full_path)
+			
 			relative_path = "data/table"
 			full_path = os.path.join(absolute_path, relative_path)
 			with open(full_path, 'wb') as file:
