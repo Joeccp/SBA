@@ -11,8 +11,6 @@ def main() -> None:
 	checkPythonVersion()
 	clearScreen()
 	print(normal)
-	print("CINEMA KIOSK SYSTEM\n\n\n")
-	print("To initialize, please login as admin.")
 	login(_first_time=True)
 	adminMode()
 	clearScreen()
