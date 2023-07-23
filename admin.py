@@ -20,21 +20,19 @@ def adminMode() -> None:
 		      "4: Load data\n"
 		      "5: Check houses information\n"
 		      "6: Buy / Reserve / Empty a seat\n"
-		      "7: Clear all seats of a house"
-		      "8: CLEAR SAVED DATA\n"
-		      "9: STOP THE ENTIRE PROGRAM"
+		      "7: Check ticket information\n"
+		      "8: Clear all seats of a house\n"
+		      "9: CLEAR ALL SAVED DATA\n"
+		      "10: STOP THE ENTIRE PROGRAM"
 		      )
 		mode: str = input("Please enter the action you want to perform (0/1/2/3/4/5/6/7/8/9)\n-> ").strip()
 		if not mode.isdecimal():
 			print("ERROR: Action code should be all decimal")
 			continue
-		if mode not in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'):
-			print("ERROR: Unknown Action code")
-			continue
 		if mode == '0':
 			print("Bye!")
 			return
-		if mode == '9':
+		if mode == '10':
 			print("STOPPING THE ENTIRE PROGRAM...")
 			print("Bye!")
 			quit()
@@ -111,27 +109,48 @@ def adminMode() -> None:
 		
 		# Save data
 		elif mode == '3':
-			"""JUST A TEST. NEED REWRITE"""
 			absolute_path = os.path.dirname(__file__)
+			
 			relative_path = "data/table"
 			full_path = os.path.join(absolute_path, relative_path)
 			with open(full_path, 'wb') as file:
 				# No need dump House.n_house, just count it later
 				pickle.dump(House.table, file)
+				
+			relative_path = "data/tickets"
+			full_path = os.path.join(absolute_path, relative_path)
+			with open(full_path, 'wb') as file:
+				pickle.dump(House.tickets, file)
+			
+			print("Success!")
 		
 		# Load data
 		elif mode == '4':
 			"""JUST A TEST. NEED REWRITE"""
 			absolute_path = os.path.dirname(__file__)
+			
 			relative_path = "data/table"
 			full_path = os.path.join(absolute_path, relative_path)
-			with open(full_path, 'rb') as file:
-				data: dict = pickle.load(file)
-				print(data)
-				print(data.items())
-				for house in data.values():
-					print(f"House {house} is playing {house.movie}")
-					house.printPlan()
+			try:
+				with open(full_path, 'rb') as file:
+					data: dict = pickle.load(file)
+			except FileNotFoundError:
+				pass
+			House.table = data
+			House.n_House = len(House.table)
+			
+			relative_path = "data/tickets"
+			full_path = os.path.join(absolute_path, relative_path)
+			try:
+				with open(full_path, 'rb') as file:
+					data: dict = pickle.load(file)
+			except FileNotFoundError:
+				pass
+			House.tickets = data
+			House.n_tickets = len(House.tickets)
+			
+			print("Success!")
+		
 		
 		# Check houses information
 		elif mode == '5':
@@ -140,6 +159,8 @@ def adminMode() -> None:
 				print(f"House {house.house_number}: {house.movie if house.movie else '(None)':<50} "
 				      f"{house.available}/{house.n_seat}")
 			house_num_str: str = input("Select a house (Just hit enter to go back to control panel):\n-> ")
+			if house_num_str == '':
+				continue
 			if not house_num_str.isdecimal():
 				print("ERROR: House number can only be decimal number")
 				print("Going back to the control panel menu...")
@@ -156,8 +177,11 @@ def adminMode() -> None:
 		
 		# Buy / Reserve / Empty a seat
 		elif mode == '6':
-			print("Note: Seats brought / reserved / emptied from this control panel WILL NOT be given a ticket.")
-			print("You should check the status of the seat before changing the status of a seat.")
+			# 後台人工購票/補票/改票/退票系統
+			# 透過此系統獲得座位將不會獲得電影票
+			print("Note: Seats brought / reserved / emptied from this control panel "
+			      "DO NOT have / WILL NOT delete a ticket.")
+			print("Staffs should check the status of the seat manually before changing the status of a seat.")
 			print("The program will NOT check the seat status for you.")
 			print("""Command format:\n\n"""
 			      """BUY [HOUSE NUMBER] [ROW NUMBER] [COLUMN INDEX]             --- Buy a seat\n"""
@@ -228,12 +252,18 @@ def adminMode() -> None:
 			house.plan[row][column] = target_status
 			print("Success!\n")
 			
-			
-
+		# Check ticket information
+		elif mode == '7':
+			for ticket in House.tickets:
+				ticket_no, time, house_no, movie, row_index, column_index = ticket
+				print(f"{ticket_no:<10} @ {time}: "
+				      f"House {house_no:<2} -- {movie:<50} ~"
+				      f"Seat <{row_index+1}{chr(column_index + 65)}>")
+			print(f"Total: {House.n_tickets} sold")
 			
 		
 		# Clear all seats of a house
-		elif mode == '7':
+		elif mode == '8':
 			print("House list:")
 			for house in House.table.values():
 				if house.movie:
@@ -264,15 +294,55 @@ def adminMode() -> None:
 				continue
 			else:
 				print("ERROR: Invalid confirmation")
+				print("Confirmation failed")
 				print("Going back to the control panel menu...")
 				continue
 		
 		# Clear all saved data
-		elif mode == '8':
-			...
+		elif mode == '9':
+			confirm: str = input("Please confirm you would like to clear ALL saved data (y/N): ").strip().upper()
+			if confirm == '' or confirm == 'N':
+				print("Going back to the control panel menu...")
+				continue
+			elif confirm == 'Y':
+				pass
+			else:
+				print("ERROR: Invalid confirmation")
+				print("Confirmation failed")
+				print("Going back to the control panel menu...")
+				continue
+			
+			print("Removing tickets data")
+			House.tickets = []
+			House.n_tickets = 0
+			print("Successfully removed local tickets data")
+			try:
+				os.remove('data/tickets')
+			except FileNotFoundError:
+				print("No saved tickets data")
+			else:
+				print("Successfully removed saved tickets data")
+			finally:
+				print("Successfully removed tickets data")
+				
+			print("Removing houses data")
+			House.table = {}
+			House.n_House = 0
+			print("Successfully removed local houses data")
+			try:
+				os.remove('data/table')
+			except FileNotFoundError:
+				print("No saved houses data")
+			else:
+				print("Successfully removed saved houses data")
+			finally:
+				print("No saved houses data")
+			
+			print("Finish!")
+			
 		
 		else:
-			raise RuntimeError(f"RUNTIME-ERROR: Unknown mode action: {mode}")
+			raise print(f"ERROR: Unknown action code {mode}")
 
 
 if __name__ == '__main__':

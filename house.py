@@ -1,5 +1,6 @@
 """Defines House"""
 from typing import Self
+from datetime import datetime
 
 
 class House:
@@ -14,6 +15,8 @@ class House:
 	
 	n_House: int = 0
 	table: dict[int, Self] = {}
+	n_tickets: int = 0
+	tickets: list[tuple[str, str, int, str, int, int]] = []
 	
 	def __init__(self, *,  row_number: int, column_number: int) -> None:
 		"""
