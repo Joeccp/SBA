@@ -1,6 +1,5 @@
 """Defines House"""
 from typing import Self
-from datetime import datetime
 
 
 class House:
