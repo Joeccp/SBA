@@ -4,6 +4,8 @@ import tomllib
 from typing import Any
 import os
 
+from common import clearScreen
+
 
 def hash(password: str) -> str:
 	"""Hash the given password using `sha3_512`
@@ -16,7 +18,7 @@ def hash(password: str) -> str:
 	return ret
 
 
-def login() -> int:
+def login(*, _first_time: bool = False) -> int:
 	"""Login using accounts from `accounts.toml`
 	
 	In theory more than two accounts can be supported after updating accounts.toml
@@ -41,7 +43,14 @@ def login() -> int:
 		with open(full_path, 'rb') as file:
 			file_data: dict[str, Any] = tomllib.load(file)
 			account_list: list[dict[str, str]] = list(file_data.values())
+			if _first_time:
+				message: str = "To initialize, please login as admin."
+			else:
+				message: str = ''
 			while True:
+				clearScreen()
+				print("CINEMA KIOSK SYSTEM\n\n\n")
+				print(message + "\n\n\n")
 				username: str = input("Username: ")
 				username: str = username.strip()
 				username_exists: bool = False
@@ -50,7 +59,7 @@ def login() -> int:
 						username_exists: bool = True
 						user_account: dict[str, str] = account
 				if not username_exists:
-					print("Username does not exists, please try again.")
+					message: str = "Username does not exists, please try again."
 					continue
 				# Make sure you use cmd.exe or powershell.exe
 				# getpass() in python terminal inside IDEs may not work, e.g. PyCharm
@@ -60,9 +69,12 @@ def login() -> int:
 					if user_account["name"] == "admin":
 						return 1
 					else:
+						if _first_time:
+							message: str = "Sorry, only admin can log in as initialization is required."
+							continue
 						return 0
 				else:
-					print("Password incorrect, please try again.")
+					message: str = "Password incorrect, please try again."
 
 	except FileNotFoundError:
 		print("Cannot find accounts.toml which is necessary for the login function.")
