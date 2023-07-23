@@ -2,7 +2,7 @@
 from house import House
 from common import clearScreen, checkPythonVersion
 from login import login
-from colour import Colour, normal, row_colour, column_colour
+from colour import normal
 from admin import adminMode
 from user import userMode
 
@@ -21,7 +21,9 @@ def main() -> None:
 		else:
 			break
 	adminMode()
+	clearScreen()
 	while True:
+		clearScreen()
 		if login() == 1:
 			adminMode()
 		else:
