@@ -17,20 +17,26 @@ def hash(password: str) -> str:
 
 
 def login() -> int:
-	"""Login using accounts from accounts.toml
-	Hard-coded to be only support the administrator and user account
+	"""Login using accounts from `accounts.toml`
+	
+	In theory more than two accounts can be supported after updating accounts.toml
+	However it is not tested, and in all the other parts of the program,
+	all normal user accounts behave as the same,
+	even the ticket system does not recolonize different normal users
+	
 	This function will execute FOREVER util logged in successfully
-	:return: 0 if logged in as normal user, 1 if logged in as administrator
+	
+	:return:
+		0 if logged in as normal user,
+		1 if logged in as administrator
 	:rtype: int
+	:raise FileNotFoundError: - if `accounts.toml` could not be found
 	"""
 	
-	# Obtain the relative path
-	# Credit: https://towardsthecloud.com/get-relative-path-python
-	# ****************************************************
+	# Obtain the full path of the file
 	absolute_path = os.path.dirname(__file__)
 	relative_path = "accounts.toml"
 	full_path = os.path.join(absolute_path, relative_path)
-	# ****************************************************
 	try:
 		with open(full_path, 'rb') as file:
 			file_data: dict[str, Any] = tomllib.load(file)
@@ -47,7 +53,7 @@ def login() -> int:
 					print("Username does not exists, please try again.")
 					continue
 				# Make sure you use cmd.exe or powershell.exe
-				# getpass() in python terminal inside IDE may not work
+				# getpass() in python terminal inside IDEs may not work, e.g. PyCharm
 				password: str = getpass("Password: ")
 				hashed_password: str = hash(password)
 				if user_account["hashed_password"] == hashed_password:
@@ -57,10 +63,11 @@ def login() -> int:
 						return 0
 				else:
 					print("Password incorrect, please try again.")
-					continue
-	except FileNotFoundError as error:
+
+	except FileNotFoundError:
 		print("Cannot find accounts.toml which is necessary for the login function.")
 		print("Exiting the program...")
+		
 
 
 if __name__ == '__main__':
