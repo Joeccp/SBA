@@ -12,14 +12,8 @@ def main() -> None:
 	clearScreen()
 	print(normal)
 	print("CINEMA KIOSK SYSTEM\n\n\n")
-	while True:
-		print("To initialize, please login as admin.")
-		result: int = login()
-		if result == 0:
-			print("Sorry, only admin can log in as initialization is required.")
-			continue
-		else:
-			break
+	print("To initialize, please login as admin.")
+	login(_first_time=True)
 	adminMode()
 	clearScreen()
 	while True:
