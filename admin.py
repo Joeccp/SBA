@@ -1,7 +1,6 @@
 """Admin mode -- control panel"""
 
-from colour import Colour, normal, row_colour, column_colour
-from House import House
+from house import House
 from common import clearScreen
 import pickle
 import os
@@ -177,8 +176,6 @@ def adminMode() -> None:
 		
 		# Buy / Reserve / Empty a seat
 		elif mode == '6':
-			# 後台人工購票/補票/改票/退票系統
-			# 透過此系統獲得座位將不會獲得電影票
 			print("Note: Seats brought / reserved / emptied from this control panel "
 			      "DO NOT have / WILL NOT delete a ticket.")
 			print("Staffs should check the status of the seat manually before changing the status of a seat.")
@@ -256,7 +253,7 @@ def adminMode() -> None:
 		elif mode == '7':
 			for ticket in House.tickets:
 				ticket_no, time, house_no, movie, row_index, column_index = ticket
-				print(f"{ticket_no:<10} @ {time}: "
+				print(f"{ticket_no:<6} @ {time}: "
 				      f"House {house_no:<2} -- {movie:<50} ~"
 				      f"Seat <{row_index+1}{chr(column_index + 65)}>")
 			print(f"Total: {House.n_tickets} sold")
@@ -347,5 +344,4 @@ def adminMode() -> None:
 
 if __name__ == '__main__':
 	adminMode()
-	print("\033[9;5mJust Monika!\033[0m")
 	

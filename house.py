@@ -14,7 +14,6 @@ class House:
 	
 	n_House: int = 0
 	table: dict[int, Self] = {}
-	n_tickets: int = 0
 	tickets: list[tuple[str, str, int, str, int, int]] = []
 	
 	def __init__(self, *,  row_number: int, column_number: int) -> None:
@@ -59,6 +58,10 @@ class House:
 				print(symbol, end='|')
 			print(f'  {row+1:>2}')
 			print('    ' + '-' * line_length)
+
+	@property
+	def n_tickets(self) -> int:
+		return len(House.tickets)
 
 
 
