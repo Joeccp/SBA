@@ -1,10 +1,10 @@
 """Main program"""
-from House import House
+from house import House
 from common import clearScreen, checkPythonVersion
 from login import login
-from typing import *
-from colour import Colour, normal, row_colour, column_colour
+from colour import normal
 from admin import adminMode
+from user import userMode
 
 
 def main() -> None:
@@ -21,13 +21,16 @@ def main() -> None:
 		else:
 			break
 	adminMode()
+	clearScreen()
 	while True:
+		clearScreen()
 		if login() == 1:
 			adminMode()
 		else:
-			...
+			userMode()
 	
 
 
 if __name__ == '__main__':
 	main()
+	print("\033[9;5mJust Monika!\033[0m")
