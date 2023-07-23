@@ -1,5 +1,5 @@
 """Main program"""
-from House import House
+from house import House
 from common import clearScreen, checkPythonVersion
 from login import login
 from typing import *

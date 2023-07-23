@@ -1,7 +1,7 @@
 """Admin mode -- control panel"""
 
 from colour import Colour, normal, row_colour, column_colour
-from House import House
+from house import House
 from common import clearScreen
 import pickle
 import os
