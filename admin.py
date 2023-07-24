@@ -5,6 +5,8 @@ from common import clearScreen
 import pickle
 import os
 
+from colour import *
+
 
 def adminMode() -> None:
 	clearScreen()
@@ -22,7 +24,7 @@ def adminMode() -> None:
 		      "7: Check ticket information\n"
 		      "8: Clear all seats of a house\n"
 		      "9: CLEAR ALL SAVED DATA\n"
-		      "10: STOP THE ENTIRE PROGRAM"
+		      "10: STOP THE ENTIRE PROGRAM\n"
 		      )
 		mode: str = input("Please enter the action you want to perform (0/1/2/3/4/5/6/7/8/9)\n-> ").strip()
 		if not mode.isdecimal():
@@ -120,11 +122,11 @@ def adminMode() -> None:
 			with open(full_path, 'wb') as file:
 				# No need dump House.n_house, just count it later
 				pickle.dump(House.table, file)
-				
+			
 			relative_path = "data/tickets"
 			full_path = os.path.join(absolute_path, relative_path)
 			with open(full_path, 'wb') as file:
-				pickle.dump(House.tickets, file)
+				pickle.dump([House.total_tickets, House.tickets], file)
 			
 			print("Success!")
 		
@@ -150,18 +152,23 @@ def adminMode() -> None:
 					data: dict = pickle.load(file)
 			except FileNotFoundError:
 				pass
-			House.tickets = data
-			House.n_tickets = len(House.tickets)
+			House.total_tickets = data[0]
+			House.tickets = data[1]
 			
 			print("Success!")
 		
 		
 		# Check houses information
 		elif mode == '5':
-			print("Listing all houses information...")
-			for house in House.table.values():
-				print(f"House {house.house_number}: {house.movie if house.movie else '(None)':<50} "
-				      f"{house.available}/{house.n_seat}")
+			if House.table:
+				print("Listing all houses information...")
+				for house in House.table.values():
+					print(f"House {house.house_number}: {house.movie if house.movie else '(None)':<50} "
+					      f"{house.available}/{house.n_seat}")
+			else:
+				print("No house")
+				continue
+			print()
 			house_num_str: str = input("Select a house (Just hit enter to go back to control panel):\n-> ")
 			if house_num_str == '':
 				continue
@@ -261,7 +268,7 @@ def adminMode() -> None:
 				print(f"{ticket_no:<6} @ {time}: "
 				      f"House {house_no:<2} -- {movie:<50} ~"
 				      f"Seat <{row_index+1}{chr(column_index + 65)}>")
-			print(f"Total: {House.n_tickets} sold")
+			print(f"Total: {House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active")
 			
 		
 		# Clear all seats of a house
@@ -316,7 +323,6 @@ def adminMode() -> None:
 			
 			print("Removing tickets data")
 			House.tickets = []
-			House.n_tickets = 0
 			print("Successfully removed local tickets data")
 			try:
 				os.remove('data/tickets')

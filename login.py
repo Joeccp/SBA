@@ -5,6 +5,7 @@ from typing import Any
 import os
 
 from common import clearScreen
+from colour import *
 
 
 def hash(password: str) -> str:
@@ -50,7 +51,7 @@ def login(*, _first_time: bool = False) -> int:
 			while True:
 				clearScreen()
 				print("CINEMA KIOSK SYSTEM\n\n\n")
-				print(message + "\n\n\n")
+				print(Colour.RED + message + normal_colour + "\n\n\n")
 				username: str = input("Username: ")
 				username: str = username.strip()
 				username_exists: bool = False

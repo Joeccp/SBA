@@ -5,16 +5,18 @@ from time import sleep
 from datetime import datetime
 from string import ascii_uppercase
 
+from colour import *
+
 
 def userMode():
 	message: str = ""
 	while True:
 		clearScreen()
 		print("CINEMA KIOSK SYSTEM\n\n\n")
-		print(message + "\n\n\n")
+		print(Colour.RED + message + normal_colour + "\n\n\n")
 		for house in House.table.values():
 			if house.movie:
-				print(f"House {house.house_number}: {house.movie:<50} {house.available}/{house.n_seat}")
+				print(f"House {house.house_number}: {house.movie:<50} {Colour.GREEN if house.available > 0 else Colour.RED}{house.available}{normal_colour}/{house.n_seat}")
 		print(
 			"\n"
 			"0: LOG OUT\n"
@@ -60,29 +62,32 @@ def userMode():
 			clearScreen()
 			print(f"House {house.house_number} is now playing: {house.movie}")
 			house.printPlan()
-			print("\nEnter the row and column number of the seat (or just hit Enter to go back to the main menu):")
+			print(f"\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat "
+			      f"(or just hit Enter to go back to the main menu):")
 			coor: str = input("\n-> ").strip().upper().replace(" ", '')
 			if coor == '':
 				message: str = ''
 				continue
 			if coor[-1] not in ascii_uppercase:
-				message: str = "ERROR: Column index is not a character"
+				message: str = f"ERROR: {column_colour}Column{normal_colour} index is not a character"
 				continue
 			column_str: str = coor[-1]
 			column_int: int = ord(column_str) - 65
 			if column_int >= house.n_column:
-				message: str = "ERROR: Invalid column"
+				message: str = f"ERROR: Invalid {column_colour}column{normal_colour}"
 				continue
 			row_str: str = coor[:-1]
 			if len(row_str) > 2:
-				message: str = "ERROR: Impossible row number"
+				message: str = f"ERROR: Impossible {row_colour}row{normal_colour} number"
 				continue
 			row_int: int = int(row_str) - 1
 			if house.plan[row_int][column_int] != 0:
 				message: str = "Sorry, the seat is not available"
 				continue
 			house.plan[row_int][column_int] = 1
-			ticket_number: str = f"T{House.n_tickets+1:0>5}"
+			House.total_tickets += 1
+			house.available -= 1
+			ticket_number: str = f"T{House.total_tickets:0>5}"
 			time: str = datetime.now().isoformat()
 			ticket: tuple[str, str, int, str, int, int] = (
 				ticket_number, time, house.house_number, house.movie, row_int, column_int
@@ -90,7 +95,7 @@ def userMode():
 			print("Your ticket:")
 			print(f"{ticket_number:<6} @ {time}: "
 			      f"House {house.house_number:<2} -- {house.movie:<50} ~"
-			      f"Seat <{row_int + 1}{chr(column_int + 65)}>")
+			      f"Seat <{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}>")
 			House.tickets.append(ticket)
 			print("\n\nThank you for your purchase!")
 			input("\nHit Enter to go back to the main menu")
@@ -119,8 +124,8 @@ def userMode():
 				if ticket[0] == ticket_number:
 					ticket_no, time, house_no, movie, row_index, column_index = ticket
 					print(f"{ticket_no:<6} @ {time}: "
-					      f"House {house_no:<2} -- {movie:<50} ~"
-					      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
+					      f"House {house_no:<2} -- {movie:<30} ~ "
+					      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
 					print("\n\n")
 					input("Hit enter to go back to the main menu")
 					message: str = ""
@@ -155,12 +160,14 @@ def userMode():
 					ticket_no, time, house_no, movie, row_index, column_index = ticket
 					print(f"{ticket_no:<6} @ {time}: "
 					      f"House {house_no:<2} -- {movie:<50} ~"
-					      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
+					      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
 					print("\nAre you sure you want to get refund of this ticket? (y/N)")
 					confirm: str = input("-> ").strip().upper()
 					if confirm == 'Y':
+						House.table[house_no].plan[row_index][column_index] = 0
 						House.tickets.remove(ticket)
 						print("\nRefund succeed!")
+						break
 					else:
 						print()
 						message: str = "ERROR: Confirmation failed. Refund Failed"

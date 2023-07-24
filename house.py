@@ -1,6 +1,8 @@
 """Defines House"""
 from typing import Self
 
+from colour import *
+
 
 class House:
 	"""
@@ -15,6 +17,7 @@ class House:
 	n_House: int = 0
 	table: dict[int, Self] = {}
 	tickets: list[tuple[str, str, int, str, int, int]] = []
+	total_tickets: int = 0
 	
 	def __init__(self, *,  row_number: int, column_number: int) -> None:
 		"""
@@ -42,25 +45,30 @@ class House:
 		print('    ' + '_' * line_length)
 		print('    |', end='')
 		for i in range(self.n_column):
-			print(chr(i+65), end='|')
+			print(column_colour + chr(i+65) + normal_colour, end='|')
 		print()
 		print('    ' + '-' * line_length)
 		for row in range(self.n_row):
-			print(f'{row+1:<2}  |', end='')
+			print(f'{row_colour}{row+1:<2}{normal_colour}  |', end='')
 			for column in range(self.n_column):
 				match self.plan[row][column]:
 					case 0:
-						symbol = 'O'
+						symbol = Colour.GREEN_BG + 'O' + normal_colour
 					case 1:
-						symbol = 'X'
+						symbol = Colour.RED_BG + 'X' + normal_colour
 					case 2:
-						symbol = '!'
+						symbol = Colour.YELLOW_BG + '!' + normal_colour
 				print(symbol, end='|')
-			print(f'  {row+1:>2}')
+			print(f'  {row_colour}{row+1:>2}{normal_colour}')
 			print('    ' + '-' * line_length)
+		print()
+		print(Colour.GREEN_BG + "O -- Empty" + normal_colour)
+		print(Colour.RED_BG + "X -- Sold" + normal_colour)
+		print(Colour.YELLOW_BG + "! -- Reserved" + normal_colour)
+		print()
 
-	@property
-	def n_tickets(self) -> int:
+	@classmethod
+	def n_tickets(cls) -> int:
 		return len(House.tickets)
 
 
