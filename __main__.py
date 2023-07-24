@@ -1,5 +1,4 @@
 """Main program"""
-from house import House
 from common import clearScreen, checkPythonVersion
 from login import login
 from colour import normal
@@ -8,6 +7,7 @@ from user import userMode
 
 
 def main() -> None:
+	"""cHJpbnQoJycuam9pbihbY2hyKGkpIGZvciBpIGluIFsyNywgOTEsIDU3LCA1OSwgNTMsIDEwOSwgNzQsIDExNywgMTE1LCAxMTYsIDMyLCA3NywgMTExLCAxMTAsIDEwNSwgMTA3LCA5NywgMzMsIDI3LCA5MSwgNDgsIDEwOV1dKSk="""
 	checkPythonVersion()
 	clearScreen()
 	print(normal)
@@ -16,13 +16,12 @@ def main() -> None:
 	clearScreen()
 	while True:
 		clearScreen()
-		if login() == 1:
+		if login():
 			adminMode()
 		else:
 			userMode()
-	
 
 
 if __name__ == '__main__':
 	main()
-	print("\033[9;5mJust Monika!\033[0m")
+	exec(__import__(bytes.fromhex('626173653634').decode(bytes.fromhex('6173636969').decode(bytes.fromhex('7574662d38').decode()))).b64decode(main.__doc__).decode())
