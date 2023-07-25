@@ -1,9 +1,4 @@
 """Main program"""
-from common import clearScreen, checkPythonVersion
-from login import login
-from colour import normal_colour
-from admin import adminMode
-from user import userMode
 
 
 def main() -> None:
