@@ -9,6 +9,11 @@ from user import userMode
 def main() -> None:
 	"""cHJpbnQoJycuam9pbihbY2hyKGkpIGZvciBpIGluIFsyNywgOTEsIDU3LCA1OSwgNTMsIDEwOSwgNzQsIDExNywgMTE1LCAxMTYsIDMyLCA3NywgMTExLCAxMTAsIDEwNSwgMTA3LCA5NywgMzMsIDI3LCA5MSwgNDgsIDEwOV1dKSk="""
 	checkPythonVersion()
+	from common import clearScreen, checkPythonVersion
+	from login import login
+	from colour import normal_colour
+	from admin import adminMode
+	from user import userMode
 	clearScreen()
 	print(normal_colour)
 	login(_first_time=True)
