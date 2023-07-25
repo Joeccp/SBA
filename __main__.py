@@ -3,8 +3,9 @@
 
 def main() -> None:
 	"""cHJpbnQoJycuam9pbihbY2hyKGkpIGZvciBpIGluIFsyNywgOTEsIDU3LCA1OSwgNTMsIDEwOSwgNzQsIDExNywgMTE1LCAxMTYsIDMyLCA3NywgMTExLCAxMTAsIDEwNSwgMTA3LCA5NywgMzMsIDI3LCA5MSwgNDgsIDEwOV1dKSk="""
+	from common import checkPythonVersion
 	checkPythonVersion()
-	from common import clearScreen, checkPythonVersion
+	from common import clearScreen
 	from login import login
 	from colour import normal_colour
 	from admin import adminMode
