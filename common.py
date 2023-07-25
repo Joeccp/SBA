@@ -33,5 +33,5 @@ def checkPythonVersion() -> None:
 		err_msg: str = "This program does not support Python 2"
 		raise SystemExit(err_msg)
 	elif minor_version < 11:
-		err_msg: str = "Unsupported old Python version, please use Python 3.11 or newer"
+		err_msg: str = "Unsupported old Python version (" + str(major_version) + "." + str(minor_version) +"), please use Python 3.11 or newer"
 		raise SystemExit(err_msg)
