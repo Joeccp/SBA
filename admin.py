@@ -6,6 +6,7 @@ import pickle
 import os
 
 from colour import *
+from common import saveData, loadData
 
 
 def adminMode() -> None:
@@ -110,52 +111,11 @@ def adminMode() -> None:
 		
 		# Save data
 		elif mode == '3':
-			absolute_path = os.path.dirname(__file__)
-			
-			relative_path = 'data'
-			full_path = os.path.join(absolute_path, relative_path)
-			if not os.path.isdir(full_path):
-				os.makedirs(full_path)
-			
-			relative_path = "data/table"
-			full_path = os.path.join(absolute_path, relative_path)
-			with open(full_path, 'wb') as file:
-				# No need dump House.n_house, just count it later
-				pickle.dump(House.table, file)
-			
-			relative_path = "data/tickets"
-			full_path = os.path.join(absolute_path, relative_path)
-			with open(full_path, 'wb') as file:
-				pickle.dump([House.total_tickets, House.tickets], file)
-			
-			print("Success!")
+			saveData(print_log=True)
 		
 		# Load data
 		elif mode == '4':
-			"""JUST A TEST. NEED REWRITE"""
-			absolute_path = os.path.dirname(__file__)
-			
-			relative_path = "data/table"
-			full_path = os.path.join(absolute_path, relative_path)
-			try:
-				with open(full_path, 'rb') as file:
-					data: dict = pickle.load(file)
-			except FileNotFoundError:
-				pass
-			House.table = data
-			House.n_House = len(House.table)
-			
-			relative_path = "data/tickets"
-			full_path = os.path.join(absolute_path, relative_path)
-			try:
-				with open(full_path, 'rb') as file:
-					data: dict = pickle.load(file)
-			except FileNotFoundError:
-				pass
-			House.total_tickets = data[0]
-			House.tickets = data[1]
-			
-			print("Success!")
+			loadData(print_log=True)
 		
 		
 		# Check houses information

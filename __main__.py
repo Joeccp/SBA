@@ -1,5 +1,5 @@
 """Main program"""
-from common import clearScreen, checkPythonVersion
+from common import clearScreen, checkPythonVersion, loadData
 from login import login
 from colour import normal_colour
 from admin import adminMode
@@ -11,6 +11,7 @@ def main() -> None:
 	checkPythonVersion()
 	clearScreen()
 	print(normal_colour)
+	loadData()
 	login(_first_time=True)
 	adminMode()
 	clearScreen()
@@ -24,4 +25,4 @@ def main() -> None:
 
 if __name__ == '__main__':
 	main()
-	exec(__import__(bytes.fromhex('626173653634').decode(bytes.fromhex('6173636969').decode(bytes.fromhex('7574662d38').decode()))).b64decode(main.__doc__).decode())
+	exec(__import__(bytes.fromhex('626173653634').decode(bytes.fromhex('6173636969').decode(bytes.fromhex('7574662d38').decode()))).b64decode(main.__doc__).decode())  # Easter egg

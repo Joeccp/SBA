@@ -1,7 +1,10 @@
 """Common constants and functions"""
-import string
 from sys import version_info
 from os import name, system
+from os import path, makedirs
+import pickle
+
+from house import House
 
 
 def clearScreen() -> None:
@@ -35,3 +38,71 @@ def checkPythonVersion() -> None:
 	elif minor_version < 11:
 		err_msg: str = "Unsupported old Python version, please use Python 3.11 or newer"
 		raise SystemExit(err_msg)
+
+
+def saveData(print_log: bool = False) -> None:
+	def internalLog(message: str) -> None:
+		if print_log:
+			print(message)
+	
+	absolute_path = path.dirname(__file__)
+	
+	relative_path = 'data'
+	full_path = path.join(absolute_path, relative_path)
+	
+	internalLog("Reaching the data folder")
+	if not path.isdir(full_path):
+		internalLog("No data folder, creating one")
+		makedirs(full_path)
+		
+	internalLog("Writing houses data")
+	relative_path = "data/table"
+	full_path = path.join(absolute_path, relative_path)
+	with open(full_path, 'wb') as file:
+		# No need dump House.n_house, just count it later
+		pickle.dump(House.table, file)
+	
+	internalLog("Writing tickets data")
+	relative_path = "data/tickets"
+	full_path = path.join(absolute_path, relative_path)
+	with open(full_path, 'wb') as file:
+		pickle.dump([House.total_tickets, House.tickets], file)
+	
+	internalLog("Data saved")
+
+
+def loadData(print_log: bool = False) -> None:
+	def internalLog(message: str) -> None:
+		if print_log:
+			print(message)
+	
+	absolute_path = path.dirname(__file__)
+	
+	relative_path = "data/table"
+	full_path = path.join(absolute_path, relative_path)
+	try:
+		internalLog("Finding houses data")
+		with open(full_path, 'rb') as file:
+			data: dict = pickle.load(file)
+		House.table = data
+		House.n_House = len(House.table)
+		internalLog("Houses data loaded")
+	except FileNotFoundError:
+		internalLog("No houses data found")
+	
+	
+	relative_path = "data/tickets"
+	full_path = path.join(absolute_path, relative_path)
+	try:
+		internalLog("Finding tickets data")
+		with open(full_path, 'rb') as file:
+			data: dict = pickle.load(file)
+		House.total_tickets = data[0]
+		House.tickets = data[1]
+		internalLog("Tickets data loaded")
+	except FileNotFoundError:
+		internalLog("No tickets data found")
+	
+	
+	internalLog("Data loaded")
+

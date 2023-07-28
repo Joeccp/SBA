@@ -6,6 +6,7 @@ from datetime import datetime
 from string import ascii_uppercase
 
 from colour import *
+from common import saveData
 
 
 def userMode():
@@ -16,7 +17,8 @@ def userMode():
 		print(Colour.RED + message + normal_colour + "\n\n\n")
 		for house in House.table.values():
 			if house.movie:
-				print(f"House {house.house_number}: {house.movie:<50} {Colour.GREEN if house.available > 0 else Colour.RED}{house.available}{normal_colour}/{house.n_seat}")
+				print(
+					f"House {house.house_number}: {house.movie:<50} {Colour.GREEN if house.available > 0 else Colour.RED}{house.available}{normal_colour}/{house.n_seat}")
 		print(
 			"\n"
 			"0: LOG OUT\n"
@@ -62,8 +64,9 @@ def userMode():
 			clearScreen()
 			print(f"House {house.house_number} is now playing: {house.movie}")
 			house.printPlan()
-			print(f"\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat "
-			      f"(or just hit Enter to go back to the main menu):")
+			print(
+				f"\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat "
+				f"(or just hit Enter to go back to the main menu):")
 			coor: str = input("\n-> ").strip().upper().replace(" ", '')
 			if coor == '':
 				message: str = ''
@@ -97,12 +100,13 @@ def userMode():
 			      f"House {house.house_number:<2} -- {house.movie:<50} ~"
 			      f"Seat <{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}>")
 			House.tickets.append(ticket)
+			saveData()
 			print("\n\nThank you for your purchase!")
 			input("\nHit Enter to go back to the main menu")
 			message: str = ""
 			continue
-			
-			
+		
+		
 		
 		elif mode == '2':
 			clearScreen()
@@ -130,15 +134,15 @@ def userMode():
 					input("Hit enter to go back to the main menu")
 					message: str = ""
 					break
-					
+			
 			else:
 				print("No such ticket")
 				print("\n\n")
 				input("Hit enter to go back to the main menu")
 				message: str = ""
-				
-			continue
 			
+			continue
+		
 		elif mode == '3':
 			clearScreen()
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n")
@@ -166,6 +170,7 @@ def userMode():
 					if confirm == 'Y':
 						House.table[house_no].plan[row_index][column_index] = 0
 						House.tickets.remove(ticket)
+						saveData()
 						print("\nRefund succeed!")
 						break
 					else:
@@ -180,13 +185,12 @@ def userMode():
 				message: str = ""
 			
 			continue
-			
-			
+		
+		
 		else:
 			message: str = "ERROR: Unknown mode"
 			continue
-			
 
 
 if __name__ == '__main__':
-    userMode()
+	userMode()
