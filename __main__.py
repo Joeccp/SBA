@@ -1,6 +1,13 @@
 """Main program"""
 
 
+def checkSystemPlatform() -> None:
+	from platform import system
+	if system() != 'Windows':
+		err_msg: str = "This program can only be executed on Windows"
+		raise SystemExit(err_msg)
+	
+
 def checkPythonVersion() -> None:
 	"""
 	Checks the Python version.
@@ -8,6 +15,7 @@ def checkPythonVersion() -> None:
 	:return: None
 	:raises SystemExit: If Python version is older than 3.11
 	"""
+	from sys import version_info
 	major_version, minor_version, *_ = version_info
 	if major_version < 3:
 		err_msg: str = "This program does not support Python 2"
@@ -21,6 +29,7 @@ def checkPythonVersion() -> None:
 def main() -> None:
 	"""cHJpbnQoJycuam9pbihbY2hyKGkpIGZvciBpIGluIFsyNywgOTEsIDU3LCA1OSwgNTMsIDEwOSwgNzQsIDExNywgMTE1LCAxMTYsIDMyLCA3NywgMTExLCAxMTAsIDEwNSwgMTA3LCA5NywgMzMsIDI3LCA5MSwgNDgsIDEwOV1dKSk="""
 	checkPythonVersion()
+	checkSystemPlatform()
 	
 	from common import clearScreen, loadData
 	from login import login

@@ -1,5 +1,4 @@
 """Common constants and functions"""
-from sys import version_info
 from os import name, system
 from os import path, makedirs
 import pickle
