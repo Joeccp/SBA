@@ -94,11 +94,19 @@ def adminMode() -> None:
 			house.movie = movie
 			print(f"Successfully changed the movie in house {house.house_number}!")
 			print(f"{old_movie} --> {house.movie}")
-			do_clean: str = input(f"Would you like to clear the seating plan too? (y/N)").strip().upper()
+			do_clean: str = input(f"Would you like to clear all relevant data too? (y/N)").strip().upper()
 			if do_clean == 'Y':
 				print(f"Clearing all seat of house {house_num}")
 				house.clearPlan()
 				print("Success!")
+				print("fClearing all related tickets")
+				n_tickets_removed: int = 0
+				for ticket in House.tickets:
+					ticket_no, time, house_no, movie, row_index, column_index = ticket
+					if house_no == house.house_number:
+						House.tickets.remove(ticket)
+						n_tickets_removed += 1
+				print(f"Removed {n_tickets_removed} tickets")
 				continue
 			elif do_clean == 'N':
 				print("OK")
