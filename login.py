@@ -23,7 +23,7 @@ def login(*, _first_time: bool = False) -> int:
 	"""Login using accounts from `accounts.toml`
 	
 	In theory more than two accounts can be supported after updating accounts.toml
-	However it is not tested, and in all the other parts of the program,
+	However it is not officially supported, and in all the other parts of the program,
 	all normal user accounts behave as the same,
 	even the ticket system does not recolonize different normal users
 	

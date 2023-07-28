@@ -24,21 +24,6 @@ def clearScreen() -> None:
 		print("\n\n\n\n\n\n", end='')
 
 
-def checkPythonVersion() -> None:
-	"""
-	Checks the Python version.
-	If the python version is older than 3.11, it raises an exception.
-	:return: None
-	:raises SystemExit: If Python version is older than 3.11
-	"""
-	major_version, minor_version, *_ = version_info
-	if major_version < 3:
-		err_msg: str = "This program does not support Python 2"
-		raise SystemExit(err_msg)
-	elif minor_version < 11:
-		err_msg: str = "Unsupported old Python version, please use Python 3.11 or newer"
-		raise SystemExit(err_msg)
-
 
 def saveData(print_log: bool = False) -> None:
 	def internalLog(message: str) -> None:
