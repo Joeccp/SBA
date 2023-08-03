@@ -1,15 +1,18 @@
+"""Login function"""
+
+import os
 from getpass import getpass
 from hashlib import sha3_512
-import tomllib
+from tomllib import load as loadtoml
 from typing import Any
-import os
 
-from common import clearScreen
 from colour import *
+from utils import clearScreen
 
 
 def hash(password: str) -> str:
-	"""Hash the given password using `sha3_512`
+	"""
+	Hash the given password using `sha3_512`
 	:param password: Password to be hashed
 	:type password: str
 	:return: Hashed password (hexadecimal)
@@ -19,21 +22,25 @@ def hash(password: str) -> str:
 	return ret
 
 
-def login(*, _first_time: bool = False) -> int:
-	"""Login using accounts from `accounts.toml`
+def login(*, first_time: bool = False) -> int:
+	"""
+	Login using accounts from `accounts.toml`
 	
 	In theory more than two accounts can be supported after updating accounts.toml
 	However it is not officially supported, and in all the other parts of the program,
-	all normal user accounts behave as the same,
+	all normal user accounts behave like the same,
 	even the ticket system does not recolonize different normal users
 	
 	This function will execute FOREVER util logged in successfully
 	
+	:param first_time: Keyword-only parameter,
+		to identify whether it is the first time logging in and requires login as administrator
+	:type first_time: bool
 	:return:
 		0 if logged in as normal user,
 		1 if logged in as administrator
 	:rtype: int
-	:raise FileNotFoundError: - if `accounts.toml` could not be found
+	:raise FileNotFoundError: If `accounts.toml` could not be found
 	"""
 	
 	# Obtain the full path of the file
@@ -42,9 +49,9 @@ def login(*, _first_time: bool = False) -> int:
 	full_path = os.path.join(absolute_path, relative_path)
 	try:
 		with open(full_path, 'rb') as file:
-			file_data: dict[str, Any] = tomllib.load(file)
+			file_data: dict[str, Any] = loadtoml(file)
 			account_list: list[dict[str, str]] = list(file_data.values())
-			if _first_time:
+			if first_time:
 				message: str = "To initialize, please login as admin."
 			else:
 				message: str = ''
@@ -70,7 +77,7 @@ def login(*, _first_time: bool = False) -> int:
 					if user_account["name"] == "admin":
 						return 1
 					else:
-						if _first_time:
+						if first_time:
 							message: str = "Sorry, only admin can log in as initialization is required."
 							continue
 						return 0
@@ -81,8 +88,3 @@ def login(*, _first_time: bool = False) -> int:
 		print("Cannot find accounts.toml which is necessary for the login function.")
 		print("Exiting the program...")
 		
-
-
-if __name__ == '__main__':
-	result: int = login()
-	print(result)

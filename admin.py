@@ -1,15 +1,18 @@
 """Admin mode -- control panel"""
 
-from house import House
-from common import clearScreen
-import pickle
 import os
 
-from colour import *
-from common import saveData, loadData
+from house import House
+from utils import clearScreen, loadData, saveData
 
 
 def adminMode() -> None:
+	"""
+	Admin mode
+	
+	:return: None
+	:raise SystemExit: To manually quit the entire program
+	"""
 	clearScreen()
 	print("CINEMA KIOSK SYSTEM")
 	print("CONTROL PANEL\n\n\n")
@@ -27,9 +30,9 @@ def adminMode() -> None:
 		      "9: CLEAR ALL SAVED DATA\n"
 		      "10: STOP THE ENTIRE PROGRAM\n"
 		      )
-		mode: str = input("Please enter the action you want to perform (0/1/2/3/4/5/6/7/8/9)\n-> ").strip()
+		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9)\n-> ").strip()
 		if not mode.isdecimal():
-			print("ERROR: Action code should be all decimal")
+			print("ERROR: Mode code should be all decimal")
 			continue
 		if mode == '0':
 			print("Bye!")
@@ -73,7 +76,7 @@ def adminMode() -> None:
 		# Update movie
 		elif mode == '2':
 			print("House list:")
-			for house in House.table.values():
+			for house in House.houses_table.values():
 				if house.movie:
 					print(f"House {house.house_number} now playing: {house.movie}")
 				else:
@@ -84,11 +87,11 @@ def adminMode() -> None:
 				print("Going back to the control panel menu...")
 				continue
 			house_num: int = int(house_num_str)
-			if house_num not in House.table.keys():
+			if house_num not in House.houses_table.keys():
 				print('ERROR: No such house')
 				print("Going back to the control panel menu...")
 				continue
-			house: House = House.table[house_num]
+			house: House = House.houses_table[house_num]
 			movie: str = input("Please enter the movie name (or leave it blank if no movie will be played): ").strip()
 			old_movie: str = house.movie
 			house.movie = movie
@@ -101,10 +104,10 @@ def adminMode() -> None:
 				print("Success!")
 				print("fClearing all related tickets")
 				n_tickets_removed: int = 0
-				for ticket in House.tickets:
+				for ticket in House.tickets_table:
 					ticket_no, time, house_no, movie, row_index, column_index = ticket
 					if house_no == house.house_number:
-						House.tickets.remove(ticket)
+						House.tickets_table.remove(ticket)
 						n_tickets_removed += 1
 				print(f"Removed {n_tickets_removed} tickets")
 				continue
@@ -128,11 +131,11 @@ def adminMode() -> None:
 		
 		# Check houses information
 		elif mode == '5':
-			if House.table:
+			if House.houses_table:
 				print("Listing all houses information...")
-				for house in House.table.values():
+				for house in House.houses_table.values():
 					print(f"House {house.house_number}: {house.movie if house.movie else '(None)':<50} "
-					      f"{house.available}/{house.n_seat}")
+					      f"{house.n_available}/{house.n_seat}")
 			else:
 				print("No house")
 				continue
@@ -145,11 +148,11 @@ def adminMode() -> None:
 				print("Going back to the control panel menu...")
 				continue
 			house_num: int = int(house_num_str)
-			if house_num not in House.table.keys():
+			if house_num not in House.houses_table.keys():
 				print('ERROR: No such house')
 				print("Going back to the control panel menu...")
 				continue
-			house: House = House.table[house_num]
+			house: House = House.houses_table[house_num]
 			print(f"House {house.house_number} is now playing: {house.movie}")
 			house.printPlan()
 		
@@ -184,11 +187,11 @@ def adminMode() -> None:
 				print("Going back to the control panel menu...")
 				continue
 			house_num: int = int(command_separated[1])
-			if house_num not in House.table.keys():
+			if house_num not in House.houses_table.keys():
 				print("No such house")
 				print("Going back to the control panel menu...")
 				continue
-			house: House = House.table[house_num]
+			house: House = House.houses_table[house_num]
 			if not command_separated[2].isdecimal():
 				print("Row number must be a decimal number")
 				print("Going back to the control panel menu...")
@@ -226,12 +229,12 @@ def adminMode() -> None:
 					target_status: int = 2
 				case _:
 					raise RuntimeError("Action code matched with nothing. This should be impossible.")
-			house.plan[row][column] = target_status
+			house.seating_plan[row][column] = target_status
 			print("Success!\n")
 			
 		# Check ticket information
 		elif mode == '7':
-			for ticket in House.tickets:
+			for ticket in House.tickets_table:
 				ticket_no, time, house_no, movie, row_index, column_index = ticket
 				print(f"{ticket_no:<6} @ {time}: "
 				      f"House {house_no:<2} -- {movie:<50} ~"
@@ -242,7 +245,7 @@ def adminMode() -> None:
 		# Clear all seats of a house
 		elif mode == '8':
 			print("House list:")
-			for house in House.table.values():
+			for house in House.houses_table.values():
 				if house.movie:
 					print(f"House {house.house_number} now playing: {house.movie}")
 				else:
@@ -253,11 +256,11 @@ def adminMode() -> None:
 				print("Going back to the control panel menu...")
 				continue
 			house_num: int = int(house_num_str)
-			if house_num not in House.table.keys():
+			if house_num not in House.houses_table.keys():
 				print('ERROR: No such house')
 				print("Going back to the control panel menu...")
 				continue
-			house: House = House.table[house_num]
+			house: House = House.houses_table[house_num]
 			print(f"House {house_num}")
 			house.printPlan()
 			confirm: str = input("Please confirm you would like to clear all seat (y/N): ").strip().upper()
@@ -290,7 +293,7 @@ def adminMode() -> None:
 				continue
 			
 			print("Removing tickets data")
-			House.tickets = []
+			House.tickets_table = []
 			print("Successfully removed local tickets data")
 			try:
 				os.remove('data/tickets')
@@ -299,28 +302,24 @@ def adminMode() -> None:
 			else:
 				print("Successfully removed saved tickets data")
 			finally:
-				print("Successfully removed tickets data")
+				print("Cleared tickets data")
 				
 			print("Removing houses data")
-			House.table = {}
+			House.houses_table = {}
 			House.n_House = 0
 			print("Successfully removed local houses data")
 			try:
-				os.remove('data/table')
+				os.remove('data/houses')
 			except FileNotFoundError:
 				print("No saved houses data")
 			else:
 				print("Successfully removed saved houses data")
 			finally:
-				print("No saved houses data")
+				print("Cleared saved houses data")
 			
 			print("Finish!")
 			
 		
 		else:
-			raise print(f"ERROR: Unknown action code {mode}")
+			print(f"ERROR: Unknown mode code {mode}")
 
-
-if __name__ == '__main__':
-	adminMode()
-	

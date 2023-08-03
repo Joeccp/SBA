@@ -2,6 +2,10 @@
 
 
 class Colour:
+	"""
+	Encapsulate different ANSI escape sequences,
+	for printing coloured texts and background
+	"""
 	RESET: str = '\033[0m'
 	BLUE: str = '\033[1;94m'  # For row letters
 	PURPLE: str = '\033[1;35m'  # For column numbers
@@ -18,5 +22,4 @@ class Colour:
 
 row_colour: str = Colour.BLUE
 column_colour: str = Colour.PURPLE
-# normal_colour: str = Colour.WHITE_BG + Colour.BLACK
-normal_colour: str = '\033[30;47m'
+normal_colour: str = Colour.WHITE_BG + Colour.BLACK

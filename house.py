@@ -15,8 +15,8 @@ class House:
 	"""
 	
 	n_House: int = 0
-	table: dict[int, Self] = {}
-	tickets: list[tuple[str, str, int, str, int, int]] = []
+	houses_table: dict[int, Self] = {}
+	tickets_table: list[tuple[str, str, int, str, int, int]] = []
 	total_tickets: int = 0
 	
 	def __init__(self, *,  row_number: int, column_number: int) -> None:
@@ -26,20 +26,22 @@ class House:
 		"""
 		self.n_row: int = row_number
 		self.n_column: int = column_number
-		self.plan: list[list[int]] = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
+		self.seating_plan: list[list[int]] = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
 		House.n_House += 1
 		self.house_number: int = House.n_House
-		House.table[self.house_number] = self
+		House.houses_table[self.house_number] = self
 		self.movie: str = ''
 		self.n_seat: int = self.n_row * self.n_column
-		self.available: int = self.n_seat
+		self.n_available: int = self.n_seat
 
 	
 	def clearPlan(self) -> None:
-		self.plan: list[list[int]] = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
+		"""Clear the seating plan"""
+		self.seating_plan: list[list[int]] = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
 	
 	
 	def printPlan(self) -> None:
+		"""Print the seating plan"""
 		line_length: int = self.n_column * 2 + 1
 		print(f"{'[Screen Here]':^{line_length+8}}")
 		print('    ' + '_' * line_length)
@@ -51,7 +53,7 @@ class House:
 		for row in range(self.n_row):
 			print(f'{row_colour}{row+1:<2}{normal_colour}  |', end='')
 			for column in range(self.n_column):
-				match self.plan[row][column]:
+				match self.seating_plan[row][column]:
 					case 0:
 						symbol = Colour.GREEN_BG + 'O' + normal_colour
 					case 1:
@@ -69,13 +71,7 @@ class House:
 
 	@classmethod
 	def n_tickets(cls) -> int:
-		return len(House.tickets)
+		"""Returns the number of tickets sold in ALL houses"""
+		return len(House.tickets_table)
 
-
-
-if __name__ == '__main__':
-	r = int(input("Row number:"))
-	c = int(input("Column number:"))
-	house = House(row_number=r, column_number=c)
-	house.printPlan()
 	

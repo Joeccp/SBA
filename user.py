@@ -1,24 +1,28 @@
 """User mode"""
-from house import House
-from common import clearScreen
-from time import sleep
+
 from datetime import datetime
 from string import ascii_uppercase
+from time import sleep
 
 from colour import *
-from common import saveData
+from house import House
+from utils import clearScreen, saveData
 
 
-def userMode():
+def userMode() -> None:
+	"""
+	User mode
+	:return: None
+	"""
 	message: str = ""
 	while True:
 		clearScreen()
 		print("CINEMA KIOSK SYSTEM\n\n\n")
 		print(Colour.RED + message + normal_colour + "\n\n\n")
-		for house in House.table.values():
+		for house in House.houses_table.values():
 			if house.movie:
 				print(
-					f"House {house.house_number}: {house.movie:<50} {Colour.GREEN if house.available > 0 else Colour.RED}{house.available}{normal_colour}/{house.n_seat}")
+					f"House {house.house_number}: {house.movie:<50} {Colour.GREEN if house.n_available > 0 else Colour.RED}{house.n_available}{normal_colour}/{house.n_seat}")
 		print(
 			"\n"
 			"0: LOG OUT\n"
@@ -41,9 +45,9 @@ def userMode():
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
 			print("House(s) available:")
 			total_available_house_count: int = 0
-			for house in House.table.values():
-				if house.movie and house.available != 0:
-					print(f"House {house.house_number}: {house.movie:<50} {house.available}/{house.n_seat}")
+			for house in House.houses_table.values():
+				if house.movie and house.n_available != 0:
+					print(f"House {house.house_number}: {house.movie:<50} {house.n_available}/{house.n_seat}")
 					total_available_house_count += 1
 			if total_available_house_count == 0:
 				message: str = "Sorry, no house available now"
@@ -57,10 +61,10 @@ def userMode():
 				message: str = "ERROR: House number can only be decimal numbers"
 				continue
 			house_num: int = int(house_num_str)
-			if house_num not in House.table.keys():
+			if house_num not in House.houses_table.keys():
 				message: str = "ERROR: That house does not exist"
 				continue
-			house: House = House.table[house_num]
+			house: House = House.houses_table[house_num]
 			clearScreen()
 			print(f"House {house.house_number} is now playing: {house.movie}")
 			house.printPlan()
@@ -84,12 +88,12 @@ def userMode():
 				message: str = f"ERROR: Impossible {row_colour}row{normal_colour} number"
 				continue
 			row_int: int = int(row_str) - 1
-			if house.plan[row_int][column_int] != 0:
+			if house.seating_plan[row_int][column_int] != 0:
 				message: str = "Sorry, the seat is not available"
 				continue
-			house.plan[row_int][column_int] = 1
+			house.seating_plan[row_int][column_int] = 1
 			House.total_tickets += 1
-			house.available -= 1
+			house.n_available -= 1
 			ticket_number: str = f"T{House.total_tickets:0>5}"
 			time: str = datetime.now().isoformat()
 			ticket: tuple[str, str, int, str, int, int] = (
@@ -99,7 +103,7 @@ def userMode():
 			print(f"{ticket_number:<6} @ {time}: "
 			      f"House {house.house_number:<2} -- {house.movie:<50} ~"
 			      f"Seat <{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}>")
-			House.tickets.append(ticket)
+			House.tickets_table.append(ticket)
 			saveData()
 			print("\n\nThank you for your purchase!")
 			input("\nHit Enter to go back to the main menu")
@@ -124,7 +128,7 @@ def userMode():
 				                "ticket number should ba a single character 'T' followed by decimal numbers")
 				continue
 			print()
-			for ticket in House.tickets:
+			for ticket in House.tickets_table:
 				if ticket[0] == ticket_number:
 					ticket_no, time, house_no, movie, row_index, column_index = ticket
 					print(f"{ticket_no:<6} @ {time}: "
@@ -159,7 +163,7 @@ def userMode():
 				                "ticket number should ba a single character 'T' followed by decimal numbers")
 				continue
 			print()
-			for ticket in House.tickets:
+			for ticket in House.tickets_table:
 				if ticket[0] == ticket_number:
 					ticket_no, time, house_no, movie, row_index, column_index = ticket
 					print(f"{ticket_no:<6} @ {time}: "
@@ -168,8 +172,8 @@ def userMode():
 					print("\nAre you sure you want to get refund of this ticket? (y/N)")
 					confirm: str = input("-> ").strip().upper()
 					if confirm == 'Y':
-						House.table[house_no].plan[row_index][column_index] = 0
-						House.tickets.remove(ticket)
+						House.houses_table[house_no].seating_plan[row_index][column_index] = 0
+						House.tickets_table.remove(ticket)
 						saveData()
 						print("\nRefund succeed!")
 						break
@@ -190,7 +194,3 @@ def userMode():
 		else:
 			message: str = "ERROR: Unknown mode"
 			continue
-
-
-if __name__ == '__main__':
-	userMode()
