@@ -231,6 +231,7 @@ def adminMode() -> None:
 					raise RuntimeError("Action code matched with nothing. This should be impossible.")
 			house.seating_plan[row][column] = target_status
 			print("Success!\n")
+			saveData()
 			
 		# Check ticket information
 		elif mode == '7':
@@ -296,6 +297,7 @@ def adminMode() -> None:
 			House.tickets_table = []
 			print("Successfully removed local tickets data")
 			try:
+				# absolute_path = path.dirname(__file__)
 				os.remove('data/tickets')
 			except FileNotFoundError:
 				print("No saved tickets data")
