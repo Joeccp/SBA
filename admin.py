@@ -270,6 +270,7 @@ def adminMode() -> None:
 				print(f"Clearing all seat of house {house_num}")
 				house.clearPlan()
 				print("Success!")
+				saveData()
 				continue
 			else:
 				print("ERROR: Invalid confirmation")
@@ -295,8 +296,10 @@ def adminMode() -> None:
 			House.tickets_table = []
 			print("Successfully removed local tickets data")
 			try:
-				# absolute_path = path.dirname(__file__)
-				os.remove('data/tickets')
+				absolute_path = os.path.dirname(__file__)
+				relative_path = 'data/tickets'
+				full_path = os.path.join(absolute_path, relative_path)
+				os.remove(full_path)
 			except FileNotFoundError:
 				print("No saved tickets data")
 			else:
@@ -309,7 +312,10 @@ def adminMode() -> None:
 			House.n_House = 0
 			print("Successfully removed local houses data")
 			try:
-				os.remove('data/houses')
+				absolute_path = os.path.dirname(__file__)
+				relative_path = 'data/houses'
+				full_path = os.path.join(absolute_path, relative_path)
+				os.remove(full_path)
 			except FileNotFoundError:
 				print("No saved houses data")
 			else:
@@ -322,4 +328,3 @@ def adminMode() -> None:
 		
 		else:
 			print(f"ERROR: Unknown mode code {mode}")
-
