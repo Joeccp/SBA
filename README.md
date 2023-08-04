@@ -54,6 +54,7 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
     - [Login](docs/login.md)
 - Developer guide
 - [LICENSE](LICENSE)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 
 
 ## Source code
