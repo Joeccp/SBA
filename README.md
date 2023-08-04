@@ -60,6 +60,7 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 
 
 ## Source code
-This program is licensed under the Apache License, Version 2.0.
-The source code can be found [here](https://github.com/Joeccp/SBA).
-The main page of this project is <https://joeccp.github.io/SBA>.
+The source code of this project can be found
+[here](https://github.com/Joeccp/SBA),
+licensed under *the Apache License, Version 2.0*.
+The website of this project is <https://joeccp.github.io/SBA>.
