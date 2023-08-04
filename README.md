@@ -5,7 +5,8 @@
 ## Introduction
 Welcome! This is a **Cinema Kiosk System** project for 
 the Hong Kong Diploma of Secondary Education Examination 2024 
-Information and Communication Technology School-based Assessment.
+Information and Communication Technology Elective Part D - Software Development 
+School-based Assessment.
 
 This project is a simple simulation of a cinema movie ticket system.
 This Cinema Kiosk System provides an easy way for customers 
