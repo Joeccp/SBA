@@ -54,8 +54,9 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
     - [Login](docs/login.md)
 - Developer guide
 - [LICENSE](LICENSE)
-- [Code of Conduct](CODE_OF_CONDUCT.md)
-- [Contribution](CONTRIBUTING.md)
+- [Code of Conduct](.github/CODE_OF_CONDUCT.md)
+- [Report security vulnerabilities](.github/SECURITY.md)
+- ~~[Want to contribute?](.github/CONTRIBUTING.md)~~
 
 
 ## Source code
