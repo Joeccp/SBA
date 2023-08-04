@@ -3,13 +3,18 @@
 ---
 
 ## Introduction
-Welcome! This is a **Cinema Kiosk System** project for the Hong Kong Diploma of Secondary Education Examination 2024 Information and Communication Technology School-based Assessment.
+Welcome! This is a **Cinema Kiosk System** project for 
+the Hong Kong Diploma of Secondary Education Examination 2024 
+Information and Communication Technology School-based Assessment.
 
-This Cinema Kiosk System provides a easy way for customers to buy movie tickets. It also serves the administrator as a control platform.
+This Cinema Kiosk System provides an easy way for customers 
+to buy movie tickets. 
+It also serves the administrator as a control platform.
 
 This project is solely done by **Joe Chau**.
 
-This project is done WITHOUT any help of generative artificial intelligence such as ChatGPT and GitHub Copilot.
+This project is done WITHOUT any help of 
+generative artificial intelligence such as ChatGPT and GitHub Copilot.
 
 ---
 
@@ -45,3 +50,9 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 
 ## Documentations
 - [Login](docs/login.md)
+
+---
+
+## Source code
+This program is licensed under the Apache License, Version 2.0.
+The source code can be found [here](https://github.com/Joeccp/SBA)
