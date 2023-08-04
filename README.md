@@ -35,8 +35,7 @@ Run this package using Python via `cmd`/`powershell` with the `-m` flag, or dire
 <!-- Please ignore the below HTML tags if you are reading from source -->
 <details><summary>Click me for examples</summary>
 
-
-Assume you have downloaded this package in `"C:\Users\[USER NAME]\Downloads"`.
+Assume you have downloaded this package in `"C:\Users\[USER NAME]\Downloads"`, run:
 ```shell
 python C:\Users\[USER NAME]\Downloads\SBA -m
 ```
