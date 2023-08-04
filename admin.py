@@ -221,10 +221,10 @@ def adminMode() -> None:
 				continue
 			column: int = column - 1  # Column index starts from 0 in python
 			match action:
-				case 'BUY':
-					target_status: int = 1
 				case 'EMPTY':
 					target_status: int = 0
+				case 'BUY':
+					target_status: int = 1
 				case 'RESERVE':
 					target_status: int = 2
 			house.seating_plan[row][column] = target_status
