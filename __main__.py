@@ -52,7 +52,6 @@ def main() -> None:
 	# (tomllib, which is required in login.login, was introduced in Python 3.11),
 	# (typing.Self, which is required in House, was also introduced in Python 3.11)
 	# (match-case syntax, which is used in House.printPlan, was introduced in Python 3.10)
-	# See documentation for a more detailed reason
 	from admin import adminMode
 	from colour import normal_colour
 	from login import login
@@ -74,7 +73,7 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-	# main is called INSIDE this if statement,
+	# main is called INSIDE this if-statement,
 	# so that main will NOT be called when __main__ being imported
 	main()
 	
