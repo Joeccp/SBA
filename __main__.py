@@ -66,11 +66,11 @@ def main() -> None:
 	# (tomllib, which is required in login.login, was introduced in Python 3.11),
 	# (typing.Self, which is required in House, was also introduced in Python 3.11)
 	# (match-case syntax, which is used in House.printPlan, was introduced in Python 3.10)
-	from admin import adminMode
-	from colour import normal_colour
-	from login import login
-	from user import userMode
-	from utils import clearScreen, loadData
+	from src.admin import adminMode
+	from src.colour import normal_colour
+	from src.login import login
+	from src.user import userMode
+	from src.utils import clearScreen, loadData
 	
 	clearScreen()
 	print(normal_colour)

@@ -15,9 +15,9 @@
 # limitations under the License.
 
 import pickle
-from os import get_terminal_size, makedirs, name, path, system
+from os import get_terminal_size, makedirs, path, system
 
-from house import House
+from .house import House
 
 
 def clearScreen() -> None:
@@ -56,7 +56,7 @@ def saveData(print_log: bool = False) -> None:
 	
 	absolute_path = path.dirname(__file__)
 	
-	relative_path = 'data'
+	relative_path = '../data'
 	full_path = path.join(absolute_path, relative_path)
 	
 	internalLog("Reaching the data folder")
