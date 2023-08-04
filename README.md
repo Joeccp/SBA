@@ -27,9 +27,7 @@ This project has ***NO PRACTICAL USE***, this is just a high school homework.
 - Python 3.11.0 or higher
 
 ### Usage
-1. Open `cmd` or `powershell`
-2. Locate to the directory where this package (The `SBA` folder) is
-3. Run this package using Python with the `-m` flag, or directly run the `__main__.py`
+Run this package using Python via `cmd`/`powershell` with the `-m` flag, or directly run the `__main__.py`
 
 (Do NOT run this program on a Python terminal *inside* an IDE, it will NOT work.)
 
@@ -37,7 +35,8 @@ This project has ***NO PRACTICAL USE***, this is just a high school homework.
 <!-- Please ignore the below HTML tags if you are reading from source -->
 <details><summary>Click me for examples</summary>
 
-Assume you downloaded this package inside `"C:\Users\[USER NAME]\Downloads"`.
+
+Assume you have downloaded this package in `"C:\Users\[USER NAME]\Downloads"`.
 ```shell
 python C:\Users\[USER NAME]\Downloads\SBA -m
 ```
