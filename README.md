@@ -50,7 +50,10 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 
 
 ## Documentations (W.I.P.)
-- [Login](docs/login.md)
+- User manual
+    - [Login](docs/login.md)
+- Developer guide
+- [LICENSE](LICENSE)
 
 
 ## Source code
