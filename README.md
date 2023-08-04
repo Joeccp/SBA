@@ -16,7 +16,7 @@ It also serves the administrator as a control platform.
 This project is solely done by **Joe Chau**.
 
 This project is done WITHOUT any help of 
-generative artificial intelligence such as ChatGPT and GitHub Copilot.
+generative artificial intelligence such as ChatGPT or GitHub Copilot.
 
 ---
 
