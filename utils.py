@@ -1,7 +1,7 @@
 """Utilities"""
 
 import pickle
-from os import makedirs, name, path, system
+from os import get_terminal_size, makedirs, name, path, system
 
 from house import House
 
@@ -10,19 +10,13 @@ def clearScreen() -> None:
 	"""
 	Clear the screen
 
-	It checks which platform is it running on,
-	then executes the command for clearing the screen.
-
-	May not work on Thonny or other IDE
-	
 	:return: None
 	"""
-	if name == 'nt':  # Windows
-		system('cls')
-	elif name == 'posix':  # Mac / Linux
-		system('clear')
-	else:  # Skip a few lines instead
-		print("\n\n\n\n\n\n", end='')
+	# Print empty lines in case system('cls') does not work
+	terminal_width, terminal_height = get_terminal_size()
+	print('\n' * terminal_height, end='')
+	
+	system('cls')  # System must be Windows, see __main__.checkSystemPlatform
 
 
 
