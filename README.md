@@ -18,6 +18,8 @@ This project is solely done by **Joe Chau**.
 This project is done WITHOUT any help of 
 generative artificial intelligence such as ChatGPT or GitHub Copilot.
 
+This project has ***NO PRACTICAL USE***, this is just a homework.
+
 ---
 
 ## Getting started
