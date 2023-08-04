@@ -1,6 +1,5 @@
 # Login
 
----
 
 Login is required to access the system.
 

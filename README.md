@@ -1,6 +1,5 @@
 # Cinema Kiosk System
 
----
 
 ## Introduction
 Welcome! This is a **Cinema Kiosk System** project for 
@@ -20,7 +19,6 @@ generative artificial intelligence such as ChatGPT or GitHub Copilot.
 
 This project has ***NO PRACTICAL USE***, this is just a high school homework.
 
----
 
 ## Getting started
 
@@ -50,12 +48,10 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 
 </details>
 
----
 
 ## Documentations (W.I.P.)
 - [Login](docs/login.md)
 
----
 
 ## Source code
 This program is licensed under the Apache License, Version 2.0.
