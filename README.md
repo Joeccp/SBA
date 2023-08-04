@@ -7,6 +7,7 @@ Welcome! This is a **Cinema Kiosk System** project for
 the Hong Kong Diploma of Secondary Education Examination 2024 
 Information and Communication Technology School-based Assessment.
 
+This project is a simple simulation of a cinema movie ticket system.
 This Cinema Kiosk System provides an easy way for customers 
 to buy movie tickets. 
 It also serves the administrator as a control platform.
@@ -48,7 +49,7 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 
 ---
 
-## Documentations
+## Documentations (W.I.P.)
 - [Login](docs/login.md)
 
 ---
