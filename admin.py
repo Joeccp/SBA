@@ -227,8 +227,6 @@ def adminMode() -> None:
 					target_status: int = 0
 				case 'RESERVE':
 					target_status: int = 2
-				case _:
-					raise RuntimeError("Action code matched with nothing. This should be impossible.")
 			house.seating_plan[row][column] = target_status
 			print("Success!\n")
 			saveData()
