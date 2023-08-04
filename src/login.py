@@ -85,7 +85,7 @@ def login(*, first_time: bool = False) -> int:
 					continue
 				# Make sure you use cmd.exe or powershell.exe
 				# getpass() in python terminal inside IDEs may not work, e.g. PyCharm
-				password: str = getpass("Password: ")
+				password: str = getpass("Password: ").strip()
 				hashed_password: str = hash(password)
 				if user_account["hashed_password"] == hashed_password:
 					if user_account["name"] == "admin":
