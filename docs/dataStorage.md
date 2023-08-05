@@ -10,7 +10,7 @@ just enter mode `3`(Save Data) and `4`(Load Data) in the Control Panel respectiv
 
 ## HOWTO: Reset everything
 
-> **Warning**
+> [!WARNING]
 > The following instructions will reset ***everything*** of this program.
 
 Login as **administrator**, enter mode `10`(CLEAR ALL SAVED DATA).
