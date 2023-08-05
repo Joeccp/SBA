@@ -92,12 +92,16 @@ def adminMode() -> None:
 		
 		# Update movie
 		elif mode == '2':
-			print("House list:")
-			for house in House.houses_table.values():
-				if house.movie:
-					print(f"House {house.house_number} now playing: {house.movie}")
-				else:
-					print(f"House {house.house_number} is closed")
+			if house_list := House.houses_table.values():
+				print("House list:")
+				for house in house_list:
+					if house.movie:
+						print(f"House {house.house_number} now playing: {house.movie}")
+					else:
+						print(f"House {house.house_number} is closed")
+			else:
+				print("No house")
+				continue
 			house_num_str: str = input("Please select the house:\n-> ").strip()
 			if not house_num_str.isdecimal():
 				print("ERROR: House number can only be decimal number")
@@ -127,12 +131,15 @@ def adminMode() -> None:
 						House.tickets_table.remove(ticket)
 						n_tickets_removed += 1
 				print(f"Removed {n_tickets_removed} tickets")
+				saveData()
 				continue
 			elif do_clean == 'N':
 				print("OK")
+				saveData()
 				print("Going back to the control panel menu...")
 			else:
 				print("ERROR: Invalid confirmation, did not clean all seat as default")
+				saveData()
 				print("Going back to the control panel menu...")
 				continue
 		
