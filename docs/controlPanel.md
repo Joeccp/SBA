@@ -17,10 +17,11 @@ You can do the following things by entering the respective 'mode' option:
 |  3   | [Save saved data](dataStorage.md)                                            |
 |  4   | [Load saved data](dataStorage.md)                                            |
 |  5   | [Check the information of different cinema houses](house.md)                 |
-|  6   | [Manually buy/reserve/empty a seat](userBuySeat.md)                              |
+|  6   | [Manually buy/reserve/empty a seat](userBuySeat.md)                          |
 |  7   | [Check the information of a ticket](ticket.md)                               |
 |  8   | [Delete a ticket](ticket.md)                                                 |
 |  9   | [Clear (empty) all seat of a cinema house](house.md)                         |
 |  10  | [Clear all (including saved) data](dataStorage.md)                           |
 |  11  | Stop the entire program                                                      |
+|  12  | See documentations of this program                                           |
 
