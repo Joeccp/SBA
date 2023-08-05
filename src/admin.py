@@ -252,7 +252,7 @@ def adminMode() -> None:
 		elif mode == '7':
 			for ticket in House.tickets_table:
 				ticket_no, time, house_no, movie, row_index, column_index = ticket
-				print(f"{ticket_no:<6} @ {time}: "
+				print(f"{ticket_no:<6} @ {time} "
 				      f"House {house_no:<2} -- {movie:<50} ~"
 				      f"Seat <{row_index+1}{chr(column_index + 65)}>")
 			print(f"Total: {House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active")
@@ -274,7 +274,7 @@ def adminMode() -> None:
 			for ticket in House.tickets_table:
 				if ticket[0] == ticket_number:
 					ticket_no, time, house_no, movie, row_index, column_index = ticket
-					print(f"{ticket_no:<6} @ {time}: "
+					print(f"{ticket_no:<6} @ {time} "
 					      f"House {house_no:<2} -- {movie:<50} ~"
 					      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
 					break
@@ -356,12 +356,11 @@ def adminMode() -> None:
 				print("Going back to the control panel menu...")
 				continue
 			
-			print("Removing tickets data")
 			House.tickets_table = []
 			print("Successfully removed local tickets data")
 			try:
 				absolute_path = os.path.dirname(__file__)
-				relative_path = 'data/tickets'
+				relative_path = '../data/tickets'
 				full_path = os.path.join(absolute_path, relative_path)
 				os.remove(full_path)
 			except FileNotFoundError:
@@ -371,13 +370,12 @@ def adminMode() -> None:
 			finally:
 				print("Cleared tickets data")
 				
-			print("Removing houses data")
 			House.houses_table = {}
 			House.n_House = 0
 			print("Successfully removed local houses data")
 			try:
 				absolute_path = os.path.dirname(__file__)
-				relative_path = 'data/houses'
+				relative_path = '../data/houses'
 				full_path = os.path.join(absolute_path, relative_path)
 				os.remove(full_path)
 			except FileNotFoundError:

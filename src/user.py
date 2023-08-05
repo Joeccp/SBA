@@ -111,7 +111,7 @@ def userMode() -> None:
 			house.seating_plan[row_int][column_int] = 1
 			House.total_tickets += 1
 			ticket_number: str = f"T{House.total_tickets:0>5}"
-			time: str = datetime.now().isoformat()
+			time: str = datetime.now().isoformat(timespec="seconds")
 			ticket: tuple[str, str, int, str, int, int] = (
 				ticket_number, time, house.house_number, house.movie, row_int, column_int
 			)
@@ -147,7 +147,7 @@ def userMode() -> None:
 			for ticket in House.tickets_table:
 				if ticket[0] == ticket_number:
 					ticket_no, time, house_no, movie, row_index, column_index = ticket
-					print(f"{ticket_no:<6} @ {time}: "
+					print(f"{ticket_no:<6} @ {time} "
 					      f"House {house_no:<2} -- {movie:<30} ~ "
 					      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
 					print("\n\n")
@@ -183,7 +183,7 @@ def userMode() -> None:
 			for ticket in House.tickets_table:
 				if ticket[0] == ticket_number:
 					ticket_no, time, house_no, movie, row_index, column_index = ticket
-					print(f"{ticket_no:<6} @ {time}: "
+					print(f"{ticket_no:<6} @ {time} "
 					      f"House {house_no:<2} -- {movie:<50} ~"
 					      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
 					print("\nAre you sure you want to get refund of this ticket? (y/N)")
