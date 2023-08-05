@@ -93,6 +93,9 @@ def userMode() -> None:
 			if coor == '':
 				message: str = ''
 				continue
+			if len(coor) == 1:
+				message: str = "ERROR: Invalid format of the seat number"
+				continue
 			if coor[-1] not in ascii_uppercase:
 				message: str = f"ERROR: {column_colour}Column{normal_colour} index is not a character"
 				continue
@@ -134,11 +137,17 @@ def userMode() -> None:
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
 			print("Please enter you ticket number (starts with 'T'):")
 			ticket_number: str = input("-> ").strip().upper()
-			if len(ticket_number) < 6:
-				message: str = "ERROR: Invalid ticket number -- ticket number too short"
+			if ticket_number == "":
+				message: str = ""
 				continue
 			if not ticket_number.startswith('T'):
 				message: str = "ERROR: Invalid ticket number format -- ticket number starts with 'T'"
+				continue
+			if ticket_number == 'T':
+				message: str = "ERROR: Invalid ticket number -- ticket number has no decimal numbers"
+				continue
+			if len(ticket_number) < 6:
+				message: str = "ERROR: Invalid ticket number -- ticket number too short"
 				continue
 			if not ticket_number[1:].isdecimal():
 				message: str = ("ERROR: Invalid ticket number -- "
@@ -170,11 +179,17 @@ def userMode() -> None:
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n")
 			print("Please enter you ticket number (starts with 'T'):")
 			ticket_number: str = input("-> ").strip().upper()
-			if len(ticket_number) < 6:
-				message: str = "ERROR: Invalid ticket number -- ticket number too short"
+			if ticket_number == "":
+				message: str = ""
 				continue
 			if not ticket_number.startswith('T'):
 				message: str = "ERROR: Invalid ticket number format -- ticket number starts with 'T'"
+				continue
+			if ticket_number == 'T':
+				message: str = "ERROR: Invalid ticket number -- ticket number has no decimal numbers"
+				continue
+			if len(ticket_number) < 6:
+				message: str = "ERROR: Invalid ticket number -- ticket number too short"
 				continue
 			if not ticket_number[1:].isdecimal():
 				message: str = ("ERROR: Invalid ticket number -- "
