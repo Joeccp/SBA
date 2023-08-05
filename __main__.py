@@ -15,6 +15,7 @@
 # limitations under the License.
 
 
+
 def checkSystemPlatform() -> None:
 	"""
 	Checks whether it is running on Windows,
@@ -62,7 +63,8 @@ def main() -> None:
 	checkSystemPlatform()
 	
 	# Import is done INSIDE main and AFTER running checkPythonVersion(),
-	# to prevent ImportError, NameError and SyntaxError
+	# since they are 'part of' the main program,
+	# and to prevent ImportError, NameError and SyntaxError
 	# (tomllib, which is required in login.login, was introduced in Python 3.11),
 	# (typing.Self, which is required in House, was also introduced in Python 3.11)
 	# (match-case syntax, which is used in House.printPlan, was introduced in Python 3.10)
@@ -87,6 +89,17 @@ def main() -> None:
 
 
 if __name__ == '__main__':
+	import argparse
+	
+	# Parse arguments
+	parser = argparse.ArgumentParser(
+		description="A simulation of a cinema kiosk system",
+		epilog="For documentation of the usage of this program, visit https://joeccp.github.io/SBA/",
+		usage="SBA"
+	)
+	parser.parse_args()
+	
+	
 	# main is called INSIDE this if-statement,
 	# so that main will NOT be called when __main__ being imported
 	main()
