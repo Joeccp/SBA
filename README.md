@@ -47,9 +47,7 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 </details>
 
 
-## Documentations (W.I.P.)
-- 
-- 
+## Documentations
 - User manual
     - [Login](docs/login.md)
     - [Admin Control Panel](docs/controlPanel.md)
