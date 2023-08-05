@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import webbrowser
 from datetime import datetime
 from string import ascii_uppercase
 from time import sleep
@@ -43,6 +44,7 @@ def userMode() -> None:
 			"1: Buy ticket\n"
 			"2: Check ticket\n"
 			"3: Ticket refund\n"
+			"4: HELP\n"
 			"Please select a mode (0/1/2/3):"
 		)
 		mode: str = input("-> ").strip()
@@ -205,6 +207,8 @@ def userMode() -> None:
 			
 			continue
 		
+		elif mode == '4':
+			webbrowser.open("https://joeccp.github.io/SBA/")
 		
 		else:
 			message: str = "ERROR: Unknown mode"

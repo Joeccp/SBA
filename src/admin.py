@@ -15,6 +15,7 @@
 # limitations under the License.
 
 import os
+import webbrowser
 
 from .house import House
 from .utils import clearScreen, loadData, saveData
@@ -44,8 +45,9 @@ def adminMode() -> None:
 		      "9: Clear all seats of a house\n"
 		      "10: CLEAR ALL SAVED DATA\n"
 		      "11: STOP THE ENTIRE PROGRAM\n"
+		      "12: Help\n"
 		      )
-		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10)\n-> ").strip()
+		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10/11/12)\n-> ").strip()
 		if not mode.isdecimal():
 			print("ERROR: Mode code should be all decimal")
 			continue
@@ -58,7 +60,7 @@ def adminMode() -> None:
 			quit()
 		
 		# Create house
-		elif mode == '1':
+		if mode == '1':
 			print(f"House {House.n_House + 1} will be the new house")
 			n_row_str: str = input(f"Enter how many row does House {House.n_House + 1} has (1-99): ").strip()
 			if not n_row_str.isdecimal():
@@ -379,6 +381,9 @@ def adminMode() -> None:
 			
 			print("Finish!")
 			
+		# Help
+		elif mode == '12':
+			webbrowser.open("https://joeccp.github.io/SBA/")
 		
 		else:
 			print(f"ERROR: Unknown mode code {mode}")
