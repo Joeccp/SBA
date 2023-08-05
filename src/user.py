@@ -52,8 +52,9 @@ def userMode() -> None:
 			message: str = "ERROR: Mode number should be a decimal number."
 			continue
 		if mode == '0':
-			print("You will be logged out after 3 seconds...")
-			sleep(3)
+			for i in range(3, 0, -1):
+				print(f"\rYou will be logged out after {i} seconds...", end='')
+				sleep(1)
 			return
 		
 		# Buy ticket
