@@ -42,7 +42,7 @@ def userMode() -> None:
 			"0: LOG OUT\n"
 			"1: Buy ticket\n"
 			"2: Check ticket\n"
-			"3: Refund\n"
+			"3: Ticket refund\n"
 			"Please select a mode (0/1/2/3):"
 		)
 		mode: str = input("-> ").strip()
@@ -54,6 +54,7 @@ def userMode() -> None:
 			sleep(3)
 			return
 		
+		# Buy ticket
 		elif mode == '1':
 			clearScreen()
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
@@ -125,7 +126,7 @@ def userMode() -> None:
 			continue
 		
 		
-		
+		# Check ticket
 		elif mode == '2':
 			clearScreen()
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
@@ -161,6 +162,7 @@ def userMode() -> None:
 			
 			continue
 		
+		# Ticket refund
 		elif mode == '3':
 			clearScreen()
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n")

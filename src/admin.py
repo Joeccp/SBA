@@ -40,18 +40,19 @@ def adminMode() -> None:
 		      "5: Check houses information\n"
 		      "6: Buy / Reserve / Empty a seat\n"
 		      "7: Check ticket information\n"
-		      "8: Clear all seats of a house\n"
-		      "9: CLEAR ALL SAVED DATA\n"
-		      "10: STOP THE ENTIRE PROGRAM\n"
+		      "8: Delete ticket\n"
+		      "9: Clear all seats of a house\n"
+		      "10: CLEAR ALL SAVED DATA\n"
+		      "11: STOP THE ENTIRE PROGRAM\n"
 		      )
-		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9)\n-> ").strip()
+		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10)\n-> ").strip()
 		if not mode.isdecimal():
 			print("ERROR: Mode code should be all decimal")
 			continue
 		if mode == '0':
 			print("Bye!")
 			return
-		if mode == '10':
+		if mode == '11':
 			print("STOPPING THE ENTIRE PROGRAM...")
 			print("Bye!")
 			quit()
@@ -254,9 +255,48 @@ def adminMode() -> None:
 				      f"Seat <{row_index+1}{chr(column_index + 65)}>")
 			print(f"Total: {House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active")
 			
+		# Delete ticket
+		elif mode == '8':
+			print("Please enter you ticket number (starts with 'T'):")
+			ticket_number: str = input("-> ").strip().upper()
+			if len(ticket_number) < 6:
+				print("ERROR: Invalid ticket number -- ticket number too short")
+				continue
+			if not ticket_number.startswith('T'):
+				print("ERROR: Invalid ticket number format -- ticket number starts with 'T'")
+				continue
+			if not ticket_number[1:].isdecimal():
+				print("ERROR: Invalid ticket number -- "
+				      "ticket number should ba a single character 'T' followed by decimal numbers")
+				continue
+			for ticket in House.tickets_table:
+				if ticket[0] == ticket_number:
+					ticket_no, time, house_no, movie, row_index, column_index = ticket
+					print(f"{ticket_no:<6} @ {time}: "
+					      f"House {house_no:<2} -- {movie:<50} ~"
+					      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
+					break
+			else:
+				print("ERROR: No such ticket")
+				continue
+			print("Enter 'DELETE' if you want to delete this ticket")
+			print("Or hit Enter to go back to control panel menu")
+			user_input: str = input('-> ').strip().upper()
+			if not user_input:
+				continue
+			elif user_input == 'DELETE':
+				House.houses_table[house_no].seating_plan[row_index][column_index] = 0
+				House.tickets_table.remove(ticket)
+				print("Successfully deleted this ticket")
+				saveData()
+			else:
+				print("ERROR: Confirmation failed")
+				print("Going back to the control panel menu...")
+			
+			
 		
 		# Clear all seats of a house
-		elif mode == '8':
+		elif mode == '9':
 			print("House list:")
 			for house in House.houses_table.values():
 				if house.movie:
@@ -293,7 +333,7 @@ def adminMode() -> None:
 				continue
 		
 		# Clear all saved data
-		elif mode == '9':
+		elif mode == '10':
 			confirm: str = input("Please confirm you would like to clear ALL saved data (y/N): ").strip().upper()
 			if confirm == '' or confirm == 'N':
 				print("Going back to the control panel menu...")
