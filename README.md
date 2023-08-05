@@ -52,6 +52,7 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
     - [Login](docs/login.md)
     - [Admin Control Panel](docs/controlPanel.md)
     - [Cinema houses](docs/house.md)
+    - [Data Storage](docs/dataStorage.md)
     - [Buy a seat as a user](docs/userBuySeat.md)
 - [LICENSE](LICENSE)
 - [Code of Conduct](.github/CODE_OF_CONDUCT.md)
