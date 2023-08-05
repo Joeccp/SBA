@@ -13,7 +13,6 @@ Each house can have a movie name, which indicates the currently playing movie.
 
 Each house has a unique house number, which is used to identify different houses.
 
----
 
 ## HOWTO: Create a house
 Login as **administrator**, enter mode `1`(Create house), 
@@ -22,7 +21,6 @@ You may choose to enter the movie name, or leave it blank.
 
 Every seat will be set as Empty as default.
 
----
 
 ## HOWTO: See the seating plan of a house
 Login as **administrator**, enter mode `5`(Check houses information), 
@@ -35,7 +33,6 @@ User can see seating plan of an available house.
 > 'Available house' refers to house that has empty seat(s), 
 > and has a movie playing (has movie name).
 
----
 
 ## HOWTO: Change the movie of a house
 Login as **administrator**, enter mode `2`(Update movie), enter the house number,
@@ -46,7 +43,6 @@ you will be asked whether you would like to 'clear all relevant data'.
 It means whether you would like to delete all the tickets of the same house, 
 and reset all the status of seats of the house to _Empty_.
 
----
 
 ## HOWTO: Clear all seats of a house
 Login as **administrator**, enter mode `9`(Clear all seats of a house), 
