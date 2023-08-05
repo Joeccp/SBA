@@ -5,7 +5,7 @@ It can be accessed once you are logged in as administrator.
 
 The menu of the control panel is like this:
 
-![Screenshot of the Control Panel Menu](..\images\docs\control_panel_menu.png)
+![Screenshot of the Control Panel Menu](../images/docs/control_panel_menu.png)
 
 You can do the following things by entering the respective 'mode' option:
 
