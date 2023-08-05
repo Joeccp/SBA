@@ -38,12 +38,17 @@ If you want to change the seat to Empty, enter the following:
 Empty [HOUSE NUMBER] [ROW NUMBER] [COLUMN INDEX]
 ```
 
-Where replace [HOUSE NUMBER] to the house number of the seat;
+Replace [HOUSE NUMBER] to the house number of the seat;
+
 replace [ROW NUMBER] to the row number of the seat; 
+
 replace [COLUMN INDEX] to the column number of the seat. 
-Case-insensitive. Leading and trailing spaces are ignored.
+
+The command above is case-insensitive. Leading and trailing spaces are ignored.
+
 You MUST NOT include the brackets (`[]`).
 
+<br/>
 
 ---
 <small>
