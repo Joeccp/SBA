@@ -15,7 +15,7 @@ Each house has a unique house number, which is used to identify different houses
 
 
 ## HOWTO: Create a house
-Login as **administrator**, enter mode `1`(Create house), 
+Login as an **administrator**, enter mode `1`(Create house), 
 enter the number of rows and columns of the house.
 You may choose to enter the movie name, or leave it blank.
 
@@ -23,19 +23,20 @@ Every seat will be set as Empty as default.
 
 
 ## HOWTO: See the seating plan of a house
-Login as **administrator**, enter mode `5`(Check houses information), 
+Login as an **administrator**, enter mode `5`(Check houses information), 
 enter the house number.
 
 OR
 
-Login as **user**, enter mode `1`(Buy ticket), enter the house number. 
+Login as a **user**, enter mode `1`(Buy ticket), enter the house number. 
 User can see seating plan of an available house.
+> **Note**
 > 'Available house' refers to house that has empty seat(s), 
 > and has a movie playing (has movie name).
 
 
 ## HOWTO: Change the movie of a house
-Login as **administrator**, enter mode `2`(Update movie), enter the house number,
+Login as an **administrator**, enter mode `2`(Update movie), enter the house number,
 enter the *new* movie name, or leave it blank if no movie is playing.
 
 After entering the new movie name, 
@@ -45,5 +46,5 @@ and reset all the status of seats of the house to _Empty_.
 
 
 ## HOWTO: Clear all seats of a house
-Login as **administrator**, enter mode `9`(Clear all seats of a house), 
+Login as an **administrator**, enter mode `9`(Clear all seats of a house), 
 enter the house number.

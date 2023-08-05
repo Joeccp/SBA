@@ -10,10 +10,10 @@ Due to the fact that this is just an SBA homework, and is in Elective Part D,
 hashed usernames and passwords are stored locally in `accounts.toml`, 
 instead of using any kind of web-server or database.
 
-You *cannot* add or remove any user, even you are the administrator,
-you also cannot change the username or password of any user.
+You *cannot* add or remove any user, even you are an administrator,
+you also *cannot* change the username or password of any user.
 
-**First time logging in will require you to login as admin.**
+**First time logging in will require you to login as an administrator.**
 
 ---
 
@@ -25,3 +25,6 @@ Here are all the user accounts:
 |   user   |  bhjs.   |     User      |
 
 Leading and trailing whitespaces are automatically ignored in the program.
+
+To logout, enter mode `0`(EXIT CONTROL PANEL) if you are in the Control Panel, otherwise,
+enter mode `0`(LOG OUT).
