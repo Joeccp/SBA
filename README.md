@@ -51,7 +51,6 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 - User manual
     - [Login](docs/login.md)
     - [Admin Control Panel](docs/controlPanel.md)
-- Developer guide
 - [LICENSE](LICENSE)
 - [Code of Conduct](.github/CODE_OF_CONDUCT.md)
 - [Report security vulnerabilities](.github/SECURITY.md)
