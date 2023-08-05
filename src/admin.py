@@ -357,6 +357,7 @@ def adminMode() -> None:
 				continue
 			
 			House.tickets_table = []
+			House.total_tickets = 0
 			print("Successfully removed local tickets data")
 			try:
 				absolute_path = os.path.dirname(__file__)
