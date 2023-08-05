@@ -89,6 +89,7 @@ def adminMode() -> None:
 			else:
 				house.movie = movie
 			print("Success!")
+			saveData()
 		
 		# Update movie
 		elif mode == '2':
