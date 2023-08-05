@@ -14,7 +14,7 @@ It also serves the administrator as a control platform.
 
 This project is solely done by **Joe Chau**.
 
-This project is done WITHOUT any help of 
+Scripts are written WITHOUT any help of 
 generative artificial intelligence such as ChatGPT or GitHub Copilot.
 
 This project has ***NO PRACTICAL USE***, this is just a high school homework.
