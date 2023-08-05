@@ -108,7 +108,6 @@ def userMode() -> None:
 				continue
 			house.seating_plan[row_int][column_int] = 1
 			House.total_tickets += 1
-			house.n_available -= 1
 			ticket_number: str = f"T{House.total_tickets:0>5}"
 			time: str = datetime.now().isoformat()
 			ticket: tuple[str, str, int, str, int, int] = (

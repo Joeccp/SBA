@@ -47,7 +47,15 @@ class House:
 		House.houses_table[self.house_number] = self
 		self.movie: str = ''
 		self.n_seat: int = self.n_row * self.n_column
-		self.n_available: int = self.n_seat
+	
+	@property
+	def n_available(self) -> int:
+		count: int = 0
+		for row in self.seating_plan:
+			for seat in row:
+				if seat == 0:
+					count += 1
+		return count
 
 	
 	def clearPlan(self) -> None:
