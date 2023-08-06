@@ -5,7 +5,7 @@ Administrator can manually change the status of a seat.
 This can be done by entering mode `6`(Buy / Reserve / Empty a seat) 
 after login as **administrator**. 
 
-## Warning :warning:
+## Warning ⚠️
 <b>
 Any changes of seat by this mode will NOT affect the ticket system.
 It means that manually setting a seat to be Sold, ticket will NOT be generated.
