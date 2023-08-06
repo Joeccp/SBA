@@ -58,3 +58,8 @@ NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
 described in BCP 14 [RFC2119] [RFC8174] when, and only when, they
 appear in all capitals, as shown here.
 </small>
+
+---
+
+Copyright © 2023 Joe Chau, Licensed under the 
+<a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.

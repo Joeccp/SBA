@@ -28,3 +28,9 @@ Leading and trailing whitespaces are automatically ignored in the program.
 
 To logout, enter mode `0`(EXIT CONTROL PANEL) if you are in the Control Panel, otherwise,
 enter mode `0`(LOG OUT).
+
+
+---
+
+Copyright © 2023 Joe Chau, Licensed under the 
+<a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.

@@ -46,3 +46,8 @@ Login as an **administrator**, enter mode `8`(Delete ticket), enter the ticket n
 
 They do the *same* thing.
 
+
+---
+
+Copyright © 2023 Joe Chau, Licensed under the 
+<a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.

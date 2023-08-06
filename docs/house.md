@@ -48,3 +48,9 @@ and reset all the status of seats of the house to _Empty_.
 ## HOWTO: Clear all seats of a house
 Login as an **administrator**, enter mode `9`(Clear all seats of a house), 
 enter the house number.
+
+
+---
+
+Copyright © 2023 Joe Chau, Licensed under the 
+<a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.

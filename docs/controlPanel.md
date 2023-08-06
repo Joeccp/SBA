@@ -25,3 +25,9 @@ You can do the following things by entering the respective 'mode' option:
 |  11  | Stop the entire program                                                      |
 |  12  | See documentations of this program                                           |
 
+
+
+---
+
+Copyright © 2023 Joe Chau, Licensed under the 
+<a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.
