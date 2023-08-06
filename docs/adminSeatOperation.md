@@ -48,14 +48,18 @@ The command above is case-insensitive. Leading and trailing spaces are ignored.
 
 You MUST NOT include the brackets (`[]`).
 
-<br/>
+<br/><br/><br/>
 
 ---
 <small>
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
 NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
 "MAY", and "OPTIONAL" in this document are to be interpreted as
-described in BCP 14 [RFC2119] [RFC8174] when, and only when, they
+described in 
+<a href="https://www.rfc-editor.org/bcp/bcp14" target="_blank">BCP 14</a>
+[<a href="https://www.rfc-editor.org/rfc/rfc2119" target="_blank">RFC2119</a>]
+[<a href="https://www.rfc-editor.org/rfc/rfc8174" target="_blank">RFC8174</a>]
+when, and only when, they
 appear in all capitals, as shown here.
 </small>
 
