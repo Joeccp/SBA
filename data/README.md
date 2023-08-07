@@ -11,4 +11,4 @@ Data are stored at `SBA/data/houses` and `SBA/data/tickets` (without a filename 
 > Those files are NOT human-readable.
 
 
-See [documentation](../docs/dataStorage.md).
+See [documentation](https://joeccp.github.io/SBA/docs/dataStorage).
