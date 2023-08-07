@@ -18,7 +18,8 @@ When the program is started, it will try to load data.
 
 
 ## HOWTO: Manually save and load data
-Login as an **administrator**, enter mode `3`(Save Data) to save data or `4`(Load Data) to load data.
+Login as an **administrator**, enter mode `3`(Save Data) to save data or 
+mode `4`(Load Data) to load data.
 
 
 ## HOWTO: Reset everything
