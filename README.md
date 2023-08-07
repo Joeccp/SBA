@@ -55,19 +55,11 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
     - [Data Storage](docs/dataStorage.md)
     - [Ticket](docs/ticket.md)
     - [Admin seat operation](docs/adminSeatOperation.md)
-<!-- Markdown link in GitHub page doesn't work for .github folder :( -->
-- [LICENSE](https://github.com/Joeccp/SBA/blob/main/LICENSE)
-- [Code of Conduct](https://github.com/Joeccp/SBA/blob/main/.github/CODE_OF_CONDUCT.md)
-- [Report security vulnerabilities](https://github.com/Joeccp/SBA/blob/main/.github/SECURITY.md)
-- ~~[Want to contribute?](https://github.com/Joeccp/SBA/blob/main/.github/CONTRIBUTING.md)~~
 
 
-## Source code
-The source code of this project can be found
-[here](https://github.com/Joeccp/SBA),
-licensed under *the Apache License, Version 2.0*.
-
-The website of this project is <https://joeccp.github.io/SBA>.
+## Relative links
+- [GitHub Repository](https://github.com/Joeccp/SBA) <-- source code
+- [Main page of this project](https://joeccp.github.io/SBA/)
 
 ---
 
