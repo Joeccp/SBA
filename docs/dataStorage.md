@@ -1,11 +1,23 @@
 # Data storage
 
-Data is automatically saved locally.
-
-You can manually save and load saved data as an **administrator**,
-just enter mode `3`(Save Data) and `4`(Load Data) in the Control Panel respectively.
+Data is automatically saved.
 
 **Each time saving data will cover the previous saved data.**
+
+Data are stored at `SBA/data/houses` and `SBA/data/tickets` (without a filename extension), 
+if there are no such files, the program will create them.
+
+When the program is started, it will try to load data.
+
+---
+> Technical details:
+> 
+> Those files are binary files, containing [pickled Python objects](https://docs.python.org/3/library/pickle.html).
+> Those files are NOT human-readable.
+
+
+## HOWTO: Manually save and load data
+Login as an **administrator**, enter mode `3`(Save Data) to save data or `4`(Load Data) to load data.
 
 
 ## HOWTO: Reset everything
