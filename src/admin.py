@@ -127,7 +127,7 @@ def adminMode() -> None:
 				print("fClearing all related tickets")
 				n_tickets_removed: int = 0
 				for ticket in House.tickets_table:
-					ticket_no, time, house_no, movie, row_index, column_index = ticket
+					ticket_no, time, house_no, *other_unused_information = ticket
 					if house_no == house.house_number:
 						House.tickets_table.remove(ticket)
 						n_tickets_removed += 1
