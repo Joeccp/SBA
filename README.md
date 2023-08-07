@@ -55,7 +55,7 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
     - [Data Storage](docs/dataStorage.md)
     - [Ticket](docs/ticket.md)
     - [Admin seat operation](docs/adminSeatOperation.md)
-<!-- Markdown link doesn't work for .github folder :(-->
+<!-- Markdown link in GitHub page doesn't work for .github folder :( -->
 - [LICENSE](https://github.com/Joeccp/SBA/blob/main/LICENSE)
 - [Code of Conduct](https://github.com/Joeccp/SBA/blob/main/.github/CODE_OF_CONDUCT.md)
 - [Report security vulnerabilities](https://github.com/Joeccp/SBA/blob/main/.github/SECURITY.md)
