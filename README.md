@@ -55,10 +55,11 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
     - [Data Storage](docs/dataStorage.md)
     - [Ticket](docs/ticket.md)
     - [Admin seat operation](docs/adminSeatOperation.md)
-- [LICENSE](LICENSE)
-- [Code of Conduct](.github/CODE_OF_CONDUCT.md)
-- [Report security vulnerabilities](.github/SECURITY.md)
-- ~~[Want to contribute?](.github/CONTRIBUTING.md)~~
+<!-- Markdown link doesn't work for .github folder :(-->
+- [LICENSE](https://github.com/Joeccp/SBA/blob/main/LICENSE)
+- [Code of Conduct](https://github.com/Joeccp/SBA/blob/main/.github/CODE_OF_CONDUCT.md)
+- [Report security vulnerabilities](https://github.com/Joeccp/SBA/blob/main/.github/SECURITY.md)
+- ~~[Want to contribute?](https://github.com/Joeccp/SBA/blob/main/.github/CONTRIBUTING.md)~~
 
 
 ## Source code
