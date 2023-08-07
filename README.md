@@ -57,7 +57,7 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
     - [Admin seat operation](docs/adminSeatOperation.md)
 
 
-## Relative links
+## Related links
 - [GitHub Repository](https://github.com/Joeccp/SBA) <-- source code
 - [Main page of this project](https://joeccp.github.io/SBA/)
 
