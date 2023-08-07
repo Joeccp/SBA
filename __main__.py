@@ -1,4 +1,4 @@
-"""Main program"""
+"""A cinema kiosk system"""
 
 # Copyright 2023 Joe Chau
 #
@@ -13,6 +13,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+
+__author__ = 'Joe Chau'
+__contact__ = 's2018014@bhjs.edu.hk'
+__copyright__ = """
+		Copyright 2023 Joe Chau
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License."""
+__license__ = 'Apache-2.0'
 
 
 
@@ -36,7 +55,7 @@ def checkPythonVersion() -> None:
 	If the python version is older than 3.11, it raises SystemExit.
 	
 	:return: None
-	:raises SystemExit: If Python version is older than 3.11
+	:raises SystemExit: If the Python version is older than 3.11
 	"""
 	from sys import version_info
 	major_version, minor_version, *_ = version_info
@@ -102,33 +121,16 @@ if __name__ == '__main__':
 	                    action='store_true')
 	args = parser.parse_args()
 	if args.license or args.copyright:
-		print("""
-		Copyright 2023 Joe Chau
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.""")
-		quit()
+		print(__license__); quit()
 	
 	
 	
+	# -------------------------------------------------------------------------
+	# -------------------------------------------------------------------------
 	# main is called INSIDE this if-statement,
-	# so that main will NOT be called when __main__ being imported
+	# so that main will NOT be called immediately after __main__ being imported
 	main()
+	# -------------------------------------------------------------------------
+	# -------------------------------------------------------------------------
 	
 	
-	
-	# Easter egg, which will never run
-	exec(__import__(bytes.fromhex('626173653634').decode(
-		bytes.fromhex('6173636969').decode(bytes.fromhex('7574662d38').decode()))).b64decode(
-		('cHJpbnQoJycuam9pbihbY2hyKGkpIGZvciBpIGluIFsyNywgOTEsIDU3LCA1OSwgNTMsIDEwOSwgNzQsIDE'
-		 'xNywgMTE1LCAxMTYsIDMyLCA3NywgMTExLCAxMTAsIDEwNSwgMTA3LCA5NywgMzMsIDI3LCA5MSwgNDgsID'
-		 'EwOV1dKSk=')).decode())
