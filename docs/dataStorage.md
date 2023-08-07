@@ -10,9 +10,10 @@ if there are no such files, the program will create them.
 When the program is started, it will try to load data.
 
 ---
-> Technical details:
+> **Technical details**
 > 
-> Those files are binary files, containing [pickled Python objects](https://docs.python.org/3/library/pickle.html).
+> Those files are binary files, containing 
+> <a href="https://docs.python.org/3/library/pickle.html" action="_blank">pickled Python objects</a>.
 > Those files are NOT human-readable.
 
 
