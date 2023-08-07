@@ -23,6 +23,7 @@ Login as an **administrator**, enter mode `3`(Save Data) to save data or `4`(Loa
 ## HOWTO: Reset everything
 <!--This is GitHub's warning format-->
 > **Warning**
+> 
 > The following instructions will reset ***everything*** of this program.
 
 Login as an **administrator**, enter mode `10`(CLEAR ALL SAVED DATA).

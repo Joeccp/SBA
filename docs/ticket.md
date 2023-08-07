@@ -31,6 +31,7 @@ Login as an **administrator**, enter mode `7`(Check ticket information),
 ALL ACTIVE tickets information will be printed.
 
 > **Note**
+> 
 > 'ACTIVE tickets' refers to tickets that are not refunded by user 
 > or deleted by administrator.
 

@@ -3,7 +3,7 @@ This folder holds data used in the program.
 Data are stored at `SBA/data/houses` and `SBA/data/tickets` (without a filename extension).
 
 
-<br/><br/><br/>
+<br/><br/>
 
 > Technical details:
 > 

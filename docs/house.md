@@ -31,6 +31,7 @@ OR
 Login as a **user**, enter mode `1`(Buy ticket), enter the house number. 
 User can see seating plan of an available house.
 > **Note**
+> 
 > 'Available house' refers to house that has empty seat(s), 
 > and has a movie playing (has movie name).
 
