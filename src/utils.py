@@ -34,18 +34,18 @@ def clearScreen() -> None:
 
 
 
-def saveData(print_log: bool = False) -> None:
+def saveData(*, print_log: bool = False) -> None:
 	"""
 	Save `House.houses_table` into `data/houses`,
 	and save `House.total_tickets` and `House.tickets_table` into `data/tickets`
 	
-	:param print_log: Whether to print logs, it is for admin mode
+	:param print_log: Whether to print logs, it is for admin mode. Keyword-only parameter
 	:type print_log: bool
 	:return: None
 	"""
 	def internalLog(message: str) -> None:
 		"""
-		Print logs if `print_log` is `True`
+		Print log if `print_log` is `True`
 		
 		:param message: Message to print
 		:type message: str
@@ -80,18 +80,18 @@ def saveData(print_log: bool = False) -> None:
 	internalLog("Data saved")
 
 
-def loadData(print_log: bool = False) -> None:
+def loadData(*, print_log: bool = False) -> None:
 	"""
 	Load `House.houses_table` from `data/houses`,
 	and load `House.total_tickets` and `House.tickets_table` from `data/tickets`
 
-	:param print_log: Whether to print logs, it is for admin mode
+	:param print_log: Whether to print logs, it is for admin mode. Keyword-only parameter
 	:type print_log: bool
 	:return: None
 	"""
 	def internalLog(message: str) -> None:
 		"""
-		Print logs if `print_log` is `True`
+		Print log if `print_log` is `True`
 
 		:param message: Message to print
 		:type message: str
