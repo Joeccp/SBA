@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import logging
 import os
 import webbrowser
+from logging import getLogger, Logger
 
 from .house import House
 from .utils import clearScreen, loadData, saveData
@@ -32,8 +32,8 @@ def adminMode() -> None:
 	clearScreen()
 	print("CINEMA KIOSK SYSTEM")
 	print("CONTROL PANEL\n\n\n")
-	logger: logging.Logger = logging.getLogger("adminMode")
 	while True:
+		logger: Logger = getLogger("adminMode")
 		logger.info("Entered main menu of the control panel")
 		logger.info("Waiting for mode input")
 		print("\n"
@@ -67,7 +67,7 @@ def adminMode() -> None:
 		
 		# Create house
 		if mode == '1':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_1")
+			logger: Logger = getLogger("adminMode.mode_1")
 			logger.info("Admin Mode 1: Create House")
 			print(f"House {House.n_House + 1} will be the new house")
 			n_row_str: str = input(f"Enter how many row does House {House.n_House + 1} has (1-99): ").strip()
@@ -106,7 +106,7 @@ def adminMode() -> None:
 		
 		# Update movie
 		elif mode == '2':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_2")
+			logger: Logger = getLogger("adminMode.mode_2")
 			logger.info("Admin Mode 1: Update movie")
 			if house_list := House.houses_table.values():
 				print("House list:")
@@ -170,20 +170,20 @@ def adminMode() -> None:
 		
 		# Save data
 		elif mode == '3':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_3")
+			logger: Logger = getLogger("adminMode.mode_3")
 			logger.info("Admin Mode 3: Save data")
 			saveData(print_log=True)
 		
 		# Load data
 		elif mode == '4':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_4")
+			logger: Logger = getLogger("adminMode.mode_4")
 			logger.info("Admin Mode 4: Load data")
 			loadData(print_log=True)
 		
 		
 		# Check houses information
 		elif mode == '5':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_5")
+			logger: Logger = getLogger("adminMode.mode_5")
 			logger.info("Admin Mode 5: Check houses information")
 			if House.houses_table:
 				print("Listing all houses information...")
@@ -213,7 +213,7 @@ def adminMode() -> None:
 		
 		# Buy / Reserve / Empty a seat
 		elif mode == '6':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_6")
+			logger: Logger = getLogger("adminMode.mode_6")
 			logger.info("Admin Mode 6: Buy / Reserve / Empty a seat")
 			print("Note: Seats brought / reserved / emptied from this control panel "
 			      "DO NOT have / WILL NOT delete a ticket.")
@@ -304,7 +304,7 @@ def adminMode() -> None:
 			
 		# Check ticket information
 		elif mode == '7':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_7")
+			logger: Logger = getLogger("adminMode.mode_7")
 			logger.info("Admin Mode 7: Check ticket information")
 			for ticket in House.tickets_table:
 				ticket_no, time, house_no, movie, row_index, column_index = ticket
@@ -315,7 +315,7 @@ def adminMode() -> None:
 			
 		# Delete ticket
 		elif mode == '8':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_8")
+			logger: Logger = getLogger("adminMode.mode_8")
 			logger.info("Admin Mode 8: Delete ticket")
 			logger.info("Waiting ticket number input")
 			print("Please enter you ticket number (starts with 'T'):")
@@ -367,7 +367,7 @@ def adminMode() -> None:
 		
 		# Clear all seats of a house
 		elif mode == '9':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_9")
+			logger: Logger = getLogger("adminMode.mode_9")
 			logger.info("Admin Mode 9: Clear all seats of a house")
 			print("House list:")
 			for house in House.houses_table.values():
@@ -424,7 +424,7 @@ def adminMode() -> None:
 		
 		# Clear all saved data
 		elif mode == '10':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_10")
+			logger: Logger = getLogger("adminMode.mode_10")
 			logger.info("Admin Mode 10: Clear all saved data")
 			logger.info("Confirming")
 			confirm: str = input("Please confirm you would like to clear ALL saved data (y/N): ").strip().upper()
@@ -486,7 +486,7 @@ def adminMode() -> None:
 			
 		# Help
 		elif mode == '12':
-			logger: logging.Logger = logging.getLogger("adminMode.mode_12")
+			logger: Logger = getLogger("adminMode.mode_12")
 			logger.info("Admin Mode 12: Help")
 			webbrowser.open("https://joeccp.github.io/SBA/")
 			logger.info("Opened a website browser and visit https://joeccp.github.io/SBA/")
