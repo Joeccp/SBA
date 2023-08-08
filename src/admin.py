@@ -35,7 +35,7 @@ def adminMode() -> None:
 	while True:
 		logger: Logger = getLogger("adminMode")
 		logger.info("Entered main menu of the control panel")
-		logger.info("Waiting for mode input")
+		logger.info("Waiting mode code input")
 		print("\n"
 		      "0: EXIT CONTROL PANEL\n"
 		      "1: Create house\n"
@@ -54,11 +54,13 @@ def adminMode() -> None:
 		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10/11/12)\n-> ").strip()
 		if not mode.isdecimal():
 			print("ERROR: Mode code should be all decimal")
-			logger.info("Invalid mode code -- not all decimal")
+			logger.info("Invalid mode code")
 			continue
 		if mode == '0':
 			print("Bye!")
-			logger.info("Mode 0: EXIT CONTROL PANEL: Going back to the login page")
+			logger: Logger = getLogger("adminMode.mode_0")
+			logger.info("Admin Mode 0: EXIT CONTROL PANEL")
+			logger.info("ADMIN LOGOUT")
 			return
 		if mode == '11':
 			print("Bye!")
@@ -70,6 +72,7 @@ def adminMode() -> None:
 			logger: Logger = getLogger("adminMode.mode_1")
 			logger.info("Admin Mode 1: Create House")
 			print(f"House {House.n_House + 1} will be the new house")
+			logger.info("Waiting number of rows input")
 			n_row_str: str = input(f"Enter how many row does House {House.n_House + 1} has (1-99): ").strip()
 			if not n_row_str.isdecimal():
 				print("ERROR: Number of rows must be decimal number")
@@ -82,6 +85,7 @@ def adminMode() -> None:
 				print("House creation failed, exiting to control panel menu...")
 				logger.info("Number of rows too big, going back to the control panel menu")
 				continue
+			logger.info("Waiting number of columns input")
 			n_col_str: str = input(f"Enter how many column does House {House.n_House + 1} has (1-26): ").strip()
 			if not n_col_str.isdecimal():
 				print("ERROR: Number of columns must be decimal number")
@@ -95,6 +99,7 @@ def adminMode() -> None:
 				logger.info("Number of columns too big, going back to the control panel menu")
 				continue
 			house: House = House(row_number=n_row, column_number=n_col)
+			logger.info("Waiting movie name input")
 			movie: str = input("Please enter the movie name (or leave it blank if no movie will be played): ").strip()
 			if movie == '':
 				pass
@@ -118,7 +123,7 @@ def adminMode() -> None:
 			else:
 				print("No house")
 				continue
-			logger.info("Waiting for house number input")
+			logger.info("Waiting house number input")
 			house_num_str: str = input("Please select the house:\n-> ").strip()
 			if not house_num_str.isdecimal():
 				print("ERROR: House number can only be decimal number")
@@ -194,6 +199,7 @@ def adminMode() -> None:
 				print("No house")
 				continue
 			print()
+			logger.info("Waiting house number input")
 			house_num_str: str = input("Select a house (Just hit enter to go back to control panel):\n-> ")
 			if house_num_str == '':
 				continue
