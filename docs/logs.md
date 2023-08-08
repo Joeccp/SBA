@@ -23,8 +23,11 @@ IT SHOULD NOT BE USED TO CHECK OR REVIEW LARGE AMOUNTS OF INFORMATION/DATA
 
 ## About the log messages
 The name of the log files is the time of executing the program.
-The format of a log message is `%(asctime)s --> %(levelname)s @%(name)s --> %(message)s`,
-where `asctime` is the time, `levelname` is the log level, `name` is where the log message
+The format of a log message is 
+
+```%(asctime)s --> %(levelname)s @%(name)s --> %(message)s```
+
+, where `asctime` is the time, `levelname` is the log level, `name` is where the log message
 was sent, `message` is the log message. Most of the log information should be,
 and is designed to be, very intuitive.
 
