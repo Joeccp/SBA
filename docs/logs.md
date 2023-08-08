@@ -21,7 +21,7 @@ IT SHOULD NOT BE USED TO CHECK OR REVIEW LARGE AMOUNTS OF INFORMATION/DATA
 (SUCH AS HOUSES AND TICKETS INFORMATION).
 
 
-## Information on log files
+## About the log messages
 The name of the log files is the time of executing the program.
 The format of a log message is `%(asctime)s --> %(levelname)s @%(name)s --> %(message)s`,
 where `asctime` is the time, `levelname` is the log level, `name` is where the log message
