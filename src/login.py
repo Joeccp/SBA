@@ -17,6 +17,7 @@
 import os
 from getpass import getpass
 from hashlib import sha3_512
+from logging import getLogger, Logger
 from tomllib import load as loadtoml
 from typing import Any
 
@@ -57,22 +58,28 @@ def login(*, first_time: bool = False) -> int:
 	:raise FileNotFoundError: If `accounts.toml` could not be found
 	"""
 	
+	logger: Logger = getLogger('login')
+	
+	logger.info("Reaching accounts.toml file")
 	# Obtain the full path of the file
 	absolute_path = os.path.dirname(__file__)
 	relative_path = "../accounts.toml"
 	full_path = os.path.join(absolute_path, relative_path)
 	try:
 		with open(full_path, 'rb') as file:
+			logger.info("Getting accounts information")
 			file_data: dict[str, Any] = loadtoml(file)
 			account_list: list[dict[str, str]] = list(file_data.values())
 			if first_time:
 				message: str = "To initialize, please login as admin."
+				logger.info("First time logging in, requires login as admin")
 			else:
 				message: str = ''
 			while True:
 				clearScreen()
 				print("CINEMA KIOSK SYSTEM\n\n\n")
 				print(Colour.RED + message + normal_colour + "\n\n\n")
+				logger.info("Waiting username input")
 				username: str = input("Username: ")
 				username: str = username.strip()
 				username_exists: bool = False
@@ -81,6 +88,7 @@ def login(*, first_time: bool = False) -> int:
 						username_exists: bool = True
 						user_account: dict[str, str] = account
 				if not username_exists:
+					logger.info("Username doesn't exit")
 					message: str = "Username does not exists, please try again."
 					continue
 				# Make sure you use cmd.exe or powershell.exe
@@ -89,16 +97,22 @@ def login(*, first_time: bool = False) -> int:
 				hashed_password: str = hash(password)
 				if user_account["hashed_password"] == hashed_password:
 					if user_account["name"] == "admin":
+						logger.info("LOGGED IN AS ADMIN")
 						return 1
-					else:
+					else:  # Login as user success
 						if first_time:
+							logger.info("USER WANTS TO LOGIN BUT ONLY ADMIN CAN LOGIN NOW")
 							message: str = "Sorry, only admin can log in as initialization is required."
 							continue
+						logger.info("LOGGED IN AS USER")
 						return 0
 				else:
+					logger.info("Incorrect password")
 					message: str = "Password incorrect, please try again."
 
 	except FileNotFoundError:
+		logger.critical("No accounts.toml file")
+		logger.critical("QUITTING THE PROGRAM: No accounts information")
 		print("Cannot find accounts.toml which is necessary for the login function.")
 		print("Exiting the program...")
-		
+		quit()
