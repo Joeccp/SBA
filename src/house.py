@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import logging
 from typing import Self
 
 from .colour import *
@@ -47,6 +48,9 @@ class House:
 		House.houses_table[self.house_number] = self
 		self.movie: str = ''
 		self.n_seat: int = self.n_row * self.n_column
+		logger: logging.Logger = logging.getLogger("House.__init__")
+		logger.info(f"House {self.house_number} is created -- {self.n_row}x{self.n_column}")
+	
 	
 	@property
 	def n_available(self) -> int:
@@ -61,6 +65,8 @@ class House:
 	def clearPlan(self) -> None:
 		"""Clear the seating plan"""
 		self.seating_plan: list[list[int]] = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
+		logger: logging.Logger = logging.getLogger("House.clearPlan_")
+		logger.info(f"House {self.house_number}'s seating plan has been cleared")
 	
 	
 	def printPlan(self) -> None:

@@ -14,10 +14,58 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import logging
 import pickle
+from datetime import datetime
 from os import get_terminal_size, makedirs, path, system
+from platform import system as systemPlatform
+from sys import version_info
 
 from .house import House
+
+
+def checkSystemPlatform() -> None:
+	"""
+	Checks whether it is running on Windows,
+	if not, raises SystemExit
+
+	:return: None
+	:raises SystemExit: If not running on Windows
+	"""
+	logger: logging.Logger = logging.getLogger("checkSystemPlatform")
+	logger.info("Checking system platform")
+	if systemPlatform() != 'Windows':
+		logger.critical("I am running on Non-Windows system platform!")
+		logger.critical("QUITTING THE PROGRAM: Non-windows system platform")
+		err_msg: str = "This program can only be executed on Windows"
+		raise SystemExit(err_msg)
+
+
+def checkPythonVersion() -> None:
+	"""
+	Checks the Python version.
+	If the python version is older than 3.11, it raises SystemExit.
+
+	:return: None
+	:raises SystemExit: If the Python version is older than 3.11
+	"""
+	# (tomllib, which is required in src.login.login, was introduced in Python 3.11),
+	# (typing.Self, which is required in src.house.House, was also introduced in Python 3.11)
+	# (match-case syntax, which is used in House.printPlan, was introduced in Python 3.10)
+	
+	logger: logging.Logger = logging.getLogger("checkPythonVersion")
+	major_version, minor_version, *_ = version_info
+	if major_version < 3:
+		logger.critical("I am running on Python 2!")
+		logger.critical("QUITTING THE PROGRAM: Python version lower than Python 3.11")
+		err_msg: str = "This program does not support Python 2"
+		raise SystemExit(err_msg)
+	elif minor_version < 11:
+		logger.critical("I am running on Python 3.%s!", minor_version)
+		logger.critical("QUITTING THE PROGRAM: Python version lower than Python 3.11")
+		err_msg: str = "Unsupported old Python version (" + str(major_version) + "." + str(
+			minor_version) + "), please use Python 3.11 or newer"
+		raise SystemExit(err_msg)
 
 
 def clearScreen() -> None:
@@ -33,7 +81,6 @@ def clearScreen() -> None:
 	system('cls')  # System must be Windows, see __main__.checkSystemPlatform
 
 
-
 def saveData(*, print_log: bool = False) -> None:
 	"""
 	Save `House.houses_table` into `data/houses`,
@@ -43,6 +90,10 @@ def saveData(*, print_log: bool = False) -> None:
 	:type print_log: bool
 	:return: None
 	"""
+	
+	logger: logging.Logger = logging.getLogger('saveData')
+	logger.info("Saving Data")
+	
 	def internalLog(message: str) -> None:
 		"""
 		Print log if `print_log` is `True`
@@ -53,6 +104,7 @@ def saveData(*, print_log: bool = False) -> None:
 		"""
 		if print_log:
 			print(message)
+		logger.info(message)
 	
 	absolute_path = path.dirname(__file__)
 	
@@ -63,7 +115,7 @@ def saveData(*, print_log: bool = False) -> None:
 	if not path.isdir(full_path):
 		internalLog("No data folder, creating one")
 		makedirs(full_path)
-		
+	
 	internalLog("Writing houses data")
 	relative_path = "../data/houses"
 	full_path = path.join(absolute_path, relative_path)
@@ -77,7 +129,7 @@ def saveData(*, print_log: bool = False) -> None:
 	with open(full_path, 'wb') as file:
 		pickle.dump([House.total_tickets, House.tickets_table], file)
 	
-	internalLog("Data saved")
+	internalLog("Data saving process finished")
 
 
 def loadData(*, print_log: bool = False) -> None:
@@ -89,6 +141,10 @@ def loadData(*, print_log: bool = False) -> None:
 	:type print_log: bool
 	:return: None
 	"""
+	
+	logger: logging.Logger = logging.getLogger('loadData')
+	logger.info("Loading Data")
+	
 	def internalLog(message: str) -> None:
 		"""
 		Print log if `print_log` is `True`
@@ -99,6 +155,7 @@ def loadData(*, print_log: bool = False) -> None:
 		"""
 		if print_log:
 			print(message)
+		logger.info(message)
 	
 	absolute_path = path.dirname(__file__)
 	
@@ -114,7 +171,6 @@ def loadData(*, print_log: bool = False) -> None:
 	except FileNotFoundError:
 		internalLog("No houses data found")
 	
-	
 	relative_path = "../data/tickets"
 	full_path = path.join(absolute_path, relative_path)
 	try:
@@ -127,6 +183,30 @@ def loadData(*, print_log: bool = False) -> None:
 	except FileNotFoundError:
 		internalLog("No tickets data found")
 	
-	
-	internalLog("Data loaded")
+	internalLog("Data loading process finished")
 
+
+def initLog() -> None:
+	"""
+	Initialize the log file
+	
+	:return: None
+	"""
+	PROGRAM_START_TIME: datetime = datetime.now()
+	PROGRAM_START_TIME_STRING: str = PROGRAM_START_TIME.isoformat(sep=' ', timespec='seconds')
+	PROGRAM_START_TIME_STRING: str = PROGRAM_START_TIME_STRING.replace(':', '-')  # file name can't have ':'
+	absolute_path = path.dirname(__file__)
+	relative_path = rf'..\logs\{PROGRAM_START_TIME_STRING}.txt'
+	full_path = path.join(absolute_path, relative_path)
+	head_msg: str = f"--- LOG FILE ---\nTime: {PROGRAM_START_TIME_STRING}\n"
+	with open(full_path, 'w') as file:
+		file.write(head_msg)
+	logging.basicConfig(
+		filename=full_path,
+		encoding='utf-8',
+		level=logging.DEBUG,
+		format='%(asctime)s --> %(levelname)s @%(name)s --> %(message)s',
+		datefmt='%Y/%m/%d %H:%M:%S',
+	)
+	logger: logging.Logger = logging.getLogger('initLog')
+	logger.info('Program started')
