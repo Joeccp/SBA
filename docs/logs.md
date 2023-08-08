@@ -20,6 +20,19 @@ LOG FILES ARE NOT DATABASE,
 IT SHOULD NOT BE USED TO CHECK OR REVIEW LARGE AMOUNTS OF INFORMATION/DATA
 (SUCH AS HOUSES AND TICKETS INFORMATION).
 
+
+## Information on log files
+The name of the log files is the time of executing the program.
+The format of a log message is `%(asctime)s --> %(levelname)s @%(name)s --> %(message)s`,
+where `asctime` is the time, `levelname` is the log level, `name` is where the log message
+was sent, `message` is the log message. Most of the log information should be,
+and is designed to be, very intuitive.
+
+(P.S. In most of the circumstances, `name` is the function / method name where the log
+message was sent.)
+
+
+
 <br/><br/>
 
 ---
