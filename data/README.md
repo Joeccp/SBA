@@ -12,4 +12,4 @@ Data are stored at `data/houses` and `data/tickets` precisely
 > Those files are NOT human-readable.
 
 
-See [documentation](https://joeccp.github.io/SBA/docs/dataStorage).
+See [documentation](../docs/dataStorage.md).
