@@ -1,6 +1,7 @@
 This folder holds data used in the program.
 
-Data are stored at `SBA/data/houses` and `SBA/data/tickets` (without a filename extension).
+Data are stored at `data/houses` and `data/tickets` precisely 
+(without a filename extension).
 
 
 <br/><br/>

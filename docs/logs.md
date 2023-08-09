@@ -2,7 +2,7 @@
 
 Logs are mainly used to trace user/admin input and activities.
 
-Log files are stored in the `logs` directory.
+Log files are `.txt` files stored in the `logs` directory.
 
 Logs cannot be view and deleted by user/administrator *in the program*. 
 (Of course no one can stop you from deleting them manually.)
@@ -23,13 +23,13 @@ THEY SHOULD NOT BE USED TO CHECK OR REVIEW LARGE AMOUNTS OF INFORMATION/DATA
 
 ## About the log messages
 The name of the log files is the time of executing the program.
-The format of a log message is 
+The format of a log message is:
 
 ```%(asctime)s --> %(levelname)s @%(name)s --> %(message)s```
 
-, where `asctime` is the time, `levelname` is the log level, `name` is where the log message
-was sent, `message` is the log message. Most of the log information should be,
-and is designed to be, very intuitive.
+Where `%(asctime)s` is the time, `%(levelname)s` is the log level, `%(name)s` is where the log 
+message was sent, `%(message)s` is the log message. Most of the log information 
+should be, and is designed to be, very intuitive and straight forward.
 
 (P.S. In most of the circumstances, `name` is the function / method name where the log
 message was sent.)
