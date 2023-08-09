@@ -26,6 +26,16 @@ This project has ***NO PRACTICAL USE***, this is just a high school homework.
 - Windows 10/11
 - Python 3.11.0 or higher
 
+### Download
+You can find the latest release [here](https://github.com/Joeccp/SBA/releases/latest), 
+Under `Assests`, you can choose to download the `.zip` file or the `.tar.gz` file, as follow:
+
+![Screenshot of the release page](images/docs/latest_release_assets.png)
+
+In most of the cases, you would like to download the first one. 
+After the download completed, unzip it.
+
+
 ### Usage
 Run this package using Python via `cmd`/`powershell` with the `-m` flag, or directly run the `__main__.py`
 
