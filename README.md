@@ -36,10 +36,13 @@ Run this package using Python via `cmd`/`powershell` with the `-m` flag, or dire
 <details><summary>Click me for examples</summary>
 
 Assume you have downloaded this package in `"C:\Users\[USER NAME]\Downloads"`, run:
+
 ```shell
 python C:\Users\[USER NAME]\Downloads\SBA -m
 ```
+
 or
+
 ```shell
 python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 ```
