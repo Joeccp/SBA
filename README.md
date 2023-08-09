@@ -32,9 +32,6 @@ Run this package using Python via `cmd`/`powershell` with the `-m` flag, or dire
 (Do NOT run this program on a Python terminal *inside* an IDE, it will NOT work.)
 
 ### Examples
-<!-- Please ignore the below HTML tags if you are reading from source -->
-<details><summary>Click me for examples</summary>
-
 Assume you have downloaded this package in `"C:\Users\[USER NAME]\Downloads"`, run:
 
 ```shell
@@ -47,7 +44,6 @@ or
 python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 ```
 
-</details>
 
 
 ## Documentations
