@@ -55,6 +55,7 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
     - [Data Storage](docs/dataStorage.md)
     - [Ticket](docs/ticket.md)
     - [Admin seat operation](docs/adminSeatOperation.md)
+- [Log files](docs/logs.md)
 
 
 ## Useful links
