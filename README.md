@@ -56,6 +56,10 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 
 
 
+# Report
+The SBA report can be found at [here](REPORT.md).
+
+
 ## Documentations
 - User manual
     - [Login](docs/login.md)
