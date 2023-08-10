@@ -50,7 +50,7 @@ __main__.py
 ├── common.py
 ├── accounts.toml
 ```
-I had a basic concept of the modularity of this program.
+I hence had a basic concept of the modularity of this program.
 
 `Implementation`: See [Implementation](#implementation)
 
@@ -100,6 +100,15 @@ The main program (function)
 ```
 
 ## Implementation
+
+Required features:
+- [X] [Login system](docs/login.md)
+- [X] [House and movie creation](docs/house.md)
+- [X] [View seating plan](docs/house.md#howto-see-the-seating-plan-of-a-house)
+- [X] [Seat selection](docs/ticket.md#howto-buy-a-seat-as-a-user)
+- [X] [Status storage](docs/dataStorage.md)
+- [ ] Calculation
+
 
 ### Features
 
