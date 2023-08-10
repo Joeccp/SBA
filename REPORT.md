@@ -3,6 +3,7 @@ This markdown file is designed to be read online only.
 Visit https://joeccp.github.io/SBA/REPORT.html 
 -->
 
+
 <!-- https://mermaid.js.org/config/usage.html#using-mermaid -->
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
@@ -24,10 +25,41 @@ flowchart LR
     Requirements -->
     Design -->
     Implementation -->
-    testing -->
-    Integration -->
-    Maintenance
+    Testing -->
+    dpm[Deployment] -->
+    mtn[Maintenance] --> dpm
 </pre>
+
+`Requirements`: I studied and analysis the requirements carefully, 
+to ensure I have fulfilled and will implement all the required features.
+
+`Design`: In the very beginning, I choose to use the 'menu and mode' design for the user interface 
+(which is, providing different menus for administrator and user respectively,
+and each menu has different modes).
+I decided to encapsulate all the scripts into one single Python package, the basic structure
+of the program was designed:
+```text
+# The structure of my very early prototype of this program
+
+__init__.py
+__main__.py
+├── admin.py
+├── colour.py
+├── House.py
+├── user.py
+├── common.py
+├── accounts.toml
+```
+I had a basic concept of the modularity of this program.
+
+`Implementation`: See [Implementation](#implementation)
+
+`Testing`: This program was tested so many times. I simulated all different kinds of 
+scenarios, and possible inputs of the users.
+
+`Deployment`: (Skipped as this is just a simulation of the kiosk system)
+
+`Maintenance`: There are bug fixes and updates regularly.
 
 
 ### Flowchart
