@@ -1,3 +1,8 @@
+<!-- README
+This markdown file is designed to be read online only.
+Visit https://joeccp.github.io/SBA/REPORT.html 
+-->
+
 <!-- https://mermaid.js.org/config/usage.html#using-mermaid -->
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
@@ -61,7 +66,11 @@ flowchart TD
     user --> ipt2
 </pre>
 
-([Photo version](images/report/Main_Flow_Chart.jpg))
+Due to the technical nature of a [mermaid graph](https://mermaid.js.org/),
+the flowchart above is indeed a bit messy, 
+you may want to see the
+[photo version](images/report/Main_Flow_Chart.jpg)
+which has a better quality.
 
 ### Pseudocode
 
