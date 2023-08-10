@@ -1,6 +1,6 @@
 # Seat Operation for Administrator
 
-Administrator can manually change the status of a seat.
+Administrator can manually **override** the status of a seat.
 
 This can be done by entering mode `6`(Buy / Reserve / Empty a seat) 
 after login as **administrator**. 
