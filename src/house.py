@@ -101,6 +101,71 @@ class House:
 	@classmethod
 	def n_tickets(cls) -> int:
 		"""Returns the number of tickets sold in ALL houses"""
-		return len(House.tickets_table)
+		return len(cls.tickets_table)
 
-	
+	@classmethod
+	def searchTicket(cls, ticket_number: str) -> tuple[str, str, int, str, int, int]:
+		"""
+		DEPRECATED ------
+		In an ideal world, it is much faster than linear search.
+		However, in reality, with the below code, it does not increase the search time by that much.
+		Moreover, it raises the complexity of the code by a lot.
+		It is difficult to maintain and debug, compared to a direct for-loop.
+		
+		Also, it is difficult to tell whether the ticket_number exists or not, compared to a for-else-loop.
+		
+		In a small-scale business, you can't feel the increased speed,
+		in a large-scale business, you would like to use some real database instead of a Python list.
+		-----------------
+		
+		Searches the ticket with the ticket number, assumes ticket number is valid.
+		
+		It uses binary search.
+		
+		P.S. Cannot just use ticket index and then do House.tickets_table[ticket_index],
+		because some tickets may get deleted or refunded.
+		
+		NOT MAINTAINED ANYMORE, SO NO BUG FIX
+		
+		
+		:param ticket_number: Ticket number for searching it
+		:type ticket_number: str
+		:return: The information about that ticket
+		:rtype: tuple[str, str, int, str, int, int]
+		"""
+		logger: Logger = getLogger("House.searchTicket")
+		logger.info("Searching ticket")
+		
+		def getRealIndexFromTicketNumber(ticket_number: str) -> int:
+			"""
+			Get the 'real' decimal ticket number from the ticket number
+			"""
+			logger: Logger = getLogger("House.searchTicket.getRealIndexFromTicketNumber")
+			ticket_number: str = ticket_number[1:]  # Ignore the 'T'
+			ticket_index: int = int(ticket_number)
+			logger.info(f"Turning ticket number {ticket_number} into index {ticket_index}")
+			return ticket_index
+		
+		possible_list_index_range: list[int, int] = [0, len(cls.tickets_table) - 1]
+		target_ticket_index: int = getRealIndexFromTicketNumber(ticket_number)
+		
+		while True:
+			if possible_list_index_range[0] == possible_list_index_range[1]:
+				return cls.tickets_table[possible_list_index_range[0]]
+			
+			guess_list_index: int = int((possible_list_index_range[1] - possible_list_index_range[0]) / 2)  # int = floor, not round
+			guess_ticket_number: str = cls.tickets_table[guess_list_index][0]
+			guess_ticket_index: int = getRealIndexFromTicketNumber(guess_ticket_number)
+			
+			if guess_ticket_index == target_ticket_index:
+				return cls.tickets_table[guess_list_index]
+			
+			if guess_ticket_index <= target_ticket_index:
+				possible_list_index_range[0] = guess_list_index
+			else:
+				possible_list_index_range[1] = guess_list_index
+			
+			
+		
+		
+		
