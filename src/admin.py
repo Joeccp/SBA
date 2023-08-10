@@ -317,7 +317,8 @@ def adminMode() -> None:
 				print(f"{ticket_no:<6} @ {time} "
 				      f"House {house_no:<2} -- {movie:<50} ~"
 				      f"Seat <{row_index+1}{chr(column_index + 65)}>")
-			print(f"Total: {House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active")
+			print(f"{House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active")
+			print(f"TOTAL: {House.total_tickets} tickets")
 			
 		# Delete ticket
 		elif mode == '8':

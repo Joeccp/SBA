@@ -28,7 +28,8 @@ Login as a **user**, enter mode `2`(Check ticket), enter the ticket number.
 OR
 
 Login as an **administrator**, enter mode `7`(Check ticket information),
-ALL ACTIVE tickets information will be printed.
+ALL ACTIVE tickets information will be printed. 
+Admin can also see the number of tickets active and the total number of tickets sold historically.
 
 > **Note**
 > 

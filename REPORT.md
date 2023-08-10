@@ -107,7 +107,7 @@ Required features:
 - [X] [View seating plan](docs/house.md#howto-see-the-seating-plan-of-a-house)
 - [X] [Seat selection](docs/ticket.md#howto-buy-a-seat-as-a-user)
 - [X] [Status storage](docs/dataStorage.md)
-- [ ] Calculation
+- [X] [Calculation (of the total number of the tickets sold)](docs/ticket.md#howto-check-ticket-information)
 
 
 ### Features
