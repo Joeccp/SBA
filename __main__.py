@@ -58,8 +58,8 @@ def main() -> None:
 	
 	# So elegant :)
 	initLog()
-	checkPythonVersion()
 	checkSystemPlatform()
+	checkPythonVersion()
 	clearScreen()
 	print(normal_colour)
 	loadData()
