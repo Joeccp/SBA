@@ -1,3 +1,8 @@
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>
+
+
 # SBA Report
 
 ## Design
@@ -8,7 +13,7 @@ Some tools are used for the software engineering of this project.
 
 Waterfall Model is used when developing this project.
 
-```mermaid
+<pre class="mermaid">
 ---
 title: Waterfall Model
 ---
@@ -19,7 +24,7 @@ flowchart LR
     testing -->
     Integration -->
     Maintenance
-```
+</pre>
 
 
 ### Flowchart
@@ -63,3 +68,4 @@ The main program (function)
 ### Features
 
 ### Key factors 
+
