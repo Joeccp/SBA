@@ -20,9 +20,6 @@ Some tools are used for the software engineering of this project.
 Waterfall Model is used when developing this project.
 
 <pre class="mermaid">
----
-title: Waterfall Model
----
 flowchart LR
     Requirements -->
     Design -->
@@ -36,9 +33,6 @@ flowchart LR
 ### Flowchart
 Here is a flowchart showing the basic structure of this program:
 <pre class="mermaid">
----
-title: The main function of the program
----
 flowchart TD
     start([Start])
     ipt1[/Input Admin username and password/]
