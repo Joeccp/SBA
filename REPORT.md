@@ -4,6 +4,24 @@
 
 Some tools are used for the software engineering of this project.
 
+### Waterfall Model
+
+Waterfall Model is used when developing this project.
+
+```mermaid
+---
+title: Waterfall Model
+---
+flowchart LR
+    Requirements -->
+    Design -->
+    Implementation -->
+    testing -->
+    Integration -->
+    Maintenance
+```
+
+
 ### Flowchart
 Here is a flowchart showing the basic structure of this program:
 ![Flow chart showing the basic structure of this program](images/report/Main_Flow_Chart.jpg)
