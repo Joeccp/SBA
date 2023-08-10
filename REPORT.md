@@ -1,9 +1,10 @@
+<!-- https://mermaid.js.org/config/usage.html#using-mermaid -->
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 </script>
 
 
-# SBA Report
+# SBA Report -- by Joe Chau
 
 ## Design
 
@@ -29,7 +30,38 @@ flowchart LR
 
 ### Flowchart
 Here is a flowchart showing the basic structure of this program:
-![Flow chart showing the basic structure of this program](images/report/Main_Flow_Chart.jpg)
+<pre class="mermaid">
+---
+title: The main function of the program
+---
+flowchart TD
+    start([Start])
+    ipt1[/Input Admin username and password/]
+    check1{Amin's username and password input correct?}
+    admin1[["Admin mode
+    Control Panel"]]
+    ipt2[/Input username and password/]
+    check2{Account exists and the corresponding password is correct?}
+    check3{Login as?}
+    admin2[["Admin mode
+    Control Panel"]]
+    user[[User mode]]
+
+    start --> ipt1
+    ipt1 --> check1
+    check1 -- Yes --> admin1
+    check1 -- No --> ipt1
+    admin1 --> ipt2
+    ipt2 --> check2
+    check2 -- Yes --> check3
+    check2 -- No --> ipt2
+    check3 -- Admin --> admin2
+    check3 -- User --> user
+    admin2 --> ipt2
+    user --> ipt2
+</pre>
+
+([Photo version](images/report/Main_Flow_Chart.jpg))
 
 ### Pseudocode
 
