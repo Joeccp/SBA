@@ -132,7 +132,6 @@ class House:
 					return None
 			
 			
-			# Sometimes if max_ - min_ = 1 (e.g. 9 & 10), half will never be max_, (e.g. floor(9.5) -> 9)
 			if max_ - min_ == 1:
 				if cls.tickets_table[max_][0] == target_ticket_index:
 					return cls.tickets_table[max_]
