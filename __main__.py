@@ -15,15 +15,12 @@
 # limitations under the License.
 
 import argparse
-from datetime import datetime
-from os import path
 
 from src.admin import adminMode
 from src.colour import normal_colour
 from src.login import login
 from src.user import userMode
 from src.utils import checkPythonVersion, checkSystemPlatform, clearScreen, initLog, loadData
-
 
 __author__ = 'Joe Chau'
 __contact__ = 's2018014@bhjs.edu.hk'
