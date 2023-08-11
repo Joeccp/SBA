@@ -136,10 +136,11 @@ def userMode() -> None:
 				continue
 			house.seating_plan[row_int][column_int] = 1
 			House.total_tickets += 1
-			ticket_number: str = f"T{House.total_tickets:0>5}"
+			ticket_index: int = House.total_tickets
+			ticket_number: str = f"T{ticket_index:0>5}"
 			time: str = datetime.now().isoformat(timespec="seconds")
-			ticket: tuple[str, str, int, str, int, int] = (
-				ticket_number, time, house.house_number, house.movie, row_int, column_int
+			ticket: tuple[int, str, str, int, str, int, int] = (
+				ticket_index, ticket_number, time, house.house_number, house.movie, row_int, column_int
 			)
 			print("Your ticket:")
 			print(f"{ticket_number:<6} @ {time}: "
@@ -185,27 +186,31 @@ def userMode() -> None:
 				                "ticket number should ba a single character 'T' followed by decimal numbers")
 				logger.info("Invalid ticket number, going back to the user menu")
 				continue
+			if len(ticket_number) > 6 and ticket_number[1] == '0':
+				message: str = "ERROR: Invalid ticket number -- more than 4 leading zeros"
+				logger.info("Invalid ticket number, going back to the control panel menu")
+				continue
+			if set(ticket_number[1:]) == {'0'}:
+				message: str = "ERROR: Invalid ticket number -- ticket number is all zero"
+				logger.info("Invalid ticket number, going back to the control panel menu")
+				continue
 			print()
-			for ticket in House.tickets_table:
-				if ticket[0] == ticket_number:
-					ticket_no, time, house_no, movie, row_index, column_index = ticket
-					logger.info(f"User checked this ticket: {ticket}")
-					print(f"{ticket_no:<6} @ {time} "
-					      f"House {house_no:<2} -- {movie:<30} ~ "
-					      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
-					print("\n\n")
-					input("Hit enter to go back to the main menu")
-					message: str = ""
-					break
-			
-			else:
-				logger.info("Invalid ticket number, going back to the user menu")
+			ticket_index: int = int(ticket_number[1:])
+			ticket = House.searchTicket(ticket_index)
+			if ticket is None:
+				logger.info("No such ticket, going back to the user menu")
 				print("No such ticket")
 				print("\n\n")
 				input("Hit enter to go back to the main menu")
 				message: str = ""
-			
-			continue
+				continue
+			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+			print(f"{ticket_no:<6} @ {time} "
+			      f"House {house_no:<2} -- {movie:<30} ~ "
+			      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
+			print("\n\n")
+			input("Hit enter to go back to the main menu")
+			message: str = ""
 		
 		# Ticket refund
 		elif mode == '3':
@@ -215,7 +220,7 @@ def userMode() -> None:
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n")
 			print("Please enter you ticket number (starts with 'T'):")
 			logger.info("Waiting ticket number input")
-			ticket_number: str = input("-> ").strip().upper()
+			ticket_number: str = input("-> ").strip().upper().replace(' ', '')
 			if ticket_number == "":
 				logger.info("Empty ticket number, going back to the user menu")
 				message: str = ""
@@ -237,38 +242,46 @@ def userMode() -> None:
 				message: str = ("ERROR: Invalid ticket number -- "
 				                "ticket number should ba a single character 'T' followed by decimal numbers")
 				continue
+			if len(ticket_number) > 6 and ticket_number[1] == '0':
+				message: str = "ERROR: Invalid ticket number -- more than 4 leading zeros"
+				logger.info("Invalid ticket number, going back to the control panel menu")
+				continue
+			if set(ticket_number[1:]) == {'0'}:
+				message: str = "ERROR: Invalid ticket number -- ticket number is all zero"
+				logger.info("Invalid ticket number, going back to the control panel menu")
+				continue
 			print()
-			for ticket in House.tickets_table:
-				if ticket[0] == ticket_number:
-					ticket_no, time, house_no, movie, row_index, column_index = ticket
-					logger.info(f"User want to delete this ticket: {ticket}")
-					print(f"{ticket_no:<6} @ {time} "
-					      f"House {house_no:<2} -- {movie:<50} ~"
-					      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
-					print("\nAre you sure you want to get refund of this ticket? (y/N)")
-					logger.info("Confirming")
-					confirm: str = input("-> ").strip().upper()
-					if confirm == 'Y':
-						House.houses_table[house_no].seating_plan[row_index][column_index] = 0
-						House.tickets_table.remove(ticket)
-						logger.info("Ticket deleted")
-						saveData()
-						print("\nRefund succeed!")
-						break
-					else:
-						logger.info("Confirmation failed, go back to the user menu")
-						print()
-						message: str = "ERROR: Confirmation failed. Refund Failed"
-						break
-			
-			else:
-				logger.info("Invalid ticket number, going back to the user menu")
+			ticket_index: int = int(ticket_number[1:])
+			ticket = House.searchTicket(ticket_index)
+			if ticket is None:
+				logger.info("No such ticket, going back to the user menu")
 				print("No such ticket")
 				print("\n\n")
 				input("Hit enter to go back to the main menu")
-				message: str = ""
+				message: str = "ERROR: No such ticket"
+				continue
+			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+			logger.info(f"User want to delete this ticket: {ticket}")
+			print(f"{ticket_no:<6} @ {time} "
+			      f"House {house_no:<2} -- {movie:<50} ~"
+			      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
+			print("\nAre you sure you want to get refund of this ticket? (y/N)")
+			logger.info("Confirming")
+			confirm: str = input("-> ").strip().upper()
+			if confirm == 'Y':
+				House.houses_table[house_no].seating_plan[row_index][column_index] = 0
+				House.tickets_table.remove(ticket)
+				logger.info("Ticket deleted")
+				saveData()
+				print("\nRefund succeed!")
+				message: str = ''
+				continue
+			else:
+				logger.info("Confirmation failed, go back to the user menu")
+				print()
+				message: str = "ERROR: Confirmation failed. Refund Failed"
+				continue
 			
-			continue
 		
 		# HELP
 		elif mode == '4':

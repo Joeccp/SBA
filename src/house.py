@@ -32,10 +32,10 @@ class House:
 	
 	n_House: int = 0
 	houses_table: dict[int, Self] = {}
-	tickets_table: list[tuple[str, str, int, str, int, int]] = []
+	tickets_table: list[tuple[int, str, str, int, str, int, int]] = []
 	total_tickets: int = 0
 	
-	def __init__(self, *,  row_number: int, column_number: int) -> None:
+	def __init__(self, *, row_number: int, column_number: int) -> None:
 		"""
 		0 < row_number < 100
 		0 < column_number < 27
@@ -51,7 +51,6 @@ class House:
 		logger: Logger = getLogger("House.__init__")
 		logger.info(f"House {self.house_number} is created -- {self.n_row}x{self.n_column}")
 	
-	
 	@property
 	def n_available(self) -> int:
 		count: int = 0
@@ -60,27 +59,25 @@ class House:
 				if seat == 0:
 					count += 1
 		return count
-
 	
 	def clearPlan(self) -> None:
 		"""Clear the seating plan"""
 		self.seating_plan: list[list[int]] = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
-		logger: Logger = getLogger("House.clearPlan_")
+		logger: Logger = getLogger("House.clearPlan")
 		logger.info(f"House {self.house_number}'s seating plan has been cleared")
-	
 	
 	def printPlan(self) -> None:
 		"""Print the seating plan"""
 		line_length: int = self.n_column * 2 + 1
-		print(f"{'[Screen Here]':^{line_length+8}}")
+		print(f"{'[Screen Here]':^{line_length + 8}}")
 		print('    ' + '_' * line_length)
 		print('    |', end='')
 		for i in range(self.n_column):
-			print(column_colour + chr(i+65) + normal_colour, end='|')
+			print(column_colour + chr(i + 65) + normal_colour, end='|')
 		print()
 		print('    ' + '-' * line_length)
 		for row in range(self.n_row):
-			print(f'{row_colour}{row+1:<2}{normal_colour}  |', end='')
+			print(f'{row_colour}{row + 1:<2}{normal_colour}  |', end='')
 			for column in range(self.n_column):
 				match self.seating_plan[row][column]:
 					case 0:
@@ -90,82 +87,74 @@ class House:
 					case 2:
 						symbol = Colour.YELLOW_BG + '!' + normal_colour
 				print(symbol, end='|')
-			print(f'  {row_colour}{row+1:>2}{normal_colour}')
+			print(f'  {row_colour}{row + 1:>2}{normal_colour}')
 			print('    ' + '-' * line_length)
 		print()
 		print(Colour.GREEN_BG + "O -- Empty" + normal_colour)
 		print(Colour.RED_BG + "X -- Sold" + normal_colour)
 		print(Colour.YELLOW_BG + "! -- Reserved" + normal_colour)
 		print()
-
+	
 	@classmethod
 	def n_tickets(cls) -> int:
 		"""Returns the number of tickets sold in ALL houses"""
 		return len(cls.tickets_table)
-
+	
 	@classmethod
-	def searchTicket(cls, ticket_number: str) -> tuple[str, str, int, str, int, int]:
+	def searchTicket(cls, target_ticket_index: int) -> tuple[int, str, str, int, str, int, int] | None:
 		"""
-		DEPRECATED ------
-		In an ideal world, it is much faster than linear search.
-		However, in reality, with the below code, it does not increase the search time by that much.
-		Moreover, it raises the complexity of the code by a lot.
-		It is difficult to maintain and debug, compared to a direct for-loop.
+		Searches the ticket with the given ticket index, and returns it.
+		Assumes the (format of the) ticket index is valid.
+		If the ticket does not exist, returns None.
 		
-		Also, it is difficult to tell whether the ticket_number exists or not, compared to a for-else-loop.
-		
-		In a small-scale business, you can't feel the increased speed,
-		in a large-scale business, you would like to use some real database instead of a Python list.
-		-----------------
-		
-		Searches the ticket with the ticket number, assumes ticket number is valid.
-		
-		It uses binary search.
-		
-		P.S. Cannot just use ticket index and then do House.tickets_table[ticket_index],
-		because some tickets may get deleted or refunded.
-		
-		NOT MAINTAINED ANYMORE, SO NO BUG FIX
-		
-		
-		:param ticket_number: Ticket number for searching it
-		:type ticket_number: str
-		:return: The information about that ticket
-		:rtype: tuple[str, str, int, str, int, int]
+		:param target_ticket_index: Ticket index with a valid format
+		:type target_ticket_index: int
+		:return: Ticket
+		:rtype: tuple[int, str, str, int, str, int, int] | None
 		"""
 		logger: Logger = getLogger("House.searchTicket")
-		logger.info("Searching ticket")
+		logger.info(f"Searching ticket: {target_ticket_index}")
 		
-		def getRealIndexFromTicketNumber(ticket_number: str) -> int:
-			"""
-			Get the 'real' decimal ticket number from the ticket number
-			"""
-			logger: Logger = getLogger("House.searchTicket.getRealIndexFromTicketNumber")
-			ticket_number: str = ticket_number[1:]  # Ignore the 'T'
-			ticket_index: int = int(ticket_number)
-			logger.info(f"Turning ticket number {ticket_number} into index {ticket_index}")
-			return ticket_index
+		min_: int = 0
+		max_: int = cls.n_tickets() - 1
+		logger.debug(f"Min: {min_}  & Max: {max_}")
 		
-		possible_list_index_range: list[int, int] = [0, len(cls.tickets_table) - 1]
-		target_ticket_index: int = getRealIndexFromTicketNumber(ticket_number)
 		
 		while True:
-			if possible_list_index_range[0] == possible_list_index_range[1]:
-				return cls.tickets_table[possible_list_index_range[0]]
+			logger.debug(f"Min: {min_}  & Max: {max_}")
+			if min_ == max_:
+				if cls.tickets_table[min_][0] == target_ticket_index:
+					logger.debug(f"cls.tickets_table[min_][0] = {cls.tickets_table[min_][0]}")
+					logger.info(f"Return ticket: {cls.tickets_table[min_]}")
+					return cls.tickets_table[min_]
+				else:
+					logger.info("No such ticket")
+					return None
 			
-			guess_list_index: int = int((possible_list_index_range[1] - possible_list_index_range[0]) / 2)  # int = floor, not round
-			guess_ticket_number: str = cls.tickets_table[guess_list_index][0]
-			guess_ticket_index: int = getRealIndexFromTicketNumber(guess_ticket_number)
+			
+			# Sometimes if max_ - min_ = 1 (e.g. 9 & 10), half will never be max_, (e.g. floor(9.5) -> 9)
+			if max_ - min_ == 1:
+				if cls.tickets_table[max_][0] == target_ticket_index:
+					return cls.tickets_table[max_]
+				elif cls.tickets_table[min_][0] == target_ticket_index:
+					return cls.tickets_table[min_]
+				else:
+					return None
+			
+			
+			half: int = int((max_ + min_) / 2)  # int() = floor()
+			guess_ticket_index: int = cls.tickets_table[half][0]
+			
+			logger.debug(f"half: {half}  guess_ticket_index: {guess_ticket_index}")
 			
 			if guess_ticket_index == target_ticket_index:
-				return cls.tickets_table[guess_list_index]
-			
-			if guess_ticket_index <= target_ticket_index:
-				possible_list_index_range[0] = guess_list_index
+				logger.info(f"Return ticket: cls.tickets_table[half] = {cls.tickets_table[half]}")
+				return cls.tickets_table[half]
+			elif guess_ticket_index > target_ticket_index:
+				max_: int = half
+				logger.debug(f"max_ <- half")
+				logger.debug(f"max is now {max_}")
 			else:
-				possible_list_index_range[1] = guess_list_index
-			
-			
-		
-		
-		
+				min_: int = half
+				logger.debug(f"min_ <- half")
+				logger.debug(f"min is now {min_}")
