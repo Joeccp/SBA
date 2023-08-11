@@ -186,6 +186,14 @@ def userMode() -> None:
 				                "ticket number should ba a single character 'T' followed by decimal numbers")
 				logger.info("Invalid ticket number, going back to the user menu")
 				continue
+			if len(ticket_number) > 6 and ticket_number[1] == '0':
+				message: str = "ERROR: Invalid ticket number -- more than 4 leading zeros"
+				logger.info("Invalid ticket number, going back to the control panel menu")
+				continue
+			if set(ticket_number[1:]) == {'0'}:
+				message: str = "ERROR: Invalid ticket number -- ticket number is all zero"
+				logger.info("Invalid ticket number, going back to the control panel menu")
+				continue
 			print()
 			ticket_index: int = int(ticket_number[1:])
 			ticket = House.searchTicket(ticket_index)
@@ -233,6 +241,14 @@ def userMode() -> None:
 				logger.info("Invalid ticket number, going back to the user menu")
 				message: str = ("ERROR: Invalid ticket number -- "
 				                "ticket number should ba a single character 'T' followed by decimal numbers")
+				continue
+			if len(ticket_number) > 6 and ticket_number[1] == '0':
+				message: str = "ERROR: Invalid ticket number -- more than 4 leading zeros"
+				logger.info("Invalid ticket number, going back to the control panel menu")
+				continue
+			if set(ticket_number[1:]) == {'0'}:
+				message: str = "ERROR: Invalid ticket number -- ticket number is all zero"
+				logger.info("Invalid ticket number, going back to the control panel menu")
 				continue
 			print()
 			ticket_index: int = int(ticket_number[1:])
