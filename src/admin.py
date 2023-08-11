@@ -153,7 +153,7 @@ def adminMode() -> None:
 				logger.info("Clearing all related tickets")
 				n_tickets_removed: int = 0
 				for ticket in House.tickets_table:
-					ticket_no, time, house_no, *other_unused_information = ticket
+					ticket_index, ticket_no, time, house_no, *other_unused_information = ticket
 					if house_no == house.house_number:
 						House.tickets_table.remove(ticket)
 						n_tickets_removed += 1
@@ -313,7 +313,7 @@ def adminMode() -> None:
 			logger: Logger = getLogger("adminMode.mode_7")
 			logger.info("Admin Mode 7: Check ticket information")
 			for ticket in House.tickets_table:
-				ticket_no, time, house_no, movie, row_index, column_index = ticket
+				ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 				print(f"{ticket_no:<6} @ {time} "
 				      f"House {house_no:<2} -- {movie:<50} ~"
 				      f"Seat <{row_index+1}{chr(column_index + 65)}>")
@@ -341,8 +341,8 @@ def adminMode() -> None:
 				logger.info("Invalid ticket number, going back to the control panel menu")
 				continue
 			for ticket in House.tickets_table:
-				if ticket[0] == ticket_number:
-					ticket_no, time, house_no, movie, row_index, column_index = ticket
+				if ticket[1] == ticket_number:
+					ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 					print(f"{ticket_no:<6} @ {time} "
 					      f"House {house_no:<2} -- {movie:<50} ~"
 					      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
@@ -413,7 +413,7 @@ def adminMode() -> None:
 				logger.info("Deleting all related tickets")
 				n_tickets_removed: int = 0
 				for ticket in House.tickets_table:
-					ticket_no, time, house_no, movie, row_index, column_index = ticket
+					ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 					if house_no == house.house_number:
 						logger.info(f"Deleting {ticket_no}, ticket info: {ticket}")
 						House.tickets_table.remove(ticket)

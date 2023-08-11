@@ -136,10 +136,11 @@ def userMode() -> None:
 				continue
 			house.seating_plan[row_int][column_int] = 1
 			House.total_tickets += 1
-			ticket_number: str = f"T{House.total_tickets:0>5}"
+			ticket_index: int = House.total_tickets
+			ticket_number: str = f"T{ticket_index:0>5}"
 			time: str = datetime.now().isoformat(timespec="seconds")
-			ticket: tuple[str, str, int, str, int, int] = (
-				ticket_number, time, house.house_number, house.movie, row_int, column_int
+			ticket: tuple[int, str, str, int, str, int, int] = (
+				ticket_index, ticket_number, time, house.house_number, house.movie, row_int, column_int
 			)
 			print("Your ticket:")
 			print(f"{ticket_number:<6} @ {time}: "
@@ -186,26 +187,22 @@ def userMode() -> None:
 				logger.info("Invalid ticket number, going back to the user menu")
 				continue
 			print()
-			for ticket in House.tickets_table:
-				if ticket[0] == ticket_number:
-					ticket_no, time, house_no, movie, row_index, column_index = ticket
-					logger.info(f"User checked this ticket: {ticket}")
-					print(f"{ticket_no:<6} @ {time} "
-					      f"House {house_no:<2} -- {movie:<30} ~ "
-					      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
-					print("\n\n")
-					input("Hit enter to go back to the main menu")
-					message: str = ""
-					break
-			
-			else:
+			ticket_index: int = int(ticket_number[1:])
+			ticket = House.searchTicket(ticket_index)
+			if ticket is None:
 				logger.info("Invalid ticket number, going back to the user menu")
 				print("No such ticket")
 				print("\n\n")
 				input("Hit enter to go back to the main menu")
 				message: str = ""
-			
-			continue
+				continue
+			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+			print(f"{ticket_no:<6} @ {time} "
+			      f"House {house_no:<2} -- {movie:<30} ~ "
+			      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
+			print("\n\n")
+			input("Hit enter to go back to the main menu")
+			message: str = ""
 		
 		# Ticket refund
 		elif mode == '3':
@@ -239,8 +236,8 @@ def userMode() -> None:
 				continue
 			print()
 			for ticket in House.tickets_table:
-				if ticket[0] == ticket_number:
-					ticket_no, time, house_no, movie, row_index, column_index = ticket
+				if ticket[1] == ticket_number:
+					ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 					logger.info(f"User want to delete this ticket: {ticket}")
 					print(f"{ticket_no:<6} @ {time} "
 					      f"House {house_no:<2} -- {movie:<50} ~"
