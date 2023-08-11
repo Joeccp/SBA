@@ -14,9 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import logging
-import pickle
+
+from pickle import dump, load
 from datetime import datetime
+from logging import basicConfig, DEBUG, getLogger, Logger
 from os import get_terminal_size, makedirs, path, system
 from platform import system as systemPlatform
 from sys import version_info
@@ -32,7 +33,7 @@ def checkSystemPlatform() -> None:
 	:return: None
 	:raises SystemExit: If not running on Windows
 	"""
-	logger: logging.Logger = logging.getLogger("checkSystemPlatform")
+	logger: Logger = getLogger("checkSystemPlatform")
 	logger.info("Checking system platform")
 	if systemPlatform() != 'Windows':
 		logger.critical("I am running on Non-Windows system platform!")
@@ -53,7 +54,7 @@ def checkPythonVersion() -> None:
 	# (typing.Self, which is required in src.house.House, was also introduced in Python 3.11)
 	# (match-case syntax, which is used in House.printPlan, was introduced in Python 3.10)
 	
-	logger: logging.Logger = logging.getLogger("checkPythonVersion")
+	logger: Logger = getLogger("checkPythonVersion")
 	major_version, minor_version, *_ = version_info
 	if major_version < 3:
 		logger.critical("I am running on Python 2!")
@@ -91,7 +92,7 @@ def saveData(*, print_log: bool = False) -> None:
 	:return: None
 	"""
 	
-	logger: logging.Logger = logging.getLogger('saveData')
+	logger: Logger = getLogger('saveData')
 	logger.info("Saving Data")
 	
 	def internalLog(message: str) -> None:
@@ -121,13 +122,13 @@ def saveData(*, print_log: bool = False) -> None:
 	full_path = path.join(absolute_path, relative_path)
 	with open(full_path, 'wb') as file:
 		# No need save House.n_house, count it later
-		pickle.dump(House.houses_table, file)
+		dump(House.houses_table, file)
 	
 	internalLog("Writing tickets data")
 	relative_path = "../data/tickets"
 	full_path = path.join(absolute_path, relative_path)
 	with open(full_path, 'wb') as file:
-		pickle.dump([House.total_tickets, House.tickets_table], file)
+		dump([House.total_tickets, House.tickets_table], file)
 	
 	internalLog("Data saving process finished")
 
@@ -142,7 +143,7 @@ def loadData(*, print_log: bool = False) -> None:
 	:return: None
 	"""
 	
-	logger: logging.Logger = logging.getLogger('loadData')
+	logger: Logger = getLogger('loadData')
 	logger.info("Loading Data")
 	
 	def internalLog(message: str) -> None:
@@ -164,7 +165,7 @@ def loadData(*, print_log: bool = False) -> None:
 	try:
 		internalLog("Finding houses data")
 		with open(full_path, 'rb') as file:
-			data: dict = pickle.load(file)
+			data: dict = load(file)
 		House.houses_table = data
 		House.n_House = len(House.houses_table)
 		internalLog("Houses data loaded")
@@ -176,7 +177,7 @@ def loadData(*, print_log: bool = False) -> None:
 	try:
 		internalLog("Finding tickets data")
 		with open(full_path, 'rb') as file:
-			data: dict = pickle.load(file)
+			data: dict = load(file)
 		House.total_tickets = data[0]
 		House.tickets_table = data[1]
 		internalLog("Tickets data loaded")
@@ -201,12 +202,12 @@ def initLog() -> None:
 	head_msg: str = f"--- LOG FILE ---\nTime: {PROGRAM_START_TIME_STRING}\n"
 	with open(full_path, 'w') as file:
 		file.write(head_msg)
-	logging.basicConfig(
+	basicConfig(
 		filename=full_path,
 		encoding='utf-8',
-		level=logging.DEBUG,
+		level=DEBUG,
 		format='%(asctime)s --> %(levelname)s @%(name)s --> %(message)s',
 		datefmt='%Y/%m/%d %H:%M:%S',
 	)
-	logger: logging.Logger = logging.getLogger('initLog')
+	logger: Logger = getLogger('initLog')
 	logger.info('Program started')

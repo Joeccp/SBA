@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import argparse
+
+from argparse import ArgumentParser
 
 from src.admin import adminMode
 from src.colour import normal_colour
@@ -74,7 +75,7 @@ def main() -> None:
 
 if __name__ == '__main__':
 	# Parse arguments
-	parser = argparse.ArgumentParser(
+	parser = ArgumentParser(
 		description="A simulation of a cinema kiosk system",
 		epilog="For documentation of the usage of this program, visit https://joeccp.github.io/SBA/",
 		usage="SBA"

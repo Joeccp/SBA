@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import webbrowser
+
 from datetime import datetime
 from logging import getLogger, Logger
 from string import ascii_uppercase
 from time import sleep
+from webbrowser import open as webbrowser_open
 
 from .colour import *
 from .house import House
@@ -287,7 +288,7 @@ def userMode() -> None:
 		elif mode == '4':
 			logger: Logger = getLogger("userMode.mode_4")
 			logger.info("User Mode 4: Help")
-			webbrowser.open("https://joeccp.github.io/SBA/")
+			webbrowser_open("https://joeccp.github.io/SBA/")
 			logger.info("Opened a website browser and visit https://joeccp.github.io/SBA/")
 		
 		else:

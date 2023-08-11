@@ -14,10 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
+
 from getpass import getpass
 from hashlib import sha3_512
 from logging import getLogger, Logger
+from os import path
 from tomllib import load as loadtoml
 from typing import Any
 
@@ -62,9 +63,9 @@ def login(*, first_time: bool = False) -> int:
 	
 	logger.info("Reaching accounts.toml file")
 	# Obtain the full path of the file
-	absolute_path = os.path.dirname(__file__)
+	absolute_path = path.dirname(__file__)
 	relative_path = "../accounts.toml"
-	full_path = os.path.join(absolute_path, relative_path)
+	full_path = path.join(absolute_path, relative_path)
 	try:
 		with open(full_path, 'rb') as file:
 			logger.info("Getting accounts information")

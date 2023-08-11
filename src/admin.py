@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
+from os import path, remove
 import webbrowser
 from logging import getLogger, Logger
 
@@ -462,10 +462,10 @@ def adminMode() -> None:
 			print("Successfully removed unsaved tickets data")
 			try:
 				logger.info("Finding any saved tickets data")
-				absolute_path = os.path.dirname(__file__)
+				absolute_path = path.dirname(__file__)
 				relative_path = '../data/tickets'
-				full_path = os.path.join(absolute_path, relative_path)
-				os.remove(full_path)
+				full_path = path.join(absolute_path, relative_path)
+				remove(full_path)
 			except FileNotFoundError:
 				logger.info("No saved tickets data")
 				print("No saved tickets data")
@@ -482,10 +482,10 @@ def adminMode() -> None:
 			print("Successfully removed local houses data")
 			try:
 				logger.info("Finding any saved houses data")
-				absolute_path = os.path.dirname(__file__)
+				absolute_path = path.dirname(__file__)
 				relative_path = '../data/houses'
-				full_path = os.path.join(absolute_path, relative_path)
-				os.remove(full_path)
+				full_path = path.join(absolute_path, relative_path)
+				remove(full_path)
 			except FileNotFoundError:
 				logger.info("No saved houses data")
 				print("No saved houses data")
