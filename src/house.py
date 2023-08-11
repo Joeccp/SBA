@@ -107,6 +107,8 @@ class House:
 		Assumes the (format of the) ticket index is valid.
 		If the ticket does not exist, returns None.
 		
+		It uses binary search.
+		
 		:param target_ticket_index: Ticket index with a valid format
 		:type target_ticket_index: int
 		:return: Ticket
