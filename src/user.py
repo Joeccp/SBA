@@ -190,7 +190,7 @@ def userMode() -> None:
 			ticket_index: int = int(ticket_number[1:])
 			ticket = House.searchTicket(ticket_index)
 			if ticket is None:
-				logger.info("Invalid ticket number, going back to the user menu")
+				logger.info("No such ticket, going back to the user menu")
 				print("No such ticket")
 				print("\n\n")
 				input("Hit enter to go back to the main menu")
@@ -212,7 +212,7 @@ def userMode() -> None:
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n")
 			print("Please enter you ticket number (starts with 'T'):")
 			logger.info("Waiting ticket number input")
-			ticket_number: str = input("-> ").strip().upper()
+			ticket_number: str = input("-> ").strip().upper().replace(' ', '')
 			if ticket_number == "":
 				logger.info("Empty ticket number, going back to the user menu")
 				message: str = ""
@@ -235,37 +235,37 @@ def userMode() -> None:
 				                "ticket number should ba a single character 'T' followed by decimal numbers")
 				continue
 			print()
-			for ticket in House.tickets_table:
-				if ticket[1] == ticket_number:
-					ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
-					logger.info(f"User want to delete this ticket: {ticket}")
-					print(f"{ticket_no:<6} @ {time} "
-					      f"House {house_no:<2} -- {movie:<50} ~"
-					      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
-					print("\nAre you sure you want to get refund of this ticket? (y/N)")
-					logger.info("Confirming")
-					confirm: str = input("-> ").strip().upper()
-					if confirm == 'Y':
-						House.houses_table[house_no].seating_plan[row_index][column_index] = 0
-						House.tickets_table.remove(ticket)
-						logger.info("Ticket deleted")
-						saveData()
-						print("\nRefund succeed!")
-						break
-					else:
-						logger.info("Confirmation failed, go back to the user menu")
-						print()
-						message: str = "ERROR: Confirmation failed. Refund Failed"
-						break
-			
-			else:
-				logger.info("Invalid ticket number, going back to the user menu")
+			ticket_index: int = int(ticket_number[1:])
+			ticket = House.searchTicket(ticket_index)
+			if ticket is None:
+				logger.info("No such ticket, going back to the user menu")
 				print("No such ticket")
 				print("\n\n")
 				input("Hit enter to go back to the main menu")
-				message: str = ""
+				message: str = "ERROR: No such ticket"
+				continue
+			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+			logger.info(f"User want to delete this ticket: {ticket}")
+			print(f"{ticket_no:<6} @ {time} "
+			      f"House {house_no:<2} -- {movie:<50} ~"
+			      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
+			print("\nAre you sure you want to get refund of this ticket? (y/N)")
+			logger.info("Confirming")
+			confirm: str = input("-> ").strip().upper()
+			if confirm == 'Y':
+				House.houses_table[house_no].seating_plan[row_index][column_index] = 0
+				House.tickets_table.remove(ticket)
+				logger.info("Ticket deleted")
+				saveData()
+				print("\nRefund succeed!")
+				message: str = ''
+				continue
+			else:
+				logger.info("Confirmation failed, go back to the user menu")
+				print()
+				message: str = "ERROR: Confirmation failed. Refund Failed"
+				continue
 			
-			continue
 		
 		# HELP
 		elif mode == '4':

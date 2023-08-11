@@ -326,7 +326,7 @@ def adminMode() -> None:
 			logger.info("Admin Mode 8: Delete ticket")
 			logger.info("Waiting ticket number input")
 			print("Please enter you ticket number (starts with 'T'):")
-			ticket_number: str = input("-> ").strip().upper()
+			ticket_number: str = input("-> ").strip().upper().replace(' ', '')
 			if len(ticket_number) < 6:
 				print("ERROR: Invalid ticket number -- ticket number too short")
 				logger.info("Invalid ticket number, going back to the control panel menu")
@@ -340,17 +340,17 @@ def adminMode() -> None:
 				      "ticket number should ba a single character 'T' followed by decimal numbers")
 				logger.info("Invalid ticket number, going back to the control panel menu")
 				continue
-			for ticket in House.tickets_table:
-				if ticket[1] == ticket_number:
-					ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
-					print(f"{ticket_no:<6} @ {time} "
-					      f"House {house_no:<2} -- {movie:<50} ~"
-					      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
-					break
-			else:
+			ticket_index: int = int(ticket_number[1:])
+			ticket = House.searchTicket(ticket_index)
+			if ticket is None:
 				print("ERROR: No such ticket")
 				logger.info("Invalid ticket number, going back to the control panel menu")
 				continue
+			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+			logger.info(f"Admin wants to delete this ticket: {ticket}")
+			print(f"{ticket_no:<6} @ {time} "
+			      f"House {house_no:<2} -- {movie:<50} ~"
+			      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
 			print("Enter 'DELETE' if you want to delete this ticket")
 			print("Or hit Enter to go back to control panel menu")
 			logger.info("Asking admin to confirm deletion")
