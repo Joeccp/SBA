@@ -1,6 +1,6 @@
 # Control Panel
 
-Control Panel is available for administrator. It provides 10 back-end operations.
+Control Panel is available for administrator. It provides 12 back-end operations.
 It can be accessed once you are logged in as administrator.
 
 The menu of the control panel is like this:
