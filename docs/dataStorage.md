@@ -13,7 +13,7 @@ When the program is started, it will try to load data.
 > **Technical details**
 > 
 > Those files are binary files, containing 
-> <a href="https://docs.python.org/3/library/pickle.html" action="_blank">pickled Python objects</a>.
+> <a href="https://docs.python.org/3/library/pickle.html" target="_blank">pickled Python objects</a>.
 > Those files are NOT human-readable.
 
 
