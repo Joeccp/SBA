@@ -6,7 +6,7 @@ Data are stored at `data/houses` and `data/tickets` precisely
 
 <br/><br/>
 
-> Technical details:
+> **Technical details**
 > 
 > Those files are binary files, containing [pickled Python objects](https://docs.python.org/3/library/pickle.html).
 > Those files are NOT human-readable.
