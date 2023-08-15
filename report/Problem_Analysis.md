@@ -33,7 +33,14 @@ This system can be login as user and admin.
 In teerms of software engineering, the software needs:
 - A login system, using a local `toml` file. Passwords should be hashed.
 - A `House` class, which represents a cinema house, and has the following attributes and methods:
-  - `n_row`, `n_column`, `house_number`: `int`, represenging number of rows and columns, and the house number respectivly.
-  - `seating_plan`: `list[list[int]]`, a 2D list which store all status of the seat of the `House` instance,
+  - `n_row`, `n_column`, `n_seat`, `house_number`: `int`, represenging number of rows and columns, number of seats, and the house number respectivly.
+  - `seating_plan`: `list[list[int]]`, a 2D list which store all status of the seat,
     - `0` = Empty, `1` = Sold, `2` = Reserved.
+  - `movie`: `str`, the movie name of the currently playing movie
+  - `n_available`: `int`, number of available seat.
+  - `printPlan(self)`: A function that pretty print the seating plan.
+  - `clearPlan(self)`: Clear the seating plan.
+  - `n_tickets`: Class method, returns the number of tickets sold in all houses
+  - `searchTicket(cls, target_ticket_index: int)`: Searches the ticket with the given ticket index
+    - 'ticket index' is a specila format of a ticket number
 
