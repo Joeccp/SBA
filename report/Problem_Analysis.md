@@ -43,4 +43,8 @@ In teerms of software engineering, the software needs:
   - `n_tickets`: Class method, returns the number of tickets sold in all houses
   - `searchTicket(cls, target_ticket_index: int)`: Searches the ticket with the given ticket index
     - 'ticket index' is a specila format of a ticket number
+- Data save and load function, which uses local pickle Python file.
+  - `saveData()` and `loadData()`, functions that save and load local data.
+- `adminMode()` and `userMode()`, functions which encapsulate the admin mode and user mode
 
+This system targets Windows 10/11, Python 3.11+.
