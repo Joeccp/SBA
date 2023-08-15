@@ -58,7 +58,7 @@ python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
 
 
 # Report
-The SBA report can be found [here](REPORT.md).
+The SBA report can be found [here](report/REPORT.md).
 
 
 ## Documentations
