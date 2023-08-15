@@ -45,6 +45,6 @@ In teerms of software engineering, the software needs:
     - 'ticket index' is a specila format of a ticket number
 - Data save and load function, which uses local pickle Python file.
   - `saveData()` and `loadData()`, functions that save and load local data.
-- `adminMode()` and `userMode()`, functions which encapsulate the admin mode and user mode
+- `adminMode()` and `userMode()`, functions which encapsulate the admin mode and user mode.
 
 This system targets Windows 10/11, Python 3.11+.
