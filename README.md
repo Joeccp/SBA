@@ -62,6 +62,7 @@ The SBA report can be found [here](REPORT.md).
 
 
 ## Documentations
+- [User quick start guide](docs/userQuickStart.md)
 - User manual
     - [Login](docs/login.md)
     - [Admin Control Panel](docs/controlPanel.md)
