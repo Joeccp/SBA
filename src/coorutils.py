@@ -38,6 +38,10 @@ class NoColumnCoordinate(Exception):
 	"""No column coordinate"""
 
 
+class NoRowCoordinate(Exception):
+	"""No row coordinate"""
+
+
 class AlphabetCharacterInRowNumber(Exception):
 	"""Column coordinate has more than two characters"""
 
@@ -65,6 +69,15 @@ class SameCoordinates(Exception):
 class CoordinateOutOfRange(Exception):
 	"""The coordinate is out of range, and does not exists"""
 
+
+class RowCoordinatesAtTwoSide(Exception):
+	"""Two row coordinates given in a single seat coordinate"""
+
+class ColumnCoordinatesAtTwoSide(Exception):
+	"""Two column coordinates given in a single seat coordinate"""
+
+
+
 def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) -> list[tuple[int, int]]:
 	"""
 	Analysis the coordinate expression.
@@ -83,6 +96,21 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	:type coor_expr: str
 	:return: A list containing one or more single-seat coordinate
 	:rtype: list[tuple[int, int]]
+	:raise EmptyCoordinate:
+	:raise InvalidCharacter:
+	:raise LeadingZero:
+	:raise MoreThanOneColon:
+	:raise NoColumnCoordinate:
+	:raise NoRowCoordinate:
+	:raise AlphabetCharacterInRowNumber:
+	:raise RowNumberIsZero:
+	:raise NoStartingCoordinate:
+	:raise NoEndingCoordinate:
+	:raise CoordinatesWrongOrder:
+	:raise SameCoordinates:
+	:raise CoordinateOutOfRange:
+	:raise RowCoordinatesAtTwoSide:
+	:raise ColumnCoordinatesAtTwoSide:
 	"""
 	logger: Logger = getLogger('coorExprAnalysis')
 	
@@ -104,26 +132,38 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	
 	if coor_expr[-1] == ':':
 		raise NoEndingCoordinate
+
 	
 	if ':' not in coor_expr:  # Single seat
 		if coor_expr[0] == '0':
 			raise LeadingZero
+		if len(coor_expr) == 1:
+			if coor_expr in digits:
+				raise NoColumnCoordinate
+			else:
+				raise NoRowCoordinate
+		if all([char in ascii_uppercase for char in coor_expr]):
+			raise NoRowCoordinate
+		if all([char in digits for char in coor_expr]):
+			raise NoColumnCoordinate
+		if coor_expr[0] in ascii_uppercase and coor_expr[-1] in ascii_uppercase:
+			raise ColumnCoordinatesAtTwoSide
+		if coor_expr[0] in digits and coor_expr[-1] in digits:
+			raise RowCoordinatesAtTwoSide
+		
+		
 		if coor_expr[0] in digits:  # Row first
 			column: str = coor_expr[-1]  # Row first = last char is column
-			row_str: str = ''
-			for char in coor_expr[:-1]:
-				if char in ascii_uppercase:
-					raise AlphabetCharacterInRowNumber
-				row_str += char
+			row_str: str = coor_expr[:-1]
+			if any([char in ascii_uppercase for char in row_str]):
+				raise AlphabetCharacterInRowNumber
 			row: int = int(row_str)
 			
 		else:  # Column first
 			column: str = coor_expr[0]  # Column first = first char is column
-			row_str: str = ''
-			for char in coor_expr[1:]:
-				if char in ascii_uppercase:
-					raise AlphabetCharacterInRowNumber
-				row_str += char
+			row_str: str = coor_expr[1:]
+			if any([char in ascii_uppercase for char in row_str]):
+				raise AlphabetCharacterInRowNumber
 			row: int = int(row_str)
 		
 	
@@ -138,22 +178,33 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 		for coor in coor_expr.split(':'):
 			if coor[0] == '0':
 				raise LeadingZero
+			if len(coor) == 1:
+				if coor in digits:
+					raise NoColumnCoordinate
+				else:
+					raise NoRowCoordinate
+			if all([char in ascii_uppercase for char in coor]):
+				raise NoRowCoordinate
+			if all([char in digits for char in coor]):
+				raise NoColumnCoordinate
+			if coor[0] in ascii_uppercase and coor[-1] in ascii_uppercase:
+				raise ColumnCoordinatesAtTwoSide
+			if coor[0] in digits and coor[-1] in digits:
+				raise RowCoordinatesAtTwoSide
+			
+			
 			if coor[0] in digits:  # Row first
 				column: str = coor[-1]  # Row first = last char is column
-				row_str: str = ''
-				for char in coor[:-1]:
-					if char in ascii_uppercase:
-						raise AlphabetCharacterInRowNumber
-					row_str += char
+				row_str: str = coor[:-1]
+				if any([char in ascii_uppercase for char in row_str]):
+					raise AlphabetCharacterInRowNumber
 				row: int = int(row_str)
 			
 			else:  # Column first
 				column: str = coor[0]  # Column first = first char is column
-				row_str: str = ''
-				for char in coor[1:]:
-					if char in ascii_uppercase:
-						raise AlphabetCharacterInRowNumber
-					row_str += char
+				row_str: str = coor[1:]
+				if any([char in ascii_uppercase for char in row_str]):
+					raise AlphabetCharacterInRowNumber
 				row: int = int(row_str)
 			
 			coordinate: tuple[int, str] = [row, column]
@@ -184,7 +235,7 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	
 	
 	max_row_index: int = n_row - 1
-	max_column_index: int = ord(n_column) - 65
+	max_column_index: int = n_column - 1
 	for coordinate_index in coordinate_indexes:
 		row_index, column_index = coordinate_index
 		if row_index > max_row_index:
@@ -194,3 +245,7 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 
 
 	return coordinate_indexes
+
+
+
+print(coorExprAnalysis('A1:9A9'))
