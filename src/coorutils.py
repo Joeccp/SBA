@@ -26,10 +26,6 @@ class InvalidCharacter(Exception):
 	"""Invalid character inside coordinate expression"""
 
 
-class LeadingZero(Exception):
-	"""Leading zero in row coordinate"""
-
-
 class MoreThanOneColon(Exception):
 	"""More than one colon in a coordinate expression"""
 
@@ -66,8 +62,12 @@ class SameCoordinates(Exception):
 	"""Two same coordinates"""
 
 
-class CoordinateOutOfRange(Exception):
-	"""The coordinate is out of range, and does not exists"""
+class RowNumberOutOfRange(Exception):
+	"""The row number is out of range, and does not exists"""
+
+
+class ColumnNumberOutOfRange(Exception):
+	"""The column number is out of range, and does not exists"""
 
 
 class RowCoordinatesAtTwoSide(Exception):
@@ -98,7 +98,6 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	:rtype: list[tuple[int, int]]
 	:raise EmptyCoordinate:
 	:raise InvalidCharacter:
-	:raise LeadingZero:
 	:raise MoreThanOneColon:
 	:raise NoColumnCoordinate:
 	:raise NoRowCoordinate:
@@ -108,11 +107,20 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	:raise NoEndingCoordinate:
 	:raise CoordinatesWrongOrder:
 	:raise SameCoordinates:
-	:raise CoordinateOutOfRange:
+	:raise RowNumberOutOfRange:
+	:raise ColumnNumberOutOfRange:
 	:raise RowCoordinatesAtTwoSide:
 	:raise ColumnCoordinatesAtTwoSide:
+	:raise TypeError:
+	:raise ValueError:
 	"""
 	logger: Logger = getLogger('coorExprAnalysis')
+	
+	if type(coor_expr) is not str or type(n_row) is not int or type(n_column) is not int:
+		raise TypeError
+	if not 1 <= n_row <= 99 or not 1 <= n_column <= 99:
+		raise ValueError
+	
 	
 	coor_expr: str = (coor_expr
 	                  .strip()
@@ -135,8 +143,6 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 
 	
 	if ':' not in coor_expr:  # Single seat
-		if coor_expr[0] == '0':
-			raise LeadingZero
 		if len(coor_expr) == 1:
 			if coor_expr in digits:
 				raise NoColumnCoordinate
@@ -176,8 +182,6 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	else:
 		coordinates: list[tuple[int, str]] = []
 		for coor in coor_expr.split(':'):
-			if coor[0] == '0':
-				raise LeadingZero
 			if len(coor) == 1:
 				if coor in digits:
 					raise NoColumnCoordinate
@@ -239,13 +243,12 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	for coordinate_index in coordinate_indexes:
 		row_index, column_index = coordinate_index
 		if row_index > max_row_index:
-			raise CoordinateOutOfRange
+			raise RowNumberOutOfRange
 		if column_index > max_column_index:
-			raise CoordinateOutOfRange
+			raise ColumnNumberOutOfRange
 
 
 	return coordinate_indexes
 
 
 
-print(coorExprAnalysis('A1:9A9'))
