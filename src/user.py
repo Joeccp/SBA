@@ -103,7 +103,7 @@ def userMode() -> None:
 			print(f"House {house.house_number} is now playing: {house.movie}")
 			house.printPlan()
 			print(
-				f"\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat "
+				f"\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat"
 				f"(or just hit Enter to go back to the main menu):")
 			logger.info("Waiting seat coordinate input")
 			coor: str = input("\n-> ").strip().upper().replace(" ", '')
