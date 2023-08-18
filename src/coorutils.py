@@ -63,11 +63,11 @@ class SameCoordinates(Exception):
 
 
 class RowNumberOutOfRange(Exception):
-	"""The row number is out of range, and does not exists"""
+	"""The row number is out of range, and does not exist"""
 
 
 class ColumnNumberOutOfRange(Exception):
-	"""The column number is out of range, and does not exists"""
+	"""The column number is out of range, and does not exist"""
 
 
 class RowCoordinatesAtTwoSide(Exception):
@@ -173,7 +173,7 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 			row: int = int(row_str)
 		
 	
-		coordinate: tuple[int, str] = [row, column]
+		coordinate: tuple[int, str] = (row, column)
 		coordinates: list[tuple[int, str]] = [coordinate]
 	
 	elif coor_expr.count(':') > 1:
@@ -211,7 +211,7 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 					raise AlphabetCharacterInRowNumber
 				row: int = int(row_str)
 			
-			coordinate: tuple[int, str] = [row, column]
+			coordinate: tuple[int, str] = (row, column)
 			coordinates.append(coordinate)
 	
 	
