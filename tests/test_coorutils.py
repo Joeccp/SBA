@@ -50,7 +50,15 @@ class Test_coorExprAnalysis(TestCase):
 		self.assertTrue(analysis('1A:99Z'), [(0, 0), (98, 26)])
 		self.assertTrue(analysis('q5:13u'), [(4, 16), (12, 20)])
 		self.assertTrue(analysis('8C:74I'), [(7, 2), (73, 8)])
-		
+		self.assertTrue(analysis('1A:1B', n_row=23), [(0, 0), (0, 1)])
+		self.assertTrue(analysis('1A:1B', n_row=1), [(0, 0), (0, 1)])
+		self.assertTrue(analysis('7D:88Y', n_column=95), [(6, 3), (87, 24)])
+		self.assertTrue(analysis('7D:88Y', n_column=88), [(6, 3), (87, 24)])
+		self.assertTrue(analysis('23F:73Q', n_row=87, n_column=25), [(22, 5), (72, 16)])
+		self.assertTrue(analysis('23F:73Q', n_row=73, n_column=17), [(22, 5), (72, 16)])
+		self.assertTrue(analysis('23F:73Q', n_row=73, n_column=26), [(22, 5), (72, 25)])
+		self.assertTrue(analysis('23F:73Q', n_row=86, n_column=17), [(22, 5), (72, 25)])
+		self.assertTrue(analysis('1A:99Z', n_row=99, n_column=26), [(0, 0), (98, 25)])
 
 	def test_stringFormatting(self):
 		self.assertEqual(analysis('    1 a    '), [(0, 0)])
@@ -87,6 +95,8 @@ class Test_coorExprAnalysis(TestCase):
 		with self.assertRaises(InvalidCharacter):
 			analysis('(^^)')
 		with self.assertRaises(InvalidCharacter):
+			analysis('45.5Aqua')
+		with self.assertRaises(InvalidCharacter):
 			analysis('A1-B2')
 		with self.assertRaises(NoStartingCoordinate):
 			analysis(':Z99')
@@ -112,15 +122,40 @@ class Test_coorExprAnalysis(TestCase):
 			analysis('A1B2')
 		with self.assertRaises(AlphabetCharacterInRowNumber):
 			analysis('C11RR22')
+		
+
+	def test_multipleInvalidSyntax(self):
 		with self.assertRaises(MoreThanOneColon):
 			analysis('7Y::6C')
 		with self.assertRaises(MoreThanOneColon):
 			analysis('42B:99K:6C')
-		
-		
-	def test_multipleSelection(self):
-		...
-	
+		with self.assertRaises(NoColumnCoordinate):
+			analysis('4:5P')
+		with self.assertRaises(NoColumnCoordinate):
+			analysis('43L:32')
+		with self.assertRaises(NoRowCoordinate):
+			analysis('35P:P')
+		with self.assertRaises(NoRowCoordinate):
+			analysis('J:8E')
+		with self.assertRaises(RowCoordinatesAtTwoSide):
+			analysis('12G6:42P')
+		with self.assertRaises(RowCoordinatesAtTwoSide):
+			analysis('G6:42P24')
+		with self.assertRaises(RowCoordinatesAtTwoSide):
+			analysis('12G6:42P24')
+		with self.assertRaises(ColumnCoordinatesAtTwoSide):
+			analysis('T20T:T23T')
+		with self.assertRaises(ColumnCoordinatesAtTwoSide):
+			analysis('T20:T23T')
+		with self.assertRaises(ColumnCoordinatesAtTwoSide):
+			analysis('T20T:T23')
+		with self.assertRaises(AlphabetCharacterInRowNumber):
+			analysis('34QW:43Y')
+		with self.assertRaises(AlphabetCharacterInRowNumber):
+			analysis('34Q:43YY')
+		with self.assertRaises(AlphabetCharacterInRowNumber):
+			analysis('34QW:5jkl3Y')
+			
 	
 	def test_rangeCheck(self):
 		with self.assertRaises(SameCoordinates):
