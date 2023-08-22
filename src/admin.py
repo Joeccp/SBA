@@ -14,9 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from os import path, remove
-import webbrowser
 from logging import getLogger, Logger
+from os import path, remove
+from typing import Optional
+from webbrowser import open as openWebBrowser
 
 from .house import House
 from .utils import clearScreen, loadData, saveData
@@ -349,7 +350,7 @@ def adminMode() -> None:
 				logger.info("Invalid ticket number, going back to the control panel menu")
 				continue
 			ticket_index: int = int(ticket_number[1:])
-			ticket = House.searchTicket(ticket_index)
+			ticket: Optional[tuple[int, str, str, int, str, int, int]] = House.searchTicket(ticket_index)
 			if ticket is None:
 				print("ERROR: No such ticket")
 				logger.info("Invalid ticket number, going back to the control panel menu")
@@ -503,7 +504,7 @@ def adminMode() -> None:
 		elif mode == '12':
 			logger: Logger = getLogger("adminMode.mode_12")
 			logger.info("Admin Mode 12: Help")
-			webbrowser.open("https://joeccp.github.io/SBA/")
+			openWebBrowser("https://joeccp.github.io/SBA/")
 			logger.info("Opened a website browser and visit https://joeccp.github.io/SBA/")
 		
 		else:

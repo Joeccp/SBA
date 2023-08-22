@@ -19,7 +19,7 @@ from datetime import datetime
 from logging import getLogger, Logger
 from string import ascii_uppercase
 from time import sleep
-from webbrowser import open as webbrowser_open
+from webbrowser import open as openWebBrowser
 
 from .colour import *
 from .house import House
@@ -288,7 +288,7 @@ def userMode() -> None:
 		elif mode == '4':
 			logger: Logger = getLogger("userMode.mode_4")
 			logger.info("User Mode 4: Help")
-			webbrowser_open("https://joeccp.github.io/SBA/")
+			openWebBrowser("https://joeccp.github.io/SBA/")
 			logger.info("Opened a website browser and visit https://joeccp.github.io/SBA/")
 		
 		else:
