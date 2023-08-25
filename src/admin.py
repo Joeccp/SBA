@@ -229,13 +229,20 @@ def adminMode() -> None:
 			print("Staffs should check the status of the seat manually before changing the status of a seat.")
 			print("The program will NOT check the seat status for you.")
 			print("""Command format:\n\n"""
-			      """BUY [HOUSE NUMBER] [ROW NUMBER] [COLUMN INDEX]             --- Buy a seat\n"""
-			      """RESERVED [HOUSE NUMBER] [ROW NUMBER] [COLUMN INDEX]        --- Reserve a seat\n"""
-			      """EMPTY [HOUSE NUMBER] [ROW NUMBER] [COLUMN INDEX]           --- Empty a seat\n"""
+			      """[EMPTY | BUY | RESERVE] - {House number} - {Coordinate Expression} \n"""
 			      """(or hit Enter to go back to control panel menu)"""
 			      )
 			logger.info("Waiting command input")
-			command: str = input("-> ").strip().upper().replace(' ', '')
+			command: str = (input("-> ")
+			                .strip()
+			                .upper()
+			                .replace(' ', '')
+			                .replace('{', '')  # Prevent confusion due to the command format
+			                .replace('}', '')
+			                .replace('[', '')
+			                .replace(']', '')
+			                .replace('|', '')  # <-- This too? Really?
+			                )
 			if command == '':
 				logger.info("Empty command, going back to the control panel menu")
 				continue

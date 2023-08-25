@@ -23,30 +23,44 @@ You should see something like this:
 
 ![Screenshot of mode 6](../images/docs/control_panel_mode_6.png)
 
-If you want to change the seat to Sold, enter the following:
-```
-BUY [HOUSE NUMBER] [ROW NUMBER] [COLUMN INDEX]
-```
 
-If you want to change the seat to Reserved, enter the following:
-```
-RESERVE [HOUSE NUMBER] [ROW NUMBER] [COLUMN INDEX]
-```
+The format of doing seat(s) operation is:
 
-If you want to change the seat to Empty, enter the following:
-```
-Empty [HOUSE NUMBER] [ROW NUMBER] [COLUMN INDEX]
-```
+`[EMPTY | BUY | RESERVE] - {House number} - {Coordinate Expression}`
 
-Replace `[HOUSE NUMBER]` to the house number of the seat;
+Replace `[EMPTY | BUY | RESERVE]` to the action you want to perform 
+(`Empty`, `BUY`, `RESERVE`?);
 
-replace `[ROW NUMBER]` to the row number of the seat; 
+replace `{House number}` to the house number of the seat(s);
 
-replace `[COLUMN INDEX]` to the column number of the seat. 
+replace `{Coordinate Expression}` to the coordinate expression
+representing the range of the seat(s) selected.
 
-The command above is case-insensitive. Leading and trailing spaces are ignored.
+---
 
-You MUST NOT include the brackets (`[]`).
+The command is case-insensitive. All spaces are ignored.
+
+You MUST separate the three argument using hyphens (`-`),
+as shown above.
+
+You SHOULD NOT include brackets (`[]`, `{}`) and vertical bar (`|`).
+They are for demonstration purpose only, though they will be ignored.
+
+### Coordinate Expression
+In control panel mode `6`(Buy / Reserve / Empty a seat),
+you may use a coordinate expression to express one or more seats.
+
+A coordinate expression can be:
+1. A single seat coordinate (E.g. `1A`, `2B`, `P35`, `35P`,`99Z`), or
+2. Two seat coordinates separated by a comma (`:`),
+   representing the start and end of an area of seats (area may not be a rectangle).
+   - These two coordinates MUST NOT be the same seat.
+   - The two coordinates must be two COMPLETE coordinates 
+   (i.e. no missing row / column number in the two coordinates)
+   - The last selected seat (the second coordinate) MUST NOT be in front of the 
+   'first' selected seat (the first coordinate).
+   - E.g. `1A:99Z`, `P35:P45`, `35P:45P`
+
 
 <br/><br/><br/>
 
