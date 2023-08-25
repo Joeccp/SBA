@@ -152,7 +152,7 @@ def adminMode() -> None:
 				print(f"Clearing all seat of house {house_num}")
 				house.clearPlan()
 				print("Success!")
-				print("fClearing all related tickets")
+				print("Clearing all related tickets")
 				logger.info("Clearing all related tickets")
 				n_tickets_removed: int = 0
 				for ticket in House.tickets_table:
@@ -278,6 +278,15 @@ def adminMode() -> None:
 				print(f"ERROR: {error.__doc__}")
 				continue
 			else:
+				if len(coor_range) == 1:
+					coor, = coor_range
+					row, column = coor
+					logger.info(f"{action} House {house.house_number} {row + 1} {chr(column + 65)}")
+					logger.debug(f"house.seating_plan[{row}][{column}]: "
+					             f"{house.seating_plan[row][column]} --> {seat_status}")
+					house.seating_plan[row][column] = seat_status
+					print("Success!\n")
+					continue
 				head, end = coor_range
 				head: tuple[int, int]
 				end: tuple[int, int]
@@ -305,7 +314,7 @@ def adminMode() -> None:
 					             f"{house.seating_plan[row][column]} --> {seat_status}")
 					house.seating_plan[row][column] = seat_status
 				print("Success!\n")
-				continue
+				print(f"{len(coor_list)} seats changed.")
 			finally:
 				saveData()
 
