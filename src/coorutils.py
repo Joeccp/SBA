@@ -16,6 +16,7 @@
 
 from logging import getLogger, Logger
 from string import ascii_uppercase, digits
+from typing import List, Tuple
 
 
 class EmptyCoordinate(Exception):
@@ -43,12 +44,12 @@ class AlphabetCharacterInRowNumber(Exception):
 
 
 class RowNumberIsZero(Exception):
-	"""Row number cannot be zero and starts with 1"""
+	"""Row number cannot be 0 (row number starts with 1)"""
 
 
 class NoStartingCoordinate(Exception):
 	"""Starting coordinate not given"""
-	
+
 
 class NoEndingCoordinate(Exception):
 	"""Ending coordinate not given"""
@@ -73,9 +74,9 @@ class ColumnNumberOutOfRange(Exception):
 class RowCoordinatesAtTwoSide(Exception):
 	"""Two row coordinates given in a single seat coordinate"""
 
+
 class ColumnCoordinatesAtTwoSide(Exception):
 	"""Two column coordinates given in a single seat coordinate"""
-
 
 
 def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) -> list[tuple[int, int]]:
@@ -94,6 +95,10 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	
 	:param coor_expr: A coordinate expression
 	:type coor_expr: str
+	:param n_row: Number of row of the house
+	:type n_row: int
+	:param n_column: Number of column of the house
+	:type n_column: int
 	:return: A list containing one or more single-seat coordinate
 	:rtype: list[tuple[int, int]]
 	:raise EmptyCoordinate:
@@ -121,7 +126,6 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	if not 1 <= n_row <= 99 or not 1 <= n_column <= 99:
 		raise ValueError
 	
-	
 	coor_expr: str = (coor_expr
 	                  .strip()
 	                  .replace(' ', '')
@@ -134,13 +138,12 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	for char in coor_expr:
 		if char not in ascii_uppercase + digits + ':':
 			raise InvalidCharacter
-		
+	
 	if coor_expr[0] == ':':
 		raise NoStartingCoordinate
 	
 	if coor_expr[-1] == ':':
 		raise NoEndingCoordinate
-
 	
 	if ':' not in coor_expr:  # Single seat
 		if len(coor_expr) == 1:
@@ -157,14 +160,13 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 		if coor_expr[0] in digits and coor_expr[-1] in digits:
 			raise RowCoordinatesAtTwoSide
 		
-		
 		if coor_expr[0] in digits:  # Row first
 			column: str = coor_expr[-1]  # Row first = last char is column
 			row_str: str = coor_expr[:-1]
 			if any([char in ascii_uppercase for char in row_str]):
 				raise AlphabetCharacterInRowNumber
 			row: int = int(row_str)
-			
+		
 		else:  # Column first
 			column: str = coor_expr[0]  # Column first = first char is column
 			row_str: str = coor_expr[1:]
@@ -172,13 +174,12 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 				raise AlphabetCharacterInRowNumber
 			row: int = int(row_str)
 		
-	
 		coordinate: tuple[int, str] = (row, column)
 		coordinates: list[tuple[int, str]] = [coordinate]
 	
 	elif coor_expr.count(':') > 1:
 		raise MoreThanOneColon
-
+	
 	else:
 		coordinates: list[tuple[int, str]] = []
 		for coor in coor_expr.split(':'):
@@ -195,7 +196,6 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 				raise ColumnCoordinatesAtTwoSide
 			if coor[0] in digits and coor[-1] in digits:
 				raise RowCoordinatesAtTwoSide
-			
 			
 			if coor[0] in digits:  # Row first
 				column: str = coor[-1]  # Row first = last char is column
@@ -214,7 +214,6 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 			coordinate: tuple[int, str] = (row, column)
 			coordinates.append(coordinate)
 	
-	
 	coordinate_indexes: list[tuple[int, int]] = []
 	for coordinate in coordinates:
 		row: int = coordinate[0]
@@ -226,7 +225,6 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 		coordinate_index: tuple[int, int] = (row_index, column_index)
 		coordinate_indexes.append(coordinate_index)
 	
-	
 	if len(coordinate_indexes) == 2:
 		start, end = coordinate_indexes
 		if start == end:
@@ -237,7 +235,6 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 			if start[1] > end[1]:
 				raise CoordinatesWrongOrder
 	
-	
 	max_row_index: int = n_row - 1
 	max_column_index: int = n_column - 1
 	for coordinate_index in coordinate_indexes:
@@ -246,9 +243,5 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 			raise RowNumberOutOfRange
 		if column_index > max_column_index:
 			raise ColumnNumberOutOfRange
-
-
+	
 	return coordinate_indexes
-
-
-

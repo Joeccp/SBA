@@ -86,7 +86,7 @@ class House:
 						symbol = Colour.RED_BG + 'X' + normal_colour
 					case 2:
 						symbol = Colour.YELLOW_BG + '!' + normal_colour
-				print(symbol, end='|')
+				print(symbol, end='|')  # NOQA
 			print(f'  {row_colour}{row + 1:>2}{normal_colour}')
 			print('    ' + '-' * line_length)
 		print()
