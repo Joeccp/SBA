@@ -15,7 +15,7 @@
 # limitations under the License.
 
 from logging import getLogger, Logger
-from typing import Self
+from typing import Optional, Self
 
 from .colour import *
 
@@ -86,7 +86,7 @@ class House:
 						symbol = Colour.RED_BG + 'X' + normal_colour
 					case 2:
 						symbol = Colour.YELLOW_BG + '!' + normal_colour
-				print(symbol, end='|')
+				print(symbol, end='|')  # NOQA
 			print(f'  {row_colour}{row + 1:>2}{normal_colour}')
 			print('    ' + '-' * line_length)
 		print()
@@ -101,7 +101,7 @@ class House:
 		return len(cls.tickets_table)
 	
 	@classmethod
-	def searchTicket(cls, target_ticket_index: int) -> tuple[int, str, str, int, str, int, int] | None:
+	def searchTicket(cls, target_ticket_index: int) -> Optional[tuple[int, str, str, int, str, int, int]]:
 		"""
 		Searches the ticket with the given ticket index, and returns it.
 		Assumes the (format of the) ticket index is valid.
