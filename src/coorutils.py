@@ -120,6 +120,7 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	:raise ValueError:
 	"""
 	logger: Logger = getLogger('coorExprAnalysis')
+	logger.info(f"Analysing the coordinate expression: {coor_expr}")
 	
 	if type(coor_expr) is not str or type(n_row) is not int or type(n_column) is not int:
 		raise TypeError
@@ -244,4 +245,5 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 		if column_index > max_column_index:
 			raise ColumnNumberOutOfRange
 	
+	logger.debug(f'{coordinate_indexes[0]} --> {coordinate_indexes[1]}')
 	return coordinate_indexes
