@@ -55,11 +55,10 @@ A coordinate expression can be:
 2. Two seat coordinates separated by a comma (`:`),
    representing the start and end of an area of seats (area may not be a rectangle).
    - These two coordinates MUST NOT be the same seat.
-   - The two coordinates must be two COMPLETE coordinates 
+   - The two coordinates must be two COMPLETE coordinates.
    (i.e. no missing row / column number in the two coordinates)
-   - The last selected seat (the second coordinate) MUST NOT be in front of the 
-   'first' selected seat (the first coordinate).
-   - E.g. `1A:99Z`, `P35:P45`, `35P:45P`
+   - The first seat (the first coordinate) MUST be in front of the last seat (the second coordinate). Order is counted by row, then column.
+   - Valid examples: `1A:99Z`, `P35:P45`, `35P:45P`
 
 
 <br/><br/><br/>
