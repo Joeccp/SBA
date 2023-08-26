@@ -24,6 +24,8 @@ Here are all the user accounts:
 |  admin   |  pass,   | Administrator |
 |   user   |  bhjs.   |     User      |
 
+(Punctuations are part of the password)
+
 Leading and trailing whitespaces are automatically ignored in the program.
 
 To logout, enter mode `0`(EXIT CONTROL PANEL) if you are in the Control Panel, otherwise,
