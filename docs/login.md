@@ -24,7 +24,7 @@ Here are all the user accounts:
 |  admin   |  pass,   | Administrator |
 |   user   |  bhjs.   |     User      |
 
-(Punctuations are part of the password)
+(For the avoidance of doubt, punctuations are part of the password)
 
 Leading and trailing whitespaces are automatically ignored in the program.
 
