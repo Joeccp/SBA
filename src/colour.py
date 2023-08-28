@@ -32,8 +32,6 @@ class Colour:
 	RED_BG: str = '\033[101m'
 
 
-
-
 row_colour: str = Colour.BLUE
 column_colour: str = Colour.PURPLE
 normal_colour: str = Colour.WHITE_BG + Colour.BLACK

@@ -16,7 +16,6 @@
 
 from logging import getLogger, Logger
 from string import ascii_uppercase, digits
-from typing import List, Tuple
 
 
 class EmptyCoordinate(Exception):

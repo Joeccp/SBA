@@ -80,7 +80,7 @@ def clearScreen() -> None:
 		terminal_width, terminal_height = get_terminal_size()
 		# Print empty lines in case system('cls') does not work
 		print('\n' * terminal_height, end='')
-	except OSError as error:
+	except OSError:
 		# OSError: [WinError 6] The handle is invalid
 		# Normally due to get_terminal_size()
 		# But still need to print empty lines in case system('cls') does not work

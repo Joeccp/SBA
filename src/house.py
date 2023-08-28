@@ -150,9 +150,9 @@ class House:
 				return cls.tickets_table[half]
 			elif guess_ticket_index > target_ticket_index:
 				max_: int = half
-				logger.debug(f"max_ <- half")
+				logger.debug("max_ <- half")
 				logger.debug(f"max is now {max_}")
 			else:
 				min_: int = half
-				logger.debug(f"min_ <- half")
+				logger.debug("min_ <- half")
 				logger.debug(f"min is now {min_}")

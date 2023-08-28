@@ -146,7 +146,7 @@ def adminMode() -> None:
 			print(f"Successfully changed the movie in house {house.house_number}!")
 			print(f"{old_movie or '(None)'} --> {house.movie}")
 			logger.info(f"Movie of House {house.house_number}: {old_movie or '(None)'} --> {house.movie}")
-			do_clean: str = input(f"Would you like to clear all relevant data too? (y/N)").strip().upper()
+			do_clean: str = input("Would you like to clear all relevant data too? (y/N)").strip().upper()
 			if do_clean == 'Y':
 				logger.info("Admin wants to clear all relevant data")
 				print(f"Clearing all seat of house {house_num}")
@@ -175,7 +175,6 @@ def adminMode() -> None:
 				print("Going back to the control panel menu...")
 				continue
 		
-		
 		# Save data
 		elif mode == '3':
 			logger: Logger = getLogger("adminMode.mode_3")
@@ -187,7 +186,6 @@ def adminMode() -> None:
 			logger: Logger = getLogger("adminMode.mode_4")
 			logger.info("Admin Mode 4: Load data")
 			loadData(print_log=True)
-		
 		
 		# Check houses information
 		elif mode == '5':
@@ -218,7 +216,6 @@ def adminMode() -> None:
 			house: House = House.houses_table[house_num]
 			print(f"House {house.house_number} is now playing: {house.movie}")
 			house.printPlan()
-		
 		
 		# Buy / Reserve / Empty a seat
 		elif mode == '6':
@@ -278,7 +275,9 @@ def adminMode() -> None:
 			coor_expr: str = command_list[2]
 			
 			try:
-				coor_range: list[tuple[int, int]] = coorExprAnalysis(coor_expr, n_row=house.n_row, n_column=house.n_column)
+				coor_range: list[tuple[int, int]] = coorExprAnalysis(
+					coor_expr, n_row=house.n_row, n_column=house.n_column
+				)
 			except Exception as error:  # NOQA
 				logger.info(f'Invalid command: {error.__doc__}. '
 				            'Going back to the control panel menu')
@@ -298,7 +297,7 @@ def adminMode() -> None:
 				head: tuple[int, int]
 				end: tuple[int, int]
 				coor_list: list[tuple[int, int]] = []
-				for i in range(head[0], end[0]+1):
+				for i in range(head[0], end[0] + 1):
 					if i > end[0]:
 						break
 					for j in range(house.n_column):
@@ -325,7 +324,6 @@ def adminMode() -> None:
 			finally:
 				saveData()
 
-		
 		# Check ticket information
 		elif mode == '7':
 			logger: Logger = getLogger("adminMode.mode_7")
@@ -396,7 +394,6 @@ def adminMode() -> None:
 				print("Going back to the control panel menu...")
 				logger.info("Confirmation failed")
 			logger.debug(f"Total: {House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active")
-		
 		
 		# Clear all seats of a house
 		elif mode == '9':

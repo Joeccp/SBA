@@ -21,7 +21,7 @@ from string import ascii_uppercase
 from time import sleep
 from webbrowser import open as openWebBrowser
 
-from .colour import *
+from .colour import Colour, column_colour, normal_colour, row_colour
 from .house import House
 from .utils import clearScreen, saveData
 
@@ -41,7 +41,9 @@ def userMode() -> None:
 		for house in House.houses_table.values():
 			if house.movie:
 				print(
-					f"House {house.house_number}: {house.movie:<50} {Colour.GREEN if house.n_available > 0 else Colour.RED}{house.n_available}{normal_colour}/{house.n_seat}")
+					f"House {house.house_number}: {house.movie:<50} "
+					f"{Colour.GREEN if house.n_available > 0 else Colour.RED}{house.n_available}{normal_colour}"
+					f"/{house.n_seat}")
 		print(
 			"\n"
 			"0: LOG OUT\n"
@@ -155,7 +157,6 @@ def userMode() -> None:
 			input("\nHit Enter to go back to the main menu")
 			message: str = ""
 			continue
-		
 		
 		# Check ticket
 		elif mode == '2':
@@ -283,7 +284,6 @@ def userMode() -> None:
 				message: str = "ERROR: Confirmation failed. Refund Failed"
 				continue
 			
-		
 		# HELP
 		elif mode == '4':
 			logger: Logger = getLogger("userMode.mode_4")

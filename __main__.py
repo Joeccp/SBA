@@ -21,7 +21,8 @@ from src.admin import adminMode
 from src.colour import normal_colour
 from src.login import login
 from src.user import userMode
-from src.utils import checkPythonVersion, checkSystemPlatform, clearScreen, initLog, loadData
+from src.utils import (checkPythonVersion, checkSystemPlatform,
+                       clearScreen, initLog, loadData)
 
 __author__ = 'Joe Chau'
 __contact__ = 's2018014@bhjs.edu.hk'
@@ -40,7 +41,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License."""
 __license__ = 'Apache-2.0'
-
 
 
 def main() -> None:
@@ -72,12 +72,12 @@ def main() -> None:
 			userMode()
 
 
-
 if __name__ == '__main__':
 	# Parse arguments
 	parser = ArgumentParser(
 		description="A simulation of a cinema kiosk system",
-		epilog="For documentation of the usage of this program, visit https://joeccp.github.io/SBA/",
+		epilog="For documentation of the usage of this program, "
+		       "visit https://joeccp.github.io/SBA/",
 		usage="SBA"
 	)
 	parser.add_argument("-l", "--license",
@@ -85,12 +85,11 @@ if __name__ == '__main__':
 	                    action='store_true')
 	args = parser.parse_args()
 	if args.license:
-		print(__license__); quit()
+		print(__license__)
+		quit()
 	
 	# -------------------------------------------------------------------------
 	# main is called INSIDE this if-statement,
 	# so that main will NOT be called immediately after __main__ being imported
 	main()
-	# -------------------------------------------------------------------------
-	
-	
+# -------------------------------------------------------------------------
