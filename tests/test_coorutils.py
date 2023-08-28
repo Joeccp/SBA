@@ -67,15 +67,15 @@ class Test_coorExprAnalysis(TestCase):
 	
 	def test_functionException(self):
 		with self.assertRaises(TypeError):
-			analysis()
+			analysis()  # NOQA
 		with self.assertRaises(TypeError):
-			analysis(12345)
+			analysis(12345)  # NOQA
 		with self.assertRaises(TypeError):
-			analysis((1, 1))
+			analysis((1, 1))  # NOQA
 		with self.assertRaises(TypeError):
-			analysis([(0, 0)])
+			analysis([(0, 0)])  # NOQA
 		with self.assertRaises(TypeError):
-			analysis("A1", 2, 4)
+			analysis("A1", 2, 4)  # NOQA
 		with self.assertRaises(ValueError):
 			analysis("A1", n_column=0)
 		with self.assertRaises(ValueError):
