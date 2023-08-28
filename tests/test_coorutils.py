@@ -21,14 +21,14 @@ from unittest import TestCase
 analysis: Callable = coorExprAnalysis
 
 
-class Test_coorExprAnalysis(TestCase):
+class Test_coorExprAnalysis(TestCase):  # NOQA: prevent 'all caps in class name' warning
 	def test_singleCoordinate(self):
 		self.assertEqual(analysis('A1'), [(0, 0)])
 		self.assertEqual(analysis('1A'), [(0, 0)])
 		self.assertEqual(analysis('2B'), [(1, 1)])
 		self.assertEqual(analysis('B2'), [(1, 1)])
-		self.assertEqual(analysis('99Z'),[(98, 25)])
-		self.assertEqual(analysis('Z99'),[(98, 25)])
+		self.assertEqual(analysis('99Z'), [(98, 25)])
+		self.assertEqual(analysis('Z99'), [(98, 25)])
 		self.assertEqual(analysis('17M'), [(16, 12)])
 		self.assertEqual(analysis('o8'), [(7, 14)])
 		self.assertEqual(analysis('23Q', n_row=84), [(22, 16)])
@@ -85,7 +85,7 @@ class Test_coorExprAnalysis(TestCase):
 		with self.assertRaises(ValueError):
 			analysis("A1", n_row=100)
 		with self.assertRaises(ValueError):
-			analysis("A1",n_row=23, n_column=0)
+			analysis("A1", n_row=23, n_column=0)
 		with self.assertRaises(ValueError):
 			analysis("A1", n_row=12345, n_column=4)
 	
