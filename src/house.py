@@ -17,7 +17,7 @@
 from logging import getLogger, Logger
 from typing import Optional, Self
 
-from .colour import *
+from .colour import Colour, column_colour, normal_colour, row_colour
 
 
 class House:
@@ -121,7 +121,6 @@ class House:
 		max_: int = cls.n_tickets() - 1
 		logger.debug(f"Min: {min_}  & Max: {max_}")
 		
-		
 		while True:
 			logger.debug(f"Min: {min_}  & Max: {max_}")
 			if min_ == max_:
@@ -133,7 +132,6 @@ class House:
 					logger.info("No such ticket")
 					return None
 			
-			
 			if max_ - min_ == 1:
 				if cls.tickets_table[max_][0] == target_ticket_index:
 					return cls.tickets_table[max_]
@@ -141,7 +139,6 @@ class House:
 					return cls.tickets_table[min_]
 				else:
 					return None
-			
 			
 			half: int = int((max_ + min_) / 2)  # int() = floor()
 			guess_ticket_index: int = cls.tickets_table[half][0]
