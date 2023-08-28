@@ -13,7 +13,8 @@ jobs:
         python-version: ['3.11', '3.11.5']
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checking out
+        uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
