@@ -13,7 +13,7 @@ jobs:
         python-version: ['3.11', '3.11.5']
 
     steps:
-      - name: Checking out
+      - name: Check out
         uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
@@ -24,4 +24,4 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox tox-gh-actions
       - name: Test with tox
-        uses: tox
+        run: tox
