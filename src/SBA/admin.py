@@ -478,7 +478,7 @@ def adminMode() -> None:
 			try:
 				logger.info("Finding any saved tickets data")
 				absolute_path = path.dirname(__file__)
-				relative_path = '../data/tickets'
+				relative_path = '../../data/tickets'
 				full_path = path.join(absolute_path, relative_path)
 				remove(full_path)
 			except FileNotFoundError:
@@ -498,7 +498,7 @@ def adminMode() -> None:
 			try:
 				logger.info("Finding any saved houses data")
 				absolute_path = path.dirname(__file__)
-				relative_path = '../data/houses'
+				relative_path = '../../data/houses'
 				full_path = path.join(absolute_path, relative_path)
 				remove(full_path)
 			except FileNotFoundError:

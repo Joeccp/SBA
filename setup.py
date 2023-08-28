@@ -1,4 +1,4 @@
-"""Run the main program when package executed directly"""
+"""Setup"""
 
 # Copyright 2023 Joe Chau
 #
@@ -14,11 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from src.SBA.main import main
-
-__author__ = 'Joe Chau'
-__contact__ = 's2018014@bhjs.edu.hk'
-__license__ = 'Apache-2.0'
+from setuptools import setup
 
 if __name__ == '__main__':
-	main()
+	setup()

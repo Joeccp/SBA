@@ -1,4 +1,4 @@
-# Config file for the flake8 linter
+# flake8 config
 [flake8]
 
 ignore =
@@ -12,8 +12,6 @@ ignore =
 max-line-length = 110
 
 per-file-ignores =
-    # I have no idea why E117 and E126 are raised, ignore it first
-    __main__.py:E117,E126,
     # import * in tests is OK to me, and I prefer doing so
     tests/*:F403,F405
 

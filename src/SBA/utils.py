@@ -116,7 +116,7 @@ def saveData(*, print_log: bool = False) -> None:
 	
 	absolute_path = path.dirname(__file__)
 	
-	relative_path = '../data'
+	relative_path = '../../../data'
 	full_path = path.join(absolute_path, relative_path)
 	
 	internalLog("Reaching the data folder")
@@ -125,14 +125,14 @@ def saveData(*, print_log: bool = False) -> None:
 		makedirs(full_path)
 	
 	internalLog("Writing houses data")
-	relative_path = "../data/houses"
+	relative_path = "../../../data/houses"
 	full_path = path.join(absolute_path, relative_path)
 	with open(full_path, 'wb') as file:
 		# No need save House.n_house, count it later
 		dump(House.houses_table, file)
 	
 	internalLog("Writing tickets data")
-	relative_path = "../data/tickets"
+	relative_path = "../../../data/tickets"
 	full_path = path.join(absolute_path, relative_path)
 	with open(full_path, 'wb') as file:
 		dump([House.total_tickets, House.tickets_table], file)
@@ -167,7 +167,7 @@ def loadData(*, print_log: bool = False) -> None:
 	
 	absolute_path = path.dirname(__file__)
 	
-	relative_path = "../data/houses"
+	relative_path = "../../../data/houses"
 	full_path = path.join(absolute_path, relative_path)
 	try:
 		internalLog("Finding houses data")
@@ -179,7 +179,7 @@ def loadData(*, print_log: bool = False) -> None:
 	except FileNotFoundError:
 		internalLog("No houses data found")
 	
-	relative_path = "../data/tickets"
+	relative_path = "../../../data/tickets"
 	full_path = path.join(absolute_path, relative_path)
 	try:
 		internalLog("Finding tickets data")
@@ -204,7 +204,7 @@ def initLog() -> None:
 	PROGRAM_START_TIME_STRING: str = PROGRAM_START_TIME.isoformat(sep=' ', timespec='seconds')
 	PROGRAM_START_TIME_STRING: str = PROGRAM_START_TIME_STRING.replace(':', '-')  # file name can't have ':'
 	absolute_path = path.dirname(__file__)
-	relative_path = rf'..\logs\{PROGRAM_START_TIME_STRING}.txt'
+	relative_path = rf'..\..\logs\{PROGRAM_START_TIME_STRING}.txt'
 	full_path = path.join(absolute_path, relative_path)
 	head_msg: str = f"--- LOG FILE ---\nTime: {PROGRAM_START_TIME_STRING}\n"
 	with open(full_path, 'w') as file:
