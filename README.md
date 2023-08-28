@@ -2,9 +2,13 @@
 <!-- https://joeccp.github.io/SBA/ -->
 
 ![python3.11_badge](https://img.shields.io/badge/python-3.11-blue?logo=python)
-![python3.11_badge](https://img.shields.io/badge/license-Apache--2.0-blue)
+![latest](https://img.shields.io/github/v/release/Joeccp/SBA)
+![python3.11_badge](https://img.shields.io/github/license/Joeccp/SBA?color=mediumslateblue)
 ![tests_badge](https://github.com/Joeccp/SBA/actions/workflows/tests.yml/badge.svg)
-
+![GitHub_last_commit_(branch)](https://img.shields.io/github/last-commit/Joeccp/SBA/main)
+![maintenance](https://img.shields.io/maintenance/yes/2023?label=Is%20maintaining)
+![code_size](https://img.shields.io/github/languages/code-size/Joeccp/SBA)
+![repo_size](https://img.shields.io/github/repo-size/Joeccp/SBA)
 
 
 ## Introduction
