@@ -75,8 +75,14 @@ def clearScreen() -> None:
 
 	:return: None
 	"""
+
+	try:
+		terminal_width, terminal_height = get_terminal_size()
+	except OSError as error:
+		print(f"ERROR: OSError: {error} Are you using Windows terminal? (cmd/powershell)")
+		quit()
+		
 	# Print empty lines in case system('cls') does not work
-	terminal_width, terminal_height = get_terminal_size()
 	print('\n' * terminal_height, end='')
 	
 	system('cls')  # System must be Windows, see __main__.checkSystemPlatform
