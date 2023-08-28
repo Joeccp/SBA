@@ -1,8 +1,12 @@
 # Cinema Kiosk System
 <!-- https://joeccp.github.io/SBA/ -->
 
+![python3.11_badge](https://img.shields.io/badge/python-3.11-blue?logo=python)
+![python3.11_badge](https://img.shields.io/badge/license-Apache--2.0-blue)
 ![tests_badge](https://github.com/Joeccp/SBA/actions/workflows/tests.yml/badge.svg)
-![python3.11_badge](https://img.shields.io/badge/python-3.11-blue)
+![docs_badge](https://img.shields.io/badge/Documentations-green?link=https%3A%2F%2Fjoeccp.github.io%2FSBA%2F)
+![src_badge](https://img.shields.io/badge/Source-black?logo=github&link=https%3A%2F%2Fgithub.com%2FJoeccp%2FSBA)
+
 
 ## Introduction
 Welcome! This is a **Cinema Kiosk System** project for 
