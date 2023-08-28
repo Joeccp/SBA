@@ -245,5 +245,5 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 		if column_index > max_column_index:
 			raise ColumnNumberOutOfRange
 	
-	logger.debug(f'{coordinate_indexes[0]} --> {coordinate_indexes[1]}')
+	logger.debug(f'{coordinate_indexes}')
 	return coordinate_indexes
