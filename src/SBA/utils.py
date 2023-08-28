@@ -50,8 +50,8 @@ def checkPythonVersion() -> None:
 	:return: None
 	:raises SystemExit: If the Python version is older than 3.11
 	"""
-	# (tomllib, which is required in src.login.login, was introduced in Python 3.11),
-	# (typing.Self, which is required in src.house.House, was also introduced in Python 3.11)
+	# (tomllib, which is required in login.login, was introduced in Python 3.11),
+	# (typing.Self, which is required in house.House, was also introduced in Python 3.11)
 	# (match-case syntax, which is used in House.printPlan, was introduced in Python 3.10)
 	
 	logger: Logger = getLogger("checkPythonVersion")
