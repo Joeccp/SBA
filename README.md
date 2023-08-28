@@ -1,7 +1,8 @@
 # Cinema Kiosk System
 <!-- https://joeccp.github.io/SBA/ -->
 
-![tests_badge](https:github.com/Joeccp/SBA/actions/workflows/tests.yml/badge.svg)
+![tests_badge](https://github.com/Joeccp/SBA/actions/workflows/tests.yml/badge.svg)
+![python3.11_badge](https://img.shields.io/badge/python-3.11-blue)
 
 ## Introduction
 Welcome! This is a **Cinema Kiosk System** project for 
