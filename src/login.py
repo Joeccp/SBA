@@ -22,7 +22,7 @@ from os import path
 from tomllib import load as loadtoml
 from typing import Any
 
-from .colour import *
+from .colour import Colour, normal_colour
 from .utils import clearScreen
 
 
