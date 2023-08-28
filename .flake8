@@ -2,11 +2,9 @@
 [flake8]
 
 ignore =
-    # mix of spaces and tabs, false alarm in docs and strings, Python would raise exception anyway
+    # Mix of spaces and tabs, false alarm in docs and strings, Python would raise exception anyway
     E101,
-    # I have no idea why E117 is raised, ignore it first
-    E117,
-    # should use tabs for indentation, I use tabs anyway
+    # Should use tabs for indentation, I use tabs anyway
     W191,
     # Blank line contains whitespace, mainly for easier editing
     W293,
@@ -14,8 +12,8 @@ ignore =
 max-line-length = 110
 
 per-file-ignores =
-    # I have no idea why E126 is raised, ignore it first
-    __main__.py:E126,
+    # I have no idea why E117 and E126 are raised, ignore it first
+    __main__.py:E117,E126,
     # import * in tests is OK to me, and I prefer doing so
     tests/*:F403,F405
 
