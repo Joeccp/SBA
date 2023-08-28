@@ -4,8 +4,7 @@
 ![python3.11_badge](https://img.shields.io/badge/python-3.11-blue?logo=python)
 ![python3.11_badge](https://img.shields.io/badge/license-Apache--2.0-blue)
 ![tests_badge](https://github.com/Joeccp/SBA/actions/workflows/tests.yml/badge.svg)
-![docs_badge](https://img.shields.io/badge/Documentations-green?link=https%3A%2F%2Fjoeccp.github.io%2FSBA%2F)
-![src_badge](https://img.shields.io/badge/Source-black?logo=github&link=https%3A%2F%2Fgithub.com%2FJoeccp%2FSBA)
+
 
 
 ## Introduction
@@ -79,8 +78,10 @@ The SBA report can be found [here](report/REPORT.md).
 
 
 ## Useful links
-- [GitHub Repository](https://github.com/Joeccp/SBA) <-- source code
-- [Main page of this project](https://joeccp.github.io/SBA/)
+- ![Static Badge](https://img.shields.io/badge/Source-black?logo=github) 
+[GitHub Repository](https://github.com/Joeccp/SBA) <-- source code
+- ![Static Badge](https://img.shields.io/badge/Documentation-green?logo=github&labelColor=black) 
+[Documentations](https://joeccp.github.io/SBA/)
 
 ---
 
