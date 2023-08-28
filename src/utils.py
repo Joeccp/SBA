@@ -78,14 +78,15 @@ def clearScreen() -> None:
 
 	try:
 		terminal_width, terminal_height = get_terminal_size()
+		# Print empty lines in case system('cls') does not work
+		print('\n' * terminal_height, end='')
 	except OSError as error:
-		print(f"ERROR: OSError: {error} Are you using Windows terminal? (cmd/powershell)")
-		quit()
-		
-	# Print empty lines in case system('cls') does not work
-	print('\n' * terminal_height, end='')
-	
-	system('cls')  # System must be Windows, see __main__.checkSystemPlatform
+		# OSError: [WinError 6] The handle is invalid
+		# Normally due to get_terminal_size()
+		# But still need to print empty lines in case system('cls') does not work
+		print('\n' * 20)
+	finally:
+		system('cls')
 
 
 def saveData(*, print_log: bool = False) -> None:
