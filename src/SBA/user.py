@@ -19,6 +19,7 @@ from datetime import datetime
 from logging import getLogger, Logger
 from string import ascii_uppercase
 from time import sleep
+from typing import Optional
 from webbrowser import open as openWebBrowser
 
 from .colour import Colour, column_colour, normal_colour, row_colour
@@ -198,7 +199,7 @@ def userMode() -> None:
 				continue
 			print()
 			ticket_index: int = int(ticket_number[1:])
-			ticket = House.searchTicket(ticket_index)
+			ticket: Optional[tuple[int, str, str, int, str, int, int]] = House.searchTicket(ticket_index)
 			if ticket is None:
 				logger.info("No such ticket, going back to the user menu")
 				print("No such ticket")
@@ -254,7 +255,7 @@ def userMode() -> None:
 				continue
 			print()
 			ticket_index: int = int(ticket_number[1:])
-			ticket = House.searchTicket(ticket_index)
+			ticket: Optional[tuple[int, str, str, int, str, int, int]] = House.searchTicket(ticket_index)
 			if ticket is None:
 				logger.info("No such ticket, going back to the user menu")
 				print("No such ticket")
