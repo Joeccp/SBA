@@ -59,18 +59,17 @@ scenarios, and possible inputs of the users.
 Moreover, there are unittests which test one of the utility programs,
 (using the builtin `unittest` module).
 You may find the unittest script in the `tests` directory.
-(For what it's worth, I also use linter (`flake8`) to check my code style 
-to ensure a good readability.) 
+(For what it's worth, I also use linter (`flake8` for style checking and `mypy` for type checking) 
+to check my code style to ensure a good readability.) 
 All the above tests are automated using `GitHub actions` 
 with the help of `tox` and `pytest`, 
 those tests are automatically done when I `push` my code into the GitHub repository.
-
 
 `Deployment`: (Skipped as this is just a simulation of the kiosk system)
 
 `Maintenance`: There are bug fixes and updates regularly. 
 You may check the [commits history](https://github.com/Joeccp/SBA/commits/main)
-and the [releases](https://github.com/Joeccp/SBA/releases).
+and all the [releases](https://github.com/Joeccp/SBA/releases).
 
 
 ### Flowchart
@@ -115,12 +114,12 @@ The main program (function)
 ### Features
 
 Required features:
-- [X] [Login system](docs/login.md)
-- [X] [House and movie creation](docs/house.md)
-- [X] [View seating plan](docs/house.md#howto-see-the-seating-plan-of-a-house)
-- [X] [Seat selection](docs/ticket.md#howto-buy-a-seat-as-a-user)
-- [X] [Status storage](docs/dataStorage.md)
-- [X] [Calculation (of the total number of the tickets sold)](docs/ticket.md#howto-check-ticket-information)
+- [X] [Login system](../docs/login.md)
+- [X] [House and movie creation](../docs/house.md)
+- [X] [View seating plan](../docs/house.md#howto-see-the-seating-plan-of-a-house)
+- [X] [Seat selection](../docs/ticket.md#howto-buy-a-seat-as-a-user)
+- [X] [Status storage](../docs/dataStorage.md)
+- [X] [Calculation (of the total number of the tickets sold)](../docs/ticket.md#howto-check-ticket-information)
 
 Large additional features:
 - [Ticket operation](../docs/ticket.md)
