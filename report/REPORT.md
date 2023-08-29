@@ -20,8 +20,7 @@ Some tools are used for the software engineering of this project.
 
 Waterfall Model is used when developing this project.
 
-<!--<pre class="mermaid">-->
-```mermaid!
+<pre class="mermaid">
 flowchart LR
     Requirements -->
     Design -->
@@ -29,8 +28,7 @@ flowchart LR
     Testing -->
     dpm[Deployment] -->
     mtn[Maintenance] --> dpm
-```
-<!--</pre>-->
+</pre>
 
 `Requirements`: I studied and analysis the requirements carefully, 
 to ensure I have fulfilled and will implement all the required features.
