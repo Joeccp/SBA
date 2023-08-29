@@ -64,7 +64,7 @@ scenarios, and possible inputs of the users.
 
 ### Flowchart
 Here is a flowchart showing the basic structure of this program:
-![Flow chart of the main program](images/report/Main_Flow_Chart.jpg)
+![Flow chart of the main program](../images/report/Main_Flow_Chart.jpg)
 
 
 ### Pseudocode
