@@ -38,7 +38,7 @@ This project has *NO PRACTICAL USE*, this is just a piece of high school homewor
 
 ### Download
 You can find the latest release [here](https://github.com/Joeccp/SBA/releases/latest), 
-Under `Assests`, you can choose to download the `.zip` file or the `.tar.gz` file, as follow:
+Under `Assests`, you can choose to download the `.zip` file or the `.tar.gz` file, as follows:
 
 ![Screenshot of the release page](images/docs/latest_release_assets.png)
 
@@ -52,17 +52,13 @@ Run this package using Python via `cmd`/`powershell` with the `-m` flag, or dire
 (Do NOT run this program on a Python terminal *inside* an IDE, it will NOT work.)
 
 ### Examples
-Assume you have downloaded this package in `"C:\Users\[USER NAME]\Downloads"`, run:
-
-```shell
-python C:\Users\[USER NAME]\Downloads\SBA -m
-```
-
-or
-
-```shell
-python C:\Users\[USER NAME]\Downloads\SBA\__main__.py
-```
+0. (Download python 3.11 or above)
+1. Download source code (the `zip` file).
+2. Unzip it.
+3. Inside the unzipped folder, you should see another folder with the same name, open it.
+4. Double-click the `__main__.py` file. 
+(Or the `__main__` file if you cannot see the file extension.)
+5. Ta-da!
 
 
 
