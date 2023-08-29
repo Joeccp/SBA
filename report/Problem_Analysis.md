@@ -30,7 +30,7 @@ This system can be login as user and admin.
 
 ### Inplementation analysis
 
-In teerms of software engineering, the software needs:
+In terms of software engineering, the software needs:
 - A login system, using a local `toml` file. Passwords should be hashed.
 - A `House` class, which represents a cinema house, and has the following attributes and methods:
   - `n_row`, `n_column`, `n_seat`, `house_number`: `int`, represenging number of rows and columns, number of seats, and the house number respectivly.
@@ -43,7 +43,7 @@ In teerms of software engineering, the software needs:
   - `n_tickets`: Class method, returns the number of tickets sold in all houses
   - `searchTicket(cls, target_ticket_index: int)`: Searches the ticket with the given ticket index
     - 'ticket index' is a specila format of a ticket number
-- Data save and load function, which uses local pickle Python file.
+- Data save and load function, which uses local `pickle` Python file.
   - `saveData()` and `loadData()`, functions that save and load local data.
 - `adminMode()` and `userMode()`, functions which encapsulate the admin mode and user mode.
 
