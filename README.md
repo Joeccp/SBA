@@ -53,7 +53,7 @@ Run this package using Python via `cmd`/`powershell` with the `-m` flag, or dire
 
 ### Examples
 0. (Download python 3.11 or above)
-1. Download source code (the `zip` file).
+1. Download the source code (the `zip` file).
 2. Unzip it.
 3. Inside the unzipped folder, you should see another folder with the same name, open it.
 4. Double-click the `__main__.py` file. 
