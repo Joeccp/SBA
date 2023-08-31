@@ -57,7 +57,7 @@ def checkPythonVersion() -> None:
 	logger: Logger = getLogger("checkPythonVersion")
 	major_version, minor_version, *_ = version_info
 	if major_version < 3:
-		logger.critical("I am running on Python 2!")
+		logger.critical("I am running on Python %s!", major_version)
 		logger.critical("QUITTING THE PROGRAM: Python version lower than Python 3.11")
 		err_msg: str = "This program does not support Python 2"
 		raise SystemExit(err_msg)

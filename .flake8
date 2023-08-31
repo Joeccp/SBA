@@ -12,6 +12,8 @@ ignore =
 max-line-length = 110
 
 per-file-ignores =
+    # import is separated because checks must be done before importing other modules
+    src/SBA/main.py:E402
     # import * in tests is OK to me, and I prefer doing so
     tests/*:F403,F405
 

@@ -15,11 +15,19 @@
 # limitations under the License.
 
 
+# You can't even import some of the module here as you will get NameError in an older version of the Python
+# Better to check before import, so people will know what's wrong
+# Platform is also checked here to maintain consistency
+from .utils import checkPythonVersion, checkSystemPlatform
+
+checkSystemPlatform()
+checkPythonVersion()
+
 from .admin import adminMode
 from .colour import normal_colour
 from .login import login
 from .user import userMode
-from .utils import checkPythonVersion, checkSystemPlatform, clearScreen, initLog, loadData
+from .utils import clearScreen, initLog, loadData
 
 
 def main() -> None:
@@ -35,8 +43,6 @@ def main() -> None:
 	
 	# So elegant :)
 	initLog()
-	checkSystemPlatform()
-	checkPythonVersion()
 	clearScreen()
 	print(normal_colour)
 	loadData()
@@ -46,7 +52,7 @@ def main() -> None:
 	while True:
 		clearScreen()
 		adminMode() if login() else userMode()
-	
+
 
 if __name__ == '__main__':
 	main()
