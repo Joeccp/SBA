@@ -16,6 +16,7 @@
 
 from logging import getLogger, Logger
 from string import ascii_uppercase, digits
+from typing import Any, Callable
 
 
 class EmptyCoordinate(Exception):
@@ -78,6 +79,20 @@ class ColumnCoordinatesAtTwoSide(Exception):
 	"""Two column coordinates given in a single seat coordinate"""
 
 
+def exceptionLogger(function: Callable) -> Callable:
+	def functionWithLogger(*args, **kwargs) -> Any:
+		try:
+			return_: Any = function(*args, **kwargs)
+			return return_
+		except Exception as exception:  # NOQA # Too many possible exceptions
+			logger: Logger = getLogger(function.__name__)
+			logger.debug(f'Exception: {exception.__class__.__name__}')
+			raise exception
+	
+	return functionWithLogger
+
+
+@exceptionLogger
 def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) -> list[tuple[int, int]]:
 	"""
 	Analysis the coordinate expression.
@@ -146,11 +161,6 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 		raise NoEndingCoordinate
 	
 	if ':' not in coor_expr:  # Single seat
-		if len(coor_expr) == 1:
-			if coor_expr in digits:
-				raise NoColumnCoordinate
-			else:
-				raise NoRowCoordinate
 		if all([char in ascii_uppercase for char in coor_expr]):
 			raise NoRowCoordinate
 		if all([char in digits for char in coor_expr]):
@@ -183,11 +193,6 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	else:
 		coordinates: list[tuple[int, str]] = []
 		for coor in coor_expr.split(':'):
-			if len(coor) == 1:
-				if coor in digits:
-					raise NoColumnCoordinate
-				else:
-					raise NoRowCoordinate
 			if all([char in ascii_uppercase for char in coor]):
 				raise NoRowCoordinate
 			if all([char in digits for char in coor]):
