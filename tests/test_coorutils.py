@@ -106,7 +106,9 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: prevent 'all caps in class name'
 		with self.assertRaises(NoRowCoordinate):
 			analysis("HIJKL")
 		with self.assertRaises(NoColumnCoordinate):
-			analysis('012345')
+			analysis('12345')
+		with self.assertRaises(NoColumnCoordinate):
+			analysis('1')
 		with self.assertRaises(RowCoordinatesAtTwoSide):
 			analysis('12A23')
 		with self.assertRaises(RowCoordinatesAtTwoSide):
@@ -119,6 +121,12 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: prevent 'all caps in class name'
 			analysis('A1B2')
 		with self.assertRaises(AlphabetCharacterInRowNumber):
 			analysis('C11RR22')
+		with self.assertRaises(AlphabetCharacterInRowNumber):
+			analysis('12r34R')
+		with self.assertRaises(RowNumberIsZero):
+			analysis('0A')
+		with self.assertRaises(RowNumberIsZero):
+			analysis('0Z')
 		
 	def test_multipleInvalidSyntax(self):
 		with self.assertRaises(MoreThanOneColon):
@@ -151,6 +159,12 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: prevent 'all caps in class name'
 			analysis('34Q:43YY')
 		with self.assertRaises(AlphabetCharacterInRowNumber):
 			analysis('34QW:5jkl3Y')
+		with self.assertRaises(AlphabetCharacterInRowNumber):
+			analysis('32M:PP21')
+		with self.assertRaises(RowNumberIsZero):
+			analysis('31A:0T')
+		with self.assertRaises(RowNumberIsZero):
+			analysis('0A:0Z')
 	
 	def test_rangeCheck(self):
 		with self.assertRaises(SameCoordinates):
@@ -171,6 +185,8 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: prevent 'all caps in class name'
 			analysis('1b:1A')
 		with self.assertRaises(CoordinatesWrongOrder):
 			analysis('w87:87h')
+		with self.assertRaises(CoordinatesWrongOrder):
+			analysis('5V:1A')
 		with self.assertRaises(RowNumberOutOfRange):
 			analysis('99Z', n_row=13)
 		with self.assertRaises(RowNumberOutOfRange):
