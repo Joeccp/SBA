@@ -213,6 +213,7 @@ def adminMode() -> None:
 				print('ERROR: No such house')
 				print("Going back to the control panel menu...")
 				continue
+			logger.info(f"Viewing house {house_num} data")
 			house: House = House.houses_table[house_num]
 			print(f"House {house.house_number} is now playing: {house.movie}")
 			house.printPlan()
