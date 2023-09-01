@@ -24,13 +24,14 @@ from .coorutils import coorExprAnalysis
 from .house import House
 from .utils import clearScreen, loadData, saveData
 
+# TODO: Sort the functions
 
 def clearAllSavedData():
 	"""
-	Admin Mode 10: Clear all saved data
+	Admin Mode 11: Clear all saved data
 	"""
 	logger: Logger = getLogger("clearAllSavedData")
-	logger.info("Admin Mode 10: Clear all saved data")
+	logger.info("Admin Mode 11: Clear all saved data")
 	logger.info("Confirming")
 	confirm: str = input("Please confirm you would like to clear ALL saved data (y/N): ").strip().upper()
 	if confirm == '' or confirm == 'N':
@@ -87,14 +88,14 @@ def clearAllSavedData():
 	logger.info("Finished clearing all saved data!")
 
 
-def houseClearSeats() -> None:
+def deleteHouse() -> None:
 	"""
-	Admin Mode 9: Clear all seats of a house
-	
+	Admin mode 10: DELETE A HOUSE
+
 	:return: None
 	"""
-	logger: Logger = getLogger("houseClearSeats")
-	logger.info("Admin Mode 9: Clear all seats of a house")
+	logger: Logger = getLogger('deleteHouse')
+	logger.info("Admin mode 10: DELETE A HOUSE")
 	print("House list:")
 	for house in House.houses_table.values():
 		if house.movie:
@@ -102,7 +103,7 @@ def houseClearSeats() -> None:
 		else:
 			print(f"House {house.house_number} is closed")
 	logger.info("Waiting house number input")
-	house_num_str: str = input("Which house would you like to empty:\n-> ")
+	house_num_str: str = input("Enter the house number of a house which you would like to delete:\n-> ").strip()
 	if not house_num_str.isdecimal():
 		logger.info("Invalid house number, going back to the control panel menu")
 		print("ERROR: House number can only be decimal number")
@@ -118,7 +119,7 @@ def houseClearSeats() -> None:
 	print(f"House {house_num}")
 	house.printPlan()
 	logger.info(f"Waiting to confirm clear of all seat of House {house_num}")
-	confirm: str = input("Please confirm you would like to clear all seat (y/N): ").strip().upper()
+	confirm: str = input("Please confirm you would like to delete this house (y/N): ").strip().upper()
 	if confirm == '' or confirm == 'N':
 		logger.info("Confirmation failed")
 		print("Going back to the control panel menu...")
@@ -127,14 +128,77 @@ def houseClearSeats() -> None:
 		logger.info("Confirmed, clearing seating plan")
 		print(f"Clearing all seat of house {house_num}")
 		house.clearPlan()
-		print("Success!")
 		print("Deleting all related tickets")
 		logger.info("Deleting all related tickets")
 		n_tickets_removed: int = 0
 		for ticket in House.tickets_table:
-			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
-			if house_no == house.house_number:
-				logger.info(f"Deleting {ticket_no}, ticket info: {ticket}")
+			ticket_index, ticket_num, time, house_num, movie, row_index, column_index = ticket
+			if house_num == house.house_number:
+				logger.info(f"Deleting {ticket_num}, ticket info: {ticket}")
+				House.tickets_table.remove(ticket)
+				n_tickets_removed += 1
+		print(f"Removed {n_tickets_removed} ticket{'s' if n_tickets_removed > 1 else ''}")
+		logger.info(f"Removed {n_tickets_removed} ticket{'s' if n_tickets_removed > 1 else ''}")
+		print("Removing this house")
+		logger.info("Removing this house")
+		del House.houses_table[house_num]
+		# No need House.house_num -= 1, as it is only for giving new house number
+	else:
+		logger.info("Confirmation failed")
+		print("ERROR: Invalid confirmation")
+		print("Confirmation failed")
+		print("Going back to the control panel menu...")
+		return
+
+
+def houseClearSeats() -> None:
+	"""
+	Admin mode 9: Clear all seats of a house
+	
+	:return: None
+	"""
+	logger: Logger = getLogger("houseClearSeats")
+	logger.info("Admin Mode 9: Clear all seats of a house")
+	print("House list:")
+	for house in House.houses_table.values():
+		if house.movie:
+			print(f"House {house.house_number} now playing: {house.movie}")
+		else:
+			print(f"House {house.house_number} is closed")
+	logger.info("Waiting house number input")
+	house_num_str: str = input("Enter the house number of a house which you would like to empty:\n-> ").strip()
+	if not house_num_str.isdecimal():
+		logger.info("Invalid house number, going back to the control panel menu")
+		print("ERROR: House number can only be decimal number")
+		print("Going back to the control panel menu...")
+		return
+	house_num: int = int(house_num_str)
+	if house_num not in House.houses_table.keys():
+		logger.info("Invalid house number, going back to the control panel menu")
+		print('ERROR: No such house')
+		print("Going back to the control panel menu...")
+		return
+	house: House = House.houses_table[house_num]
+	print(f"House {house_num}")
+	house.printPlan()
+	logger.info(f"Waiting to confirm clear of all seat of House {house_num}")
+	confirm: str = (input("Please confirm you would like to clear all seats and tickets of this house (y/N): ")
+	                .strip().upper())
+	if confirm == '' or confirm == 'N':
+		logger.info("Confirmation failed")
+		print("Going back to the control panel menu...")
+		return
+	elif confirm == 'Y':
+		logger.info("Confirmed, clearing seating plan")
+		print(f"Clearing all seat of house {house_num}")
+		house.clearPlan()
+		print("Deleting all related tickets")
+		logger.info("Deleting all related tickets")
+		n_tickets_removed: int = 0
+		for ticket in House.tickets_table:
+			ticket_index, ticket_num, time, house_num, movie, row_index, column_index = ticket
+			if house_num == house.house_number:
+				logger.info(f"Deleting {ticket_num}, ticket info: {ticket}")
 				House.tickets_table.remove(ticket)
 				n_tickets_removed += 1
 		print(f"Removed {n_tickets_removed} ticket{'s' if n_tickets_removed > 1 else ''}")
@@ -151,7 +215,7 @@ def houseClearSeats() -> None:
 
 def deleteTicket() -> None:
 	"""
-	Admin Mode 8: Delete a ticket
+	Admin mode 8: Delete a ticket
 	
 	:return: None
 	"""
@@ -252,7 +316,7 @@ def checkTicketInformation() -> None:
 		      f"House {house_no:<2} -- {movie:<50} ~"
 		      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
 	print(f"TOTAL: {House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active, "
-	      f"{House.total_tickets} tickets were created.")
+	      f"{House.total_tickets} ticket{'s' if House.total_tickets > 1 else ''} were created.")
 
 
 def seatStatusOverride() -> None:
@@ -540,9 +604,10 @@ def adminMode() -> None:
 		      "7: Check ticket information\n"
 		      "8: Delete a ticket\n"
 		      "9: Clear all seats of a house\n"
-		      "10: CLEAR ALL SAVED DATA\n"
-		      "11: STOP THE ENTIRE PROGRAM\n"
-		      "12: Help\n"
+		      "10: DELETE A HOUSE\n"
+		      "11: CLEAR ALL SAVED DATA\n"
+		      "12: STOP THE ENTIRE PROGRAM\n"
+		      "13: Help\n"
 		      )
 		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10/11/12)\n-> ").strip()
 		if not mode.isdecimal():
@@ -598,23 +663,29 @@ def adminMode() -> None:
 		elif mode == '9':
 			houseClearSeats()
 		
-		# Clear all saved data
+		# DELETE A HOUSE
 		elif mode == '10':
-			clearAllSavedData()
+			deleteHouse()
 		
-		# Help
+		# Clear all saved data
+		elif mode == '11':
+			clearAllSavedData()
+			
+		# STOP THE ENTIRE PROGRAM
 		elif mode == '12':
 			logger: Logger = getLogger("adminMode.mode_12")
-			logger.info("Admin Mode 12: Help")
+			logger.info("QUITING PROGRAM: Admin mode 12")
+			print("Bye!")
+			quit()
+		
+		
+		# Help
+		elif mode == '13':
+			logger: Logger = getLogger("adminMode.mode_13")
+			logger.info("Admin Mode 13: Help")
 			openWebBrowser("https://joeccp.github.io/SBA/")
 			logger.info("Opened a website browser and visit https://joeccp.github.io/SBA/")
 		
-		# STOP THE ENTIRE PROGRAM
-		elif mode == '11':
-			logger: Logger = getLogger("adminMode.mode_11")
-			logger.info("QUITING PROGRAM: Admin mode 11")
-			print("Bye!")
-			quit()
 		
 		else:
 			logger.info("Unknown mode code")
