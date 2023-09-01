@@ -209,19 +209,50 @@ def checkTicketInformation() -> None:
 	"""
 	logger: Logger = getLogger("checkTicketInformation")
 	logger.info("Admin Mode 7: Check ticket information")
-	ticket_input: str = input('Enter the ticket number to see the information about that ticket, '
-	                          'or hit enter to see all ticket information').strip().upper()
-	if ticket_input == '':
+	print('Enter the ticket number to see the information about that ticket,\n'
+	      'or hit enter to see all ticket information')
+	ticket_number: str = input("-> ").strip().upper().replace(' ', '')
+	if ticket_number == '':
 		for ticket in House.tickets_table:
 			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 			print(f"{ticket_no:<6} @ {time} "
 			      f"House {house_no:<2} -- {movie:<50} ~"
 			      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
 	else:
-		# TODO: Check specific ticket information
-		pass
-	print(f"{House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active")
-	print(f"TOTAL: {House.total_tickets} tickets")
+		if len(ticket_number) < 6:
+			print("ERROR: Invalid ticket number -- ticket number too short")
+			logger.info("Invalid ticket number, going back to the control panel menu")
+			return
+		if not ticket_number.startswith('T'):
+			print("ERROR: Invalid ticket number format -- ticket number starts with 'T'")
+			logger.info("Invalid ticket number, going back to the control panel menu")
+			return
+		if not ticket_number[1:].isdecimal():
+			print("ERROR: Invalid ticket number -- "
+			      "ticket number should ba a single character 'T' followed by decimal numbers")
+			logger.info("Invalid ticket number, going back to the control panel menu")
+			return
+		if len(ticket_number) > 6 and ticket_number[1] == '0':
+			print("ERROR: Invalid ticket number -- more than 4 leading zeros")
+			logger.info("Invalid ticket number, going back to the control panel menu")
+			return
+		if set(ticket_number[1:]) == {'0'}:
+			print("ERROR: Invalid ticket number -- ticket number is all zero")
+			logger.info("Invalid ticket number, going back to the control panel menu")
+			return
+		ticket_index: int = int(ticket_number[1:])
+		ticket: Optional[tuple[int, str, str, int, str, int, int]] = House.searchTicket(ticket_index)
+		if ticket is None:
+			print("ERROR: No such ticket")
+			logger.info("Invalid ticket number, going back to the control panel menu")
+			return
+		ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+		logger.info(f"Admin wants to check this ticket: {ticket}")
+		print(f"{ticket_no:<6} @ {time} "
+		      f"House {house_no:<2} -- {movie:<50} ~"
+		      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
+	print(f"TOTAL: {House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active, "
+	      f"{House.total_tickets} tickets were created.")
 
 
 def seatStatusOverride() -> None:
