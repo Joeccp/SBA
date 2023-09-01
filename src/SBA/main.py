@@ -14,10 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# NOQA: E402
+
+if __name__ == '__main__':
+	# 'main' is above imports as you will get error about relative import if executed directly
+	# If it is under the imports, it will never run
+	print("Please do NOT RUN me directly. Instead, run __main__.py in the root directory of this project")
+	quit()
 
 # You can't even import some of the module here as you will get NameError in an older version of the Python
 # Better to check before import, so people will know what's wrong
-# Platform is also checked here to maintain consistency
+# System platform is also checked here to maintain consistency
+# As a result, system platform and Python version are checked when import this module
+
 from .utils import checkPythonVersion, checkSystemPlatform
 
 checkSystemPlatform()
@@ -52,7 +61,3 @@ def main() -> None:
 	while True:
 		clearScreen()
 		adminMode() if login() else userMode()
-
-
-if __name__ == '__main__':
-	print("Please do NOT RUN me directly. Instead, run __main__.py in the root directory of this project")
