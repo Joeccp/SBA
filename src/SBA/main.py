@@ -55,4 +55,4 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-	print("DO NOT RUN ME DIRECTLY, run __main__.py in the root directory of this project")
+	print("Please do NOT RUN me directly. Instead, run __main__.py in the root directory of this project")
