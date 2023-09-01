@@ -112,7 +112,7 @@ class House:
 		:param target_ticket_index: Ticket index with a valid format
 		:type target_ticket_index: int
 		:return: Ticket
-		:rtype: tuple[int, str, str, int, str, int, int] | None
+		:rtype: Optional[tuple[int, str, str, int, str, int, int]]
 		"""
 		logger: Logger = getLogger("House.searchTicket")
 		logger.info(f"Searching ticket: {target_ticket_index}")
