@@ -545,6 +545,7 @@ def clearAllSavedData():
 		absolute_path = path.dirname(__file__)
 		relative_path = '../../data/tickets'
 		full_path = path.join(absolute_path, relative_path)
+		logger.debug(f"Full path = {full_path}")
 		remove(full_path)
 	except FileNotFoundError:
 		logger.info("No saved tickets data")
