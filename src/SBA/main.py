@@ -17,8 +17,9 @@
 # NOQA: E402
 
 if __name__ == '__main__':
-	# 'main' is above imports as you will get error about relative import if executed directly
-	# If it is under the imports, it will never run
+	# 'main' is above the imports as you will get error about relative import if executed directly
+	# If it is under the imports, it will never run due to the error
+	# Better move it upwards
 	print("Please do NOT RUN me directly. Instead, run __main__.py in the root directory of this project")
 	quit()
 
