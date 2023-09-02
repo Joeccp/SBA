@@ -40,10 +40,10 @@ This project has *NO PRACTICAL USE*, this is just a piece of high school homewor
 You can find the latest release [here](https://github.com/Joeccp/SBA/releases/latest), 
 Under `Assests`, you can choose to download the `.zip` file or the `.tar.gz` file, as follows:
 
-![Screenshot of the release page](images/docs/latest_release_assets.png)
+![Screenshot of the release page](images/docs/github_release_assets.png)
 
 In most of the cases, you would like to download the first one. 
-After the download completed, unzip it.
+After the download is completed, unzip it.
 
 
 ### Usage

@@ -2,7 +2,7 @@
 
 Data is automatically saved.
 
-**Each time saving data will cover the previous saved data.**
+***Each time saving data will cover the previous saved data.***
 
 Data are stored at `SBA/data/houses` and `SBA/data/tickets` (without a filename extension), 
 if there are no such files, the program will create them.
@@ -22,15 +22,16 @@ Login as an **administrator**, enter mode `3`(Save Data) to save data or
 mode `4`(Load Data) to load data.
 
 
-## HOWTO: Reset everything
+## HOWTO: Delete all data
 <!--This is GitHub's warning format-->
 > **Warning**
 > 
 > The following instructions will reset ***everything*** of this program.
 
-Login as an **administrator**, enter mode `10`(CLEAR ALL SAVED DATA).
-It will clear ALL saved data: every house, every ticket. 
-Saved data will also be deleted.
+Login as an **administrator**, enter mode `11`(CLEAR ALL DATA).
+It will clear ALL data: every house, every ticket. 
+Saved data will also be deleted. 
+It should reset everything.
 
 
 ---

@@ -15,7 +15,7 @@ Each house has a unique house number, which is used to identify different houses
 
 
 ## HOWTO: Create a house
-Login as an **administrator**, enter mode `1`(Create house), 
+Login as an **administrator**, enter mode `1`(Create a new house), 
 enter the number of rows and columns of the house.
 You may choose to enter the movie name, or leave it blank.
 
@@ -28,27 +28,35 @@ enter the house number.
 
 OR
 
-Login as a **user**, enter mode `1`(Buy ticket), enter the house number. 
-User can see seating plan of an available house.
+Login as a **user**, enter mode `1`(Buy a ticket), enter the house number. 
+User can see the seating plan of an available house.
 > **Note**
 > 
-> 'Available house' refers to house that has empty seat(s), 
-> and has a movie playing (has movie name).
+> 'Available house' refers to houses that has empty seat(s), 
+> and has a movie playing (has a movie name).
 
 
 ## HOWTO: Change the movie of a house
-Login as an **administrator**, enter mode `2`(Update movie), enter the house number,
+Login as an **administrator**, enter mode `2`(Update the movie of a house), 
+enter the house number, 
 enter the *new* movie name, or leave it blank if no movie is playing.
 
 After entering the new movie name, 
 you will be asked whether you would like to 'clear all relevant data'.
 It means whether you would like to delete all the tickets of the same house, 
-and reset all the status of seats of the house to _Empty_.
+and reset all the status of seats of the house to Empty.
 
 
-## HOWTO: Clear all seats of a house
-Login as an **administrator**, enter mode `9`(Clear all seats of a house), 
+## HOWTO: Clear all the seats of a house
+Login as an **administrator**, enter mode `9`(Clear all the seats of a house), 
 enter the house number.
+
+
+## HOWTO: Delete a house
+Login as an **administrator**, enter mode `10`(DELETE A HOUSE),
+enter the house number.
+
+The house number of a deleted house will not be used again.
 
 
 ---

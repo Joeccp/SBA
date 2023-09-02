@@ -1,6 +1,6 @@
 # Ticket
 
-Ticket is generated when a User has bought a seat.
+Ticket is generated when a user has bought a seat.
 
 Each ticket indicates the following information about a purchase of a movie ticket.
 - Date and time of the purchasing
@@ -12,7 +12,7 @@ Each ticket indicates the following information about a purchase of a movie tick
 
 ## HOWTO: Buy a seat as a user
 
-1. Login as a **user**, enter mode `1`(Buy ticket), enter the house number.
+1. Login as a **user**, enter mode `1`(Buy a ticket), enter the house number.
 2. You can now see the seating plan of the house. Choose a seat.
 3. Enter the row and column number of the seat. 
 Whitespaces between row and column number is fine.
@@ -23,13 +23,14 @@ and you should see your ticket number and information indicating this purchase.
 
 
 ## HOWTO: Check ticket information
-Login as a **user**, enter mode `2`(Check ticket), enter the ticket number.
+Login as a **user**, enter mode `2`(Check ticket information), enter the ticket number.
 
 OR
 
 Login as an **administrator**, enter mode `7`(Check ticket information),
-ALL ACTIVE tickets information will be printed. 
-Admin can also see the number of tickets active and the total number of tickets sold historically.
+administrator can choose to see all ACTIVE tickets' information 
+or see the information of a specific ticket.
+Admin can also see the number of active tickets and the total number of tickets sold historically.
 
 > **Note**
 > 
@@ -42,7 +43,7 @@ Login as a **user**, enter mode `3`(Ticket refund), enter the ticket number.
 
 OR
 
-Login as an **administrator**, enter mode `8`(Delete ticket), enter the ticket number.
+Login as an **administrator**, enter mode `8`(Delete a ticket), enter the ticket number.
 
 <br/>
 

@@ -1,8 +1,8 @@
-# Seat Operation for Administrator
+# Seat Operation for Administrator - Seat status override
 
 Administrator can manually **override** the status of a seat.
 
-This can be done by entering mode `6`(Buy / Reserve / Empty a seat) 
+This can be done by entering mode `6`(Seat status override) 
 after login as **administrator**. 
 
 ## Warning ⚠️
@@ -12,13 +12,13 @@ It means that manually setting a seat to be Sold, ticket will NOT be generated.
 And turning a seat from Sold to Reserved/Empty will not delete any tickets.
 Administrator is RECOMMENDED to check the status of the seat before changing it.
 This mode will NOT check it for you. You will not be stopped when changing 
-the seat status to the same as before.
+the seat status to be the same as before.
 </b>
 
 
 ## HOWTO: Change the seat status
 
-Login as **administrator**, enter mode `6`(Buy / Reserve / Empty a seat).
+Login as **administrator**, enter mode `6`(Seat status override).
 You should see something like this:
 
 ![Screenshot of mode 6](../images/docs/control_panel_mode_6.png)
@@ -29,7 +29,7 @@ The format of doing seat(s) operation is:
 `[EMPTY | BUY | RESERVE] - {House number} - {Coordinate Expression}`
 
 Replace `[EMPTY | BUY | RESERVE]` to the action you want to perform 
-(`Empty`, `BUY`, `RESERVE`?);
+(`Empty`, `BUY`, `RESERVE`);
 
 replace `{House number}` to the house number of the seat(s);
 
@@ -47,7 +47,7 @@ You SHOULD NOT include brackets (`[]`, `{}`) and vertical bar (`|`).
 They are for demonstration purpose only, though they will be ignored.
 
 ### Coordinate Expression
-In control panel mode `6`(Buy / Reserve / Empty a seat),
+In control panel mode `6`(Seat status override),
 you may use a coordinate expression to express one or more seats.
 
 A coordinate expression can be:
@@ -57,7 +57,8 @@ A coordinate expression can be:
    - These two coordinates MUST NOT be the same seat.
    - The two coordinates must be two COMPLETE coordinates.
    (i.e. no missing row / column number in the two coordinates)
-   - The first seat (the first coordinate) MUST be in front of the last seat (the second coordinate). Order is counted by row, then column.
+   - The first seat (the first coordinate) MUST be in front of the last seat (the second coordinate). 
+   Order is counted from top to down, then from left to right.
    - Valid examples: `1A:99Z`, `P35:P45`, `35P:45P`
 
 

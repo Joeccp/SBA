@@ -40,7 +40,7 @@ def hash(password: str) -> str:
 
 def login(*, first_time: bool = False) -> int:
 	"""
-	Login using accounts from `accounts.toml`
+	Login using accounts from `data/accounts.toml`
 	
 	In theory more than two accounts can be supported after updating accounts.toml
 	However it is not officially supported, and in all the other parts of the program,
@@ -64,7 +64,7 @@ def login(*, first_time: bool = False) -> int:
 	logger.info("Reaching accounts.toml file")
 	# Obtain the full path of the file
 	absolute_path = path.dirname(__file__)
-	relative_path = "../../accounts.toml"
+	relative_path = "../../data/accounts.toml"
 	full_path = path.join(absolute_path, relative_path)
 	try:
 		with open(full_path, 'rb') as file:

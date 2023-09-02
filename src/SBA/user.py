@@ -48,8 +48,8 @@ def userMode() -> None:
 		print(
 			"\n"
 			"0: LOG OUT\n"
-			"1: Buy ticket\n"
-			"2: Check ticket\n"
+			"1: Buy a ticket\n"
+			"2: Check ticket information\n"
 			"3: Ticket refund\n"
 			"4: HELP\n"
 			"Please select a mode (0/1/2/3):"
@@ -72,7 +72,7 @@ def userMode() -> None:
 		# Buy ticket
 		elif mode == '1':
 			logger: Logger = getLogger("userMode.mode_1")
-			logger.info("User Mode 1: Buy ticket")
+			logger.info("User Mode 1: Buy a ticket")
 			clearScreen()
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
 			print("House(s) available:")
@@ -162,7 +162,7 @@ def userMode() -> None:
 		# Check ticket
 		elif mode == '2':
 			logger: Logger = getLogger("userMode.mode_2")
-			logger.info("User Mode 2: Check ticket")
+			logger.info("User Mode 2: Check ticket information")
 			clearScreen()
 			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
 			print("Please enter you ticket number (starts with 'T'):")

@@ -391,14 +391,14 @@ def deleteTicket() -> None:
 	logger.debug(f"Total: {House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active")
 
 
-def houseClearSeats() -> None:
+def clearHouseSeats() -> None:
 	"""
-	Admin mode 9: Clear all seats of a house
+	Admin mode 9: Clear all the seats of a house
 
 	:return: None
 	"""
-	logger: Logger = getLogger("houseClearSeats")
-	logger.info("Admin Mode 9: Clear all seats of a house")
+	logger: Logger = getLogger("clearHouseSeats")
+	logger.info("Admin Mode 9: Clear all the seats of a house")
 	print("House list:")
 	for house in House.houses_table.values():
 		if house.movie:
@@ -462,11 +462,16 @@ def deleteHouse() -> None:
 	logger: Logger = getLogger('deleteHouse')
 	logger.info("Admin mode 10: DELETE A HOUSE")
 	print("House list:")
+	house_count: int = 0
 	for house in House.houses_table.values():
 		if house.movie:
 			print(f"House {house.house_number} now playing: {house.movie}")
 		else:
 			print(f"House {house.house_number} is closed")
+	if house_count == 0:
+		logger.info("No house, Going back to the control panel menu...")
+		print("No house")
+		return
 	logger.info("Waiting house number input")
 	house_num_str: str = input("Enter the house number of a house which you would like to delete:\n-> ").strip()
 	if not house_num_str.isdecimal():
@@ -516,14 +521,14 @@ def deleteHouse() -> None:
 		return
 
 
-def clearAllSavedData():
+def clearAllData():
 	"""
-	Admin Mode 11: Clear all saved data
+	Admin Mode 11: CLEAR ALL DATA
 	"""
-	logger: Logger = getLogger("clearAllSavedData")
-	logger.info("Admin Mode 11: Clear all saved data")
+	logger: Logger = getLogger("clearAllData")
+	logger.info("Admin Mode 11: CLEAR ALL DATA")
 	logger.info("Confirming")
-	confirm: str = input("Please confirm you would like to clear ALL saved data (y/N): ").strip().upper()
+	confirm: str = input("Please confirm you would like to clear ALL data (y/N): ").strip().upper()
 	if confirm == '' or confirm == 'N':
 		logger.info("Confirmation failed, going back to the control panel menu")
 		print("Going back to the control panel menu...")
@@ -603,13 +608,13 @@ def adminMode() -> None:
 		      "6: Seat status override\n"
 		      "7: Check ticket information\n"
 		      "8: Delete a ticket\n"
-		      "9: Clear all seats of a house\n"
+		      "9: Clear all the seats of a house\n"
 		      "10: DELETE A HOUSE\n"
-		      "11: CLEAR ALL SAVED DATA\n"
+		      "11: CLEAR ALL DATA\n"
 		      "12: STOP THE ENTIRE PROGRAM\n"
 		      "13: Help\n"
 		      )
-		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10/11/12)\n-> ").strip()
+		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10/11/12/13)\n-> ").strip()
 		if not mode.isdecimal():
 			print("ERROR: Mode code should be all decimal")
 			logger.info("Invalid mode code")
@@ -661,15 +666,15 @@ def adminMode() -> None:
 		
 		# Clear all seats of a house
 		elif mode == '9':
-			houseClearSeats()
+			clearHouseSeats()
 		
 		# DELETE A HOUSE
 		elif mode == '10':
 			deleteHouse()
 		
-		# Clear all saved data
+		# CLEAR ALL DATA
 		elif mode == '11':
-			clearAllSavedData()
+			clearAllData()
 		
 		# STOP THE ENTIRE PROGRAM
 		elif mode == '12':
