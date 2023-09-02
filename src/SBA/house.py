@@ -109,6 +109,8 @@ class House:
 		
 		It uses binary search.
 		
+		ASSUMES House.tickets_table IS ALREADY SORTED (As it should be sorted anytime).
+		
 		:param target_ticket_index: Ticket index with a valid format
 		:type target_ticket_index: int
 		:return: Ticket
