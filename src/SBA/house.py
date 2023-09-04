@@ -217,5 +217,7 @@ class House:
 		"""
 		class DunderMethodShouldNotBeUsed(Exception):
 			"""House.__setitem__ method should NEVER be used, do self.seating_plan[row_number] = row instead"""
-			def __str__(self) -> str: return self.__doc__
+			def __str__(self) -> str:
+				self.__doc__: str
+				return self.__doc__
 		raise DunderMethodShouldNotBeUsed
