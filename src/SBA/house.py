@@ -15,9 +15,21 @@
 # limitations under the License.
 
 from logging import getLogger, Logger
-from typing import NoReturn, Optional, Self
+from typing import NoReturn, Optional, Self, TypeAlias
 
 from .colour import Colour, column_colour, normal_colour, row_colour
+
+Row: TypeAlias = list[int]
+Seating_plan: TypeAlias = list[Row]
+
+Ticket_index: TypeAlias = int
+Ticket_number: TypeAlias = str
+Time: TypeAlias = str
+House_number: TypeAlias = int
+Movie: TypeAlias = str
+Row_number: TypeAlias = int  # Not to be confused with Row
+Column_number: TypeAlias = int
+Ticket: TypeAlias = tuple[Ticket_index, Ticket_number, Time, House_number, Movie, Row_number, Column_number]
 
 
 class House:
@@ -32,7 +44,7 @@ class House:
 	
 	n_House: int = 0
 	houses_table: dict[int, Self] = {}
-	tickets_table: list[tuple[int, str, str, int, str, int, int]] = []
+	tickets_table: list[Ticket] = []
 	total_tickets: int = 0
 	
 	def __init__(self, *, row_number: int, column_number: int) -> None:
@@ -42,7 +54,7 @@ class House:
 		"""
 		self.n_row: int = row_number
 		self.n_column: int = column_number
-		self.seating_plan: list[list[int]] = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
+		self.seating_plan: Seating_plan = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
 		House.n_House += 1
 		self.house_number: int = House.n_House
 		House.houses_table[self.house_number] = self
@@ -65,7 +77,7 @@ class House:
 	
 	def clearPlan(self) -> None:
 		"""Clear the seating plan"""
-		self.seating_plan: list[list[int]] = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
+		self.seating_plan: Seating_plan = [[0 for _ in range(self.n_column)] for _ in range(self.n_row)]
 		logger: Logger = getLogger("House.clearPlan")
 		logger.info(f"House {self.house_number}'s seating plan has been cleared")
 	
@@ -104,7 +116,7 @@ class House:
 		return len(cls.tickets_table)
 	
 	@classmethod
-	def searchTicket(cls, target_ticket_index: int) -> Optional[tuple[int, str, str, int, str, int, int]]:
+	def searchTicket(cls, target_ticket_index: int) -> Optional[Ticket]:
 		"""
 		Searches the ticket with the given ticket index, and returns it.
 		Assumes the (format of the) ticket index is valid.
@@ -165,21 +177,8 @@ class House:
 	# THE BELOW DUNDER METHODS ARE DEFINED FOR FUTURE USAGE ONLY, NOT USED
 	
 	# TODO: unittests for this module
-	# TODO: type alias for list[list[int]] for the below dunder methods
-	
-	def __call__(self) -> list[list[int]]:
-		"""
-		Returns self.seating_plan
-		
-		So `house()` will return the seating plan where `house` is a `House` instance.
-		It should only be used ONLY when you want to READ the seating plan, not changing it.
-		
-		:return: The seating plan of the house
-		:rtype: list[list[int]]
-		"""
-		return self.seating_plan
-	
-	def __getitem__(self, key: int) -> list[int]:
+
+	def __getitem__(self, key: int) -> Row:
 		"""
 		Returns self.seating_plan[key]
 		
@@ -189,7 +188,7 @@ class House:
 		
 		E.g.
 			for seat in house[row_number]:
-				doSomething()
+				...
 		
 		:param key: Row number
 		:type key: int
@@ -198,26 +197,28 @@ class House:
 		"""
 		return self.seating_plan[key]
 	
-	def __setitem__(self, key: int, value: list[int]) -> NoReturn:
+	def __setitem__(self, key: int, value: Row) -> NoReturn:
 		"""
 		Do self.seating_plan[key] = value
 		
-		WARNING: value should be a ROW, not a seat.
+		NOTE: value should be a ROW, not a seat.
 		
 		In most of the cases, you would NOT like to use this method.
 		I can't think of any reason for implementing this method.
 		You should do `self.seating_plan[key] = value` instead.
-		However, I have already defined __getitem__ method,
+		However, I have already defined the __getitem__ method,
 		which may cause confusion where programmers (i.e. me) think there is an error.
+		
+		It raises MethodShouldNotBeUsed
 		
 		:param key: Row number
 		:type key: int
 		:param value: New row
 		:type value: list[int]
 		"""
-		class DunderMethodShouldNotBeUsed(Exception):
+		class MethodShouldNotBeUsed(Exception):
 			"""House.__setitem__ method should NEVER be used, do self.seating_plan[row_number] = row instead"""
 			def __str__(self) -> str:
 				self.__doc__: str
 				return self.__doc__
-		raise DunderMethodShouldNotBeUsed
+		raise MethodShouldNotBeUsed
