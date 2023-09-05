@@ -174,9 +174,7 @@ class House:
 				logger.debug("min_ <- half")
 				logger.debug(f"min is now {min_}")
 	
-	# THE BELOW DUNDER METHODS ARE DEFINED FOR FUTURE USAGE ONLY, NOT USED
-	
-	# TODO: unittests for this module
+	# THE BELOW DUNDER METHODS ARE DEFINED FOR FUTURE USAGE ONLY, NOT IN USED
 
 	def __getitem__(self, key: int) -> Row:
 		"""

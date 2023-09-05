@@ -21,7 +21,7 @@ from unittest import TestCase
 analysis: Callable = coorExprAnalysis
 
 
-class Test_coorExprAnalysis(TestCase):  # NOQA: prevent 'all caps in class name' warning
+class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name' warning
 	def test_singleCoordinate(self):
 		self.assertEqual(analysis('A1'), [(0, 0)])
 		self.assertEqual(analysis('1A'), [(0, 0)])
