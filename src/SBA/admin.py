@@ -521,7 +521,7 @@ def deleteHouse() -> None:
 		return
 
 
-def clearAllData():
+def clearAllData() -> None:
 	"""
 	Admin Mode 11: CLEAR ALL DATA
 	"""
