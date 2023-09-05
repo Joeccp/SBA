@@ -1,6 +1,6 @@
 # This file contains user passwords
 # Passwords are hashed using sha3_512
-# Real passwords are shown in comments due to the fact that this is a SBA project.
+# Real passwords are shown in comments due to the fact that this is a SBA project :)
 
 [administrator]
 name = "admin"
