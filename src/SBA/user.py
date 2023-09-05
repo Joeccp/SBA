@@ -23,7 +23,7 @@ from typing import Optional
 from webbrowser import open as openWebBrowser
 
 from .colour import Colour, column_colour, normal_colour, row_colour
-from .house import House
+from .house import House, Ticket
 from .utils import clearScreen, saveData
 
 
@@ -143,7 +143,7 @@ def userMode() -> None:
 			ticket_index: int = House.total_tickets
 			ticket_number: str = f"T{ticket_index:0>5}"
 			time: str = datetime.now().isoformat(timespec="seconds")
-			ticket: tuple[int, str, str, int, str, int, int] = (
+			ticket: Ticket = (
 				ticket_index, ticket_number, time, house.house_number, house.movie, row_int, column_int
 			)
 			print("Your ticket:")
@@ -199,7 +199,7 @@ def userMode() -> None:
 				continue
 			print()
 			ticket_index: int = int(ticket_number[1:])
-			ticket: Optional[tuple[int, str, str, int, str, int, int]] = House.searchTicket(ticket_index)
+			ticket: Optional[Ticket] = House.searchTicket(ticket_index)
 			if ticket is None:
 				logger.info("No such ticket, going back to the user menu")
 				print("No such ticket")
@@ -255,7 +255,7 @@ def userMode() -> None:
 				continue
 			print()
 			ticket_index: int = int(ticket_number[1:])
-			ticket: Optional[tuple[int, str, str, int, str, int, int]] = House.searchTicket(ticket_index)
+			ticket: Optional[Ticket] = House.searchTicket(ticket_index)
 			if ticket is None:
 				logger.info("No such ticket, going back to the user menu")
 				print("No such ticket")

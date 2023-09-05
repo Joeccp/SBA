@@ -21,7 +21,7 @@ from typing import Optional
 from webbrowser import open as openWebBrowser
 
 from .coorutils import coorExprAnalysis
-from .house import House
+from .house import House, Ticket
 from .utils import clearScreen, loadData, saveData
 
 
@@ -120,7 +120,7 @@ def updateMovie() -> None:
 		logger.info("Clearing all related tickets")
 		n_tickets_removed: int = 0
 		for ticket in House.tickets_table:
-			ticket_index, ticket_no, time, house_no, *other_unused_information = ticket
+			ticket_index, ticket_no, time, house_no, *other_information = ticket
 			if house_no == house.house_number:
 				House.tickets_table.remove(ticket)
 				n_tickets_removed += 1
@@ -297,11 +297,15 @@ def checkTicketInformation() -> None:
 	      'or hit enter to see all ticket information')
 	ticket_number: str = input("-> ").strip().upper().replace(' ', '')
 	if ticket_number == '':
+		ticket_count: int = 0
 		for ticket in House.tickets_table:
 			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 			print(f"{ticket_no:<6} @ {time} "
 			      f"House {house_no:<2} -- {movie:<50} ~"
 			      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
+			ticket_count += 1
+		if ticket_count == 0:
+			print("No ticket")
 	else:
 		if len(ticket_number) < 6:
 			print("ERROR: Invalid ticket number -- ticket number too short")
@@ -325,7 +329,7 @@ def checkTicketInformation() -> None:
 			logger.info("Invalid ticket number, going back to the control panel menu")
 			return
 		ticket_index: int = int(ticket_number[1:])
-		ticket: Optional[tuple[int, str, str, int, str, int, int]] = House.searchTicket(ticket_index)
+		ticket: Optional[Ticket] = House.searchTicket(ticket_index)
 		if ticket is None:
 			print("ERROR: No such ticket")
 			logger.info("Invalid ticket number, going back to the control panel menu")
@@ -372,7 +376,7 @@ def deleteTicket() -> None:
 		logger.info("Invalid ticket number, going back to the control panel menu")
 		return
 	ticket_index: int = int(ticket_number[1:])
-	ticket: Optional[tuple[int, str, str, int, str, int, int]] = House.searchTicket(ticket_index)
+	ticket: Optional[Ticket] = House.searchTicket(ticket_index)
 	if ticket is None:
 		print("ERROR: No such ticket")
 		logger.info("Invalid ticket number, going back to the control panel menu")
@@ -436,7 +440,7 @@ def clearHouseSeats() -> None:
 		logger.info("Deleting all related tickets")
 		n_tickets_removed: int = 0
 		for ticket in House.tickets_table:
-			ticket_index, ticket_num, time, house_num, movie, row_index, column_index = ticket
+			ticket_index, ticket_num, *other_information = ticket
 			if house_num == house.house_number:
 				logger.info(f"Deleting {ticket_num}, ticket info: {ticket}")
 				House.tickets_table.remove(ticket)
@@ -502,7 +506,7 @@ def deleteHouse() -> None:
 		logger.info("Deleting all related tickets")
 		n_tickets_removed: int = 0
 		for ticket in House.tickets_table:
-			ticket_index, ticket_num, time, house_num, movie, row_index, column_index = ticket
+			ticket_index, ticket_num, *other_information = ticket
 			if house_num == house.house_number:
 				logger.info(f"Deleting {ticket_num}, ticket info: {ticket}")
 				House.tickets_table.remove(ticket)
