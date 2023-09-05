@@ -19,14 +19,13 @@
 if __name__ == '__main__':
 	# 'main' is above the imports as you will get error about relative import if executed directly
 	# If it is under the imports, it will never run due to the error
-	# Better move it upwards
-	print("Please do NOT RUN me directly. Instead, run __main__.py in the root directory of this project")
+	print("Please do NOT run me directly. Instead, run __main__.py in the root directory of this project")
 	quit()
 
 # You can't even import some of the module here as you will get NameError in an older version of the Python
 # Better to check before import, so people will know what's wrong
 # System platform is also checked here to maintain consistency
-# As a result, system platform and Python version are checked when import this module
+# As a result, system platform and Python version are checked when importing this module
 
 from .utils import checkPythonVersion, checkSystemPlatform
 
