@@ -1,4 +1,4 @@
-# Seat Operation for Administrator - Seat status override
+# Seat status override
 
 Administrator can manually **override** the status of a seat.
 

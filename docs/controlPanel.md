@@ -18,7 +18,7 @@ You can do the following things by entering the respective 'mode' option:
 |  3   | [Save data](dataStorage.md)                     |
 |  4   | [Load data](dataStorage.md)                     |
 |  5   | [Check houses information](house.md)            |
-|  6   | [Seat status override](adminSeatOperation.md)   |
+|  6   | [Seat status override](seatStatusOverride.md)   |
 |  7   | [Check ticket information](ticket.md)           |
 |  8   | [Delete a ticket](ticket.md)                    |
 |  9   | [Clear all the seats of a house](house.md)      |

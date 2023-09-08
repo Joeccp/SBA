@@ -123,7 +123,7 @@ Required features:
 
 Large additional features:
 - [Ticket operation](../docs/ticket.md)
-- [Admin seat status override](../docs/adminSeatOperation.md)
+- [Admin seat status override](../docs/seatStatusOverride.md)
 - Help function / Documentation
 
 

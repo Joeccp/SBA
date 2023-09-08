@@ -73,7 +73,7 @@ The SBA report can be found [here](report/REPORT.md).
     - [Cinema houses](docs/house.md)
     - [Data Storage](docs/dataStorage.md)
     - [Ticket](docs/ticket.md)
-    - [Admin seat operation](docs/adminSeatOperation.md)
+    - [Admin seat operation](docs/seatStatusOverride.md)
 - [Log files](docs/logs.md)
 
 
