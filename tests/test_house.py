@@ -66,6 +66,12 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 			[1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
 		]
 		self.assertEqual(house.n_available, 25)
+		
+		self.assertEqual(
+			house[0],
+			[1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+		)
+		
 		house.clearPlan()
 		self.assertEqual(house.seating_plan, [
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -75,6 +81,9 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 		])
 		self.assertEqual(house.n_available, 50)
+		
+		with self.assertRaises(Exception):  # MethodShouldNotBeUsed exception
+			house[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 	def test_ticket(self):
 		house: House = House(row_number=5, column_number=10)
