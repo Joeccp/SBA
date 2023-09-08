@@ -111,7 +111,7 @@ class House:
 		print()
 	
 	@classmethod
-	def n_tickets(cls) -> int:
+	def get_n_tickets(cls) -> int:
 		"""Returns the number of tickets sold in ALL houses"""
 		return len(cls.tickets_table)
 	
@@ -135,7 +135,7 @@ class House:
 		logger.info(f"Searching ticket: {target_ticket_index}")
 		
 		min_: int = 0
-		max_: int = cls.n_tickets() - 1
+		max_: int = cls.get_n_tickets() - 1
 		logger.debug(f"Min: {min_}  & Max: {max_}")
 		
 		while True:

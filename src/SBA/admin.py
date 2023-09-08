@@ -339,7 +339,7 @@ def checkTicketInformation() -> None:
 		print(f"{ticket_no:<6} @ {time} "
 		      f"House {house_no:<2} -- {movie:<50} ~"
 		      f"Seat <{row_index + 1}{chr(column_index + 65)}>")
-	print(f"TOTAL: {House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active, "
+	print(f"TOTAL: {House.get_n_tickets()} ticket{'s' if House.get_n_tickets() > 1 else ''} active, "
 	      f"{House.total_tickets} ticket{'s' if House.total_tickets > 1 else ''} were created.")
 
 
@@ -392,7 +392,7 @@ def deleteTicket() -> None:
 	print("Successfully deleted this ticket")
 	logger.info(f"Ticket {ticket_no} deleted")
 	saveData()
-	logger.debug(f"Total: {House.n_tickets()} ticket{'s' if House.n_tickets() > 1 else ''} active")
+	logger.debug(f"Total: {House.get_n_tickets()} ticket{'s' if House.get_n_tickets() > 1 else ''} active")
 
 
 def clearHouseSeats() -> None:
