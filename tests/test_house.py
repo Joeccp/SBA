@@ -42,6 +42,7 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 		House.houses_table = {}
 
 	def test_initHouse(self):
+		"""Tests the basic attributes of a House instance"""
 		house: House = House(row_number=5, column_number=10)
 		self.assertEqual(house.n_row, 5)
 		self.assertEqual(house.n_column, 10)
@@ -57,6 +58,7 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 		self.assertEqual(house.house_number, 1)
 	
 	def test_seatingPlanOperation(self):
+		"""Tests operations toward seating_plan"""
 		house: House = House(row_number=5, column_number=10)
 		house.seating_plan = [
 			[1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
@@ -86,6 +88,7 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 			house[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 	def test_ticket(self):
+		"""Tests separation about tickets"""
 		house: House = House(row_number=5, column_number=10)
 		house.movie = "An Excellent Movie"
 		House.tickets_table = [
