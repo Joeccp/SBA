@@ -23,6 +23,7 @@ analysis: Callable = coorExprAnalysis
 
 class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name' warning
 	def test_singleCoordinate(self):
+		"""Tests single coordinate"""
 		self.assertEqual(analysis('A1'), [(0, 0)])
 		self.assertEqual(analysis('1A'), [(0, 0)])
 		self.assertEqual(analysis('2B'), [(1, 1)])
@@ -41,6 +42,7 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name'
 		self.assertEqual(analysis('23Q', n_row=84, n_column=98), [(22, 16)])
 
 	def test_twoCoordinates(self):
+		"""Tests multiple coordinates"""
 		self.assertTrue(analysis('A1:A2'), [(0, 0), (0, 1)])
 		self.assertTrue(analysis('1A:2A'), [(0, 0), (0, 1)])
 		self.assertTrue(analysis('1A:A2'), [(0, 0), (0, 1)])
@@ -59,10 +61,12 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name'
 		self.assertTrue(analysis('1A:99Z', n_row=99, n_column=26), [(0, 0), (98, 25)])
 
 	def test_stringFormatting(self):
+		"""Tests how coorExprAnalysis handle white-spaces"""
 		self.assertEqual(analysis('    1 a    '), [(0, 0)])
 		self.assertEqual(analysis('  A  1: B2  '), [(0, 0), (1, 1)])
 	
 	def test_functionException(self):
+		"""Tests basic about the invalid usage (argument) of the function"""
 		with self.assertRaises(TypeError):
 			analysis()  # NOQA
 		with self.assertRaises(TypeError):
@@ -87,6 +91,7 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name'
 			analysis("A1", n_row=12345, n_column=4)
 	
 	def test_singleInvalidSyntax(self):
+		"""Tests exceptions about the result of the function when analyzing single coordinate"""
 		with self.assertRaises(EmptyCoordinate):
 			analysis('')
 		with self.assertRaises(InvalidCharacter):
@@ -129,6 +134,7 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name'
 			analysis('0Z')
 		
 	def test_multipleInvalidSyntax(self):
+		"""Tests exceptions about the result of the function when analyzing multiple coordinates"""
 		with self.assertRaises(MoreThanOneColon):
 			analysis('7Y::6C')
 		with self.assertRaises(MoreThanOneColon):
@@ -167,6 +173,7 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name'
 			analysis('0A:0Z')
 	
 	def test_rangeCheck(self):
+		"""Tests the range check"""
 		with self.assertRaises(SameCoordinates):
 			analysis('35P:35P')
 		with self.assertRaises(SameCoordinates):
