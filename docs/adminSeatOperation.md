@@ -59,7 +59,7 @@ A coordinate expression can be:
    (i.e. no missing row / column number in the two coordinates)
    - The first seat (the first coordinate) MUST be in front of the last seat (the second coordinate). 
    Order is counted from top to down, then from left to right.
-   - Valid examples: `1A:99Z`, `P35:P45`, `35P:45P`
+   - Valid examples: `1A:99Z`, `1B:2A`, `P35:P45`, `35P:45P`
 
 
 <br/><br/><br/>
