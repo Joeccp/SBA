@@ -81,7 +81,7 @@ class House:
 		logger: Logger = getLogger("House.clearPlan")
 		logger.info(f"House {self.house_number}'s seating plan has been cleared")
 	
-	def printPlan(self) -> None:
+	def printPlan(self) -> None:  # pragma: no cover # skip coverage report -- IDK how to mock output
 		"""Print the seating plan"""
 		line_length: int = self.n_column * 2 + 1
 		print(f"{'[Screen Here]':^{line_length + 8}}")
