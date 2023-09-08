@@ -20,7 +20,29 @@ from ..src.SBA.house import House
 
 
 class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
-	def test_buildHouse(self):
+
+	@classmethod
+	def setUpClass(cls) -> None:
+		"""Before testing, reset all house data"""
+		House.houses_table = {}
+		House.n_House = 0
+		House.tickets_table = []
+		House.total_tickets = 0
+	
+	@classmethod
+	def tearDownClass(cls) -> None:
+		"""After testing, reset all house data"""
+		House.houses_table = {}
+		House.n_House = 0
+		House.tickets_table = []
+		House.total_tickets = 0
+		
+	def setUp(self) -> None:
+		"""Clear houses table before each test so house number will be 1 every time"""
+		House.houses_table = {}
+
+	
+	def test_initHouse(self):
 		house: House = House(row_number=5, column_number=10)
 		self.assertEqual(house.n_row, 5)
 		self.assertEqual(house.n_column, 10)
@@ -33,8 +55,9 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 		])
 		self.assertEqual(house.n_seat, 50)
 		self.assertEqual(house.n_available, 50)
+		self.assertEqual(house.house_number, 1)
 	
-	def test_n_available(self):
+	def test_seatingPlanOperation(self):
 		house: House = House(row_number=5, column_number=10)
 		house.seating_plan = [
 			[1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
@@ -44,3 +67,50 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 			[1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
 		]
 		self.assertEqual(house.n_available, 25)
+		house.clearPlan()
+		self.assertEqual(house.seating_plan, [
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+		])
+		self.assertEqual(house.n_available, 50)
+
+	def test_ticket(self):
+		house: House = House(row_number=5, column_number=10)
+		house.movie = "An Excellent Movie"
+		House.tickets_table = [
+			[1, "T00001", '0186-05-05T00:00:00', 1, "An Excellent Movie", 0, 0],
+			[2, "T00002", '2006-02-27T00:00:00', 1, "An Excellent Movie", 0, 1],
+			[3, "T00003", '2006-05-22T05:02:00', 1, "An Excellent Movie", 0, 2],
+			[4, "T00004", '2018-08-01T03:05:00', 1, "An Excellent Movie", 0, 3],
+			[5, "T00005", '2018-09-04T04:08:06', 1, "An Excellent Movie", 0, 4],
+			[6, "T00006", '2020-08-13T00:06:09', 1, "An Excellent Movie", 0, 5],
+			[7, "T00007", '2020-09-13T01:02:05', 1, "An Excellent Movie", 0, 6],
+			[8, "T00008", '2021-11-26T01:03:09', 1, "An Excellent Movie", 0, 7],
+			[9, "T00009", '2023-07-26T01:04:00', 1, "An Excellent Movie", 0, 8],
+			[10, "T00010", '2023-07-26T22:22:22', 1, "An Excellent Movie", 0, 9]
+		]
+		House.total_tickets = len(House.tickets_table)
+		self.assertEqual(House.get_n_tickets(), 10)
+		self.assertEqual(
+			House.searchTicket(2),
+			[2, "T00002", '2006-02-27T00:00:00', 1, "An Excellent Movie", 0, 1]
+		)
+		self.assertEqual(House.searchTicket(0), None)
+		self.assertEqual(House.searchTicket(11), None)
+		
+		
+		House.tickets_table.remove([2, "T00002", '2006-02-27T00:00:00', 1, "An Excellent Movie", 0, 1])
+		self.assertEqual(House.total_tickets, 10)  # Total tickets should not change
+		self.assertEqual(House.get_n_tickets(), 9)
+		self.assertEqual(
+			House.searchTicket(2),
+			None
+		)
+		self.assertEqual(
+			House.searchTicket(3),
+			[3, "T00003", '2006-05-22T05:02:00', 1, "An Excellent Movie", 0, 2]
+		)
+		
