@@ -41,7 +41,6 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 		"""Clear houses table before each test so house number will be 1 every time"""
 		House.houses_table = {}
 
-	
 	def test_initHouse(self):
 		house: House = House(row_number=5, column_number=10)
 		self.assertEqual(house.n_row, 5)
@@ -101,7 +100,6 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 		self.assertEqual(House.searchTicket(0), None)
 		self.assertEqual(House.searchTicket(11), None)
 		
-		
 		House.tickets_table.remove([2, "T00002", '2006-02-27T00:00:00', 1, "An Excellent Movie", 0, 1])
 		self.assertEqual(House.total_tickets, 10)  # Total tickets should not change
 		self.assertEqual(House.get_n_tickets(), 9)
@@ -113,4 +111,3 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 			House.searchTicket(3),
 			[3, "T00003", '2006-05-22T05:02:00', 1, "An Excellent Movie", 0, 2]
 		)
-		
