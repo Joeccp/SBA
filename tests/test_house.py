@@ -89,7 +89,7 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 
 	def test_ticket(self):
 		"""Tests separation about tickets"""
-		house: House = House(row_number=5, column_number=10)
+		house: House = House(row_number=99, column_number=26)
 		house.movie = "An Excellent Movie"
 		House.tickets_table = [
 			[1, "T00001", '0186-05-05T00:00:00', 1, "An Excellent Movie", 0, 0],
@@ -101,20 +101,23 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 			[7, "T00007", '2020-09-13T01:02:05', 1, "An Excellent Movie", 0, 6],
 			[8, "T00008", '2021-11-26T01:03:09', 1, "An Excellent Movie", 0, 7],
 			[9, "T00009", '2023-07-26T01:04:00', 1, "An Excellent Movie", 0, 8],
-			[10, "T00010", '2023-07-26T22:22:22', 1, "An Excellent Movie", 0, 9]
+			[10, "T00010", '2023-07-26T22:22:22', 1, "An Excellent Movie", 0, 9],
+			[11, "T00011", '2023-09-09T01:05:03', 1, "An Excellent Movie", 0, 10],
+			[12, "T00012", '2023-09-09T01:06:02', 1, "An Excellent Movie", 0, 11],
 		]
-		House.total_tickets = len(House.tickets_table)
-		self.assertEqual(House.get_n_tickets(), 10)
+		House.total_tickets = 12
+		
+		self.assertEqual(House.get_n_tickets(), 12)
 		self.assertEqual(
 			House.searchTicket(2),
 			[2, "T00002", '2006-02-27T00:00:00', 1, "An Excellent Movie", 0, 1]
 		)
 		self.assertEqual(House.searchTicket(0), None)
-		self.assertEqual(House.searchTicket(11), None)
+		self.assertEqual(House.searchTicket(13), None)
 		
 		House.tickets_table.remove([2, "T00002", '2006-02-27T00:00:00', 1, "An Excellent Movie", 0, 1])
-		self.assertEqual(House.total_tickets, 10)  # Total tickets should not change
-		self.assertEqual(House.get_n_tickets(), 9)
+		self.assertEqual(House.total_tickets, 12)  # Total tickets should not change
+		self.assertEqual(House.get_n_tickets(), 11)
 		self.assertEqual(
 			House.searchTicket(2),
 			None
