@@ -20,7 +20,7 @@ from ..src.SBA.house import House
 
 
 class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
-
+	
 	@classmethod
 	def setUpClass(cls) -> None:
 		"""Before testing, reset all house data"""
@@ -36,11 +36,11 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 		House.n_House = 0
 		House.tickets_table = []
 		House.total_tickets = 0
-		
+	
 	def setUp(self) -> None:
 		"""Clear houses table before each test so house number will be 1 every time"""
 		House.houses_table = {}
-
+	
 	def test_initHouse(self):
 		"""Tests the basic attributes of a House instance"""
 		house: House = House(row_number=5, column_number=10)
@@ -86,7 +86,7 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 		
 		with self.assertRaises(Exception):  # MethodShouldNotBeUsed exception
 			house[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
+	
 	def test_ticket(self):
 		"""Tests separation about tickets"""
 		house: House = House(row_number=99, column_number=26)
