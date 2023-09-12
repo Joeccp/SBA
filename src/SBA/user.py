@@ -69,7 +69,8 @@ def buyTicket() -> None:
 	logger.info(f"User selected house {house_num}")
 	clearScreen()
 	print(f"House {house.house_number} is now playing: {house.movie}")
-	house.printPlan()
+	house.printSeatingPlan()
+	
 	print(
 		f"\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat"
 		f"(or just hit Enter to go back to the main menu):")

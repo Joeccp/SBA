@@ -173,7 +173,7 @@ def checkHousesInformation() -> None:
 	logger.info(f"Viewing house {house_num} data")
 	house: House = House.houses_table[house_num]
 	print(f"House {house.house_number} is now playing: {house.movie}")
-	house.printPlan()
+	house.printSeatingPlan()
 
 
 def seatStatusOverride() -> None:
@@ -424,7 +424,7 @@ def clearHouseSeats() -> None:
 		return
 	house: House = House.houses_table[house_num]
 	print(f"House {house_num}")
-	house.printPlan()
+	house.printSeatingPlan()
 	logger.info(f"Waiting to confirm clear of all seat of House {house_num}")
 	confirm: str = (input("Please confirm you would like to clear all seats and tickets of this house (y/N): ")
 	                .strip().upper())
@@ -491,7 +491,7 @@ def deleteHouse() -> None:
 		return
 	house: House = House.houses_table[house_num]
 	print(f"House {house_num}")
-	house.printPlan()
+	house.printSeatingPlan()
 	logger.info(f"Waiting to confirm clear of all seat of House {house_num}")
 	confirm: str = input("Please confirm you would like to delete this house (y/N): ").strip().upper()
 	if confirm == '' or confirm == 'N':

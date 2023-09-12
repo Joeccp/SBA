@@ -26,12 +26,17 @@ class Colour:
 	RED: str = '\033[1;31m'
 	BLACK: str = '\033[30m'
 	GREEN: str = '\033[1;32m'
+	WHITE: str = '\033[37m'
 	WHITE_BG: str = '\033[47m'
 	GREEN_BG: str = '\033[102m'
 	YELLOW_BG: str = '\033[103m'
 	RED_BG: str = '\033[101m'
+	BLACK_BG: str = '\033[40m'
 
 
 row_colour: str = Colour.BLUE
 column_colour: str = Colour.PURPLE
-normal_colour: str = Colour.WHITE_BG + Colour.BLACK
+font_colour: str = Colour.WHITE
+background_colour: str = Colour.BLACK_BG
+normal_colour: str = font_colour + background_colour
+font_colour_opposite: str = Colour.BLACK
