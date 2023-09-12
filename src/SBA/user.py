@@ -30,6 +30,11 @@ message: str = ""
 
 
 def buyTicket() -> None:
+	"""
+	User Mode 1: Buy Ticket
+
+	:return: None
+	"""
 	global message
 	logger: Logger = getLogger("buyTicket")
 	logger.info("User Mode 1: Buy a ticket")
@@ -120,6 +125,11 @@ def buyTicket() -> None:
 
 
 def checkTicket() -> None:
+	"""
+	User Mode 2: Check Ticket
+	
+	:return: None
+	"""
 	global message
 	logger: Logger = getLogger("checkTicket")
 	logger.info("User Mode 2: Check ticket information")
@@ -177,8 +187,13 @@ def checkTicket() -> None:
 
 
 def ticketRefund() -> None:
+	"""
+	User Mode 3: Ticket Refund
+
+	:return: None
+	"""
 	global message
-	logger: Logger = getLogger("userMode.mode_3")
+	logger: Logger = getLogger("ticketRefund")
 	logger.info("User Mode 3: Ticket refund")
 	clearScreen()
 	print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n")
