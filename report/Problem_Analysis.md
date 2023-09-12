@@ -48,3 +48,9 @@ In terms of software engineering, the software needs:
 - `adminMode()` and `userMode()`, functions which encapsulate the admin mode and user mode.
 
 This system targets Windows 10/11, Python 3.11+.
+
+
+---
+
+Copyright © 2023 Joe Chau, Licensed under the 
+<a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.

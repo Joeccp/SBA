@@ -132,4 +132,5 @@ Large additional features:
 
 ---
 
-By Joe Chau
+Copyright © 2023 Joe Chau, Licensed under the 
+<a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.
