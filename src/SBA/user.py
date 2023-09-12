@@ -31,7 +31,7 @@ message: str = ""
 
 def buyTicket() -> None:
 	global message
-	logger: Logger = getLogger("userMode.mode_1")
+	logger: Logger = getLogger("buyTicket")
 	logger.info("User Mode 1: Buy a ticket")
 	clearScreen()
 	print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
@@ -119,6 +119,63 @@ def buyTicket() -> None:
 	message = ""
 
 
+def checkTicket() -> None:
+	global message
+	logger: Logger = getLogger("checkTicket")
+	logger.info("User Mode 2: Check ticket information")
+	clearScreen()
+	print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
+	print("Please enter you ticket number (starts with 'T'):")
+	logger.info("Waiting ticket number input")
+	ticket_number: str = input("-> ").strip().upper()
+	if ticket_number == "":
+		message = ""
+		logger.info("Empty ticket number, going back to the user menu")
+		return
+	if not ticket_number.startswith('T'):
+		message = "ERROR: Invalid ticket number format -- ticket number starts with 'T'"
+		logger.info("Invalid ticket number, going back to the user menu")
+		return
+	if ticket_number == 'T':
+		message = "ERROR: Invalid ticket number -- ticket number has no decimal numbers"
+		logger.info("Invalid ticket number, going back to the user menu")
+		return
+	if len(ticket_number) < 6:
+		message = "ERROR: Invalid ticket number -- ticket number too short"
+		logger.info("Invalid ticket number, going back to the user menu")
+		return
+	if not ticket_number[1:].isdecimal():
+		message = ("ERROR: Invalid ticket number -- "
+		           "ticket number should ba a single character 'T' followed by decimal numbers")
+		logger.info("Invalid ticket number, going back to the user menu")
+		return
+	if len(ticket_number) > 6 and ticket_number[1] == '0':
+		message = "ERROR: Invalid ticket number -- more than 4 leading zeros"
+		logger.info("Invalid ticket number, going back to the control panel menu")
+		return
+	if set(ticket_number[1:]) == {'0'}:
+		message = "ERROR: Invalid ticket number -- ticket number is all zero"
+		logger.info("Invalid ticket number, going back to the control panel menu")
+	# return
+	print()
+	ticket_index: int = int(ticket_number[1:])
+	ticket: Optional[Ticket] = House.searchTicket(ticket_index)
+	if ticket is None:
+		logger.info("No such ticket, going back to the user menu")
+		print("No such ticket")
+		print("\n\n")
+		input("Hit enter to go back to the main menu")
+		message = ""
+		return
+	ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+	print(f"{ticket_no:<6} @ {time} "
+	      f"House {house_no:<2} -- {movie:<30} ~ "
+	      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
+	print("\n\n")
+	input("Hit enter to go back to the main menu")
+	message = ""
+
+
 def userMode() -> None:
 	"""
 	User mode
@@ -167,59 +224,7 @@ def userMode() -> None:
 		
 		# Check ticket
 		elif mode == '2':
-			logger: Logger = getLogger("userMode.mode_2")
-			logger.info("User Mode 2: Check ticket information")
-			clearScreen()
-			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
-			print("Please enter you ticket number (starts with 'T'):")
-			logger.info("Waiting ticket number input")
-			ticket_number: str = input("-> ").strip().upper()
-			if ticket_number == "":
-				message = ""
-				logger.info("Empty ticket number, going back to the user menu")
-				continue
-			if not ticket_number.startswith('T'):
-				message = "ERROR: Invalid ticket number format -- ticket number starts with 'T'"
-				logger.info("Invalid ticket number, going back to the user menu")
-				continue
-			if ticket_number == 'T':
-				message = "ERROR: Invalid ticket number -- ticket number has no decimal numbers"
-				logger.info("Invalid ticket number, going back to the user menu")
-				continue
-			if len(ticket_number) < 6:
-				message = "ERROR: Invalid ticket number -- ticket number too short"
-				logger.info("Invalid ticket number, going back to the user menu")
-				continue
-			if not ticket_number[1:].isdecimal():
-				message = ("ERROR: Invalid ticket number -- "
-				           "ticket number should ba a single character 'T' followed by decimal numbers")
-				logger.info("Invalid ticket number, going back to the user menu")
-				continue
-			if len(ticket_number) > 6 and ticket_number[1] == '0':
-				message = "ERROR: Invalid ticket number -- more than 4 leading zeros"
-				logger.info("Invalid ticket number, going back to the control panel menu")
-				continue
-			if set(ticket_number[1:]) == {'0'}:
-				message = "ERROR: Invalid ticket number -- ticket number is all zero"
-				logger.info("Invalid ticket number, going back to the control panel menu")
-				continue
-			print()
-			ticket_index: int = int(ticket_number[1:])
-			ticket: Optional[Ticket] = House.searchTicket(ticket_index)
-			if ticket is None:
-				logger.info("No such ticket, going back to the user menu")
-				print("No such ticket")
-				print("\n\n")
-				input("Hit enter to go back to the main menu")
-				message = ""
-				continue
-			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
-			print(f"{ticket_no:<6} @ {time} "
-			      f"House {house_no:<2} -- {movie:<30} ~ "
-			      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
-			print("\n\n")
-			input("Hit enter to go back to the main menu")
-			message = ""
+			checkTicket()
 		
 		# Ticket refund
 		elif mode == '3':
