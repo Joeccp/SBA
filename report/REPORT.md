@@ -95,7 +95,7 @@ The main program (function)
  9 | while true do
 10 |     input username
 11 |     input password
-12 |     if the username and password not correct AND it is the admin's account then
+12 |     if the username and password are correct AND it is the admin's account then
 13 |         break the loop
 14 | adminMode()
 15 | while true do
