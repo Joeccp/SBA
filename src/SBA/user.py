@@ -26,13 +26,106 @@ from .colour import Colour, column_colour, normal_colour, row_colour
 from .house import House, Ticket
 from .utils import clearScreen, saveData
 
+message: str = ""
+
+
+def buyTicket() -> None:
+	global message
+	logger: Logger = getLogger("userMode.mode_1")
+	logger.info("User Mode 1: Buy a ticket")
+	clearScreen()
+	print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
+	print("House(s) available:")
+	total_available_house_count: int = 0
+	for house in House.houses_table.values():
+		if house.movie and house.n_available != 0:
+			print(f"House {house.house_number}: {house.movie:<50} {house.n_available}/{house.n_seat}")
+			total_available_house_count += 1
+	if total_available_house_count == 0:
+		message = "Sorry, no house available now"
+		return
+	print("\nPlease enter the house number (or hit Enter to go back to the main menu):")
+	logger.info("Waiting house number input")
+	house_num_str: str = input("-> ").strip()
+	if house_num_str == '':
+		message = ''
+		logger.info("Empty house number, going back to the user menu")
+		return
+	if not house_num_str.isdecimal():
+		message = "ERROR: House number can only be decimal numbers"
+		logger.info("Invalid house number, going back to the user menu")
+		return
+	house_num: int = int(house_num_str)
+	if house_num not in House.houses_table.keys():
+		message = "ERROR: That house does not exist"
+		logger.info("Invalid house number, going back to the user menu")
+		return
+	house: House = House.houses_table[house_num]
+	logger.info(f"User selected house {house_num}")
+	clearScreen()
+	print(f"House {house.house_number} is now playing: {house.movie}")
+	house.printPlan()
+	print(
+		f"\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat"
+		f"(or just hit Enter to go back to the main menu):")
+	logger.info("Waiting seat coordinate input")
+	coor: str = input("\n-> ").strip().upper().replace(" ", '')
+	if coor == '':
+		message = ''
+		logger.info("Empty coordinate, going back to the user menu")
+		return
+	if len(coor) == 1:
+		logger.info("Invalid coordinate, going back to the user menu")
+		message = "ERROR: Invalid format of the seat number"
+		return
+	if coor[-1] not in ascii_uppercase:
+		logger.info("Invalid coordinate, going back to the user menu")
+		message = f"ERROR: {column_colour}Column{normal_colour} index is not a character"
+		return
+	column_str: str = coor[-1]
+	column_int: int = ord(column_str) - 65
+	if column_int >= house.n_column:
+		logger.info("Invalid coordinate, going back to the user menu")
+		message = f"ERROR: Invalid {column_colour}column{normal_colour}"
+		return
+	row_str: str = coor[:-1]
+	if len(row_str) > 2:
+		logger.info("Invalid coordinate, going back to the user menu")
+		message = f"ERROR: Impossible {row_colour}row{normal_colour} number"
+		return
+	row_int: int = int(row_str) - 1
+	if house.seating_plan[row_int][column_int] != 0:
+		logger.info("Seat already sold, going back to the user menu")
+		message = "Sorry, the seat is not available"
+		return
+	house.seating_plan[row_int][column_int] = 1
+	House.total_tickets += 1
+	ticket_index: int = House.total_tickets
+	ticket_number: str = f"T{ticket_index:0>5}"
+	time: str = datetime.now().isoformat(timespec="seconds")
+	ticket: Ticket = (
+		ticket_index, ticket_number, time, house.house_number, house.movie, row_int, column_int
+	)
+	print("Your ticket:")
+	print(f"{ticket_number:<6} @ {time}: "
+	      f"House {house.house_number:<2} -- {house.movie:<50} ~"
+	      f"Seat <{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}>")
+	logger.info("User has successfully bought a ticket")
+	logger.info(f"Ticket info: {ticket}")
+	House.tickets_table.append(ticket)
+	saveData()
+	print("\n\nThank you for your purchase!")
+	input("\nHit Enter to go back to the main menu")
+	message = ""
+
 
 def userMode() -> None:
 	"""
 	User mode
 	:return: None
 	"""
-	message: str = ""
+	global message
+	message = ""
 	while True:
 		logger: Logger = getLogger("userMode")
 		logger.info("Entered the user menu")
@@ -57,7 +150,7 @@ def userMode() -> None:
 		logger.info("Waiting mode code input")
 		mode: str = input("-> ").strip()
 		if not mode.isdecimal():
-			message: str = "ERROR: Mode number should be a decimal number."
+			message = "ERROR: Mode number should be a decimal number."
 			logger.info("Invalid mode code")
 			continue
 		if mode == '0':
@@ -69,95 +162,8 @@ def userMode() -> None:
 				sleep(1)
 			return
 		
-		# Buy ticket
 		elif mode == '1':
-			logger: Logger = getLogger("userMode.mode_1")
-			logger.info("User Mode 1: Buy a ticket")
-			clearScreen()
-			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
-			print("House(s) available:")
-			total_available_house_count: int = 0
-			for house in House.houses_table.values():
-				if house.movie and house.n_available != 0:
-					print(f"House {house.house_number}: {house.movie:<50} {house.n_available}/{house.n_seat}")
-					total_available_house_count += 1
-			if total_available_house_count == 0:
-				message: str = "Sorry, no house available now"
-				continue
-			print("\nPlease enter the house number (or hit Enter to go back to the main menu):")
-			logger.info("Waiting house number input")
-			house_num_str: str = input("-> ").strip()
-			if house_num_str == '':
-				message: str = ''
-				logger.info("Empty house number, going back to the user menu")
-				continue
-			if not house_num_str.isdecimal():
-				message: str = "ERROR: House number can only be decimal numbers"
-				logger.info("Invalid house number, going back to the user menu")
-				continue
-			house_num: int = int(house_num_str)
-			if house_num not in House.houses_table.keys():
-				message: str = "ERROR: That house does not exist"
-				logger.info("Invalid house number, going back to the user menu")
-				continue
-			house: House = House.houses_table[house_num]
-			logger.info(f"User selected house {house_num}")
-			clearScreen()
-			print(f"House {house.house_number} is now playing: {house.movie}")
-			house.printPlan()
-			print(
-				f"\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat"
-				f"(or just hit Enter to go back to the main menu):")
-			logger.info("Waiting seat coordinate input")
-			coor: str = input("\n-> ").strip().upper().replace(" ", '')
-			if coor == '':
-				message: str = ''
-				logger.info("Empty coordinate, going back to the user menu")
-				continue
-			if len(coor) == 1:
-				logger.info("Invalid coordinate, going back to the user menu")
-				message: str = "ERROR: Invalid format of the seat number"
-				continue
-			if coor[-1] not in ascii_uppercase:
-				logger.info("Invalid coordinate, going back to the user menu")
-				message: str = f"ERROR: {column_colour}Column{normal_colour} index is not a character"
-				continue
-			column_str: str = coor[-1]
-			column_int: int = ord(column_str) - 65
-			if column_int >= house.n_column:
-				logger.info("Invalid coordinate, going back to the user menu")
-				message: str = f"ERROR: Invalid {column_colour}column{normal_colour}"
-				continue
-			row_str: str = coor[:-1]
-			if len(row_str) > 2:
-				logger.info("Invalid coordinate, going back to the user menu")
-				message: str = f"ERROR: Impossible {row_colour}row{normal_colour} number"
-				continue
-			row_int: int = int(row_str) - 1
-			if house.seating_plan[row_int][column_int] != 0:
-				logger.info("Seat already sold, going back to the user menu")
-				message: str = "Sorry, the seat is not available"
-				continue
-			house.seating_plan[row_int][column_int] = 1
-			House.total_tickets += 1
-			ticket_index: int = House.total_tickets
-			ticket_number: str = f"T{ticket_index:0>5}"
-			time: str = datetime.now().isoformat(timespec="seconds")
-			ticket: Ticket = (
-				ticket_index, ticket_number, time, house.house_number, house.movie, row_int, column_int
-			)
-			print("Your ticket:")
-			print(f"{ticket_number:<6} @ {time}: "
-			      f"House {house.house_number:<2} -- {house.movie:<50} ~"
-			      f"Seat <{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}>")
-			logger.info("User has successfully bought a ticket")
-			logger.info(f"Ticket info: {ticket}")
-			House.tickets_table.append(ticket)
-			saveData()
-			print("\n\nThank you for your purchase!")
-			input("\nHit Enter to go back to the main menu")
-			message: str = ""
-			continue
+			buyTicket()  # Buy ticket
 		
 		# Check ticket
 		elif mode == '2':
@@ -169,32 +175,32 @@ def userMode() -> None:
 			logger.info("Waiting ticket number input")
 			ticket_number: str = input("-> ").strip().upper()
 			if ticket_number == "":
-				message: str = ""
+				message = ""
 				logger.info("Empty ticket number, going back to the user menu")
 				continue
 			if not ticket_number.startswith('T'):
-				message: str = "ERROR: Invalid ticket number format -- ticket number starts with 'T'"
+				message = "ERROR: Invalid ticket number format -- ticket number starts with 'T'"
 				logger.info("Invalid ticket number, going back to the user menu")
 				continue
 			if ticket_number == 'T':
-				message: str = "ERROR: Invalid ticket number -- ticket number has no decimal numbers"
+				message = "ERROR: Invalid ticket number -- ticket number has no decimal numbers"
 				logger.info("Invalid ticket number, going back to the user menu")
 				continue
 			if len(ticket_number) < 6:
-				message: str = "ERROR: Invalid ticket number -- ticket number too short"
+				message = "ERROR: Invalid ticket number -- ticket number too short"
 				logger.info("Invalid ticket number, going back to the user menu")
 				continue
 			if not ticket_number[1:].isdecimal():
-				message: str = ("ERROR: Invalid ticket number -- "
-				                "ticket number should ba a single character 'T' followed by decimal numbers")
+				message = ("ERROR: Invalid ticket number -- "
+				           "ticket number should ba a single character 'T' followed by decimal numbers")
 				logger.info("Invalid ticket number, going back to the user menu")
 				continue
 			if len(ticket_number) > 6 and ticket_number[1] == '0':
-				message: str = "ERROR: Invalid ticket number -- more than 4 leading zeros"
+				message = "ERROR: Invalid ticket number -- more than 4 leading zeros"
 				logger.info("Invalid ticket number, going back to the control panel menu")
 				continue
 			if set(ticket_number[1:]) == {'0'}:
-				message: str = "ERROR: Invalid ticket number -- ticket number is all zero"
+				message = "ERROR: Invalid ticket number -- ticket number is all zero"
 				logger.info("Invalid ticket number, going back to the control panel menu")
 				continue
 			print()
@@ -205,7 +211,7 @@ def userMode() -> None:
 				print("No such ticket")
 				print("\n\n")
 				input("Hit enter to go back to the main menu")
-				message: str = ""
+				message = ""
 				continue
 			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 			print(f"{ticket_no:<6} @ {time} "
@@ -213,7 +219,7 @@ def userMode() -> None:
 			      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
 			print("\n\n")
 			input("Hit enter to go back to the main menu")
-			message: str = ""
+			message = ""
 		
 		# Ticket refund
 		elif mode == '3':
@@ -226,31 +232,31 @@ def userMode() -> None:
 			ticket_number: str = input("-> ").strip().upper().replace(' ', '')
 			if ticket_number == "":
 				logger.info("Empty ticket number, going back to the user menu")
-				message: str = ""
+				message = ""
 				continue
 			if not ticket_number.startswith('T'):
 				logger.info("Invalid ticket number, going back to the user menu")
-				message: str = "ERROR: Invalid ticket number format -- ticket number starts with 'T'"
+				message = "ERROR: Invalid ticket number format -- ticket number starts with 'T'"
 				continue
 			if ticket_number == 'T':
 				logger.info("Invalid ticket number, going back to the user menu")
-				message: str = "ERROR: Invalid ticket number -- ticket number has no decimal numbers"
+				message = "ERROR: Invalid ticket number -- ticket number has no decimal numbers"
 				continue
 			if len(ticket_number) < 6:
 				logger.info("Invalid ticket number, going back to the user menu")
-				message: str = "ERROR: Invalid ticket number -- ticket number too short"
+				message = "ERROR: Invalid ticket number -- ticket number too short"
 				continue
 			if not ticket_number[1:].isdecimal():
 				logger.info("Invalid ticket number, going back to the user menu")
-				message: str = ("ERROR: Invalid ticket number -- "
-				                "ticket number should ba a single character 'T' followed by decimal numbers")
+				message = ("ERROR: Invalid ticket number -- "
+				           "ticket number should ba a single character 'T' followed by decimal numbers")
 				continue
 			if len(ticket_number) > 6 and ticket_number[1] == '0':
-				message: str = "ERROR: Invalid ticket number -- more than 4 leading zeros"
+				message = "ERROR: Invalid ticket number -- more than 4 leading zeros"
 				logger.info("Invalid ticket number, going back to the control panel menu")
 				continue
 			if set(ticket_number[1:]) == {'0'}:
-				message: str = "ERROR: Invalid ticket number -- ticket number is all zero"
+				message = "ERROR: Invalid ticket number -- ticket number is all zero"
 				logger.info("Invalid ticket number, going back to the control panel menu")
 				continue
 			print()
@@ -261,7 +267,7 @@ def userMode() -> None:
 				print("No such ticket")
 				print("\n\n")
 				input("Hit enter to go back to the main menu")
-				message: str = "ERROR: No such ticket"
+				message = "ERROR: No such ticket"
 				continue
 			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 			logger.info(f"User want to delete this ticket: {ticket}")
@@ -277,14 +283,14 @@ def userMode() -> None:
 				logger.info("Ticket deleted")
 				saveData()
 				print("\nRefund succeed!")
-				message: str = ''
+				message = ''
 				continue
 			else:
 				logger.info("Confirmation failed, go back to the user menu")
 				print()
-				message: str = "ERROR: Confirmation failed. Refund Failed"
+				message = "ERROR: Confirmation failed. Refund Failed"
 				continue
-			
+		
 		# HELP
 		elif mode == '4':
 			logger: Logger = getLogger("userMode.mode_4")
@@ -294,5 +300,5 @@ def userMode() -> None:
 		
 		else:
 			logger.info("Unknown mode code")
-			message: str = "ERROR: Unknown mode"
+			message = "ERROR: Unknown mode"
 			continue
