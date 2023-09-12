@@ -176,6 +176,77 @@ def checkTicket() -> None:
 	message = ""
 
 
+def ticketRefund() -> None:
+	global message
+	logger: Logger = getLogger("userMode.mode_3")
+	logger.info("User Mode 3: Ticket refund")
+	clearScreen()
+	print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n")
+	print("Please enter you ticket number (starts with 'T'):")
+	logger.info("Waiting ticket number input")
+	ticket_number: str = input("-> ").strip().upper().replace(' ', '')
+	if ticket_number == "":
+		logger.info("Empty ticket number, going back to the user menu")
+		message = ""
+		return
+	if not ticket_number.startswith('T'):
+		logger.info("Invalid ticket number, going back to the user menu")
+		message = "ERROR: Invalid ticket number format -- ticket number starts with 'T'"
+		return
+	if ticket_number == 'T':
+		logger.info("Invalid ticket number, going back to the user menu")
+		message = "ERROR: Invalid ticket number -- ticket number has no decimal numbers"
+		return
+	if len(ticket_number) < 6:
+		logger.info("Invalid ticket number, going back to the user menu")
+		message = "ERROR: Invalid ticket number -- ticket number too short"
+		return
+	if not ticket_number[1:].isdecimal():
+		logger.info("Invalid ticket number, going back to the user menu")
+		message = ("ERROR: Invalid ticket number -- "
+		           "ticket number should ba a single character 'T' followed by decimal numbers")
+		return
+	if len(ticket_number) > 6 and ticket_number[1] == '0':
+		message = "ERROR: Invalid ticket number -- more than 4 leading zeros"
+		logger.info("Invalid ticket number, going back to the control panel menu")
+		return
+	if set(ticket_number[1:]) == {'0'}:
+		message = "ERROR: Invalid ticket number -- ticket number is all zero"
+		logger.info("Invalid ticket number, going back to the control panel menu")
+		return
+	print()
+	ticket_index: int = int(ticket_number[1:])
+	ticket: Optional[Ticket] = House.searchTicket(ticket_index)
+	if ticket is None:
+		logger.info("No such ticket, going back to the user menu")
+		print("No such ticket")
+		print("\n\n")
+		input("Hit enter to go back to the main menu")
+		message = "ERROR: No such ticket"
+		return
+	ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+	logger.info(f"User want to delete this ticket: {ticket}")
+	print(f"{ticket_no:<6} @ {time} "
+	      f"House {house_no:<2} -- {movie:<50} ~"
+	      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
+	print("\nAre you sure you want to get refund of this ticket? (y/N)")
+	logger.info("Confirming")
+	confirm: str = input("-> ").strip().upper()
+	if confirm == 'Y':
+		House.houses_table[house_no].seating_plan[row_index][column_index] = 0
+		House.tickets_table.remove(ticket)
+		logger.info("Ticket deleted")
+		saveData()
+		print("\nRefund succeed!")
+		message = ''
+		return
+	else:
+		logger.info("Confirmation failed, go back to the user menu")
+		print()
+		message = "ERROR: Confirmation failed. Refund Failed"
+		return
+	
+
 def userMode() -> None:
 	"""
 	User mode
@@ -210,6 +281,7 @@ def userMode() -> None:
 			message = "ERROR: Mode number should be a decimal number."
 			logger.info("Invalid mode code")
 			continue
+		
 		if mode == '0':
 			logger: Logger = getLogger("userMode.mode_0")
 			logger.info("User Mode 0: Log out")
@@ -222,79 +294,11 @@ def userMode() -> None:
 		elif mode == '1':
 			buyTicket()  # Buy ticket
 		
-		# Check ticket
 		elif mode == '2':
-			checkTicket()
+			checkTicket()  # Check ticket
 		
-		# Ticket refund
 		elif mode == '3':
-			logger: Logger = getLogger("userMode.mode_3")
-			logger.info("User Mode 3: Ticket refund")
-			clearScreen()
-			print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n")
-			print("Please enter you ticket number (starts with 'T'):")
-			logger.info("Waiting ticket number input")
-			ticket_number: str = input("-> ").strip().upper().replace(' ', '')
-			if ticket_number == "":
-				logger.info("Empty ticket number, going back to the user menu")
-				message = ""
-				continue
-			if not ticket_number.startswith('T'):
-				logger.info("Invalid ticket number, going back to the user menu")
-				message = "ERROR: Invalid ticket number format -- ticket number starts with 'T'"
-				continue
-			if ticket_number == 'T':
-				logger.info("Invalid ticket number, going back to the user menu")
-				message = "ERROR: Invalid ticket number -- ticket number has no decimal numbers"
-				continue
-			if len(ticket_number) < 6:
-				logger.info("Invalid ticket number, going back to the user menu")
-				message = "ERROR: Invalid ticket number -- ticket number too short"
-				continue
-			if not ticket_number[1:].isdecimal():
-				logger.info("Invalid ticket number, going back to the user menu")
-				message = ("ERROR: Invalid ticket number -- "
-				           "ticket number should ba a single character 'T' followed by decimal numbers")
-				continue
-			if len(ticket_number) > 6 and ticket_number[1] == '0':
-				message = "ERROR: Invalid ticket number -- more than 4 leading zeros"
-				logger.info("Invalid ticket number, going back to the control panel menu")
-				continue
-			if set(ticket_number[1:]) == {'0'}:
-				message = "ERROR: Invalid ticket number -- ticket number is all zero"
-				logger.info("Invalid ticket number, going back to the control panel menu")
-				continue
-			print()
-			ticket_index: int = int(ticket_number[1:])
-			ticket: Optional[Ticket] = House.searchTicket(ticket_index)
-			if ticket is None:
-				logger.info("No such ticket, going back to the user menu")
-				print("No such ticket")
-				print("\n\n")
-				input("Hit enter to go back to the main menu")
-				message = "ERROR: No such ticket"
-				continue
-			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
-			logger.info(f"User want to delete this ticket: {ticket}")
-			print(f"{ticket_no:<6} @ {time} "
-			      f"House {house_no:<2} -- {movie:<50} ~"
-			      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
-			print("\nAre you sure you want to get refund of this ticket? (y/N)")
-			logger.info("Confirming")
-			confirm: str = input("-> ").strip().upper()
-			if confirm == 'Y':
-				House.houses_table[house_no].seating_plan[row_index][column_index] = 0
-				House.tickets_table.remove(ticket)
-				logger.info("Ticket deleted")
-				saveData()
-				print("\nRefund succeed!")
-				message = ''
-				continue
-			else:
-				logger.info("Confirmation failed, go back to the user menu")
-				print()
-				message = "ERROR: Confirmation failed. Refund Failed"
-				continue
+			ticketRefund()  # Ticket refund
 		
 		# HELP
 		elif mode == '4':
