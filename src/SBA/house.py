@@ -17,7 +17,7 @@
 from logging import getLogger, Logger
 from typing import NoReturn, Optional, Self, TypeAlias
 
-from .colour import background_colour, Colour, column_colour, font_colour, font_colour_opposite, normal_colour, row_colour
+from .colour import Colour, column_colour, font_colour_opposite, normal_colour, row_colour
 
 Row: TypeAlias = list[int]
 Seating_plan: TypeAlias = list[Row]
