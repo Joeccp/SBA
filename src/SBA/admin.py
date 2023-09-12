@@ -18,7 +18,7 @@
 from logging import getLogger, Logger
 from os import path, remove
 from typing import Optional
-from webbrowser import open as openWebBrowser
+from webbrowser import open as openWebBrowser  # NOQA: lowercase function import as uppercase function
 
 from .coorutils import coorExprAnalysis
 from .house import House, Ticket
