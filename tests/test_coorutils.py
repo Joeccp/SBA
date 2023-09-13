@@ -204,3 +204,23 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name'
 			coorExprAnalysis('23o', n_column=14)
 		with self.assertRaises(ColumnNumberOutOfRange):
 			coorExprAnalysis('78q', n_column=10, n_row=87)
+
+
+class Test_getCoorsFromCoorExpr(TestCase):  # NOQA: disable 'all caps in class name' warning
+	def test_singleCoordinates(self) -> None:
+		self.assertEqual(getCoorsFromCoorExpr('A1'), [(0, 0)])
+		self.assertEqual(getCoorsFromCoorExpr('1A'), [(0, 0)])
+		self.assertEqual(getCoorsFromCoorExpr('2B'), [(1, 1)])
+		self.assertEqual(getCoorsFromCoorExpr('B2'), [(1, 1)])
+		self.assertEqual(getCoorsFromCoorExpr('99Z'), [(98, 25)])
+		self.assertEqual(getCoorsFromCoorExpr('Z99'), [(98, 25)])
+		self.assertEqual(getCoorsFromCoorExpr('17M'), [(16, 12)])
+		self.assertEqual(getCoorsFromCoorExpr('o8'), [(7, 14)])
+		self.assertEqual(getCoorsFromCoorExpr('23Q', n_row=84), [(22, 16)])
+		self.assertEqual(getCoorsFromCoorExpr('Q90', n_row=90), [(89, 16)])
+		self.assertEqual(getCoorsFromCoorExpr('1z', n_row=1), [(0, 25)])
+		self.assertEqual(getCoorsFromCoorExpr('23Q', n_column=25), [(22, 16)])
+		self.assertEqual(getCoorsFromCoorExpr('23Q', n_column=17), [(22, 16)])
+		self.assertEqual(getCoorsFromCoorExpr('1A', n_column=1), [(0, 0)])
+		self.assertEqual(getCoorsFromCoorExpr('23Q', n_column=84), [(22, 16)])
+		self.assertEqual(getCoorsFromCoorExpr('23Q', n_row=84, n_column=98), [(22, 16)])
