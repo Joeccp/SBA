@@ -17,6 +17,7 @@
 from ..src.SBA.coorutils import *
 from unittest import TestCase
 
+
 class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name' warning
 	def test_singleCoordinate(self):
 		"""Tests single coordinate"""
@@ -36,7 +37,7 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name'
 		self.assertEqual(coorExprAnalysis('1A', n_column=1), [(0, 0)])
 		self.assertEqual(coorExprAnalysis('23Q', n_column=84), [(22, 16)])
 		self.assertEqual(coorExprAnalysis('23Q', n_row=84, n_column=98), [(22, 16)])
-
+	
 	def test_twoCoordinates(self):
 		"""Tests multiple coordinates"""
 		self.assertTrue(coorExprAnalysis('A1:A2'), [(0, 0), (0, 1)])
@@ -55,7 +56,7 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name'
 		self.assertTrue(coorExprAnalysis('23F:73Q', n_row=73, n_column=26), [(22, 5), (72, 25)])
 		self.assertTrue(coorExprAnalysis('23F:73Q', n_row=86, n_column=17), [(22, 5), (72, 25)])
 		self.assertTrue(coorExprAnalysis('1A:99Z', n_row=99, n_column=26), [(0, 0), (98, 25)])
-
+	
 	def test_stringFormatting(self):
 		"""Tests how coorExprAnalysis handle white-spaces"""
 		self.assertEqual(coorExprAnalysis('    1 a    '), [(0, 0)])
@@ -128,7 +129,7 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name'
 			coorExprAnalysis('0A')
 		with self.assertRaises(RowNumberIsZero):
 			coorExprAnalysis('0Z')
-		
+	
 	def test_multipleInvalidSyntax(self):
 		"""Tests exceptions about the result of the function when analyzing multiple coordinates"""
 		with self.assertRaises(MoreThanOneColon):
@@ -224,3 +225,15 @@ class Test_getCoorsFromCoorExpr(TestCase):  # NOQA: disable 'all caps in class n
 		self.assertEqual(getCoorsFromCoorExpr('1A', n_column=1), [(0, 0)])
 		self.assertEqual(getCoorsFromCoorExpr('23Q', n_column=84), [(22, 16)])
 		self.assertEqual(getCoorsFromCoorExpr('23Q', n_row=84, n_column=98), [(22, 16)])
+	
+	def test_multipleCoordinates(self) -> None:
+		self.assertEqual(getCoorsFromCoorExpr('1F:J3'),
+		                 [(0, 5), (0, 6), (0, 7), (0, 8), (0, 9),
+		                  (1, 5), (1, 6), (1, 7), (1, 8), (1, 9),
+		                  (2, 5), (2, 6), (2, 7), (2, 8), (2, 9)])
+		self.assertEqual(getCoorsFromCoorExpr('2H:4D'),
+		                 [(1, 3), (1, 4), (1, 5), (1, 6), (1, 7),
+		                  (2, 3), (2, 4), (2, 5), (2, 6), (2, 7),
+		                  (3, 3), (3, 4), (3, 5), (3, 6), (3, 7)])
+		self.assertEqual(getCoorsFromCoorExpr('3A:5A'), [(2, 0), (3, 0), (4, 0)])
+		self.assertEqual(getCoorsFromCoorExpr('5C:5G'), [(4, 2), (4, 3), (4, 4), (4, 5), (4, 6)])

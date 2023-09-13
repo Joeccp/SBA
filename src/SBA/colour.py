@@ -24,7 +24,7 @@ such as `colour_mode` and `normal_colour`.
 These variables may change.
 
 Due to the mechanism of importing in Python,
-the change of these variables cannot be seen outside this module immediately,
+the changes of these variables cannot be seen outside this module immediately,
 you have to import it AGAIN
 """
 

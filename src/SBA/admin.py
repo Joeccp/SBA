@@ -594,6 +594,10 @@ def changeColour() -> None:
 	else:
 		logger.info("ERROR: Unknown colour scheme, changing to DARK anyway...")
 		setColour('DARK')
+		
+	from .colour import colour_mode
+	
+	print(f"Success! The colour scheme is now {colour_mode}")
 
 
 def adminMode() -> None:
