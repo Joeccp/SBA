@@ -32,6 +32,8 @@ This project has *NO PRACTICAL USE*, this is just a piece of high school homewor
 
 ## Getting started
 
+*You may want to check out the online version of this documentation instead: <https://joeccp.github.io/SBA/>*
+
 ### Requirements
 - Windows 10/11
 - Python 3.11.0 or higher
