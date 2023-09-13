@@ -70,10 +70,11 @@ The SBA report can be found [here](report/REPORT.md).
 - User manual
     - [Login](docs/login.md)
     - [Admin Control Panel](docs/controlPanel.md)
+    - [Admin seat operation](docs/seatStatusOverride.md)
     - [Cinema houses](docs/house.md)
+    - [Colour scheme](docs/colour.md)
     - [Data Storage](docs/dataStorage.md)
     - [Ticket](docs/ticket.md)
-    - [Admin seat operation](docs/seatStatusOverride.md)
 - [Log files](docs/logs.md)
 
 

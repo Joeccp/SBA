@@ -19,7 +19,7 @@ the seat status to be the same as before.
 ## HOWTO: Change the seat status
 
 Login as **administrator**, enter mode `6`(Seat status override).
-You should see something like this (colour may be different):
+You should see something like this:
 
 ![Screenshot of mode 6](../images/docs/control_panel_mode_6.png)
 

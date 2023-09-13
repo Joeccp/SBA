@@ -594,7 +594,6 @@ def changeColour() -> None:
 	else:
 		logger.info("ERROR: Unknown colour scheme, changing to DARK anyway...")
 		setColour('DARK')
-	print(f"The {colour_mode} colour scheme will be applied the next time you logged in")
 
 
 def adminMode() -> None:

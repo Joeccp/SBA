@@ -18,6 +18,16 @@ from logging import getLogger, Logger
 from os import path
 from typing import Literal
 
+"""
+In this module, there are many variables store the colour information,
+such as `colour_mode` and `normal_colour`.
+These variables may change.
+
+Due to the mechanism of importing in Python,
+the change of these variables cannot be seen outside this module immediately,
+you have to import it AGAIN
+"""
+
 ColourCode = Literal['DARK', 'LIGHT']
 
 colour_mode: ColourCode = 'DARK'
