@@ -288,7 +288,6 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 		coordinates: list[Coor] = []
 		for column_index in range(analysis_result_start[1], analysis_result_end[1] + 1):
 			coordinates.append((row_index, column_index))
-		logger.debug(coordinates)
 		return coordinates
 		
 	# Single column:
@@ -298,7 +297,6 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 		coordinates: list[Coor] = []
 		for row_index in range(analysis_result_start[0], analysis_result_end[0] + 1):
 			coordinates.append((row_index, column_index))
-		logger.debug(coordinates)
 		return coordinates
 	
 	starting_coordinate: Coor = analysis_result_start
@@ -317,8 +315,7 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 	
 	for row_index in range(starting_coordinate[0], ending_coordinate[0] + 1):
 		for column_index in range(starting_coordinate[1], ending_coordinate[1] + 1):
-			logger.debug(f"In loop: {row_index:=} {column_index:=}")
+			logger.debug(f"Adding coordinate {row_index} {column_index}")
 			coordinates.append((row_index, column_index))
 
-	logger.debug(coordinates)
 	return coordinates
