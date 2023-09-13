@@ -20,7 +20,7 @@ from os import path, remove
 from typing import Optional
 from webbrowser import open as openWebBrowser  # NOQA: lowercase function import as uppercase function
 
-from .coorutils import coorExprAnalysis
+from .coorutils import Coor, getCoorsFromCoorExpr
 from .house import House, Ticket
 from .utils import clearScreen, loadData, saveData
 
@@ -235,7 +235,7 @@ def seatStatusOverride() -> None:
 	house: House = House.houses_table[house_num]
 	coor_expr: str = command_list[2]
 	try:
-		coor_range: list[tuple[int, int]] = coorExprAnalysis(
+		coor_list: list[Coor] = getCoorsFromCoorExpr(
 			coor_expr, n_row=house.n_row, n_column=house.n_column
 		)
 	except Exception as error:  # NOQA
@@ -244,8 +244,8 @@ def seatStatusOverride() -> None:
 		print(f"ERROR: {error.__doc__}")
 		return
 	else:
-		if len(coor_range) == 1:
-			coor, = coor_range
+		if len(coor_list) == 1:
+			coor, = coor_list
 			row, column = coor
 			logger.info(f"{action} House {house.house_number} {row + 1} {chr(column + 65)}")
 			logger.debug(f"house.seating_plan[{row}][{column}]: "
@@ -253,23 +253,6 @@ def seatStatusOverride() -> None:
 			house.seating_plan[row][column] = seat_status
 			print("Success!\n")
 			return
-		head, end = coor_range
-		head: tuple[int, int]
-		end: tuple[int, int]
-		coor_list: list[tuple[int, int]] = []
-		for i in range(head[0], end[0] + 1):
-			if i > end[0]:
-				break
-			for j in range(house.n_column):
-				
-				if head[0] < i < end[0]:  # In between of head and end rows: must be in range
-					coor_list.append((i, j))
-				elif i == head[0]:  # first in range line
-					if j >= head[1]:
-						coor_list.append((i, j))
-				else:  # i == end[0]: last in range line
-					if j <= end[1]:
-						coor_list.append((i, j))
 		
 		for coor in coor_list:
 			row: int
@@ -280,7 +263,8 @@ def seatStatusOverride() -> None:
 			             f"{house.seating_plan[row][column]} --> {seat_status}")
 			house.seating_plan[row][column] = seat_status
 		print("Success!\n")
-		print(f"{len(coor_list)} seats changed.")
+		print(f"{len(coor_list)} seats overwritten.")
+		logger.info(f"{len(coor_list)} seats overwritten.")
 	finally:
 		saveData()
 

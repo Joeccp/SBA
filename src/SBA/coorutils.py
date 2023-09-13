@@ -16,7 +16,9 @@
 
 from logging import getLogger, Logger
 from string import ascii_uppercase, digits
-from typing import Any, Callable
+from typing import Any, Callable, TypeAlias
+
+Coor: TypeAlias = tuple[int, int]
 
 
 class EmptyCoordinate(Exception):
@@ -79,7 +81,7 @@ class ColumnCoordinatesAtTwoSide(Exception):
 	"""Two column coordinates given in a single seat coordinate"""
 
 
-def exceptionLogger(function: Callable) -> Callable:
+def ExceptionLogger(function: Callable) -> Callable:
 	def functionWithLogger(*args, **kwargs) -> Any:
 		try:
 			return_: Any = function(*args, **kwargs)
@@ -92,7 +94,7 @@ def exceptionLogger(function: Callable) -> Callable:
 	return functionWithLogger
 
 
-@exceptionLogger
+@ExceptionLogger
 def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) -> list[tuple[int, int]]:
 	"""
 	Analysis the coordinate expression.
@@ -251,3 +253,72 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	
 	logger.debug(f'{coordinate_indexes}')
 	return coordinate_indexes
+
+
+@ExceptionLogger
+def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) -> list[Coor]:
+	"""
+	Returns a list of coordinates which the coor_expr argument defines.
+	
+	:param coor_expr: A coordinate expression
+	:type coor_expr: str
+	:param n_row: Number of row of the house
+	:type n_row: int
+	:param n_column: Number of column of the house
+	:type n_column: int
+	:return: A list of coordinates
+	:rtype: list[tuple[int, int]]
+	"""
+	logger: Logger = getLogger('getCoorsFromCoorExpr')
+	logger.info(f"Analysing the coordinate expression: {coor_expr}")
+	
+	analysis_result: list[Coor] = coorExprAnalysis(coor_expr, n_row=n_row, n_column=n_column)
+	
+	if len(analysis_result) == 1:
+		logger.info("Single coordinate")
+		return analysis_result
+	
+	analysis_result_start: Coor = analysis_result[0]
+	analysis_result_end: Coor = analysis_result[1]
+	
+	# Single row:
+	if analysis_result_start[0] == analysis_result_end[0]:
+		logger.info("Single row")
+		row_index: int = analysis_result_start[0]
+		coordinates: list[Coor] = []
+		for column_index in range(analysis_result_start[1], analysis_result_end[1] + 1):
+			coordinates.append((row_index, column_index))
+		logger.debug(coordinates)
+		return coordinates
+		
+	# Single column:
+	if analysis_result_start[1] == analysis_result_end[1]:
+		logger.info("Single column")
+		column_index: int = analysis_result_start[1]
+		coordinates: list[Coor] = []
+		for row_index in range(analysis_result_start[0], analysis_result_end[0] + 1):
+			coordinates.append((row_index, column_index))
+		logger.debug(coordinates)
+		return coordinates
+	
+	starting_coordinate: Coor = analysis_result_start
+	ending_coordinate: Coor = analysis_result_end
+	
+	# Detect 'top-right to bottom-left' and change it to 'top-left to bottom-right'
+	if analysis_result_start[1] > analysis_result_end[1]:
+		logger.info("Top-right to bottom-left detected! Changing it...")
+		starting_coordinate: Coor = (analysis_result_start[0], analysis_result_end[1])
+		ending_coordinate: Coor = (analysis_result_end[0], analysis_result_start[1])
+		
+	logger.debug(f"Starting coordinate: {starting_coordinate}")
+	logger.debug(f"Ending coordinate: {ending_coordinate}")
+	
+	coordinates: list[Coor] = []
+	
+	for row_index in range(starting_coordinate[0], ending_coordinate[0] + 1):
+		for column_index in range(starting_coordinate[1], ending_coordinate[1] + 1):
+			logger.debug(f"In loop: {row_index:=} {column_index:=}")
+			coordinates.append((row_index, column_index))
+
+	logger.debug(coordinates)
+	return coordinates

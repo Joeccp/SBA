@@ -105,8 +105,8 @@ class House:
 			print(f'  {row_colour}{row + 1:>2}{normal_colour}')
 			print('    ' + '-' * line_length)
 		print()
-		print(Colour.GREEN_BG + font_colour_opposite + "  -- Empty" + normal_colour)
-		print(Colour.RED_BG + font_colour_opposite + "X -- Sold" + normal_colour)
+		print(Colour.GREEN_BG + font_colour_opposite + "  -- Empty   " + normal_colour)
+		print(Colour.RED_BG + font_colour_opposite + "X -- Sold    " + normal_colour)
 		print(Colour.YELLOW_BG + font_colour_opposite + "! -- Reserved" + normal_colour)
 		print()
 	
