@@ -9,8 +9,8 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: ['3.11','3.11.4']
+        os: [windows-latest]
+        python-version: ['3.11']
 
     steps:
       - name: Check out
