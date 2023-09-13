@@ -207,7 +207,7 @@ class Test_coorExprAnalysis(TestCase):  # NOQA: disable 'all caps in class name'
 
 
 class Test_getCoorsFromCoorExpr(TestCase):  # NOQA: disable 'all caps in class name' warning
-	def test_singleCoordinates(self) -> None:
+	def test_singleCoordinate(self) -> None:
 		self.assertEqual(getCoorsFromCoorExpr('A1'), [(0, 0)])
 		self.assertEqual(getCoorsFromCoorExpr('1A'), [(0, 0)])
 		self.assertEqual(getCoorsFromCoorExpr('2B'), [(1, 1)])
