@@ -630,7 +630,7 @@ def adminMode() -> None:
 		      "13: Help\n"
 		      "14: Change the colour scheme"
 		      )
-		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10/11/12/13)\n-> ").strip()
+		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10/11/12/13/14)\n-> ").strip()
 		if not mode.isdecimal():
 			print("ERROR: Mode code should be all decimal")
 			logger.info("Invalid mode code")
