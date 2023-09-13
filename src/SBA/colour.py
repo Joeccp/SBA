@@ -14,6 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from logging import getLogger, Logger
+from os import path
+from typing import Literal
+
+ColourCode = Literal['DARK', 'LIGHT']
+
+colour_mode: ColourCode = 'DARK'
+
 
 class Colour:
 	"""
@@ -36,7 +44,84 @@ class Colour:
 
 row_colour: str = Colour.BLUE
 column_colour: str = Colour.PURPLE
+
 font_colour: str = Colour.WHITE
 background_colour: str = Colour.BLACK_BG
 normal_colour: str = font_colour + background_colour
-font_colour_opposite: str = Colour.BLACK
+
+
+def setColour(colour_code: ColourCode) -> None:
+	"""
+	Set the font and background colour
+	
+	:param colour_code: A colour code
+	:type colour_code: ColourCode
+	:return: None
+	"""
+	global background_colour, colour_mode, font_colour, normal_colour
+	
+	logger: Logger = getLogger('setColour')
+	logger.info(f"Admin wants to set colour to {colour_code}")
+	
+	if colour_code == 'DARK':
+		logger.info("Setting colour to DARK")
+		colour_mode = 'DARK'
+		font_colour = Colour.WHITE
+		background_colour = Colour.BLACK_BG
+		normal_colour = font_colour + background_colour
+	elif colour_code == 'LIGHT':
+		logger.info("Setting colour to LIGHT")
+		colour_mode = 'LIGHT'
+		font_colour = Colour.BLACK
+		background_colour = Colour.WHITE_BG
+		normal_colour = font_colour + background_colour
+	else:
+		logger.info("Unknown colour code: Setting to DARK...")
+		setColour('DARK')
+	
+	logger.info(f"The colour scheme is now {colour_mode}")
+	
+	logger.info("Saving colour code...")
+	absolute_path = path.dirname(__file__)
+	relative_path = "../../data/colour.txt"
+	full_path = path.join(absolute_path, relative_path)
+	logger.debug(f"Full path = {full_path}")
+	
+	logger.info("Reaching the file")
+	with open(full_path, 'w') as file:
+		logger.info("Writing the colour data to the file")
+		file.write(colour_mode)
+		
+	print(normal_colour)
+
+
+def initColour() -> None:
+	"""
+	Initialize the font and background colour
+
+	Reads the data from data/colour.txt
+	If the file does not exist, create one and set to DARk
+
+	:return: None
+	"""
+	
+	logger: Logger = getLogger('initColour')
+	logger.info("Initializing the colour scheme")
+	
+	absolute_path = path.dirname(__file__)
+	relative_path = "../../data/colour.txt"
+	full_path = path.join(absolute_path, relative_path)
+	logger.debug(f"Full path = {full_path}")
+	
+	try:
+		logger.info("Reaching the file")
+		with open(full_path, 'r') as file:
+			# The context of the file should be a valid ColorCode
+			colour_code: ColourCode = file.read().strip().upper()  # type: ignore # NOQA
+			logger.info(f"Colour code stored in the file is {colour_code}")
+	except FileNotFoundError:
+		logger.info("File not found, default set to DARK")
+		colour_code = 'DARK'
+	
+	colour_code: ColourCode
+	setColour(colour_code)

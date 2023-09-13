@@ -22,7 +22,7 @@ from time import sleep
 from typing import Optional
 from webbrowser import open as openWebBrowser
 
-from .colour import Colour, column_colour, normal_colour, row_colour
+from .colour import Colour, column_colour, row_colour
 from .house import House, Ticket
 from .utils import clearScreen, saveData
 
@@ -35,7 +35,10 @@ def buyTicket() -> None:
 
 	:return: None
 	"""
+	from .colour import normal_colour
+	
 	global message
+	
 	logger: Logger = getLogger("buyTicket")
 	logger.info("User Mode 1: Buy a ticket")
 	clearScreen()
@@ -131,7 +134,10 @@ def checkTicket() -> None:
 	
 	:return: None
 	"""
+	from .colour import normal_colour
+	
 	global message
+	
 	logger: Logger = getLogger("checkTicket")
 	logger.info("User Mode 2: Check ticket information")
 	clearScreen()
@@ -193,7 +199,10 @@ def ticketRefund() -> None:
 
 	:return: None
 	"""
+	from .colour import normal_colour
+	
 	global message
+	
 	logger: Logger = getLogger("ticketRefund")
 	logger.info("User Mode 3: Ticket refund")
 	clearScreen()
@@ -268,7 +277,10 @@ def userMode() -> None:
 	User mode
 	:return: None
 	"""
+	from .colour import normal_colour
+	
 	global message
+	
 	message = ""
 	while True:
 		logger: Logger = getLogger("userMode")

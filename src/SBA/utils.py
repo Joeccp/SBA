@@ -19,7 +19,7 @@ from pickle import dump, load
 from datetime import datetime
 from logging import basicConfig, DEBUG, getLogger, Logger
 from os import get_terminal_size, makedirs, path, system
-from platform import system as systemPlatform
+from platform import system as systemPlatform  # NOQA: lowercase function imported as uppercase function
 from sys import version_info
 
 from .house import House

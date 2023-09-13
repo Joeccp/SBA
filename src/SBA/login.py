@@ -22,7 +22,7 @@ from os import path
 from tomllib import load as loadtoml
 from typing import Any
 
-from .colour import Colour, normal_colour
+from .colour import Colour
 from .utils import clearScreen
 
 
@@ -58,6 +58,7 @@ def login(*, first_time: bool = False) -> int:
 	:rtype: int
 	:raise FileNotFoundError: If `accounts.toml` could not be found
 	"""
+	from .colour import normal_colour
 	
 	logger: Logger = getLogger('login')
 	

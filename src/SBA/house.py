@@ -17,7 +17,7 @@
 from logging import getLogger, Logger
 from typing import NoReturn, Optional, Self, TypeAlias
 
-from .colour import Colour, column_colour, font_colour_opposite, normal_colour, row_colour
+from .colour import Colour, column_colour, row_colour
 
 Row: TypeAlias = list[int]
 Seating_plan: TypeAlias = list[Row]
@@ -83,6 +83,8 @@ class House:
 	
 	def printSeatingPlan(self) -> None:  # pragma: no cover # skip coverage report -- IDK how to mock output
 		"""Print the seating plan"""
+		from .colour import normal_colour
+		
 		line_length: int = self.n_column * 2 + 1
 		print(f"{'[Screen Here]':^{line_length + 8}}")
 		print('    ' + '_' * line_length)
@@ -96,18 +98,18 @@ class House:
 			for column in range(self.n_column):
 				match self.seating_plan[row][column]:
 					case 0:
-						symbol = Colour.GREEN_BG + font_colour_opposite + ' ' + normal_colour
+						symbol = Colour.GREEN_BG + Colour.BLACK + ' ' + normal_colour
 					case 1:
-						symbol = Colour.RED_BG + font_colour_opposite + 'X' + normal_colour
+						symbol = Colour.RED_BG + Colour.BLACK + 'X' + normal_colour
 					case 2:
-						symbol = Colour.YELLOW_BG + font_colour_opposite + '!' + normal_colour
+						symbol = Colour.YELLOW_BG + Colour.BLACK + '!' + normal_colour
 				print(symbol, end='|')  # NOQA
 			print(f'  {row_colour}{row + 1:>2}{normal_colour}')
 			print('    ' + '-' * line_length)
 		print()
-		print(Colour.GREEN_BG + font_colour_opposite + "  -- Empty   " + normal_colour)
-		print(Colour.RED_BG + font_colour_opposite + "X -- Sold    " + normal_colour)
-		print(Colour.YELLOW_BG + font_colour_opposite + "! -- Reserved" + normal_colour)
+		print(Colour.GREEN_BG + Colour.BLACK + "  -- Empty   " + normal_colour)
+		print(Colour.RED_BG + Colour.BLACK + "X -- Sold    " + normal_colour)
+		print(Colour.YELLOW_BG + Colour.BLACK + "! -- Reserved" + normal_colour)
 		print()
 	
 	@classmethod

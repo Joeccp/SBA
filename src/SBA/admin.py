@@ -18,9 +18,10 @@
 from logging import getLogger, Logger
 from os import path, remove
 from typing import Optional
-from webbrowser import open as openWebBrowser  # NOQA: lowercase function import as uppercase function
+from webbrowser import open as openWebBrowser  # NOQA: lowercase function imported as uppercase function
 
 from .coorutils import Coor, getCoorsFromCoorExpr
+from .colour import setColour
 from .house import House, Ticket
 from .utils import clearScreen, loadData, saveData
 
@@ -512,6 +513,8 @@ def deleteHouse() -> None:
 def clearAllData() -> None:
 	"""
 	Admin Mode 11: CLEAR ALL DATA
+	
+	:return: None
 	"""
 	logger: Logger = getLogger("clearAllData")
 	logger.info("Admin Mode 11: CLEAR ALL DATA")
@@ -572,6 +575,28 @@ def clearAllData() -> None:
 	logger.info("Finished clearing all saved data!")
 
 
+def changeColour() -> None:
+	"""
+	Admin Mode 14: Change the colour scheme
+	
+	:return: None
+	"""
+	from .colour import colour_mode
+	
+	logger: Logger = getLogger("changeColour")
+	logger.info("Admin Mode 14: Change the colour scheme")
+	if colour_mode == 'DARK':
+		logger.info("The colour scheme is now DARK, changing to LIGHT...")
+		setColour('LIGHT')
+	elif colour_mode == 'LIGHT':
+		logger.info("The colour scheme is now LIGHT, changing to DARK...")
+		setColour('DARK')
+	else:
+		logger.info("ERROR: Unknown colour scheme, changing to DARK anyway...")
+		setColour('DARK')
+	print(f"The {colour_mode} colour scheme will be applied the next time you logged in")
+
+
 def adminMode() -> None:
 	"""
 	Admin mode
@@ -583,8 +608,11 @@ def adminMode() -> None:
 	print("CINEMA KIOSK SYSTEM")
 	print("CONTROL PANEL\n\n\n")
 	while True:
+		from .colour import normal_colour
+		
 		logger: Logger = getLogger("adminMode")
 		logger.info("Entered main menu of the Control Panel")
+		print(normal_colour)
 		logger.info("Waiting mode code input")
 		print("\n"
 		      "0: EXIT CONTROL PANEL\n"
@@ -601,6 +629,7 @@ def adminMode() -> None:
 		      "11: CLEAR ALL DATA\n"
 		      "12: STOP THE ENTIRE PROGRAM\n"
 		      "13: Help\n"
+		      "14: Change the colour scheme"
 		      )
 		mode: str = input("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10/11/12/13)\n-> ").strip()
 		if not mode.isdecimal():
@@ -677,6 +706,10 @@ def adminMode() -> None:
 			logger.info("Admin Mode 13: Help")
 			openWebBrowser("https://joeccp.github.io/SBA/")
 			logger.info("Opened a website browser and visit https://joeccp.github.io/SBA/")
+		
+		# Change the colour scheme
+		elif mode == '14':
+			changeColour()
 		
 		else:
 			logger.info("Unknown mode code")
