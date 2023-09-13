@@ -52,14 +52,18 @@ you may use a coordinate expression to express one or more seats.
 
 A coordinate expression can be:
 1. A single seat coordinate (E.g. `1A`, `2B`, `P35`, `35P`,`99Z`), or
-2. Two seat coordinates separated by a comma (`:`),
+2. Two seat coordinates separated by a comma (`:`), 
+represents a rectangular range of seats,
    representing the start and end of an area of seats (area may not be a rectangle).
+   - These two coordinates form a diagonal of a rectangular area.
    - These two coordinates MUST NOT be the same seat.
    - The two coordinates must be two COMPLETE coordinates.
    (i.e. no missing row / column number in the two coordinates)
    - The first seat (the first coordinate) MUST be in front of the last seat (the second coordinate). 
    Order is counted from top to down, then from left to right.
-   - Valid examples: `1A:99Z`, `1B:2A`, `P35:P45`, `35P:45P`
+   - Valid examples: `1A:99Z`, `1B:2A`, `1A:1B`, `1A:2A`, `P35:P45`, `35P:45P`.
+
+In a coordinate expression, the 
 
 
 <br/><br/><br/>
