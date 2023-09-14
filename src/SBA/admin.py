@@ -571,6 +571,24 @@ def clearAllData() -> None:
 	finally:
 		logger.info("Process of removing houses data finished")
 		print("Process of removing tickets houses finished")
+	logger.info("Resetting the colour scheme to DARK")
+	print("Resetting the colour scheme to DARK")
+	setColour('DARK')
+	try:
+		logger.info("Finding the colour scheme setting file")
+		absolute_path = path.dirname(__file__)
+		relative_path = '../../data/colour.txt'
+		full_path = path.join(absolute_path, relative_path)
+		remove(full_path)
+	except FileNotFoundError:
+		logger.info("No colour scheme setting file")
+		print("No colour scheme setting file")
+	else:
+		logger.info("DELETED COLOUR SCHEME SETTING FILE")
+		print("Successfully deleted colour scheme setting file")
+	finally:
+		logger.info("Process of removing colour scheme setting file finished finished")
+		print("Process of removing colour scheme setting file finished finished")
 	print("Finish!")
 	logger.info("Finished clearing all saved data!")
 
