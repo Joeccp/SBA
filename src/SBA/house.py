@@ -18,6 +18,7 @@ from logging import getLogger, Logger
 from typing import NoReturn, Optional, Self, TypeAlias
 
 from .colour import Colour, column_colour, row_colour
+from .language import printLang
 
 Row: TypeAlias = list[int]
 Seating_plan: TypeAlias = list[Row]
@@ -86,7 +87,8 @@ class House:
 		from .colour import normal_colour
 		
 		line_length: int = self.n_column * 2 + 1
-		print(f"{'[Screen Here]':^{line_length + 8}}")
+		printLang(f"{'[Screen Here]':^{line_length + 8}}",
+		          f"{'[銀幕在此]':^{line_length + 6}}")
 		print('    ' + '_' * line_length)
 		print('    |', end='')
 		for i in range(self.n_column):
@@ -107,9 +109,12 @@ class House:
 			print(f'  {row_colour}{row + 1:>2}{normal_colour}')
 			print('    ' + '-' * line_length)
 		print()
-		print(Colour.GREEN_BG + Colour.BLACK + "  -- Empty   " + normal_colour)
-		print(Colour.RED_BG + Colour.BLACK + "X -- Sold    " + normal_colour)
-		print(Colour.YELLOW_BG + Colour.BLACK + "! -- Reserved" + normal_colour)
+		printLang(Colour.GREEN_BG + Colour.BLACK + "  -- Empty   " + normal_colour,
+		          Colour.GREEN_BG + Colour.BLACK + "  -- 可選座位" + normal_colour)
+		printLang(Colour.RED_BG + Colour.BLACK + "X -- Sold    " + normal_colour,
+		          Colour.RED_BG + Colour.BLACK + "X -- 已售座位" + normal_colour)
+		printLang(Colour.YELLOW_BG + Colour.BLACK + "! -- Reserved" + normal_colour,
+		          Colour.YELLOW_BG + Colour.BLACK + "! -- 保留座位" + normal_colour)
 		print()
 	
 	@classmethod
