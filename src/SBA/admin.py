@@ -646,7 +646,8 @@ def clearAllData() -> None:
 	logger: Logger = getLogger("clearAllData")
 	logger.info("Admin Mode 11: CLEAR ALL DATA")
 	logger.info("Confirming")
-	confirm: str = input("Please confirm you would like to clear ALL data (y/N): ").strip().upper()
+	confirm: str = inputLang("Please confirm you would like to clear ALL data (y/N): ",
+	                         "請確認你想刪除所有資料（y/N）：").strip().upper()
 	if confirm == '' or confirm == 'N':
 		logger.info("Confirmation failed, going back to the Control Panel menu")
 		printLang("Going back to the Control Panel menu...",
@@ -794,38 +795,38 @@ def adminMode() -> None:
 		print(normal_colour)
 		logger.info("Waiting mode code input")
 		printLang("\n"
-		          " 0: EXIT CONTROL PANEL\n"
-		          " 1: Create a new house\n"
-		          " 2: Update the movie of a house\n"
-		          " 3: Save data\n"
-		          " 4: Load data\n"
-		          " 5: Check houses information\n"
-		          " 6: Seat status override\n"
-		          " 7: Check ticket information\n"
-		          " 8: Delete a ticket\n"
-		          " 9: Clear all the seats of a house\n"
-		          "10: DELETE A HOUSE\n"
-		          "11: CLEAR ALL DATA\n"
-		          "12: STOP THE ENTIRE PROGRAM\n"
-		          "13: Help\n"
-		          "14: Change the colour scheme\n"
+		          " 0: 🔚EXIT CONTROL PANEL\n"
+		          " 1: 🎦Create a new house\n"
+		          " 2: 📽️Update the movie of a house\n"
+		          " 3: 💾Save data\n"
+		          " 4: 🔄Load data\n"
+		          " 5: 🎦Check houses information\n"
+		          " 6: 💺Seat status override\n"
+		          " 7: 🎫Check ticket information\n"
+		          " 8: ⚠️Delete a ticket\n"
+		          " 9: ⚠️Clear all the seats of a house\n"
+		          "10: ⚠️DELETE A HOUSE\n"
+		          "11: ☢️CLEAR ALL DATA\n"
+		          "12: 🛑STOP THE ENTIRE PROGRAM\n"
+		          "13: ❔Help\n"
+		          "14: 🎨Change the colour scheme\n"
 		          "15: 🌐Change the language",
 		          "\n"
-		          " 0: 退出控制面板\n"
-		          " 1: 創建新電影院\n"
-		          " 2: 更新電影名稱\n"
-		          " 3: 儲存資料\n"
-		          " 4: 載入資料\n"
-		          " 5: 查詢電影院資訊\n"
-		          " 6: 覆蓋座位狀態\n"
-		          " 7: 查詢電影票資訊\n"
-		          " 8: 刪除電影票\n"
-		          " 9: 清空電影院的所有座位\n"
-		          "10: 刪除電影院\n"
-		          "11: 刪除所有資料\n"
-		          "12: 停止本程式\n"
-		          "13: 教學\n"
-		          "14: 轉換配色\n"
+		          " 0: 🔚退出控制面板\n"
+		          " 1: 🎦創建新電影院\n"
+		          " 2: 📽️更新電影名稱\n"
+		          " 3: 💾儲存資料\n"
+		          " 4: 🔄載入資料\n"
+		          " 5: 🎦查詢電影院資訊\n"
+		          " 6: 💺覆蓋座位狀態\n"
+		          " 7: 🎫查詢電影票資訊\n"
+		          " 8: ⚠️刪除電影票\n"
+		          " 9: ⚠️清空電影院的所有座位\n"
+		          "10: ⚠️刪除電影院\n"
+		          "11: ☢️刪除所有資料\n"
+		          "12: 🛑停止本程式\n"
+		          "13: ❔教學\n"
+		          "14: 🎨轉換配色\n"
 		          "15: 🌐轉換語言"
 		          )
 		mode: str = inputLang("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10/11/12/13/14)\n-> ",
