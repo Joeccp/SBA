@@ -23,6 +23,7 @@ from tomllib import load as loadtoml
 from typing import Any
 
 from .colour import Colour
+from .language import inputLang, printLang
 from .utils import clearScreen
 
 
@@ -59,6 +60,7 @@ def login(*, first_time: bool = False) -> int:
 	:raise FileNotFoundError: If `accounts.toml` could not be found
 	"""
 	from .colour import normal_colour
+	from .language import language
 	
 	logger: Logger = getLogger('login')
 	
@@ -73,7 +75,10 @@ def login(*, first_time: bool = False) -> int:
 			file_data: dict[str, Any] = loadtoml(file)
 			account_list: list[dict[str, str]] = list(file_data.values())
 			if first_time:
-				message: str = "To initialize, please login as admin."
+				if language == 'ENGLISH':
+					message: str = "To initialize, please login as admin."
+				else:
+					message: str = "請登錄為管理員以初始化系統。"
 				logger.info("First time logging in, requires login as admin")
 			else:
 				message: str = ''
@@ -82,8 +87,11 @@ def login(*, first_time: bool = False) -> int:
 				print("CINEMA KIOSK SYSTEM\n\n\n")
 				print(Colour.RED + message + normal_colour + "\n\n\n")
 				logger.info("Waiting username input")
-				username: str = input("Username: ")
+				username: str = inputLang("Username: ", "用戶名稱：")
 				username: str = username.strip()
+				if username == '':
+					message: str = ''
+					continue
 				username_exists: bool = False
 				for account in account_list:
 					if account["name"] == username:
@@ -91,11 +99,18 @@ def login(*, first_time: bool = False) -> int:
 						user_account: dict[str, str] = account
 				if not username_exists:
 					logger.info("Username doesn't exit")
-					message: str = "Username does not exists, please try again."
+					if language == 'ENGLISH':
+						message: str = "Username does not exists, please try again."
+					else:
+						message: str = "用戶名稱不存在，請重新輸入。"
 					continue
 				# Make sure you use cmd.exe or powershell.exe
 				# getpass() in python terminal inside IDEs may not work, e.g. PyCharm
-				password: str = getpass("Password: ").strip()
+				if language == 'ENGLISH':
+					prompt: str = "Password: "
+				else:
+					prompt: str = "密碼："
+				password: str = getpass(prompt).strip()
 				hashed_password: str = hash(password)
 				if user_account["hashed_password"] == hashed_password:
 					if user_account["name"] == "admin":
@@ -104,17 +119,24 @@ def login(*, first_time: bool = False) -> int:
 					else:  # Login as user success
 						if first_time:
 							logger.info("USER WANTS TO LOGIN BUT ONLY ADMIN CAN LOGIN NOW")
-							message: str = "Sorry, only admin can log in as initialization is required."
+							if language == 'ENGLISH':
+								message: str = "Sorry, only admin can log in now as initialization is required."
+							else:
+								message: str = "抱歉，現在只有管理員才能登錄。"
 							continue
 						logger.info("LOGGED IN AS USER")
 						return 0
 				else:
 					logger.info("Incorrect password")
-					message: str = "Password incorrect, please try again."
-
+					if language == 'ENGLISH':
+						message: str = "Password incorrect, please try again."
+					else:
+						message: str = "密碼錯誤，請重新登錄。"
+	
 	except FileNotFoundError:
 		logger.critical("No accounts.toml file")
 		logger.critical("QUITTING THE PROGRAM: No accounts information")
+		# Important error message, no translation is needed (to prevent further error)
 		print("Cannot find accounts.toml which is necessary for the login function.")
 		print("Exiting the program...")
 		quit()
