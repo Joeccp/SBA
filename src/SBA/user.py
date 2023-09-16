@@ -142,7 +142,7 @@ def checkTicket() -> None:
 	logger.info("User Mode 2: Check ticket information")
 	clearScreen()
 	print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n")
-	print("Please enter you ticket number (starts with 'T'):")
+	print("Please enter your ticket number (starts with 'T'):")
 	logger.info("Waiting ticket number input")
 	ticket_number: str = input("-> ").strip().upper()
 	if ticket_number == "":
@@ -185,9 +185,9 @@ def checkTicket() -> None:
 		message = ""
 		return
 	ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
-	print(f"{ticket_no:<6} @ {time} "
+	print(f"{ticket_no:<6} @{time} "
 	      f"House {house_no:<2} -- {movie:<30} ~ "
-	      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
+	      f"Seat<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
 	print("\n\n")
 	input("Hit enter to go back to the main menu")
 	message = ""
@@ -207,7 +207,7 @@ def ticketRefund() -> None:
 	logger.info("User Mode 3: Ticket refund")
 	clearScreen()
 	print("CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n")
-	print("Please enter you ticket number (starts with 'T'):")
+	print("Please enter your ticket number (starts with 'T'):")
 	logger.info("Waiting ticket number input")
 	ticket_number: str = input("-> ").strip().upper().replace(' ', '')
 	if ticket_number == "":
@@ -251,9 +251,9 @@ def ticketRefund() -> None:
 		return
 	ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 	logger.info(f"User want to delete this ticket: {ticket}")
-	print(f"{ticket_no:<6} @ {time} "
+	print(f"{ticket_no:<6} @{time} "
 	      f"House {house_no:<2} -- {movie:<50} ~"
-	      f"Seat <{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
+	      f"Seat<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>")
 	print("\nAre you sure you want to get refund of this ticket? (y/N)")
 	logger.info("Confirming")
 	confirm: str = input("-> ").strip().upper()

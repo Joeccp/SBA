@@ -26,14 +26,14 @@ You should see something like this:
 
 The format of doing seat(s) operation is:
 
-`[EMPTY | BUY | RESERVE] - {House number} - {Coordinate Expression}`
+`(EMPTY | BUY | RESERVE) - <House number> - <Coordinate Expression>`
 
-Replace `[EMPTY | BUY | RESERVE]` to the action you want to perform 
+Replace `(EMPTY | BUY | RESERVE)` to the action you want to perform 
 (`Empty`, `BUY`, `RESERVE`);
 
-replace `{House number}` to the house number of the seat(s);
+replace `<House number>` to the house number of the seat(s);
 
-replace `{Coordinate Expression}` to the coordinate expression
+replace `<Coordinate Expression>` to the coordinate expression
 representing the range of the seat(s) selected.
 
 ---
@@ -43,7 +43,7 @@ The command is case-insensitive. All spaces are ignored.
 You MUST separate the three argument using hyphens (`-`),
 as shown above.
 
-You SHOULD NOT include brackets (`[]`, `{}`) and vertical bar (`|`).
+You SHOULD NOT include brackets (`()`, `<>`) and vertical bar (`|`).
 They are for demonstration purpose only, though they will be ignored.
 
 ### Coordinate Expression
