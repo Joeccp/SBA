@@ -136,7 +136,7 @@ def login(*, first_time: bool = False) -> int:
 	except FileNotFoundError:
 		logger.critical("No accounts.toml file")
 		logger.critical("QUITTING THE PROGRAM: No accounts information")
-		# Important error message, no translation is needed (to prevent further error)
+		# Important error message for a critical error, no translation is needed (to prevent further error)
 		print("Cannot find accounts.toml which is necessary for the login function.")
 		print("Exiting the program...")
 		quit()
