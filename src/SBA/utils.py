@@ -15,10 +15,10 @@
 # limitations under the License.
 
 
-from pickle import dump, load
 from datetime import datetime
 from logging import basicConfig, DEBUG, getLogger, Logger
 from os import get_terminal_size, makedirs, path, system
+from pickle import dump, load
 from platform import system as systemPlatform  # NOQA: lowercase function imported as uppercase function
 from sys import version_info
 
@@ -75,7 +75,7 @@ def clearScreen() -> None:
 
 	:return: None
 	"""
-
+	
 	try:
 		terminal_width, terminal_height = get_terminal_size()
 		# Print empty lines in case system('cls') does not work
