@@ -23,7 +23,7 @@ from tomllib import load as loadtoml
 from typing import Any
 
 from .colour import Colour
-from .language import inputLang, printLang
+from .language import inputLang
 from .utils import clearScreen
 
 
