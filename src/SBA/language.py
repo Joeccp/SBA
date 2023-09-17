@@ -88,7 +88,6 @@ def loadLanguage() -> None:
 	setLanguage(language_)
 
 
-
 def printLang(english_message: str = '', chinese_message: str = '', /, **kwargs) -> None:
 	"""
 	Print the message with the correct language
