@@ -22,6 +22,7 @@ from pickle import dump, load
 from platform import system as systemPlatform  # NOQA: lowercase function imported as uppercase function
 from sys import version_info
 
+from .colour import loadColour, setColour
 from .house import House
 from .language import printLang
 
@@ -99,6 +100,7 @@ def saveData(*, print_log: bool = False) -> None:
 	:type print_log: bool
 	:return: None
 	"""
+	from .colour import colour_mode
 	
 	logger: Logger = getLogger('saveData')
 	logger.info("Saving Data")
@@ -141,6 +143,9 @@ def saveData(*, print_log: bool = False) -> None:
 	logger.debug(f"Full path = {full_path}")
 	with open(full_path, 'wb') as file:
 		dump([House.total_tickets, House.tickets_table], file)
+	
+	internalLog("Writing colour scheme setting", "正在寫入顔色設定")
+	setColour(colour_mode)
 	
 	internalLog("Data saving process finished", "儲存資料程序完成")
 
@@ -199,6 +204,10 @@ def loadData(*, print_log: bool = False) -> None:
 		internalLog("Tickets data loaded", "已載入電影票資料")
 	except FileNotFoundError:
 		internalLog("No tickets data found", "無電影票資料")
+	
+	internalLog("Loading colour scheme", "正在載入配色設定")
+	loadColour()
+	internalLog("Colour scheme loaded", "已載入配色設定")
 	
 	internalLog("Data loading process finished", "載入資料程序完成")
 

@@ -33,7 +33,7 @@ checkSystemPlatform()
 checkPythonVersion()
 
 from .admin import adminMode
-from .colour import initColour
+from .colour import loadColour
 from .login import login
 from .user import userMode
 from .utils import clearScreen, initLog, loadData
@@ -52,7 +52,7 @@ def main() -> None:
 	
 	# So elegant :)
 	initLog()
-	initColour()
+	loadColour()
 	clearScreen()
 	from .colour import normal_colour
 	print(normal_colour)

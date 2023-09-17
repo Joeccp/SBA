@@ -105,7 +105,7 @@ def setColour(colour_code: ColourCode) -> None:
 	print(normal_colour)
 
 
-def initColour() -> None:
+def loadColour() -> None:
 	"""
 	Initialize the font and background colour
 
@@ -115,7 +115,7 @@ def initColour() -> None:
 	:return: None
 	"""
 	
-	logger: Logger = getLogger('initColour')
+	logger: Logger = getLogger('loadColour')
 	logger.info("Initializing the colour scheme")
 	
 	absolute_path = path.dirname(__file__)
@@ -129,6 +129,10 @@ def initColour() -> None:
 			# The context of the file should be a valid ColorCode
 			colour_code: ColourCode = file.read().strip().upper()  # type: ignore # NOQA
 			logger.info(f"Colour code stored in the file is {colour_code}")
+			if colour_code not in ['DARK', 'LIGHT']:  # Save insurance
+				logger.info("Unknown colour_code, default set to DARK")
+				colour_code: ColourCode = 'DARK'
+				setColour('DARK')
 	except FileNotFoundError:
 		logger.info("File not found, default set to DARK")
 		colour_code = 'DARK'
