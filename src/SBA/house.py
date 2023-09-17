@@ -141,6 +141,10 @@ class House:
 		logger: Logger = getLogger("House.searchTicket")
 		logger.info(f"Searching ticket: {target_ticket_index}")
 		
+		if not cls.tickets_table:
+			logger.info("No any tickets, just return None")
+			return None
+		
 		min_: int = 0
 		max_: int = cls.get_n_tickets() - 1
 		logger.debug(f"Min: {min_}  & Max: {max_}")
