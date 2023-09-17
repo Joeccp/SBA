@@ -68,7 +68,7 @@ class NoStartingCoordinate(CoordinateExpressionException):
 
 class NoEndingCoordinate(CoordinateExpressionException):
 	"""Ending coordinate not given"""
-	chinese_msg: str = "無完結坐標"
+	chinese_msg: str = "無結尾坐標"
 
 
 class CoordinatesWrongOrder(CoordinateExpressionException):

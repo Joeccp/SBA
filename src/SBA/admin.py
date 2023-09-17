@@ -681,7 +681,7 @@ def clearAllData() -> None:
 		printLang("Successfully deleted saved tickets data", "成功刪除已儲存的電影票資料")
 	finally:
 		logger.info("Process of removing tickets data finished")
-		printLang("Process of removing tickets data finished", "刪除電影票資料之程序完結")
+		printLang("Process of removing tickets data finished", "完成刪除電影票資料程序")
 	House.houses_table = {}
 	House.n_House = 0
 	logger.info("Removed unsaved houses data")
@@ -700,7 +700,7 @@ def clearAllData() -> None:
 		printLang("Successfully deleted saved houses data", "成功刪除已儲存的電影院資料")
 	finally:
 		logger.info("Process of removing houses data finished")
-		printLang("Process of removing tickets houses finished", "刪除電影院資料之程序完結")
+		printLang("Process of removing tickets houses finished", "完成刪除電影院資料程序")
 	logger.info("Resetting the colour scheme to DARK")
 	printLang("Resetting the colour scheme to DARK", "正在重設配色為 DARK")
 	setColour('DARK')
@@ -719,7 +719,7 @@ def clearAllData() -> None:
 	finally:
 		logger.info("Process of removing colour scheme setting file finished finished")
 		printLang("Process of removing colour scheme setting file finished finished",
-		          "刪除配色資料之程序完結")
+		          "完成刪除配色資料程序")
 	printLang("Finish!", "完成！")
 	logger.info("Finished clearing all saved data!")
 

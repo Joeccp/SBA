@@ -23,6 +23,7 @@ from platform import system as systemPlatform  # NOQA: lowercase function import
 from sys import version_info
 
 from .house import House
+from .language import printLang
 
 
 def checkSystemPlatform() -> None:
@@ -102,29 +103,31 @@ def saveData(*, print_log: bool = False) -> None:
 	logger: Logger = getLogger('saveData')
 	logger.info("Saving Data")
 	
-	def internalLog(message: str) -> None:
+	def internalLog(english_message: str, chinese_message: str) -> None:
 		"""
-		Print log if `print_log` is `True`
-		
-		:param message: Message to print
-		:type message: str
+		Print (English) log if `print_log` is `True`
+
+		:param english_message: An English message to print and log
+		:type english_message: str
+		:param chinese_message: A Chinese message to print
+		:type chinese_message: str
 		:return: None
 		"""
 		if print_log:
-			print(message)
-		logger.info(message)
+			printLang(english_message, chinese_message)
+		logger.info(english_message)
 	
 	absolute_path = path.dirname(__file__)
 	
 	relative_path = '../../data'
 	full_path = path.join(absolute_path, relative_path)
 	logger.debug(f"Full path = {full_path}")
-	internalLog("Reaching the data folder")
+	internalLog("Reaching the data folder", "正在尋找 data 資料夾")
 	if not path.isdir(full_path):
-		internalLog("No data folder, creating one")
+		internalLog("No data folder, creating one", "無 data 資料夾，正在創建")
 		makedirs(full_path)
 	
-	internalLog("Writing houses data")
+	internalLog("Writing houses data", "正在寫入電影院資料")
 	relative_path = "../../data/houses"
 	full_path = path.join(absolute_path, relative_path)
 	logger.debug(f"Full path = {full_path}")
@@ -132,14 +135,14 @@ def saveData(*, print_log: bool = False) -> None:
 		# No need save House.n_house, count it later
 		dump(House.houses_table, file)
 	
-	internalLog("Writing tickets data")
+	internalLog("Writing tickets data", "正在寫入電影票資料")
 	relative_path = "../../data/tickets"
 	full_path = path.join(absolute_path, relative_path)
 	logger.debug(f"Full path = {full_path}")
 	with open(full_path, 'wb') as file:
 		dump([House.total_tickets, House.tickets_table], file)
 	
-	internalLog("Data saving process finished")
+	internalLog("Data saving process finished", "儲存資料程序完成")
 
 
 def loadData(*, print_log: bool = False) -> None:
@@ -155,17 +158,19 @@ def loadData(*, print_log: bool = False) -> None:
 	logger: Logger = getLogger('loadData')
 	logger.info("Loading Data")
 	
-	def internalLog(message: str) -> None:
+	def internalLog(english_message: str, chinese_message: str) -> None:
 		"""
-		Print log if `print_log` is `True`
+		Print (English) log if `print_log` is `True`
 
-		:param message: Message to print
-		:type message: str
+		:param english_message: An English message to print and log
+		:type english_message: str
+		:param chinese_message: A Chinese message to print
+		:type chinese_message: str
 		:return: None
 		"""
 		if print_log:
-			print(message)
-		logger.info(message)
+			printLang(english_message, chinese_message)
+		logger.info(english_message)
 	
 	absolute_path = path.dirname(__file__)
 	
@@ -173,29 +178,29 @@ def loadData(*, print_log: bool = False) -> None:
 	full_path = path.join(absolute_path, relative_path)
 	logger.debug(f"Full path = {full_path}")
 	try:
-		internalLog("Finding houses data")
+		internalLog("Finding houses data", "正在尋找電影院資料")
 		with open(full_path, 'rb') as file:
 			data: dict = load(file)
 		House.houses_table = data
 		House.n_House = len(House.houses_table)
-		internalLog("Houses data loaded")
+		internalLog("Houses data loaded", "已載入電影院資料")
 	except FileNotFoundError:
-		internalLog("No houses data found")
+		internalLog("No houses data found", "無電影院資料")
 	
 	relative_path = "../../data/tickets"
 	full_path = path.join(absolute_path, relative_path)
 	logger.debug(f"Full path = {full_path}")
 	try:
-		internalLog("Finding tickets data")
+		internalLog("Finding tickets data", "正在尋找電影票資料")
 		with open(full_path, 'rb') as file:
 			data: dict = load(file)
 		House.total_tickets = data[0]
 		House.tickets_table = data[1]
-		internalLog("Tickets data loaded")
+		internalLog("Tickets data loaded", "已載入電影票資料")
 	except FileNotFoundError:
-		internalLog("No tickets data found")
+		internalLog("No tickets data found", "無電影票資料")
 	
-	internalLog("Data loading process finished")
+	internalLog("Data loading process finished", "載入資料程序完成")
 
 
 def initLog() -> None:
