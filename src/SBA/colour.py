@@ -107,16 +107,16 @@ def setColour(colour_code: ColourCode) -> None:
 
 def loadColour() -> None:
 	"""
-	Initialize the font and background colour
+	Load the font and background colour setting
 
 	Reads the data from data/colour.txt
-	If the file does not exist, create one and set to DARk
+	If the file does not exist, create one and set to DARK
 
 	:return: None
 	"""
 	
 	logger: Logger = getLogger('loadColour')
-	logger.info("Initializing the colour scheme")
+	logger.info("Loading the colour scheme")
 	
 	absolute_path = path.dirname(__file__)
 	relative_path = "../../data/colour.txt"
@@ -127,11 +127,12 @@ def loadColour() -> None:
 		logger.info("Reaching the file")
 		with open(full_path, 'r') as file:
 			# The context of the file should be a valid ColorCode
-			colour_code: ColourCode = file.read().strip().upper()  # type: ignore # NOQA
+			colour_code: str = file.read().strip().upper()
 			logger.info(f"Colour code stored in the file is {colour_code}")
 			if colour_code not in ['DARK', 'LIGHT']:  # Save insurance
 				logger.info("Unknown colour_code, default set to DARK")
 				colour_code: ColourCode = 'DARK'
+			colour_code: ColourCode
 	except FileNotFoundError:
 		logger.info("File not found, default set to DARK")
 		colour_code = 'DARK'

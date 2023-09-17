@@ -15,6 +15,7 @@
 #  limitations under the License.
 
 from logging import getLogger, Logger
+from os import path
 from typing import Literal
 
 
@@ -23,7 +24,7 @@ language: Literal['CHINESE', 'ENGLISH'] = 'ENGLISH'
 
 def setLanguage(language_: Literal['CHINESE', 'ENGLISH']) -> None:
 	"""
-	Change the language
+	Set the language
 	
 	:param language_: The language code
 	:type language_: Literal['CHINESE', 'ENGLISH']
@@ -41,6 +42,52 @@ def setLanguage(language_: Literal['CHINESE', 'ENGLISH']) -> None:
 	logger.info(f"Setting the language to {language_}")
 	language = language_
 	
+	logger.info("Saving language setting")
+	absolute_path = path.dirname(__file__)
+	relative_path = "../../data/language.txt"
+	full_path = path.join(absolute_path, relative_path)
+	logger.debug(f"Full path = {full_path}")
+	
+	logger.info("Reaching the file")
+	with open(full_path, 'w') as file:
+		logger.info("Writing the language data to the file")
+		file.write(language)
+
+
+def loadLanguage() -> None:
+	"""
+	Load the language setting
+
+	Reads the data from data/language.txt
+	If the file does not exist, create one and set to ENGLISH
+
+	:return: None
+	"""
+	logger: Logger = getLogger('loadLanguage')
+	logger.info("Loading the language setting")
+	
+	absolute_path = path.dirname(__file__)
+	relative_path = "../../data/language.txt"
+	full_path = path.join(absolute_path, relative_path)
+	logger.debug(f"Full path = {full_path}")
+	
+	try:
+		logger.info("Reaching the file")
+		with open(full_path, 'r') as file:
+			# The context of the file should a valid Literal['ENGLISH', 'CHINESE']
+			language_: str = file.read().strip().upper()
+			logger.info(f"Language option stored in the file is {language_}")
+			if language_ not in ('ENGLISH', 'CHINESE'):
+				logger.info("Unknown language option, default set to ENGLISH")
+				language_: Literal['ENGLISH', 'CHINESE'] = 'ENGLISH'
+			language_: Literal['ENGLISH', 'CHINESE']
+	except FileNotFoundError:
+		logger.info("File not found, default set to ENGLISH")
+		language_: Literal['ENGLISH', 'CHINESE'] = 'ENGLISH'
+		
+	setLanguage(language_)
+
+
 
 def printLang(english_message: str = '', chinese_message: str = '', /, **kwargs) -> None:
 	"""
