@@ -132,9 +132,9 @@ def loadColour() -> None:
 			if colour_code not in ['DARK', 'LIGHT']:  # Save insurance
 				logger.info("Unknown colour_code, default set to DARK")
 				colour_code: ColourCode = 'DARK'
-			colour_code: ColourCode
 	except FileNotFoundError:
 		logger.info("File not found, default set to DARK")
 		colour_code = 'DARK'
-	
-	setColour(colour_code)
+		
+	colour_code: ColourCode
+	setColour(colour_code)  # type: ignore[arg-type] # colour_code must be ColourCode

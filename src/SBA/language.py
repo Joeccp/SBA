@@ -80,12 +80,12 @@ def loadLanguage() -> None:
 			if language_ not in ('ENGLISH', 'CHINESE'):
 				logger.info("Unknown language option, default set to ENGLISH")
 				language_: Literal['ENGLISH', 'CHINESE'] = 'ENGLISH'
-			language_: Literal['ENGLISH', 'CHINESE']
 	except FileNotFoundError:
 		logger.info("File not found, default set to ENGLISH")
 		language_: Literal['ENGLISH', 'CHINESE'] = 'ENGLISH'
 		
-	setLanguage(language_)
+	language_: Literal['ENGLISH', 'CHINESE']
+	setLanguage(language_)  # type: ignore[arg-type] # language_ must be Literal['ENGLISH', 'CHINESE']
 
 
 def printLang(english_message: str = '', chinese_message: str = '', /, **kwargs) -> None:
