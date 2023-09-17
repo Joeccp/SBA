@@ -34,6 +34,7 @@ checkPythonVersion()
 
 from .admin import adminMode
 from .colour import loadColour
+from .language import loadLanguage
 from .login import login
 from .user import userMode
 from .utils import clearScreen, initLog, loadData
@@ -53,6 +54,7 @@ def main() -> None:
 	# So elegant :)
 	initLog()
 	loadColour()
+	loadLanguage()
 	clearScreen()
 	from .colour import normal_colour
 	print(normal_colour)

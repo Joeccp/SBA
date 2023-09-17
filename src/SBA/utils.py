@@ -24,7 +24,7 @@ from sys import version_info
 
 from .colour import loadColour, setColour
 from .house import House
-from .language import printLang
+from .language import loadLanguage, printLang, setLanguage
 
 
 def checkSystemPlatform() -> None:
@@ -101,6 +101,7 @@ def saveData(*, print_log: bool = False) -> None:
 	:return: None
 	"""
 	from .colour import colour_mode
+	from .language import language
 	
 	logger: Logger = getLogger('saveData')
 	logger.info("Saving Data")
@@ -146,6 +147,9 @@ def saveData(*, print_log: bool = False) -> None:
 	
 	internalLog("Writing colour scheme setting", "正在寫入顔色設定")
 	setColour(colour_mode)
+	
+	internalLog("Writing language option", "正在寫入語言設定")
+	setLanguage(language)
 	
 	internalLog("Data saving process finished", "儲存資料程序完成")
 
@@ -208,6 +212,10 @@ def loadData(*, print_log: bool = False) -> None:
 	internalLog("Loading colour scheme", "正在載入配色設定")
 	loadColour()
 	internalLog("Colour scheme loaded", "已載入配色設定")
+	
+	internalLog("Loading language setting", "正在載入語言設定")
+	loadLanguage()
+	internalLog("Colour scheme loaded", "已載入語言設定")
 	
 	internalLog("Data loading process finished", "載入資料程序完成")
 

@@ -720,6 +720,21 @@ def clearAllData() -> None:
 		logger.info("Process of removing colour scheme setting file finished finished")
 		printLang("Process of removing colour scheme setting file finished finished",
 		          "完成刪除配色資料程序")
+	printLang("Resetting the language to ENGLISH", "正在重設語言為 ENGLISH")
+	setLanguage('ENGLISH')
+	try:
+		logger.info("Finding the language setting file")
+		absolute_path = path.dirname(__file__)
+		relative_path = '../../data/language.txt'
+		full_path = path.join(absolute_path, relative_path)
+		remove(full_path)
+	except FileNotFoundError:
+		logger.info("No language setting file")
+		printLang("No language setting file", "沒有語言設定檔案")
+	finally:
+		logger.info("Process of removing language setting file finished finished")
+		printLang("Process of removing language setting file finished finished",
+		          "完成刪除語言資料程序")
 	printLang("Finish!", "完成！")
 	logger.info("Finished clearing all saved data!")
 

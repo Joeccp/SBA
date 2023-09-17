@@ -23,7 +23,7 @@ from tomllib import load as loadtoml
 from typing import Any
 
 from .colour import Colour
-from .language import inputLang
+from .language import inputLang, printLang
 from .utils import clearScreen
 
 
@@ -84,7 +84,7 @@ def login(*, first_time: bool = False) -> int:
 				message: str = ''
 			while True:
 				clearScreen()
-				print("CINEMA KIOSK SYSTEM\n\n\n")
+				printLang("CINEMA KIOSK SYSTEM\n\n\n", "電影售票系統\n\n\n")
 				print(Colour.RED + message + normal_colour + "\n\n\n")
 				logger.info("Waiting username input")
 				username: str = inputLang("Username: ", "用戶名稱：")
