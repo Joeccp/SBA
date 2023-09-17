@@ -102,7 +102,7 @@ def setColour(colour_code: ColourCode) -> None:
 		logger.info("Writing the colour data to the file")
 		file.write(colour_mode)
 		
-	print(normal_colour)
+	print(normal_colour, end='')
 
 
 def loadColour() -> None:
@@ -132,10 +132,8 @@ def loadColour() -> None:
 			if colour_code not in ['DARK', 'LIGHT']:  # Save insurance
 				logger.info("Unknown colour_code, default set to DARK")
 				colour_code: ColourCode = 'DARK'
-				setColour('DARK')
 	except FileNotFoundError:
 		logger.info("File not found, default set to DARK")
 		colour_code = 'DARK'
 	
-	colour_code: ColourCode
 	setColour(colour_code)
