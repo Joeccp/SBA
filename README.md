@@ -80,6 +80,7 @@ The SBA report can be found [here](report/REPORT.md).
     - [Cinema houses](docs/house.md)
     - [Colour scheme](docs/colour.md)
     - [Data Storage](docs/dataStorage.md)
+    - [Language](docs/language.md)
     - [Ticket](docs/ticket.md)
 - [Log files](docs/logs.md)
 
