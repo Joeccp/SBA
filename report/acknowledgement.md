@@ -10,15 +10,13 @@ such as ChatGPT or GitHub Copilot.
 However, when it comes to programming concepts, the format of a specific file, 
 or the usage of some functions/modules/libraries/frameworks, 
 I did reference some materials. 
-There should be no originality or infringement issue.
-Necessary modifications (if required) are made to prevent the above concerns. 
+There should be no issue of originality nor infringement.
 
-As required, here is a list of my references:
+As required, here is a list of my references (***W.I.P.***):
 
 |  Type   | Name/Title                                                       | Author(s)    | URL (if any)                                  | Description                                           |
 |:-------:|:-----------------------------------------------------------------|:-------------|:----------------------------------------------|:------------------------------------------------------|
 |  Video  | Automated Testing in Python with pytest, tox, and GitHub Actions | mCoding      | https://www.youtube.com/watch?v=DhUpxWjOhME   | Tutorial of mypy, Pytest, Tox, Flake8, GitHub Actions |
-|         |                                                                  |              |                                               |                                                       |
 
 
 
