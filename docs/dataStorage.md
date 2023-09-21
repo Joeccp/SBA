@@ -5,12 +5,13 @@ Data is automatically saved.
 ***Each time saving data will cover the previous saved data.***
 
 Houses and tickets data are stored at `SBA/data/houses` and `SBA/data/tickets` 
-(without a filename extension), colour scheme setting is stored at `SBA/data/colour.txt`,
-if there are no such files, the program will create them.
+(without a filename extension), the colour scheme setting is stored at `SBA/data/colour.txt`,
+the language option is stored at `SBA/data/language.txt`
+if there are no such files, the program will create them if needed.
 
 When the program is started, it will try to load data.
 
-See [documentation](colour.md) on how to change the colour scheme.
+See documentation on how to change the [colour scheme](colour.md) and [language](language.md).
 
 ---
 
@@ -36,6 +37,7 @@ Login as an **administrator**, enter mode `11`(CLEAR ALL DATA).
 It will clear ALL data: every house, every ticket. 
 Saved data will also be deleted.
 Colour scheme will be reset to `DARK`.
+Language will be reset to `ENGLISH`.
 It should reset everything.
 
 

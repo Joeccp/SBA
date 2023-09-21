@@ -70,6 +70,10 @@ The SBA report can be found [here](report/REPORT.md).
 
 
 ## Documentations
+
+*Documentation is only available in English.*
+*文檔僅提供英文版。*
+
 - User manual
     - [Login](docs/login.md)
     - [Admin Control Panel](docs/controlPanel.md)

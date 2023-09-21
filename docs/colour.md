@@ -25,6 +25,8 @@ Login as **administrator**, enter mode `14`(Change the colour scheme).
 
 The colour scheme will be changed to a **different** colour scheme and be saved.
 
+It also affects the user menu.
+
 ---
 
 Copyright © 2023 Joe Chau, Licensed under the 
