@@ -787,7 +787,7 @@ def changeLanguage() -> None:
 		setLanguage('ENGLISH')
 	
 	printLang(
-		"Success! The language is now ENGLISH",
+		"Success! The language is now English",
 		"成功！ 現在的語言為中文"
 	)
 
