@@ -29,11 +29,10 @@ generative artificial intelligence such as ChatGPT or GitHub Copilot.
 
 This project has *NO PRACTICAL USE*, this is just a piece of high school homework :)
 
+*If you are reading this from the GitHub repository, 
+you may want to check out the online version of this documentation instead: <https://joeccp.github.io/SBA/>*
 
 ## Getting started
-
-*If you are reading from the GitHub repository, 
-you may want to check out the online version of this documentation instead: <https://joeccp.github.io/SBA/>*
 
 ### Requirements
 - Windows 10/11
