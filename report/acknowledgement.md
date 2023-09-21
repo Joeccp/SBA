@@ -10,7 +10,7 @@ such as ChatGPT or GitHub Copilot.
 However, when it comes to programming concepts, the format of a specific file, 
 or the usage of some functions/modules/libraries/frameworks, 
 I did reference some materials. 
-There should be no issue of originality nor infringement.
+There should not be concerns for originality nor infringement.
 
 As required, here is a list of my references (***W.I.P.***):
 
