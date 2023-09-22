@@ -65,7 +65,7 @@ Run this package using Python via `cmd`/`powershell` with the `-m` flag, or dire
 
 
 # Report
-The SBA report can be found [here](report/REPORT.md).
+A rough SBA report can be found [here](report/REPORT.md). NOT THE FINAL VERSION. Working in progress.
 
 
 ## Documentations
