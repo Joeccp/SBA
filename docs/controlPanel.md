@@ -30,6 +30,7 @@ You can do the following things by entering the respective 'mode' option:
 |  13  | See documentations of this program              |
 |  14  | [Change the colour scheme](colour.md)           |
 |  15  | [Change the language](language.md)              |
+|  16  | Clear screen                                    |
 
 
 ---
