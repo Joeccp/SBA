@@ -941,6 +941,8 @@ def adminMode() -> None:
 			logger: Logger = getLogger("adminMode.mode_16")
 			logger.info("Admin Mode 16: Clear screen")
 			clearScreen()
+			printLang("CINEMA KIOSK SYSTEM", "電影售票系統")
+			printLang("CONTROL PANEL\n\n\n", "控制面板\n\n\n")
 
 		else:
 			logger.info("Unknown mode code")
