@@ -825,7 +825,8 @@ def adminMode() -> None:
 		          "12: STOP THE ENTIRE PROGRAM\n"
 		          "13: Help\n"
 		          "14: Change the colour scheme\n"
-		          "15: Change the language",
+		          "15: Change the language\n"
+				  "16: Clear screen",
 		          "\n"
 		          " 0：退出控制面板\n"
 		          " 1：創建新電影院\n"
@@ -842,7 +843,8 @@ def adminMode() -> None:
 		          "12：停止本程式\n"
 		          "13：教學\n"
 		          "14：轉換配色\n"
-		          "15：轉換語言"
+		          "15：轉換語言\n"
+				  "16：清除屏幕"
 		          )
 		mode: str = inputLang("Please choose a mode (0/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15)\n-> ",
 		                      "請選擇模式（0/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15）\n-> ").strip()
@@ -934,6 +936,12 @@ def adminMode() -> None:
 		elif mode == '15':
 			changeLanguage()
 		
+		# Clear screen
+		elif mode == '16':
+			logger: Logger = getLogger("adminMode.mode_16")
+			logger.info("Admin Mode 16: Clear screen")
+			clearScreen()
+
 		else:
 			logger.info("Unknown mode code")
 			printLang(f"ERROR: Unknown mode code {mode}", f"錯誤：無效模式代碼——{mode}")
