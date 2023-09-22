@@ -8,15 +8,15 @@ such as ChatGPT or GitHub Copilot.
 
 ## References
 However, when it comes to programming concepts, the format of a specific file, 
-or the usage of some functions/modules/libraries/frameworks, 
+or the usage of some functions / modules / libraries / frameworks, 
 I did reference some materials. 
-There should not be concerns for originality nor infringement.
+There should not be any concerns for originality nor infringement.
 
 As required, here is a list of my references (***W.I.P.***):
 
-|  Type   | Name/Title                                                       | Author(s)    | URL (if any)                                  | Description                                           |
-|:-------:|:-----------------------------------------------------------------|:-------------|:----------------------------------------------|:------------------------------------------------------|
-|  Video  | Automated Testing in Python with pytest, tox, and GitHub Actions | mCoding      | https://www.youtube.com/watch?v=DhUpxWjOhME   | Tutorial of mypy, Pytest, Tox, Flake8, GitHub Actions |
+|  Type   | Name/Title                                                       | Author(s)    | URL (if any)                                  | Description                                              |
+|:-------:|:-----------------------------------------------------------------|:-------------|:----------------------------------------------|:---------------------------------------------------------|
+|  Video  | Automated Testing in Python with pytest, tox, and GitHub Actions | mCoding      | https://www.youtube.com/watch?v=DhUpxWjOhME   | Tutorial of mypy, Pytest, Tox, Flake8 and GitHub Actions |
 
 
 
