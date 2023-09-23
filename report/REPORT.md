@@ -124,6 +124,9 @@ Required features:
 Large additional features:
 - [Ticket operation](../docs/ticket.md)
 - [Admin seat status override](../docs/seatStatusOverride.md)
+- [Supports two langauge](../docs/language.md)
+- [Supports two colour scheme](../docs/colour.md)
+- [Log files](../docs/logs.md)
 - Help function / Documentation
 
 
