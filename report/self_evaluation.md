@@ -12,7 +12,7 @@ There are many things that I think I can improve when doing this project:
   - Maybe group these settings into a single Admin Mode?
   - Maybe store these setting into a single file?
 
-- User can't buy more than one ticket at once, even I have finished `SBA.coorutils.coorExprAnalysis()`.
+- User can't buy more than one ticket at once, even I have finished `SBA.coorutils.coorExprAnalysis()`
 and `SBA.coorutils.getCoorsFromCoorExpr()`.
   - Use them.
   - Change the code logic, so that one ticket does not equal to one seat.
