@@ -87,7 +87,7 @@ A rough SBA report can be found [here](report/REPORT.md). NOT THE FINAL VERSION.
 
 ## Useful links
 - ![Static Badge](https://img.shields.io/badge/Source-black?logo=github) 
-[GitHub Repository](https://github.com/Joeccp/SBA) <-- source code
+[GitHub Repository](https://github.com/Joeccp/SBA) <-- The source code can be found here
 - ![Static Badge](https://img.shields.io/badge/Documentation-green?logo=github&labelColor=black) 
 [Documentations](https://joeccp.github.io/SBA/)
 
