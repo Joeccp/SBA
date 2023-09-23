@@ -40,6 +40,14 @@ Colour scheme will be reset to `DARK`.
 Language will be reset to `ENGLISH`.
 It should reset everything.
 
+---
+
+Note:
+As mentioned in the [documentation about login](login.md), 
+due to the fact that this is just an SBA homework, and is in Elective Part D,
+data are stored locally as `txt` files and pickled files, 
+instead of using any kind of web-server or database.
+
 
 ---
 
