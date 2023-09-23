@@ -10,6 +10,8 @@ Each ticket indicates the following information about a purchase of a movie tick
 
 **Ticket number starts with a 'T', followed by at least 5 digits.**
 
+> Also check out the documentation about [seat status override](seatStatusOverride.md).
+
 ## HOWTO: Buy a seat as a user
 
 1. Login as a **user**, enter mode `1`(Buy a ticket), enter the house number.
@@ -44,8 +46,6 @@ Login as a **user**, enter mode `3`(Ticket refund), enter the ticket number.
 OR
 
 Login as an **administrator**, enter mode `8`(Delete a ticket), enter the ticket number.
-
-<br/>
 
 They do the *same* thing.
 
