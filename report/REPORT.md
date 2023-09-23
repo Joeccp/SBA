@@ -130,6 +130,7 @@ Large additional features:
 ## Related files
 - [Problem Analysis](Problem_Analysis.md)
 - [Acknowledgement](acknowledgement.md)
+- [Self-evaluation](self_evaluation.md)
 
 ---
 
