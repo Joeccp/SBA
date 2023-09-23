@@ -30,7 +30,7 @@ The format of a log message is:
 
 Where `%(asctime)s` is the time, `%(levelname)s` is the log level, `%(name)s` is where the log 
 message was sent, `%(message)s` is the log message. 
-Most of the log message should be, and is designed to be, very intuitive and straight forward.
+Most of the log messages should be, and are designed to be, very intuitive and straight forward.
 
 (P.S. In most of the circumstances, `%(name)s` is the function / method name where the log
 message was sent.)
