@@ -89,24 +89,26 @@ The main program (function)
  3 |     exit the program
  4 | if the Python version is too old then
  5 |     exit the program
- 6 | Clear the screen
- 7 | Set the color of the terminal
- 8 | Load saved data
- 9 | while true do
-10 |     input username
-11 |     input password
-12 |     if the username and password are correct AND it is the admin's account then
-13 |         break the loop
-14 | adminMode()
-15 | while true do
-16 |     input username
-17 |     if the username exists then
-18 |         input password
-19 |         if the password is correct then
-20 |             if the username is admin then
-21 |                 adminMode()
-22 |             else
-23 |                 userMode()
+ 6 | Load and initialize the language setting
+ 7 | Load and initialize the colour scheme
+ 8 | Clear the screen
+ 9 | Set the color of the terminal
+10 | Load saved data
+11 | while true do
+12 |     input username
+13 |     input password
+14 |     if the username and password are correct AND it is the admin's account then
+15 |         break the loop
+16 | adminMode()
+17 | while true do
+18 |     input username
+19 |     if the username exists then
+20 |         input password
+21 |         if the password is correct then
+22 |             if the username is admin then
+23 |                 adminMode()
+24 |             else
+25 |                 userMode()
 ```
 
 ## Implementation
