@@ -1,5 +1,6 @@
 # This is a config file for the GitHub Pages
 
+# https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
 # https://github.com/pages-themes/hacker
 
 remote_theme: pages-themes/hacker@v0.2.0
