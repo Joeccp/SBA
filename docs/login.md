@@ -6,8 +6,7 @@ Login is required to access the system.
 To login, enter the username then the password.
 Password will not be shown when you are typing.
 
-Due to the fact that this is just an SBA homework, and is in Elective Part D,
-hashed usernames and passwords are stored locally in `SBA\data\accounts.toml`, 
+Due to the fact that this is just an SBA homework, and is in Elective Part D, usernames and hashed passwords are stored locally in `SBA\data\accounts.toml`, 
 instead of using any kind of web-server or database.
 
 You *cannot* add or remove any user, even you are an administrator,
