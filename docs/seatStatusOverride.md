@@ -11,7 +11,7 @@ Any changes of seat by this mode will NOT affect the ticket system.
 It means that manually setting a seat to be Sold, ticket will NOT be generated.
 And turning a seat from Sold to Reserved/Empty will not delete any tickets.
 Administrator is RECOMMENDED to check the status of the seat before changing it.
-This mode will NOT check it for you. You will not be stopped when changing 
+This mode will NOT check it for you. You will not be stopped when setting 
 the seat status to be the same as before.
 </b>
 
@@ -24,7 +24,7 @@ You should see something like this:
 ![Screenshot of mode 6](../images/docs/control_panel_mode_6.png)
 
 
-The format of doing seat(s) operation is:
+The format of the command for this mode is:
 
 `(EMPTY | BUY | RESERVE) - <House number> - <Coordinate Expression>`
 
@@ -53,8 +53,7 @@ you may use a coordinate expression to express one or more seats.
 A coordinate expression can be:
 1. A single seat coordinate (E.g. `1A`, `2B`, `P35`, `35P`,`99Z`), or
 2. Two seat coordinates separated by a comma (`:`), 
-represents a rectangular range of seats,
-   representing the start and end of an area of seats (area may not be a rectangle).
+represents a rectangular range of seats.
    - These two coordinates form a diagonal of a rectangular area.
    - These two coordinates MUST NOT be the same seat.
    - The two coordinates must be two COMPLETE coordinates.
@@ -62,8 +61,6 @@ represents a rectangular range of seats,
    - The first seat (the first coordinate) MUST be in front of the last seat (the second coordinate). 
    Order is counted from top to down, then from left to right.
    - Valid examples: `1A:99Z`, `1B:2A`, `1A:1B`, `1A:2A`, `P35:P45`, `35P:45P`.
-
-In a coordinate expression, the 
 
 
 <br/><br/><br/>

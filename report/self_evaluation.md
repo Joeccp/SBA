@@ -15,7 +15,7 @@ There are many things that I think I can improve when doing this project:
 - User can't buy more than one ticket at once, even I have finished `SBA.coorutils.coorExprAnalysis()`
 and `SBA.coorutils.getCoorsFromCoorExpr()`.
   - Use them.
-  - Change the code logic, so that one ticket does not equal to one seat.
+  - Manybe change the code logic, so that one ticket does not equal to one seat.
 
 - Admin can't add a custom ticket.
   - Maybe adding a new Admin Mode. After creating the ticket, sort all the tickets inside `House.tickets_table`.
@@ -23,6 +23,15 @@ and `SBA.coorutils.getCoorsFromCoorExpr()`.
 - User can't set the language and colour scheme.
   - Maybe adding a new user mode option
   - Separate Admin's and User's settings (into two different files or folders)?
+
+- User can only buy tickets of movies that are currently playing.
+  - Maybe a `Movie` class for each movie in house.
+  - Each `House` instance has a movie list, storing the currently playing movie and the movies that will be played.
+  - Maybe many same movie playing can be grouped into a single `Movie` instance.
+  - Then we will need a largely modified user menu, the logic of buying movie tickets would be changed as follow:
+    1. User select the movie.
+    2. User select a available date and time of the selected movie.
+    3. User select a seat / seats.
 
 ---
 
