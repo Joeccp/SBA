@@ -16,7 +16,7 @@ authors = [
 description = "A Cinema kiosk system for HKDSE ICT SBA project."
 readme = "README.md"
 requires-python = ">=3.11"
-classifiers=[  # https://pypi.org/classifiers/
+classifiers=[
 			"Environment :: Console",
 			"Environment :: Win32 (MS Windows)",
 			"Intended Audience :: Customer Service",
@@ -32,6 +32,7 @@ classifiers=[  # https://pypi.org/classifiers/
 			"Topic :: Software Development :: Embedded Systems",
 			"Topic :: Software Development :: User Interfaces",
 		]
+version = "0.1"  # No need to sync this with the GitHub release version
 
 [project.urls]
 "Homepage" = "https://joeccp.github.io/SBA/"
