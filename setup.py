@@ -1,4 +1,4 @@
-r"""
+"""
 Setup file
 
 This file, and pyproject.toml, were originally created for publishing this project onto PyPI
