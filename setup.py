@@ -8,12 +8,9 @@ so that you can install this package with pip.
 However, when I published it on TestPyPI for testing, I realized that
 you will only install the SBA module inside the src folder,
 not the whole SBA root directory.
-
 I store all my data and log files inside folders that are up two levels of the directory of the SBA module.
-With packaging,the SBA module would be installed at
-C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\site-packages ,
-its top two levels (C:\Users\USER\AppData\Local\Programs\Python\Python311) hold important files and folders,
-and I don't want to mess it around.
+It can't save anything.
+It will crash.
 
 It is too late for me to either change my program
 or to do some research on how to configurate build/setuptools/wheel/twine.
