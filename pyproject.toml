@@ -7,3 +7,32 @@ addopts = "--cov=SBA"
 testpaths = [
     "tests",
 ]
+
+[project]
+name = "SBA_JoeChau"
+authors = [
+  { name="Joe Chau", email="lmcs121005@gmail.com" },
+]
+description = "A Cinema kiosk system for HKDSE ICT SBA project."
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers=[  # https://pypi.org/classifiers/
+			"Environment :: Console",
+			"Environment :: Win32 (MS Windows)",
+			"Intended Audience :: Customer Service",
+			"License :: OSI Approved :: Apache Software License",
+			"Natural Language :: Chinese (Traditional)",
+			"Natural Language :: English",
+			"Operating System :: Microsoft :: Windows :: Windows 10",
+			"Operating System :: Microsoft :: Windows :: Windows 11",
+			"Programming Language :: Python :: 3.11",
+			"Programming Language :: Python :: 3.12",
+			"Programming Language :: Python :: 3.13",
+			"Topic :: Games/Entertainment :: Simulation",
+			"Topic :: Software Development :: Embedded Systems",
+			"Topic :: Software Development :: User Interfaces",
+		]
+
+[project.urls]
+"Homepage" = "https://joeccp.github.io/SBA/"
+"GitHub Repository" = "https://github.com/Joeccp/SBA"
