@@ -32,7 +32,7 @@ classifiers=[
 			"Topic :: Software Development :: Embedded Systems",
 			"Topic :: Software Development :: User Interfaces",
 		]
-version = "0.1"  # No need to sync this with the GitHub release version
+version = "1.0"  # No need to sync this with the GitHub release version
 
 [project.urls]
 "Homepage" = "https://joeccp.github.io/SBA/"
