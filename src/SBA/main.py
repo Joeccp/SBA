@@ -69,7 +69,6 @@ def main() -> None:
 		:return: None
 		"""
 	
-	
 		global exception_list
 		
 		try:
