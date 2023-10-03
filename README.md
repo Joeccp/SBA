@@ -1,7 +1,7 @@
 # Cinema Kiosk System
 <!-- https://joeccp.github.io/SBA/ -->
 
-![python3.11_badge](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![python3.12_badge](https://img.shields.io/badge/Python-3.12-blue?logo=python)
 ![latest](https://img.shields.io/github/v/release/Joeccp/SBA)
 ![python3.11_badge](https://img.shields.io/github/license/Joeccp/SBA?color=mediumslateblue)
 ![tests_badge](https://github.com/Joeccp/SBA/actions/workflows/tests.yml/badge.svg)
