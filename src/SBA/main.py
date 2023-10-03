@@ -32,12 +32,17 @@ from .utils import checkPythonVersion, checkSystemPlatform
 checkSystemPlatform()
 checkPythonVersion()
 
+from logging import getLogger, Logger
+
 from .admin import adminMode
 from .colour import loadColour
 from .language import loadLanguage
 from .login import login
 from .user import userMode
-from .utils import clearScreen, initLog, loadData
+from .utils import clearScreen, initLog, loadData, RealExit
+
+
+exception_list: list[Exception] = []
 
 
 def main() -> None:
@@ -51,17 +56,59 @@ def main() -> None:
 	:return: None
 	"""
 	
-	# So elegant :)
+	global exception_list
+	
 	initLog()
-	loadColour()
-	loadLanguage()
-	clearScreen()
-	from .colour import normal_colour
-	print(normal_colour)
-	loadData()
-	login(first_time=True)
-	adminMode()
-	clearScreen()
-	while True:
+	
+	try:
+	
+		logger: Logger = getLogger("main.main_loop")
+		logger.info("Inside the main loop")
+	
+		# So elegant :)
+		loadColour()
+		loadLanguage()
 		clearScreen()
-		adminMode() if login() else userMode()
+		from .colour import normal_colour
+		print(normal_colour)
+		loadData()
+		login(first_time=True)
+		adminMode()
+		clearScreen()
+		while True:
+			clearScreen()
+			adminMode() if login() else userMode()
+	
+	# Very not elegant :(
+	# Below is an error handling chaos, need to be improved
+	except SystemExit:
+		logger: Logger = getLogger("main.SystemExit_handler")
+		logger.info("SystemExit. Bye.")
+		
+		print(r"Admin Exit -- Bye Bye! \(●'◡'●)/")
+		# I KNOW this is not a good practice of using ExceptionGroup
+		# However, this is such an easy and lazy way to show error messages ;)
+		if exception_list:
+			raise ExceptionGroup("Just to note: this program has met the following errors:", exception_list)
+		quit()  # Raises SystemExit. This should not be caught by any try-except block
+	
+	except RealExit as error:
+		logger: Logger = getLogger("main.RealExit_handler")
+		logger.info(f"Forced exit --- {error.__class__}")
+		
+		if exception_list:
+			raise ExceptionGroup(error.message, [error, *exception_list])
+		raise error  # This should also not be caught by any try-except block
+	
+	except Exception as error:
+		exception_list.append(error)
+		
+		logger: Logger = getLogger("main.Exception_handler")
+		logger.critical(f"ERROR --- {error.__class__}")
+		logger.critical(error.__traceback__)
+		logger.info("Main function will be executed again")
+		
+		print(f"Sorry! Something went wrong! :(        {error.__class__}")
+		for i in range(5, 0, -1):
+			print(f"\rThis system will be restarted after {i} second{'s' if i > 1 else ''}...")
+		main()

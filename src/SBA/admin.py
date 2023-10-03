@@ -916,8 +916,6 @@ def adminMode() -> None:
 		
 		# STOP THE ENTIRE PROGRAM
 		elif mode == '12':
-			logger: Logger = getLogger("adminMode.mode_12")
-			logger.info("QUITING PROGRAM: Admin mode 12")
 			printLang("Bye!", "再見！")
 			quit()
 		

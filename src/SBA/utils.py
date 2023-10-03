@@ -27,6 +27,21 @@ from .house import House
 from .language import loadLanguage, printLang, setLanguage
 
 
+class RealExit(Exception):
+	"""
+	This exception is raised when you really want to quit
+	i.e. Not an unexpected program crash
+	
+	This exception should be handled specially in main.main()
+	
+	Do NOT use exit() or quit() or even os._exit(), they can't be treated specifically (in this program)
+	"""
+	def __init__(self, message: str = "") -> None:
+		# No logging is needed
+		self.message: str = message
+		super().__init__(self.message)
+
+
 def checkSystemPlatform() -> None:
 	"""
 	Checks whether it is running on Windows,
@@ -41,7 +56,7 @@ def checkSystemPlatform() -> None:
 		logger.critical("I am running on Non-Windows system platform!")
 		logger.critical("QUITTING THE PROGRAM: Non-windows system platform")
 		err_msg: str = "This program can only be executed on Windows"
-		raise SystemExit(err_msg)
+		raise RealExit(err_msg)
 
 
 def checkPythonVersion() -> None:
@@ -62,13 +77,13 @@ def checkPythonVersion() -> None:
 		logger.critical("I am running on Python %s!", major_version)
 		logger.critical("QUITTING THE PROGRAM: Python version lower than Python 3.11")
 		err_msg: str = "This program does not support Python 2"
-		raise SystemExit(err_msg)
+		raise RealExit(err_msg)
 	elif minor_version < 11:
 		logger.critical("I am running on Python 3.%s!", minor_version)
 		logger.critical("QUITTING THE PROGRAM: Python version lower than Python 3.11")
 		err_msg: str = "Unsupported old Python version (" + str(major_version) + "." + str(
 			minor_version) + "), please use Python 3.11 or newer"
-		raise SystemExit(err_msg)
+		raise RealExit(err_msg)
 
 
 def clearScreen() -> None:
