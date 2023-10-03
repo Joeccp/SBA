@@ -19,6 +19,6 @@ per-file-ignores =
     tests/*:F403,F405
     # Imported but unused
     # This is nesseccary for any __init__.py file
-    */__init__.py
+    */__init__.py：F401
 
 statistics = True
