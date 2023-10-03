@@ -115,7 +115,7 @@ def ExceptionLogger(function: Callable) -> Callable:
 
 
 @ExceptionLogger
-def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) -> list[tuple[int, int]]:
+def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) -> list[Coor]:
 	"""
 	Analysis the coordinate expression.
 	
@@ -241,7 +241,7 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 			coordinate: tuple[int, str] = (row, column)
 			coordinates.append(coordinate)
 	
-	coordinate_indexes: list[tuple[int, int]] = []
+	coordinate_indexes: list[Coor] = []
 	for coordinate in coordinates:
 		row: int = coordinate[0]
 		if row == 0:
@@ -249,7 +249,7 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 		row_index: int = row - 1
 		column: str = coordinate[1]
 		column_index: int = ord(column) - 65
-		coordinate_index: tuple[int, int] = (row_index, column_index)
+		coordinate_index: Coor = (row_index, column_index)
 		coordinate_indexes.append(coordinate_index)
 	
 	if len(coordinate_indexes) == 2:
