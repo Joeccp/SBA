@@ -12,6 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# NOQA: F401 # Imported but unused
-# This is nesseccary for an __init__.py file
 from .main import main
