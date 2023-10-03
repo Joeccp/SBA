@@ -16,7 +16,7 @@ It is too late for me to either change my program
 or to do some research on how to configurate build/setuptools/wheel/twine.
 
 But these two files are still useful.
-They are needed for tox.
+They are needed by tox.
 """
 
 # Copyright 2023 Joe Chau
