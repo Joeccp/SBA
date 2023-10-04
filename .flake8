@@ -17,5 +17,8 @@ per-file-ignores =
     src/SBA/main.py:E402
     # import * in tests is OK to me, and I prefer doing so
     tests/*:F403,F405
+    # Imported but unused
+    # This is nesseccary for any __init__.py file
+    __init__.py：F401
 
 statistics = True
