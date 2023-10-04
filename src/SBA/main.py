@@ -33,6 +33,8 @@ checkSystemPlatform()
 checkPythonVersion()
 
 from logging import getLogger, Logger
+from time import sleep
+from traceback import format_exception
 
 from .admin import adminMode
 from .colour import loadColour
@@ -93,36 +95,61 @@ def main() -> None:
 		
 		# Very not elegant :(
 		# Below is an error handling chaos, need to be improved
+		# For the below input/output, no need translation, so that even the translator failed, it still works
 		except SystemExit:
 			logger: Logger = getLogger("main._main.SystemExit_handler")
 			logger.info("SystemExit. Bye.")
 			
 			print(r"Admin Exit -- Bye Bye! \(●'◡'●)/")
-			# I KNOW this is not a good practice of using ExceptionGroup
-			# However, this is such an easy and lazy way to show error messages ;)
-			if exception_list:
-				raise ExceptionGroup("Just to note: this program has met the following errors:", exception_list)
 			quit()  # Raises SystemExit. This should not be caught by any try-except block
 		
+		except KeyboardInterrupt:
+			# This will not catch any keyboard interrupt when handling errors
+			logger: Logger = getLogger("main._main.KeyboardInterrupt_handler")
+			logger.info("Keyboard interrupted")
+			logger.info("Waiting for confirm")
+			confirm: str = input("\n\nYou just pressed a special keystroke.\n"
+			                     "You are going to quit this program. Are you sure about that? [y/N]")
+			confirm: str = confirm.strip().upper()
+			if confirm == 'Y':
+				logger.info("Confirmed. Bye.")
+				print("Got it. Have a nice day.")
+				quit()  # Raises SystemExit. This should not be caught by any try-except block
+			print("Confirmation failed. Restarting the program")
+			logger.info("Confirmation failed. Restarting the program")
+			_main()
+
 		except RealExit as error:
 			logger: Logger = getLogger("main._main.RealExit_handler")
-			logger.info(f"Forced exit --- {error.__class__}")
+			logger.error(f"Forced exit --- RealExit")
+			logger.info("TRACEBACK STARTS")
+			for error_message_line in format_exception(error):
+				error_message_line: str = error_message_line.strip()
+				error_message_row_list: list[str] = error_message_line.split('\n')
+				for error_message_row in error_message_row_list:
+					logger.error(error_message_row)
+			logger.info("TRACEBACK ENDS")
 			
-			if exception_list:
-				raise ExceptionGroup(error.message, [error, *exception_list])
 			raise error  # This should also not be caught by any try-except block
 		
 		except Exception as error:
 			exception_list.append(error)
 			
 			logger: Logger = getLogger("main._main.Exception_handler")
-			logger.critical(f"ERROR --- {error.__class__}")
-			logger.critical(error.__traceback__)
+			logger.critical(f"ERROR --- {error.__class__.__name__}")
+			logger.info("TRACEBACK STARTS")
+			for error_message_line in format_exception(error):
+				error_message_line: str = error_message_line.strip()
+				error_message_row_list: list[str] = error_message_line.split('\n')
+				for error_message_row in error_message_row_list:
+					logger.critical(error_message_row)
+			logger.info("TRACEBACK ENDS")
 			logger.info("Main function will be executed again")
 			
-			print(f"Sorry! Something went wrong! :(        {error.__class__}")
+			print(f"Sorry! Something went wrong! :(        {error.__class__.__name__}")
 			for i in range(5, 0, -1):
-				print(f"\rThis system will be restarted after {i} second{'s' if i > 1 else ''}...")
+				print(f"\rThis system will be restarted after {i} second{'s' if i > 1 else ''}...", end='')
+				sleep(1)
 			_main()
 
 	_main()

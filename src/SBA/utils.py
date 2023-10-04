@@ -15,12 +15,13 @@
 # limitations under the License.
 
 
+from atexit import register
 from datetime import datetime
 from logging import basicConfig, DEBUG, getLogger, Logger
 from os import get_terminal_size, makedirs, path, system
 from pickle import dump, load
 from platform import system as systemPlatform  # NOQA: lowercase function imported as uppercase function
-from sys import version_info
+from sys import argv, version_info
 
 from .colour import loadColour, setColour
 from .house import House
@@ -36,6 +37,7 @@ class RealExit(Exception):
 	
 	Do NOT use exit() or quit() or even os._exit(), they can't be treated specifically (in this program)
 	"""
+	
 	def __init__(self, message: str = "") -> None:
 		# No logging is needed
 		self.message: str = message
@@ -235,19 +237,30 @@ def loadData(*, print_log: bool = False) -> None:
 	internalLog("Data loading process finished", "載入資料程序完成")
 
 
+LOG_FILE_FULL_PATH: str = ''
+
+
 def initLog() -> None:
 	"""
 	Initialize the log file
 	
 	:return: None
 	"""
+	global LOG_FILE_FULL_PATH
 	PROGRAM_START_TIME: datetime = datetime.now()
 	PROGRAM_START_TIME_STRING: str = PROGRAM_START_TIME.isoformat(sep=' ', timespec='seconds')
 	PROGRAM_START_TIME_STRING: str = PROGRAM_START_TIME_STRING.replace(':', '-')  # file name can't have ':'
 	absolute_path = path.dirname(__file__)
 	relative_path = rf'..\..\logs\{PROGRAM_START_TIME_STRING}.txt'
 	full_path = path.join(absolute_path, relative_path)
-	head_msg: str = f"--- LOG FILE ---\nTime: {PROGRAM_START_TIME_STRING}\n"
+	LOG_FILE_FULL_PATH = full_path
+	head_msg: str = (f"--- LOG FILE ---\n"
+	                 "~INFO~\n"
+	                 f"    Time: {PROGRAM_START_TIME_STRING}\n"
+	                 f"    Python version: {version_info.major}.{version_info.minor}.{version_info.micro}\n"
+	                 f"    Arguments: {argv}\n"
+	                 f"    Path: {path.abspath(__file__)}\n"
+	                 f"~INFO~\n")
 	with open(full_path, 'w') as file:
 		file.write(head_msg)
 	basicConfig(
@@ -259,3 +272,14 @@ def initLog() -> None:
 	)
 	logger: Logger = getLogger('initLog')
 	logger.info('Program started')
+
+
+@register
+def endLog() -> None:
+	"""
+	Log message when exiting
+	
+	:return: None
+	"""
+	with open(LOG_FILE_FULL_PATH, 'a') as file:
+		file.write('--- LOG FILE ---')
