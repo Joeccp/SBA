@@ -281,5 +281,8 @@ def endLog() -> None:
 	
 	:return: None
 	"""
-	with open(LOG_FILE_FULL_PATH, 'a') as file:
-		file.write('--- LOG FILE ---')
+	try:
+		with open(LOG_FILE_FULL_PATH, 'a') as file:
+			file.write('--- LOG FILE ---')
+	except FileNotFoundError:
+		pass
