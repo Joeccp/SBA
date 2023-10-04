@@ -120,7 +120,7 @@ def main() -> None:
 
 		except RealExit as error:
 			logger: Logger = getLogger("main._main.RealExit_handler")
-			logger.error(f"Forced exit --- RealExit")
+			logger.error("Forced exit --- RealExit")
 			logger.info("TRACEBACK STARTS")
 			for error_message_line in format_exception(error):
 				error_message_line: str = error_message_line.strip()
