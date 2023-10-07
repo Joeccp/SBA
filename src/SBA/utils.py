@@ -44,26 +44,6 @@ class RealExit(Exception):
 		super().__init__(self.message)
 
 
-def checkSystemPlatform() -> None:
-	"""
-	NOT USED ANY MORE.
-	KEEP AS A BACKUP.
-	
-	Checks whether it is running on Windows,
-	if not, raises SystemExit
-
-	:return: None
-	:raises SystemExit: If not running on Windows
-	"""
-	# logger: Logger = getLogger("checkSystemPlatform")
-	# logger.info("Checking system platform")
-	# if systemPlatform() != 'Windows':
-	# 	logger.critical("I am running on Non-Windows system platform!")
-	# 	logger.critical("QUITTING THE PROGRAM: Non-windows system platform")
-	# 	err_msg: str = "This program can only be executed on Windows"
-	# 	raise RealExit(err_msg)
-
-
 def checkPythonVersion() -> None:
 	"""
 	Checks the Python version.

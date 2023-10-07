@@ -27,9 +27,8 @@ if __name__ == '__main__':
 # System platform is also checked here to maintain consistency
 # As a result, system platform and Python version are checked when importing this module
 
-from .utils import checkPythonVersion  # , checkSystemPlatform
+from .utils import checkPythonVersion
 
-# checkSystemPlatform()
 checkPythonVersion()
 
 from logging import getLogger, Logger
