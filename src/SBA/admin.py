@@ -574,6 +574,7 @@ def deleteHouse() -> None:
 		else:
 			printLang(f"House {house.house_number} is closed",
 			          f"電影院{house.house_number}已關閉")
+		house_count += 1
 	if house_count == 0:
 		logger.info("No house, Going back to the Control Panel menu...")
 		printLang("No house", "無電影院")
