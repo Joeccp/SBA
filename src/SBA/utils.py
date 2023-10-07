@@ -18,7 +18,7 @@
 from atexit import register
 from datetime import datetime
 from logging import basicConfig, DEBUG, getLogger, Logger
-from os import get_terminal_size, makedirs, path, system
+from os import get_terminal_size, name, makedirs, path, system
 from pickle import dump, load
 from platform import system as systemPlatform  # NOQA: lowercase function imported as uppercase function
 from sys import argv, version_info
@@ -46,19 +46,22 @@ class RealExit(Exception):
 
 def checkSystemPlatform() -> None:
 	"""
+	NOT USED ANY MORE.
+	KEEP AS A BACKUP.
+	
 	Checks whether it is running on Windows,
 	if not, raises SystemExit
 
 	:return: None
 	:raises SystemExit: If not running on Windows
 	"""
-	logger: Logger = getLogger("checkSystemPlatform")
-	logger.info("Checking system platform")
-	if systemPlatform() != 'Windows':
-		logger.critical("I am running on Non-Windows system platform!")
-		logger.critical("QUITTING THE PROGRAM: Non-windows system platform")
-		err_msg: str = "This program can only be executed on Windows"
-		raise RealExit(err_msg)
+	# logger: Logger = getLogger("checkSystemPlatform")
+	# logger.info("Checking system platform")
+	# if systemPlatform() != 'Windows':
+	# 	logger.critical("I am running on Non-Windows system platform!")
+	# 	logger.critical("QUITTING THE PROGRAM: Non-windows system platform")
+	# 	err_msg: str = "This program can only be executed on Windows"
+	# 	raise RealExit(err_msg)
 
 
 def checkPythonVersion() -> None:
@@ -105,7 +108,10 @@ def clearScreen() -> None:
 		# But still need to print empty lines in case system('cls') does not work
 		print('\n' * 20)
 	finally:
-		system('cls')
+		if name == 'nt':
+			system('cls')
+		else:
+			system('clear')
 
 
 def saveData(*, print_log: bool = False) -> None:
@@ -251,7 +257,7 @@ def initLog() -> None:
 	PROGRAM_START_TIME_STRING: str = PROGRAM_START_TIME.isoformat(sep=' ', timespec='seconds')
 	PROGRAM_START_TIME_STRING: str = PROGRAM_START_TIME_STRING.replace(':', '-')  # file name can't have ':'
 	absolute_path = path.dirname(__file__)
-	relative_path = rf'..\..\logs\{PROGRAM_START_TIME_STRING}.txt'
+	relative_path = f'../../logs/{PROGRAM_START_TIME_STRING}.txt'
 	full_path = path.join(absolute_path, relative_path)
 	LOG_FILE_FULL_PATH = full_path
 	head_msg: str = (f"--- LOG FILE ---\n"
