@@ -92,7 +92,7 @@ def main() -> None:
 				adminMode() if login() else userMode()
 		
 		# Very not elegant :(
-		# Below is an error handling chaos, need to be improved
+		# Below is an error handling disaster, need to be improved
 		# For the below input/output, no need translation, so that even the translator failed, it still works
 		except SystemExit:
 			logger: Logger = getLogger("main._main.SystemExit_handler")
