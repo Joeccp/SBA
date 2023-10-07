@@ -106,7 +106,7 @@ def clearScreen() -> None:
 		# OSError: [WinError 6] The handle is invalid
 		# Normally due to get_terminal_size()
 		# But still need to print empty lines in case system('cls') does not work
-		print('\n' * 20)
+		print('\n' * 30)
 	finally:
 		if name == 'nt':
 			system('cls')
