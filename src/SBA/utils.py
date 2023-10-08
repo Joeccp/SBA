@@ -240,13 +240,13 @@ def initLog() -> None:
 	relative_path = f'../../logs/{PROGRAM_START_TIME_STRING}.txt'
 	full_path = path.join(absolute_path, relative_path)
 	LOG_FILE_FULL_PATH = full_path
-	head_msg: str = (f"--- LOG FILE ---\n"
-	                 "~INFO~\n"
-	                 f"    Time: {PROGRAM_START_TIME_STRING}\n"
-	                 f"    Python version: {version_info.major}.{version_info.minor}.{version_info.micro}\n"
-	                 f"    Arguments: {argv}\n"
-	                 f"    Path: {path.abspath(__file__)}\n"
-	                 f"~INFO~\n")
+	head_msg: str = ("--- LOG FILE ---\n"
+	                 "# ~INFO~\n"
+	                 f"# Time: {PROGRAM_START_TIME_STRING}\n"
+	                 f"# Python version: {version_info.major}.{version_info.minor}.{version_info.micro}\n"
+	                 f"# Arguments: {argv}\n"
+	                 f"# Path: {path.abspath(__file__)}\n"
+	                 "# ~INFO~\n")
 	with open(full_path, 'w') as file:
 		file.write(head_msg)
 	basicConfig(
@@ -263,7 +263,7 @@ def initLog() -> None:
 @register
 def endLog() -> None:
 	"""
-	Log message when exiting
+	Log ending message when exiting
 	
 	:return: None
 	"""

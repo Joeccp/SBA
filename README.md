@@ -38,7 +38,7 @@ you may want to check out the online version of this documentation instead: <htt
 - Python 3.11.0 or higher
 
 This program mainly serves Windows 10 and Windows 11. 
-But should also support Linux (roughly tested on Debian GNU/Linux 12 (bookworm) on Windows 10 x86_64 with WSL2).
+But should also support Linux (roughly tested on Debian GNU/Linux 12 (bookworm) on Windows 11 x86_64 with WSL2).
 
 ### Download
 You can find the latest release [here](https://github.com/Joeccp/SBA/releases/latest), 
