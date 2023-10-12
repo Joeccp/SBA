@@ -411,14 +411,14 @@ def userMode() -> None:
 			"2: Check ticket information\n"
 			"3: Ticket refund\n"
 			"4: HELP\n"
-			"Please select a mode (0/1/2/3):",
+			"Please select a mode [0-4]:",
 			"\n"
 			"0：登出\n"
 			"1：買票\n"
 			"2：查票\n"
 			"3：退款\n"
 			"4：教學\n"
-			"請選擇模式（0/1/2/3）："
+			"請選擇模式 [0-4]："
 		)
 		logger.info("Waiting mode code input")
 		mode: str = input("-> ").strip()
