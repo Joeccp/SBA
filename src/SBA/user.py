@@ -461,6 +461,10 @@ def userMode() -> None:
 			logger.info("Unknown mode code")
 			if language == "ENGLISH":
 				message = "ERROR: Unknown mode"
+				if mode.startswith('0'):
+					message = message + ". Did you accidentally enter any leading zeros?"
 			else:
 				message = "錯誤：無效模式代碼"
+				if mode.startswith('0'):
+					message = message + "。你可能輸入了不需要的前置零。"
 			continue
