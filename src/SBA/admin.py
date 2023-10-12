@@ -847,8 +847,8 @@ def adminMode() -> None:
 		          "15：轉換語言\n"
 		          "16：清除屏幕"
 		          )
-		mode: str = inputLang("Please choose a mode [0-16]\n-> ",
-		                      "請選擇模式 [0-16]\n-> ").strip()
+		mode: str = inputLang("Please choose a mode [0-9]|1[0-6]\n-> ",
+		                      "請選擇模式 [0-9]|1[0-6]\n-> ").strip()
 		
 		if mode == '':
 			continue
