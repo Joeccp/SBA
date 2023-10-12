@@ -950,4 +950,4 @@ def adminMode() -> None:
 			printLang(f"ERROR: Unknown mode code {mode}", f"錯誤：無效模式代碼——{mode}")
 			if mode.startswith('0'):
 				printLang("Did you accidentally enter any leading zeros?",
-				          "你可能輸入了不需要的前置零。")
+				          "你可能輸入了不需要的前置零")
