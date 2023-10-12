@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>SBA.user API documentation</title>
+<meta name="description" content="User mode" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>SBA.user</code></h1>
+</header>
+<section id="section-intro">
+<p>User mode</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;User mode&#34;&#34;&#34;
+
+# Copyright 2023 Joe Chau
+#
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+from datetime import datetime
+from logging import getLogger, Logger
+from string import ascii_uppercase
+from time import sleep
+from typing import Optional
+from webbrowser import open as openWebBrowser
+
+from .colour import Colour, column_colour, row_colour
+from .house import House, Ticket
+from .language import inputLang, printLang
+from .utils import clearScreen, saveData
+
+message: str = &#34;&#34;
+
+
+def buyTicket() -&gt; None:
+        &#34;&#34;&#34;
+        User Mode 1: Buy Ticket
+
+        :return: None
+        &#34;&#34;&#34;
+        from .colour import normal_colour
+        from .language import language
+        
+        global message
+        
+        logger: Logger = getLogger(&#34;buyTicket&#34;)
+        logger.info(&#34;User Mode 1: Buy a ticket&#34;)
+        clearScreen()
+        printLang(&#34;CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n&#34;, &#34;電影售票系統\n\n\n\n\n\n\n&#34;)
+        printLang(&#34;House(s) available:&#34;, &#34;可選的電影院：&#34;)
+        total_available_house_count: int = 0
+        for house in House.houses_table.values():
+                if house.movie and house.n_available != 0:
+                        printLang(f&#34;House {house.house_number}: {house.movie:&lt;50} {house.n_available}/{house.n_seat}&#34;,
+                                  f&#34;電影院{house.house_number}：{house.movie:&lt;50} {house.n_available}/{house.n_seat}&#34;)
+                        total_available_house_count += 1
+        if total_available_house_count == 0:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;Sorry, no house available now&#34;
+                else:
+                        message = &#34;抱歉，現在沒有可選的電影院&#34;
+                return
+        printLang(&#34;\nPlease enter the house number (or hit Enter to go back to the main menu):&#34;,
+                  &#34;\n請輸入電影院號碼（或按 Enter 以返回主頁面）&#34;)
+        logger.info(&#34;Waiting house number input&#34;)
+        house_num_str: str = input(&#34;-&gt; &#34;).strip()
+        if house_num_str == &#39;&#39;:
+                message = &#39;&#39;
+                logger.info(&#34;Empty house number, going back to the user menu&#34;)
+                return
+        if not house_num_str.isdecimal():
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: House number can only be decimal numbers&#34;
+                else:
+                        message = &#34;錯誤：電影院號碼必須爲數字&#34;
+                logger.info(&#34;Invalid house number, going back to the user menu&#34;)
+                return
+        house_num: int = int(house_num_str)
+        if house_num not in House.houses_table.keys():
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: That house does not exist&#34;
+                else:
+                        message = &#34;錯誤：無此電影院&#34;
+                logger.info(&#34;Invalid house number, going back to the user menu&#34;)
+                return
+        house: House = House.houses_table[house_num]
+        logger.info(f&#34;User selected house {house_num}&#34;)
+        clearScreen()
+        printLang(f&#34;House {house.house_number} is now playing: {house.movie}&#34;,
+                  f&#34;電影院{house.house_number} 正在播映：{house.movie}&#34;)
+        house.printSeatingPlan()
+        
+        printLang(
+                f&#34;\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat&#34;
+                f&#34;(or just hit Enter to go back to the main menu):&#34;,
+                f&#34;\n請輸入座位的{row_colour}行數{normal_colour}和{column_colour}列數{normal_colour}&#34;
+                f&#34;（或按 Enter 以返回主頁面）&#34;
+        )
+        logger.info(&#34;Waiting seat coordinate input&#34;)
+        coor: str = input(&#34;\n-&gt; &#34;).strip().upper().replace(&#34; &#34;, &#39;&#39;)
+        if coor == &#39;&#39;:
+                message = &#39;&#39;
+                logger.info(&#34;Empty coordinate, going back to the user menu&#34;)
+                return
+        if len(coor) == 1:
+                logger.info(&#34;Invalid coordinate, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid format of the seat number&#34;
+                else:
+                        message = &#34;錯誤：無效座位坐標格式&#34;
+                return
+        if coor[-1] not in ascii_uppercase:
+                logger.info(&#34;Invalid coordinate, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = f&#34;ERROR: {column_colour}Column{normal_colour} index is not a character&#34;
+                else:
+                        message = f&#34;錯誤：座位{column_colour}列數{normal_colour}必須是英文字母&#34;
+                return
+        column_str: str = coor[-1]
+        column_int: int = ord(column_str) - 65
+        if column_int &gt;= house.n_column:
+                logger.info(&#34;Invalid coordinate, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = f&#34;ERROR: Invalid {column_colour}column{normal_colour}&#34;
+                else:
+                        message = f&#34;錯誤：無效座位{column_colour}行數{normal_colour}&#34;
+                return
+        row_str: str = coor[:-1]
+        if len(row_str) &gt; 2:
+                logger.info(&#34;Invalid coordinate, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = f&#34;ERROR: Impossible {row_colour}row{normal_colour} number&#34;
+                else:
+                        message = f&#34;錯誤：不可能的{row_colour}行數{normal_colour}&#34;
+                return
+        row_int: int = int(row_str) - 1
+        if house.seating_plan[row_int][column_int] != 0:
+                logger.info(&#34;Seat already sold, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;Sorry, the seat is not available&#34;
+                else:
+                        message = &#34;抱歉，該座位不予發售&#34;
+                return
+        house.seating_plan[row_int][column_int] = 1
+        House.total_tickets += 1
+        ticket_index: int = House.total_tickets
+        ticket_number: str = f&#34;T{ticket_index:0&gt;5}&#34;
+        time: str = datetime.now().isoformat(timespec=&#34;seconds&#34;)
+        ticket: Ticket = (
+                ticket_index, ticket_number, time, house.house_number, house.movie, row_int, column_int
+        )
+        printLang(&#34;Your ticket:&#34;, &#34;你的電影票如下：&#34;)
+        printLang(f&#34;{ticket_number:&lt;6} @{time}: &#34;
+                  f&#34;House {house.house_number:&lt;2} -- {house.movie:&lt;50} ~&#34;
+                  f&#34;Seat&lt;{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}&gt;&#34;,
+                  f&#34;{ticket_number:&lt;6} @{time}: &#34;
+                  f&#34;電影院{house.house_number:&lt;2} -- {house.movie:&lt;50} ~&#34;
+                  f&#34;座位&lt;{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}&gt;&#34;
+                  )
+        logger.info(&#34;User has successfully bought a ticket&#34;)
+        logger.info(f&#34;Ticket info: {ticket}&#34;)
+        House.tickets_table.append(ticket)
+        saveData()
+        printLang(&#34;\n\nThank you for your purchase!&#34;, &#34;\n\n感謝您的購買！&#34;)
+        inputLang(&#34;\nHit Enter to go back to the main menu&#34;, &#34;按 Enter 以返回主頁面&#34;)
+        message = &#34;&#34;
+
+
+def checkTicket() -&gt; None:
+        &#34;&#34;&#34;
+        User Mode 2: Check Ticket
+        
+        :return: None
+        &#34;&#34;&#34;
+        from .colour import normal_colour
+        from .language import language
+        
+        global message
+        
+        logger: Logger = getLogger(&#34;checkTicket&#34;)
+        logger.info(&#34;User Mode 2: Check ticket information&#34;)
+        clearScreen()
+        printLang(&#34;CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n&#34;, &#34;電影售票系統\n\n\n\n\n\n\n&#34;)
+        if not House.tickets_table:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;Sorry, there are no tickets&#34;
+                else:
+                        message = &#34;抱歉，現在沒有任何電影票&#34;
+                logger.info(&#34;No tickets, going back to the user menu&#34;)
+                return
+        printLang(&#34;Please enter your ticket number (starts with &#39;T&#39;):&#34;,
+                  &#34;請輸入你的電影票號碼（由「T」開始）&#34;)
+        logger.info(&#34;Waiting ticket number input&#34;)
+        ticket_number: str = input(&#34;-&gt; &#34;).strip().upper()
+        if ticket_number == &#34;&#34;:
+                message = &#34;&#34;
+                logger.info(&#34;Empty ticket number, going back to the user menu&#34;)
+                return
+        if not ticket_number.startswith(&#39;T&#39;):
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number format -- ticket number starts with &#39;T&#39;&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼由「T」開始&#34;
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                return
+        if ticket_number == &#39;T&#39;:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number has no decimal numbers&#34;
+                else:
+                        message = &#34;錯誤：無效的電影票號碼——電影票號碼必須有數字&#34;
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                return
+        if len(ticket_number) &lt; 6:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number too short&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼太短&#34;
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                return
+        if not ticket_number[1:].isdecimal():
+                if language == &#34;ENGLISH&#34;:
+                        message = (&#34;ERROR: Invalid ticket number -- &#34;
+                                   &#34;ticket number should ba a single character &#39;T&#39; followed by decimal numbers&#34;)
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼由「T」開始然後是數字&#34;
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                return
+        if len(ticket_number) &gt; 6 and ticket_number[1] == &#39;0&#39;:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- more than 4 leading zeros&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼的前置零不可有多於四位&#34;
+                logger.info(&#34;Invalid ticket number, going back to the control panel menu&#34;)
+                return
+        if set(ticket_number[1:]) == {&#39;0&#39;}:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number is all zero&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼不可全部爲零&#34;
+                logger.info(&#34;Invalid ticket number, going back to the control panel menu&#34;)
+                return
+        print()
+        ticket_index: int = int(ticket_number[1:])
+        ticket: Optional[Ticket] = House.searchTicket(ticket_index)
+        if ticket is None:
+                logger.info(&#34;No such ticket, going back to the user menu&#34;)
+                printLang(&#34;No such ticket&#34;, &#34;無此電影票&#34;)
+                print(&#34;\n\n&#34;)
+                inputLang(&#34;Hit enter to go back to the main menu&#34;,
+                          &#34;按 Enter 以返回主頁面&#34;)
+                message = &#34;&#34;
+                return
+        ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+        printLang(f&#34;{ticket_no:&lt;6} @{time} &#34;
+                  f&#34;House {house_no:&lt;2} -- {movie:&lt;30} ~ &#34;
+                  f&#34;Seat&lt;{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}&gt;&#34;,
+                  f&#34;{ticket_no:&lt;6} @{time} &#34;
+                  f&#34;電影院{house_no:&lt;2} -- {movie:&lt;30} ~ &#34;
+                  f&#34;座位&lt;{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}&gt;&#34;
+                  )
+        print(&#34;\n\n&#34;)
+        inputLang(&#34;\nHit Enter to go back to the main menu&#34;, &#34;按 Enter 以返回主頁面&#34;)
+        message = &#34;&#34;
+
+
+def ticketRefund() -&gt; None:
+        &#34;&#34;&#34;
+        User Mode 3: Ticket Refund
+
+        :return: None
+        &#34;&#34;&#34;
+        from .colour import normal_colour
+        from .language import language
+        
+        global message
+        
+        logger: Logger = getLogger(&#34;ticketRefund&#34;)
+        logger.info(&#34;User Mode 3: Ticket refund&#34;)
+        clearScreen()
+        printLang(&#34;CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n&#34;,
+                  &#34;電影售票系統\n\n\n\n\n\n\n\n\n\n\n\n&#34;)
+        if not House.tickets_table:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;Sorry, there are no tickets&#34;
+                else:
+                        message = &#34;抱歉，現在沒有任何電影票&#34;
+                logger.info(&#34;No tickets, going back to the user menu&#34;)
+                return
+        printLang(&#34;Please enter your ticket number (starts with &#39;T&#39;):&#34;,
+                  &#34;請輸入你的電影票號碼（由「T」開始）&#34;)
+        logger.info(&#34;Waiting ticket number input&#34;)
+        ticket_number: str = input(&#34;-&gt; &#34;).strip().upper().replace(&#39; &#39;, &#39;&#39;)
+        if ticket_number == &#34;&#34;:
+                logger.info(&#34;Empty ticket number, going back to the user menu&#34;)
+                message = &#34;&#34;
+                return
+        if not ticket_number.startswith(&#39;T&#39;):
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number format -- ticket number starts with &#39;T&#39;&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼由「T」開始&#34;
+                return
+        if ticket_number == &#39;T&#39;:
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number has no decimal numbers&#34;
+                else:
+                        message = &#34;錯誤：無效的電影票號碼——電影票號碼必須有數字&#34;
+                return
+        if len(ticket_number) &lt; 6:
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number too short&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼太短&#34;
+                return
+        if not ticket_number[1:].isdecimal():
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = (&#34;ERROR: Invalid ticket number -- &#34;
+                                   &#34;ticket number should ba a single character &#39;T&#39; followed by decimal numbers&#34;)
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼由「T」開始然後是數字&#34;
+                return
+        if len(ticket_number) &gt; 6 and ticket_number[1] == &#39;0&#39;:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- more than 4 leading zeros&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼的前置零不可有多於四位&#34;
+                logger.info(&#34;Invalid ticket number, going back to the control panel menu&#34;)
+                return
+        if set(ticket_number[1:]) == {&#39;0&#39;}:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number is all zero&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼不可全部爲零&#34;
+                logger.info(&#34;Invalid ticket number, going back to the control panel menu&#34;)
+                return
+        print()
+        ticket_index: int = int(ticket_number[1:])
+        ticket: Optional[Ticket] = House.searchTicket(ticket_index)
+        if ticket is None:
+                logger.info(&#34;No such ticket, going back to the user menu&#34;)
+                printLang(&#34;No such ticket&#34;, &#34;無此電影票&#34;)
+                print(&#34;\n\n&#34;)
+                inputLang(&#34;Hit enter to go back to the main menu&#34;,
+                          &#34;按 Enter 以返回主頁面&#34;)
+                message = &#34;&#34;
+                return
+        ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+        logger.info(f&#34;User want to delete this ticket: {ticket}&#34;)
+        printLang(f&#34;{ticket_no:&lt;6} @{time} &#34;
+                  f&#34;House {house_no:&lt;2} -- {movie:&lt;30} ~ &#34;
+                  f&#34;Seat&lt;{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}&gt;&#34;,
+                  f&#34;{ticket_no:&lt;6} @{time} &#34;
+                  f&#34;電影院{house_no:&lt;2} -- {movie:&lt;30} ~ &#34;
+                  f&#34;座位&lt;{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}&gt;&#34;
+                  )
+        printLang(&#34;\nAre you sure you want to get refund of this ticket? (y/N)&#34;,
+                  &#34;\n你確定要為此電影票退款嗎？（y/N）&#34;)
+        logger.info(&#34;Confirming&#34;)
+        confirm: str = input(&#34;-&gt; &#34;).strip().upper()
+        if confirm == &#39;Y&#39;:
+                House.houses_table[house_no].seating_plan[row_index][column_index] = 0
+                House.tickets_table.remove(ticket)
+                logger.info(&#34;Ticket deleted&#34;)
+                saveData()
+                printLang(&#34;\nRefund succeed!&#34;, &#34;\n退款成功！&#34;)
+                message = &#39;&#39;
+                return
+        else:
+                logger.info(&#34;Confirmation failed, go back to the user menu&#34;)
+                print()
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;Confirmation failed. Refund Failed&#34;
+                else:
+                        message = &#34;確認失敗，退款失敗&#34;
+                return
+
+
+def userMode() -&gt; None:
+        &#34;&#34;&#34;
+        User mode
+        :return: None
+        &#34;&#34;&#34;
+        from .colour import normal_colour
+        from .language import language
+        
+        global message
+        
+        message = &#34;&#34;
+        while True:
+                logger: Logger = getLogger(&#34;userMode&#34;)
+                logger.info(&#34;Entered the user menu&#34;)
+                clearScreen()
+                printLang(&#34;CINEMA KIOSK SYSTEM\n\n\n&#34;, &#34;電影售票系統\n\n\n&#34;)
+                print(Colour.RED + message + normal_colour + &#34;\n\n\n&#34;)
+                for house in House.houses_table.values():
+                        if house.movie:
+                                printLang(
+                                        f&#34;House {house.house_number}: {house.movie:&lt;50} &#34;
+                                        f&#34;{Colour.GREEN if house.n_available &gt; 0 else Colour.RED}{house.n_available}{normal_colour}&#34;
+                                        f&#34;/{house.n_seat}&#34;,
+                                        f&#34;電影院{house.house_number}：{house.movie:&lt;50} &#34;
+                                        f&#34;{Colour.GREEN if house.n_available &gt; 0 else Colour.RED}{house.n_available}{normal_colour}&#34;
+                                        f&#34;/{house.n_seat}&#34;
+                                )
+                printLang(
+                        &#34;\n&#34;
+                        &#34;0: LOG OUT\n&#34;
+                        &#34;1: Buy a ticket\n&#34;
+                        &#34;2: Check ticket information\n&#34;
+                        &#34;3: Ticket refund\n&#34;
+                        &#34;4: HELP\n&#34;
+                        &#34;Please select a mode ([0-4]):&#34;,
+                        &#34;\n&#34;
+                        &#34;0：登出\n&#34;
+                        &#34;1：買票\n&#34;
+                        &#34;2：查票\n&#34;
+                        &#34;3：退款\n&#34;
+                        &#34;4：教學\n&#34;
+                        &#34;請選擇模式 ([0-4])：&#34;
+                )
+                logger.info(&#34;Waiting mode code input&#34;)
+                mode: str = input(&#34;-&gt; &#34;).strip()
+                if not mode.isdecimal():
+                        if language == &#34;ENGLISH&#34;:
+                                message = &#34;ERROR: Mode number should be a decimal number.&#34;
+                        else:
+                                message = &#34;錯誤：模式代碼必須全部都是數字&#34;
+                        logger.info(&#34;Invalid mode code&#34;)
+                        continue
+                
+                if mode == &#39;0&#39;:
+                        logger: Logger = getLogger(&#34;userMode.mode_0&#34;)
+                        logger.info(&#34;User Mode 0: Log out&#34;)
+                        logger.info(&#34;USER LOGOUT&#34;)
+                        for i in range(3, 0, -1):
+                                printLang(f&#34;\rYou will be logged out after {i} seconds...&#34;,
+                                          f&#34;\r你將會於{i}秒後登出......&#34;,
+                                          end=&#39;&#39;)
+                                sleep(1)
+                        return
+                
+                elif mode == &#39;1&#39;:
+                        buyTicket()  # Buy ticket
+                
+                elif mode == &#39;2&#39;:
+                        checkTicket()  # Check ticket
+                
+                elif mode == &#39;3&#39;:
+                        ticketRefund()  # Ticket refund
+                
+                # HELP
+                elif mode == &#39;4&#39;:
+                        logger: Logger = getLogger(&#34;userMode.mode_4&#34;)
+                        logger.info(&#34;User Mode 4: Help&#34;)
+                        openWebBrowser(&#34;https://joeccp.github.io/SBA/&#34;)
+                        logger.info(&#34;Opened a website browser and visit https://joeccp.github.io/SBA/&#34;)
+                
+                else:
+                        logger.info(&#34;Unknown mode code&#34;)
+                        if language == &#34;ENGLISH&#34;:
+                                message = &#34;ERROR: Unknown mode&#34;
+                                if mode.startswith(&#39;0&#39;):
+                                        message = message + &#34;. Did you accidentally enter any leading zeros?&#34;
+                        else:
+                                message = &#34;錯誤：無效模式代碼&#34;
+                                if mode.startswith(&#39;0&#39;):
+                                        message = message + &#34;。你可能輸入了不需要的前置零。&#34;
+                        continue</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="SBA.user.buyTicket"><code class="name flex">
+<span>def <span class="ident">buyTicket</span></span>(<span>) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>User Mode 1: Buy Ticket</p>
+<p>:return: None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def buyTicket() -&gt; None:
+        &#34;&#34;&#34;
+        User Mode 1: Buy Ticket
+
+        :return: None
+        &#34;&#34;&#34;
+        from .colour import normal_colour
+        from .language import language
+        
+        global message
+        
+        logger: Logger = getLogger(&#34;buyTicket&#34;)
+        logger.info(&#34;User Mode 1: Buy a ticket&#34;)
+        clearScreen()
+        printLang(&#34;CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n&#34;, &#34;電影售票系統\n\n\n\n\n\n\n&#34;)
+        printLang(&#34;House(s) available:&#34;, &#34;可選的電影院：&#34;)
+        total_available_house_count: int = 0
+        for house in House.houses_table.values():
+                if house.movie and house.n_available != 0:
+                        printLang(f&#34;House {house.house_number}: {house.movie:&lt;50} {house.n_available}/{house.n_seat}&#34;,
+                                  f&#34;電影院{house.house_number}：{house.movie:&lt;50} {house.n_available}/{house.n_seat}&#34;)
+                        total_available_house_count += 1
+        if total_available_house_count == 0:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;Sorry, no house available now&#34;
+                else:
+                        message = &#34;抱歉，現在沒有可選的電影院&#34;
+                return
+        printLang(&#34;\nPlease enter the house number (or hit Enter to go back to the main menu):&#34;,
+                  &#34;\n請輸入電影院號碼（或按 Enter 以返回主頁面）&#34;)
+        logger.info(&#34;Waiting house number input&#34;)
+        house_num_str: str = input(&#34;-&gt; &#34;).strip()
+        if house_num_str == &#39;&#39;:
+                message = &#39;&#39;
+                logger.info(&#34;Empty house number, going back to the user menu&#34;)
+                return
+        if not house_num_str.isdecimal():
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: House number can only be decimal numbers&#34;
+                else:
+                        message = &#34;錯誤：電影院號碼必須爲數字&#34;
+                logger.info(&#34;Invalid house number, going back to the user menu&#34;)
+                return
+        house_num: int = int(house_num_str)
+        if house_num not in House.houses_table.keys():
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: That house does not exist&#34;
+                else:
+                        message = &#34;錯誤：無此電影院&#34;
+                logger.info(&#34;Invalid house number, going back to the user menu&#34;)
+                return
+        house: House = House.houses_table[house_num]
+        logger.info(f&#34;User selected house {house_num}&#34;)
+        clearScreen()
+        printLang(f&#34;House {house.house_number} is now playing: {house.movie}&#34;,
+                  f&#34;電影院{house.house_number} 正在播映：{house.movie}&#34;)
+        house.printSeatingPlan()
+        
+        printLang(
+                f&#34;\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat&#34;
+                f&#34;(or just hit Enter to go back to the main menu):&#34;,
+                f&#34;\n請輸入座位的{row_colour}行數{normal_colour}和{column_colour}列數{normal_colour}&#34;
+                f&#34;（或按 Enter 以返回主頁面）&#34;
+        )
+        logger.info(&#34;Waiting seat coordinate input&#34;)
+        coor: str = input(&#34;\n-&gt; &#34;).strip().upper().replace(&#34; &#34;, &#39;&#39;)
+        if coor == &#39;&#39;:
+                message = &#39;&#39;
+                logger.info(&#34;Empty coordinate, going back to the user menu&#34;)
+                return
+        if len(coor) == 1:
+                logger.info(&#34;Invalid coordinate, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid format of the seat number&#34;
+                else:
+                        message = &#34;錯誤：無效座位坐標格式&#34;
+                return
+        if coor[-1] not in ascii_uppercase:
+                logger.info(&#34;Invalid coordinate, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = f&#34;ERROR: {column_colour}Column{normal_colour} index is not a character&#34;
+                else:
+                        message = f&#34;錯誤：座位{column_colour}列數{normal_colour}必須是英文字母&#34;
+                return
+        column_str: str = coor[-1]
+        column_int: int = ord(column_str) - 65
+        if column_int &gt;= house.n_column:
+                logger.info(&#34;Invalid coordinate, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = f&#34;ERROR: Invalid {column_colour}column{normal_colour}&#34;
+                else:
+                        message = f&#34;錯誤：無效座位{column_colour}行數{normal_colour}&#34;
+                return
+        row_str: str = coor[:-1]
+        if len(row_str) &gt; 2:
+                logger.info(&#34;Invalid coordinate, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = f&#34;ERROR: Impossible {row_colour}row{normal_colour} number&#34;
+                else:
+                        message = f&#34;錯誤：不可能的{row_colour}行數{normal_colour}&#34;
+                return
+        row_int: int = int(row_str) - 1
+        if house.seating_plan[row_int][column_int] != 0:
+                logger.info(&#34;Seat already sold, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;Sorry, the seat is not available&#34;
+                else:
+                        message = &#34;抱歉，該座位不予發售&#34;
+                return
+        house.seating_plan[row_int][column_int] = 1
+        House.total_tickets += 1
+        ticket_index: int = House.total_tickets
+        ticket_number: str = f&#34;T{ticket_index:0&gt;5}&#34;
+        time: str = datetime.now().isoformat(timespec=&#34;seconds&#34;)
+        ticket: Ticket = (
+                ticket_index, ticket_number, time, house.house_number, house.movie, row_int, column_int
+        )
+        printLang(&#34;Your ticket:&#34;, &#34;你的電影票如下：&#34;)
+        printLang(f&#34;{ticket_number:&lt;6} @{time}: &#34;
+                  f&#34;House {house.house_number:&lt;2} -- {house.movie:&lt;50} ~&#34;
+                  f&#34;Seat&lt;{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}&gt;&#34;,
+                  f&#34;{ticket_number:&lt;6} @{time}: &#34;
+                  f&#34;電影院{house.house_number:&lt;2} -- {house.movie:&lt;50} ~&#34;
+                  f&#34;座位&lt;{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}&gt;&#34;
+                  )
+        logger.info(&#34;User has successfully bought a ticket&#34;)
+        logger.info(f&#34;Ticket info: {ticket}&#34;)
+        House.tickets_table.append(ticket)
+        saveData()
+        printLang(&#34;\n\nThank you for your purchase!&#34;, &#34;\n\n感謝您的購買！&#34;)
+        inputLang(&#34;\nHit Enter to go back to the main menu&#34;, &#34;按 Enter 以返回主頁面&#34;)
+        message = &#34;&#34;</code></pre>
+</details>
+</dd>
+<dt id="SBA.user.checkTicket"><code class="name flex">
+<span>def <span class="ident">checkTicket</span></span>(<span>) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>User Mode 2: Check Ticket</p>
+<p>:return: None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkTicket() -&gt; None:
+        &#34;&#34;&#34;
+        User Mode 2: Check Ticket
+        
+        :return: None
+        &#34;&#34;&#34;
+        from .colour import normal_colour
+        from .language import language
+        
+        global message
+        
+        logger: Logger = getLogger(&#34;checkTicket&#34;)
+        logger.info(&#34;User Mode 2: Check ticket information&#34;)
+        clearScreen()
+        printLang(&#34;CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n&#34;, &#34;電影售票系統\n\n\n\n\n\n\n&#34;)
+        if not House.tickets_table:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;Sorry, there are no tickets&#34;
+                else:
+                        message = &#34;抱歉，現在沒有任何電影票&#34;
+                logger.info(&#34;No tickets, going back to the user menu&#34;)
+                return
+        printLang(&#34;Please enter your ticket number (starts with &#39;T&#39;):&#34;,
+                  &#34;請輸入你的電影票號碼（由「T」開始）&#34;)
+        logger.info(&#34;Waiting ticket number input&#34;)
+        ticket_number: str = input(&#34;-&gt; &#34;).strip().upper()
+        if ticket_number == &#34;&#34;:
+                message = &#34;&#34;
+                logger.info(&#34;Empty ticket number, going back to the user menu&#34;)
+                return
+        if not ticket_number.startswith(&#39;T&#39;):
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number format -- ticket number starts with &#39;T&#39;&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼由「T」開始&#34;
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                return
+        if ticket_number == &#39;T&#39;:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number has no decimal numbers&#34;
+                else:
+                        message = &#34;錯誤：無效的電影票號碼——電影票號碼必須有數字&#34;
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                return
+        if len(ticket_number) &lt; 6:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number too short&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼太短&#34;
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                return
+        if not ticket_number[1:].isdecimal():
+                if language == &#34;ENGLISH&#34;:
+                        message = (&#34;ERROR: Invalid ticket number -- &#34;
+                                   &#34;ticket number should ba a single character &#39;T&#39; followed by decimal numbers&#34;)
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼由「T」開始然後是數字&#34;
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                return
+        if len(ticket_number) &gt; 6 and ticket_number[1] == &#39;0&#39;:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- more than 4 leading zeros&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼的前置零不可有多於四位&#34;
+                logger.info(&#34;Invalid ticket number, going back to the control panel menu&#34;)
+                return
+        if set(ticket_number[1:]) == {&#39;0&#39;}:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number is all zero&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼不可全部爲零&#34;
+                logger.info(&#34;Invalid ticket number, going back to the control panel menu&#34;)
+                return
+        print()
+        ticket_index: int = int(ticket_number[1:])
+        ticket: Optional[Ticket] = House.searchTicket(ticket_index)
+        if ticket is None:
+                logger.info(&#34;No such ticket, going back to the user menu&#34;)
+                printLang(&#34;No such ticket&#34;, &#34;無此電影票&#34;)
+                print(&#34;\n\n&#34;)
+                inputLang(&#34;Hit enter to go back to the main menu&#34;,
+                          &#34;按 Enter 以返回主頁面&#34;)
+                message = &#34;&#34;
+                return
+        ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+        printLang(f&#34;{ticket_no:&lt;6} @{time} &#34;
+                  f&#34;House {house_no:&lt;2} -- {movie:&lt;30} ~ &#34;
+                  f&#34;Seat&lt;{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}&gt;&#34;,
+                  f&#34;{ticket_no:&lt;6} @{time} &#34;
+                  f&#34;電影院{house_no:&lt;2} -- {movie:&lt;30} ~ &#34;
+                  f&#34;座位&lt;{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}&gt;&#34;
+                  )
+        print(&#34;\n\n&#34;)
+        inputLang(&#34;\nHit Enter to go back to the main menu&#34;, &#34;按 Enter 以返回主頁面&#34;)
+        message = &#34;&#34;</code></pre>
+</details>
+</dd>
+<dt id="SBA.user.ticketRefund"><code class="name flex">
+<span>def <span class="ident">ticketRefund</span></span>(<span>) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>User Mode 3: Ticket Refund</p>
+<p>:return: None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ticketRefund() -&gt; None:
+        &#34;&#34;&#34;
+        User Mode 3: Ticket Refund
+
+        :return: None
+        &#34;&#34;&#34;
+        from .colour import normal_colour
+        from .language import language
+        
+        global message
+        
+        logger: Logger = getLogger(&#34;ticketRefund&#34;)
+        logger.info(&#34;User Mode 3: Ticket refund&#34;)
+        clearScreen()
+        printLang(&#34;CINEMA KIOSK SYSTEM\n\n\n\n\n\n\n\n\n\n\n\n&#34;,
+                  &#34;電影售票系統\n\n\n\n\n\n\n\n\n\n\n\n&#34;)
+        if not House.tickets_table:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;Sorry, there are no tickets&#34;
+                else:
+                        message = &#34;抱歉，現在沒有任何電影票&#34;
+                logger.info(&#34;No tickets, going back to the user menu&#34;)
+                return
+        printLang(&#34;Please enter your ticket number (starts with &#39;T&#39;):&#34;,
+                  &#34;請輸入你的電影票號碼（由「T」開始）&#34;)
+        logger.info(&#34;Waiting ticket number input&#34;)
+        ticket_number: str = input(&#34;-&gt; &#34;).strip().upper().replace(&#39; &#39;, &#39;&#39;)
+        if ticket_number == &#34;&#34;:
+                logger.info(&#34;Empty ticket number, going back to the user menu&#34;)
+                message = &#34;&#34;
+                return
+        if not ticket_number.startswith(&#39;T&#39;):
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number format -- ticket number starts with &#39;T&#39;&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼由「T」開始&#34;
+                return
+        if ticket_number == &#39;T&#39;:
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number has no decimal numbers&#34;
+                else:
+                        message = &#34;錯誤：無效的電影票號碼——電影票號碼必須有數字&#34;
+                return
+        if len(ticket_number) &lt; 6:
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number too short&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼太短&#34;
+                return
+        if not ticket_number[1:].isdecimal():
+                logger.info(&#34;Invalid ticket number, going back to the user menu&#34;)
+                if language == &#34;ENGLISH&#34;:
+                        message = (&#34;ERROR: Invalid ticket number -- &#34;
+                                   &#34;ticket number should ba a single character &#39;T&#39; followed by decimal numbers&#34;)
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼由「T」開始然後是數字&#34;
+                return
+        if len(ticket_number) &gt; 6 and ticket_number[1] == &#39;0&#39;:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- more than 4 leading zeros&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼的前置零不可有多於四位&#34;
+                logger.info(&#34;Invalid ticket number, going back to the control panel menu&#34;)
+                return
+        if set(ticket_number[1:]) == {&#39;0&#39;}:
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;ERROR: Invalid ticket number -- ticket number is all zero&#34;
+                else:
+                        message = &#34;錯誤：無效電影票號碼——電影票號碼不可全部爲零&#34;
+                logger.info(&#34;Invalid ticket number, going back to the control panel menu&#34;)
+                return
+        print()
+        ticket_index: int = int(ticket_number[1:])
+        ticket: Optional[Ticket] = House.searchTicket(ticket_index)
+        if ticket is None:
+                logger.info(&#34;No such ticket, going back to the user menu&#34;)
+                printLang(&#34;No such ticket&#34;, &#34;無此電影票&#34;)
+                print(&#34;\n\n&#34;)
+                inputLang(&#34;Hit enter to go back to the main menu&#34;,
+                          &#34;按 Enter 以返回主頁面&#34;)
+                message = &#34;&#34;
+                return
+        ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+        logger.info(f&#34;User want to delete this ticket: {ticket}&#34;)
+        printLang(f&#34;{ticket_no:&lt;6} @{time} &#34;
+                  f&#34;House {house_no:&lt;2} -- {movie:&lt;30} ~ &#34;
+                  f&#34;Seat&lt;{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}&gt;&#34;,
+                  f&#34;{ticket_no:&lt;6} @{time} &#34;
+                  f&#34;電影院{house_no:&lt;2} -- {movie:&lt;30} ~ &#34;
+                  f&#34;座位&lt;{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}&gt;&#34;
+                  )
+        printLang(&#34;\nAre you sure you want to get refund of this ticket? (y/N)&#34;,
+                  &#34;\n你確定要為此電影票退款嗎？（y/N）&#34;)
+        logger.info(&#34;Confirming&#34;)
+        confirm: str = input(&#34;-&gt; &#34;).strip().upper()
+        if confirm == &#39;Y&#39;:
+                House.houses_table[house_no].seating_plan[row_index][column_index] = 0
+                House.tickets_table.remove(ticket)
+                logger.info(&#34;Ticket deleted&#34;)
+                saveData()
+                printLang(&#34;\nRefund succeed!&#34;, &#34;\n退款成功！&#34;)
+                message = &#39;&#39;
+                return
+        else:
+                logger.info(&#34;Confirmation failed, go back to the user menu&#34;)
+                print()
+                if language == &#34;ENGLISH&#34;:
+                        message = &#34;Confirmation failed. Refund Failed&#34;
+                else:
+                        message = &#34;確認失敗，退款失敗&#34;
+                return</code></pre>
+</details>
+</dd>
+<dt id="SBA.user.userMode"><code class="name flex">
+<span>def <span class="ident">userMode</span></span>(<span>) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>User mode
+:return: None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def userMode() -&gt; None:
+        &#34;&#34;&#34;
+        User mode
+        :return: None
+        &#34;&#34;&#34;
+        from .colour import normal_colour
+        from .language import language
+        
+        global message
+        
+        message = &#34;&#34;
+        while True:
+                logger: Logger = getLogger(&#34;userMode&#34;)
+                logger.info(&#34;Entered the user menu&#34;)
+                clearScreen()
+                printLang(&#34;CINEMA KIOSK SYSTEM\n\n\n&#34;, &#34;電影售票系統\n\n\n&#34;)
+                print(Colour.RED + message + normal_colour + &#34;\n\n\n&#34;)
+                for house in House.houses_table.values():
+                        if house.movie:
+                                printLang(
+                                        f&#34;House {house.house_number}: {house.movie:&lt;50} &#34;
+                                        f&#34;{Colour.GREEN if house.n_available &gt; 0 else Colour.RED}{house.n_available}{normal_colour}&#34;
+                                        f&#34;/{house.n_seat}&#34;,
+                                        f&#34;電影院{house.house_number}：{house.movie:&lt;50} &#34;
+                                        f&#34;{Colour.GREEN if house.n_available &gt; 0 else Colour.RED}{house.n_available}{normal_colour}&#34;
+                                        f&#34;/{house.n_seat}&#34;
+                                )
+                printLang(
+                        &#34;\n&#34;
+                        &#34;0: LOG OUT\n&#34;
+                        &#34;1: Buy a ticket\n&#34;
+                        &#34;2: Check ticket information\n&#34;
+                        &#34;3: Ticket refund\n&#34;
+                        &#34;4: HELP\n&#34;
+                        &#34;Please select a mode ([0-4]):&#34;,
+                        &#34;\n&#34;
+                        &#34;0：登出\n&#34;
+                        &#34;1：買票\n&#34;
+                        &#34;2：查票\n&#34;
+                        &#34;3：退款\n&#34;
+                        &#34;4：教學\n&#34;
+                        &#34;請選擇模式 ([0-4])：&#34;
+                )
+                logger.info(&#34;Waiting mode code input&#34;)
+                mode: str = input(&#34;-&gt; &#34;).strip()
+                if not mode.isdecimal():
+                        if language == &#34;ENGLISH&#34;:
+                                message = &#34;ERROR: Mode number should be a decimal number.&#34;
+                        else:
+                                message = &#34;錯誤：模式代碼必須全部都是數字&#34;
+                        logger.info(&#34;Invalid mode code&#34;)
+                        continue
+                
+                if mode == &#39;0&#39;:
+                        logger: Logger = getLogger(&#34;userMode.mode_0&#34;)
+                        logger.info(&#34;User Mode 0: Log out&#34;)
+                        logger.info(&#34;USER LOGOUT&#34;)
+                        for i in range(3, 0, -1):
+                                printLang(f&#34;\rYou will be logged out after {i} seconds...&#34;,
+                                          f&#34;\r你將會於{i}秒後登出......&#34;,
+                                          end=&#39;&#39;)
+                                sleep(1)
+                        return
+                
+                elif mode == &#39;1&#39;:
+                        buyTicket()  # Buy ticket
+                
+                elif mode == &#39;2&#39;:
+                        checkTicket()  # Check ticket
+                
+                elif mode == &#39;3&#39;:
+                        ticketRefund()  # Ticket refund
+                
+                # HELP
+                elif mode == &#39;4&#39;:
+                        logger: Logger = getLogger(&#34;userMode.mode_4&#34;)
+                        logger.info(&#34;User Mode 4: Help&#34;)
+                        openWebBrowser(&#34;https://joeccp.github.io/SBA/&#34;)
+                        logger.info(&#34;Opened a website browser and visit https://joeccp.github.io/SBA/&#34;)
+                
+                else:
+                        logger.info(&#34;Unknown mode code&#34;)
+                        if language == &#34;ENGLISH&#34;:
+                                message = &#34;ERROR: Unknown mode&#34;
+                                if mode.startswith(&#39;0&#39;):
+                                        message = message + &#34;. Did you accidentally enter any leading zeros?&#34;
+                        else:
+                                message = &#34;錯誤：無效模式代碼&#34;
+                                if mode.startswith(&#39;0&#39;):
+                                        message = message + &#34;。你可能輸入了不需要的前置零。&#34;
+                        continue</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="SBA" href="index.html">SBA</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="SBA.user.buyTicket" href="#SBA.user.buyTicket">buyTicket</a></code></li>
+<li><code><a title="SBA.user.checkTicket" href="#SBA.user.checkTicket">checkTicket</a></code></li>
+<li><code><a title="SBA.user.ticketRefund" href="#SBA.user.ticketRefund">ticketRefund</a></code></li>
+<li><code><a title="SBA.user.userMode" href="#SBA.user.userMode">userMode</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
