@@ -93,7 +93,7 @@ A rough SBA report can be found [here](report/REPORT.md). NOT THE FINAL VERSION.
 - ![Static Badge](https://img.shields.io/badge/Documentation-green?logo=github&labelColor=black) 
 [Documentations](https://joeccp.github.io/SBA/)
 - ![Static Badge](https://img.shields.io/badge/Code_Documents-pink) 
-Auto generated [code documents](src/SBA/html/SBA/index.html) generated with [pdoc](https://pdoc3.github.io/pdoc/).
+[Code documents](src/SBA/html/SBA/index.html) generated with [pdoc](https://pdoc3.github.io/pdoc/).
 FOR REFERENCE ONLY.
 
 ---
