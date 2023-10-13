@@ -122,7 +122,7 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	This function does NOT use regular expression.
 	However, to demonstrate a valid coordinate expression, here is a reference:
 	**ALL SPACES ARE DELETED FIRST, CASE-INSENSITIVE**
-	`/^(EMPTY|BUY|RESERVE)-[1-9][0-9]*-([1-9][0-9]?[A-Z]|[A-Z][1-9][0-9]?|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z]|[1-9][0-9]?[A-Z]:[A-Z][1-9][0-9]?|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z]|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z])$/i`  # NOQA: Line too long
+	/^(EMPTY|BUY|RESERVE)-[1-9][0-9]*-([1-9][0-9]?[A-Z]|[A-Z][1-9][0-9]?|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z]|[1-9][0-9]?[A-Z]:[A-Z][1-9][0-9]?|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z]|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z])$/i  # NOQA: Line too long
 	
 	If the coordinate expression represents a single seat,
 	returns a list containing single-seat coordinate.
