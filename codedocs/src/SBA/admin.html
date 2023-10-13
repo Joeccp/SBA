@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>SBA.admin API documentation</title>
+<title>src.SBA.admin API documentation</title>
 <meta name="description" content="Admin mode -- Control Panel" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>SBA.admin</code></h1>
+<h1 class="title">Module <code>src.SBA.admin</code></h1>
 </header>
 <section id="section-intro">
 <p>Admin mode &ndash; Control Panel</p>
@@ -243,6 +243,12 @@ def checkHousesInformation() -&gt; None:
 def seatStatusOverride() -&gt; None:
         &#34;&#34;&#34;
         Admin Mode 6: Seat status override
+
+        In the input hint in Admin Mode 6: Seat status override,
+        you will see the format instruction is different from the regular expression reference
+        noted in the documentation of coorutils.coorExprAnalysis().
+        The reason is to help the Admin understand it.
+        
 
         :return: None
         &#34;&#34;&#34;
@@ -989,7 +995,7 @@ def adminMode() -&gt; None:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="SBA.admin.adminMode"><code class="name flex">
+<dt id="src.SBA.admin.adminMode"><code class="name flex">
 <span>def <span class="ident">adminMode</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -1160,7 +1166,7 @@ def adminMode() -&gt; None:
                                           &#34;你可能輸入了不需要的前置零&#34;)</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.changeColour"><code class="name flex">
+<dt id="src.SBA.admin.changeColour"><code class="name flex">
 <span>def <span class="ident">changeColour</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -1196,7 +1202,7 @@ def adminMode() -&gt; None:
                   f&#34;成功！現在的配色為：{colour_mode}&#34;)</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.changeLanguage"><code class="name flex">
+<dt id="src.SBA.admin.changeLanguage"><code class="name flex">
 <span>def <span class="ident">changeLanguage</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -1233,7 +1239,7 @@ def adminMode() -&gt; None:
         )</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.checkHousesInformation"><code class="name flex">
+<dt id="src.SBA.admin.checkHousesInformation"><code class="name flex">
 <span>def <span class="ident">checkHousesInformation</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -1287,7 +1293,7 @@ def adminMode() -&gt; None:
         house.printSeatingPlan()</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.checkTicketInformation"><code class="name flex">
+<dt id="src.SBA.admin.checkTicketInformation"><code class="name flex">
 <span>def <span class="ident">checkTicketInformation</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -1381,7 +1387,7 @@ def adminMode() -&gt; None:
                   f&#34;纍計：{House.get_n_tickets()}張電影票有效，曾有{House.total_tickets}張電影票存在過。&#34;)</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.clearAllData"><code class="name flex">
+<dt id="src.SBA.admin.clearAllData"><code class="name flex">
 <span>def <span class="ident">clearAllData</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -1493,7 +1499,7 @@ def adminMode() -&gt; None:
         logger.info(&#34;Finished clearing all saved data!&#34;)</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.clearHouseSeats"><code class="name flex">
+<dt id="src.SBA.admin.clearHouseSeats"><code class="name flex">
 <span>def <span class="ident">clearHouseSeats</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -1575,7 +1581,7 @@ def adminMode() -&gt; None:
                 return</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.createHouse"><code class="name flex">
+<dt id="src.SBA.admin.createHouse"><code class="name flex">
 <span>def <span class="ident">createHouse</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -1644,7 +1650,7 @@ def adminMode() -&gt; None:
         saveData()</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.deleteHouse"><code class="name flex">
+<dt id="src.SBA.admin.deleteHouse"><code class="name flex">
 <span>def <span class="ident">deleteHouse</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -1735,7 +1741,7 @@ def adminMode() -&gt; None:
                 return</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.deleteTicket"><code class="name flex">
+<dt id="src.SBA.admin.deleteTicket"><code class="name flex">
 <span>def <span class="ident">deleteTicket</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -1818,11 +1824,15 @@ def adminMode() -&gt; None:
         logger.debug(f&#34;Total: {House.get_n_tickets()} ticket{&#39;s&#39; if House.get_n_tickets() &gt; 1 else &#39;&#39;} active&#34;)</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.seatStatusOverride"><code class="name flex">
+<dt id="src.SBA.admin.seatStatusOverride"><code class="name flex">
 <span>def <span class="ident">seatStatusOverride</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Admin Mode 6: Seat status override</p>
+<p>In the input hint in Admin Mode 6: Seat status override,
+you will see the format instruction is different from the regular expression reference
+noted in the documentation of coorutils.coorExprAnalysis().
+The reason is to help the Admin understand it.</p>
 <p>:return: None</p></div>
 <details class="source">
 <summary>
@@ -1831,6 +1841,12 @@ def adminMode() -&gt; None:
 <pre><code class="python">def seatStatusOverride() -&gt; None:
         &#34;&#34;&#34;
         Admin Mode 6: Seat status override
+
+        In the input hint in Admin Mode 6: Seat status override,
+        you will see the format instruction is different from the regular expression reference
+        noted in the documentation of coorutils.coorExprAnalysis().
+        The reason is to help the Admin understand it.
+        
 
         :return: None
         &#34;&#34;&#34;
@@ -1945,7 +1961,7 @@ def adminMode() -&gt; None:
                 saveData()</code></pre>
 </details>
 </dd>
-<dt id="SBA.admin.updateMovie"><code class="name flex">
+<dt id="src.SBA.admin.updateMovie"><code class="name flex">
 <span>def <span class="ident">updateMovie</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -2049,23 +2065,23 @@ def adminMode() -&gt; None:
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="SBA" href="index.html">SBA</a></code></li>
+<li><code><a title="src.SBA" href="index.html">src.SBA</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="SBA.admin.adminMode" href="#SBA.admin.adminMode">adminMode</a></code></li>
-<li><code><a title="SBA.admin.changeColour" href="#SBA.admin.changeColour">changeColour</a></code></li>
-<li><code><a title="SBA.admin.changeLanguage" href="#SBA.admin.changeLanguage">changeLanguage</a></code></li>
-<li><code><a title="SBA.admin.checkHousesInformation" href="#SBA.admin.checkHousesInformation">checkHousesInformation</a></code></li>
-<li><code><a title="SBA.admin.checkTicketInformation" href="#SBA.admin.checkTicketInformation">checkTicketInformation</a></code></li>
-<li><code><a title="SBA.admin.clearAllData" href="#SBA.admin.clearAllData">clearAllData</a></code></li>
-<li><code><a title="SBA.admin.clearHouseSeats" href="#SBA.admin.clearHouseSeats">clearHouseSeats</a></code></li>
-<li><code><a title="SBA.admin.createHouse" href="#SBA.admin.createHouse">createHouse</a></code></li>
-<li><code><a title="SBA.admin.deleteHouse" href="#SBA.admin.deleteHouse">deleteHouse</a></code></li>
-<li><code><a title="SBA.admin.deleteTicket" href="#SBA.admin.deleteTicket">deleteTicket</a></code></li>
-<li><code><a title="SBA.admin.seatStatusOverride" href="#SBA.admin.seatStatusOverride">seatStatusOverride</a></code></li>
-<li><code><a title="SBA.admin.updateMovie" href="#SBA.admin.updateMovie">updateMovie</a></code></li>
+<li><code><a title="src.SBA.admin.adminMode" href="#src.SBA.admin.adminMode">adminMode</a></code></li>
+<li><code><a title="src.SBA.admin.changeColour" href="#src.SBA.admin.changeColour">changeColour</a></code></li>
+<li><code><a title="src.SBA.admin.changeLanguage" href="#src.SBA.admin.changeLanguage">changeLanguage</a></code></li>
+<li><code><a title="src.SBA.admin.checkHousesInformation" href="#src.SBA.admin.checkHousesInformation">checkHousesInformation</a></code></li>
+<li><code><a title="src.SBA.admin.checkTicketInformation" href="#src.SBA.admin.checkTicketInformation">checkTicketInformation</a></code></li>
+<li><code><a title="src.SBA.admin.clearAllData" href="#src.SBA.admin.clearAllData">clearAllData</a></code></li>
+<li><code><a title="src.SBA.admin.clearHouseSeats" href="#src.SBA.admin.clearHouseSeats">clearHouseSeats</a></code></li>
+<li><code><a title="src.SBA.admin.createHouse" href="#src.SBA.admin.createHouse">createHouse</a></code></li>
+<li><code><a title="src.SBA.admin.deleteHouse" href="#src.SBA.admin.deleteHouse">deleteHouse</a></code></li>
+<li><code><a title="src.SBA.admin.deleteTicket" href="#src.SBA.admin.deleteTicket">deleteTicket</a></code></li>
+<li><code><a title="src.SBA.admin.seatStatusOverride" href="#src.SBA.admin.seatStatusOverride">seatStatusOverride</a></code></li>
+<li><code><a title="src.SBA.admin.updateMovie" href="#src.SBA.admin.updateMovie">updateMovie</a></code></li>
 </ul>
 </li>
 </ul>

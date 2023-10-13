@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>SBA.house API documentation</title>
+<title>src.SBA.house API documentation</title>
 <meta name="description" content="Defines House" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>SBA.house</code></h1>
+<h1 class="title">Module <code>src.SBA.house</code></h1>
 </header>
 <section id="section-intro">
 <p>Defines House</p>
@@ -271,7 +271,7 @@ class House:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="SBA.house.House"><code class="flex name class">
+<dt id="src.SBA.house.House"><code class="flex name class">
 <span>class <span class="ident">House</span></span>
 <span>(</span><span>*, row_number: int, column_number: int)</span>
 </code></dt>
@@ -488,26 +488,26 @@ class House:
 </details>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.house.House.houses_table"><code class="name">var <span class="ident">houses_table</span> : dict[int, typing.Self]</code></dt>
+<dt id="src.SBA.house.House.houses_table"><code class="name">var <span class="ident">houses_table</span> : dict[int, typing.Self]</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.house.House.n_House"><code class="name">var <span class="ident">n_House</span> : int</code></dt>
+<dt id="src.SBA.house.House.n_House"><code class="name">var <span class="ident">n_House</span> : int</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.house.House.tickets_table"><code class="name">var <span class="ident">tickets_table</span> : list[tuple[int, str, str, int, str, int, int]]</code></dt>
+<dt id="src.SBA.house.House.tickets_table"><code class="name">var <span class="ident">tickets_table</span> : list[tuple[int, str, str, int, str, int, int]]</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.house.House.total_tickets"><code class="name">var <span class="ident">total_tickets</span> : int</code></dt>
+<dt id="src.SBA.house.House.total_tickets"><code class="name">var <span class="ident">total_tickets</span> : int</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 <h3>Static methods</h3>
 <dl>
-<dt id="SBA.house.House.get_n_tickets"><code class="name flex">
+<dt id="src.SBA.house.House.get_n_tickets"><code class="name flex">
 <span>def <span class="ident">get_n_tickets</span></span>(<span>) ‑> int</span>
 </code></dt>
 <dd>
@@ -522,7 +522,7 @@ def get_n_tickets(cls) -&gt; int:
         return len(cls.tickets_table)</code></pre>
 </details>
 </dd>
-<dt id="SBA.house.House.searchTicket"><code class="name flex">
+<dt id="src.SBA.house.House.searchTicket"><code class="name flex">
 <span>def <span class="ident">searchTicket</span></span>(<span>target_ticket_index: int) ‑> Optional[tuple[int, str, str, int, str, int, int]]</span>
 </code></dt>
 <dd>
@@ -606,7 +606,7 @@ def searchTicket(cls, target_ticket_index: int) -&gt; Optional[Ticket]:
 </dl>
 <h3>Instance variables</h3>
 <dl>
-<dt id="SBA.house.House.n_available"><code class="name">var <span class="ident">n_available</span> : int</code></dt>
+<dt id="src.SBA.house.House.n_available"><code class="name">var <span class="ident">n_available</span> : int</code></dt>
 <dd>
 <div class="desc"><p>Returns the number of available seats</p></div>
 <details class="source">
@@ -629,7 +629,7 @@ def n_available(self) -&gt; int:
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="SBA.house.House.clearPlan"><code class="name flex">
+<dt id="src.SBA.house.House.clearPlan"><code class="name flex">
 <span>def <span class="ident">clearPlan</span></span>(<span>self) ‑> None</span>
 </code></dt>
 <dd>
@@ -645,7 +645,7 @@ def n_available(self) -&gt; int:
         logger.info(f&#34;House {self.house_number}&#39;s seating plan has been cleared&#34;)</code></pre>
 </details>
 </dd>
-<dt id="SBA.house.House.printSeatingPlan"><code class="name flex">
+<dt id="src.SBA.house.House.printSeatingPlan"><code class="name flex">
 <span>def <span class="ident">printSeatingPlan</span></span>(<span>self) ‑> None</span>
 </code></dt>
 <dd>
@@ -703,23 +703,23 @@ def n_available(self) -&gt; int:
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="SBA" href="index.html">SBA</a></code></li>
+<li><code><a title="src.SBA" href="index.html">src.SBA</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="SBA.house.House" href="#SBA.house.House">House</a></code></h4>
+<h4><code><a title="src.SBA.house.House" href="#src.SBA.house.House">House</a></code></h4>
 <ul class="two-column">
-<li><code><a title="SBA.house.House.clearPlan" href="#SBA.house.House.clearPlan">clearPlan</a></code></li>
-<li><code><a title="SBA.house.House.get_n_tickets" href="#SBA.house.House.get_n_tickets">get_n_tickets</a></code></li>
-<li><code><a title="SBA.house.House.houses_table" href="#SBA.house.House.houses_table">houses_table</a></code></li>
-<li><code><a title="SBA.house.House.n_House" href="#SBA.house.House.n_House">n_House</a></code></li>
-<li><code><a title="SBA.house.House.n_available" href="#SBA.house.House.n_available">n_available</a></code></li>
-<li><code><a title="SBA.house.House.printSeatingPlan" href="#SBA.house.House.printSeatingPlan">printSeatingPlan</a></code></li>
-<li><code><a title="SBA.house.House.searchTicket" href="#SBA.house.House.searchTicket">searchTicket</a></code></li>
-<li><code><a title="SBA.house.House.tickets_table" href="#SBA.house.House.tickets_table">tickets_table</a></code></li>
-<li><code><a title="SBA.house.House.total_tickets" href="#SBA.house.House.total_tickets">total_tickets</a></code></li>
+<li><code><a title="src.SBA.house.House.clearPlan" href="#src.SBA.house.House.clearPlan">clearPlan</a></code></li>
+<li><code><a title="src.SBA.house.House.get_n_tickets" href="#src.SBA.house.House.get_n_tickets">get_n_tickets</a></code></li>
+<li><code><a title="src.SBA.house.House.houses_table" href="#src.SBA.house.House.houses_table">houses_table</a></code></li>
+<li><code><a title="src.SBA.house.House.n_House" href="#src.SBA.house.House.n_House">n_House</a></code></li>
+<li><code><a title="src.SBA.house.House.n_available" href="#src.SBA.house.House.n_available">n_available</a></code></li>
+<li><code><a title="src.SBA.house.House.printSeatingPlan" href="#src.SBA.house.House.printSeatingPlan">printSeatingPlan</a></code></li>
+<li><code><a title="src.SBA.house.House.searchTicket" href="#src.SBA.house.House.searchTicket">searchTicket</a></code></li>
+<li><code><a title="src.SBA.house.House.tickets_table" href="#src.SBA.house.House.tickets_table">tickets_table</a></code></li>
+<li><code><a title="src.SBA.house.House.total_tickets" href="#src.SBA.house.House.total_tickets">total_tickets</a></code></li>
 </ul>
 </li>
 </ul>

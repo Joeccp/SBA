@@ -119,13 +119,18 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 	"""
 	Analysis the coordinate expression.
 	
+	This function does NOT use regular expression.
+	However, to demonstrate a valid coordinate expression, here is a reference:
+	**ALL SPACES ARE DELETED FIRST, CASE-INSENSITIVE**
+	`/^(EMPTY|BUY|RESERVE)-[1-9][0-9]*-([1-9][0-9]?[A-Z]|[A-Z][1-9][0-9]?|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z]|[1-9][0-9]?[A-Z]:[A-Z][1-9][0-9]?|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z]|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z])$/i`  # NOQA: Line too long
+	
 	If the coordinate expression represents a single seat,
-	returns a list containing single-seat coordinate
+	returns a list containing single-seat coordinate.
 	
 	If the coordinate expression represents two or more seats,
-	returns a list of two single-seat coordinates representing the start and end of an area
+	returns a list of two single-seat coordinates representing the start and end of an area.
 	
-	Single seat coordinate means a tuple containing the row and column indexes respectively
+	Single-seat coordinate means a tuple containing the row and column indexes respectively.
 	
 	Assumes column coordinate starts from A to Z only.
 	
@@ -279,6 +284,8 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
 def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) -> list[Coor]:
 	"""
 	Returns a list of coordinates which the coor_expr argument defines.
+	
+	`coor_expr` is analyzed with coorExprAnalysis().
 	
 	:param coor_expr: A coordinate expression
 	:type coor_expr: str

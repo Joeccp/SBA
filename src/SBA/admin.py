@@ -215,6 +215,12 @@ def seatStatusOverride() -> None:
 	"""
 	Admin Mode 6: Seat status override
 
+	In the input hint in Admin Mode 6: Seat status override,
+	you will see the format instruction is different from the regular expression reference
+	noted in the documentation of coorutils.coorExprAnalysis().
+	The reason is to help the Admin understand it.
+	
+
 	:return: None
 	"""
 	logger: Logger = getLogger("seatStatusOverride")

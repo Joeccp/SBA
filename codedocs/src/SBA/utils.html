@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>SBA.utils API documentation</title>
+<title>src.SBA.utils API documentation</title>
 <meta name="description" content="Utilities" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>SBA.utils</code></h1>
+<h1 class="title">Module <code>src.SBA.utils</code></h1>
 </header>
 <section id="section-intro">
 <p>Utilities</p>
@@ -310,7 +310,7 @@ def endLog() -&gt; None:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="SBA.utils.checkPythonVersion"><code class="name flex">
+<dt id="src.SBA.utils.checkPythonVersion"><code class="name flex">
 <span>def <span class="ident">checkPythonVersion</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -349,7 +349,7 @@ If the python version is older than 3.11, it raises SystemExit.</p>
                 raise RealExit(err_msg)</code></pre>
 </details>
 </dd>
-<dt id="SBA.utils.clearScreen"><code class="name flex">
+<dt id="src.SBA.utils.clearScreen"><code class="name flex">
 <span>def <span class="ident">clearScreen</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -382,7 +382,7 @@ If the python version is older than 3.11, it raises SystemExit.</p>
                         system(&#39;clear&#39;)</code></pre>
 </details>
 </dd>
-<dt id="SBA.utils.endLog"><code class="name flex">
+<dt id="src.SBA.utils.endLog"><code class="name flex">
 <span>def <span class="ident">endLog</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -406,7 +406,7 @@ def endLog() -&gt; None:
                 pass</code></pre>
 </details>
 </dd>
-<dt id="SBA.utils.initLog"><code class="name flex">
+<dt id="src.SBA.utils.initLog"><code class="name flex">
 <span>def <span class="ident">initLog</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -450,7 +450,7 @@ def endLog() -&gt; None:
         logger.info(&#39;Program started&#39;)</code></pre>
 </details>
 </dd>
-<dt id="SBA.utils.loadData"><code class="name flex">
+<dt id="src.SBA.utils.loadData"><code class="name flex">
 <span>def <span class="ident">loadData</span></span>(<span>*, print_log: bool = False) ‑> None</span>
 </code></dt>
 <dd>
@@ -529,7 +529,7 @@ and load <code>House.total_tickets</code> and <code>House.tickets_table</code> f
         internalLog(&#34;Data loading process finished&#34;, &#34;載入資料程序完成&#34;)</code></pre>
 </details>
 </dd>
-<dt id="SBA.utils.saveData"><code class="name flex">
+<dt id="src.SBA.utils.saveData"><code class="name flex">
 <span>def <span class="ident">saveData</span></span>(<span>*, print_log: bool = False) ‑> None</span>
 </code></dt>
 <dd>
@@ -610,7 +610,7 @@ and save <code>House.total_tickets</code> and <code>House.tickets_table</code> i
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="SBA.utils.RealExit"><code class="flex name class">
+<dt id="src.SBA.utils.RealExit"><code class="flex name class">
 <span>class <span class="ident">RealExit</span></span>
 <span>(</span><span>message: str = '')</span>
 </code></dt>
@@ -655,23 +655,23 @@ i.e. Not an unexpected program crash</p>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="SBA" href="index.html">SBA</a></code></li>
+<li><code><a title="src.SBA" href="index.html">src.SBA</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="two-column">
-<li><code><a title="SBA.utils.checkPythonVersion" href="#SBA.utils.checkPythonVersion">checkPythonVersion</a></code></li>
-<li><code><a title="SBA.utils.clearScreen" href="#SBA.utils.clearScreen">clearScreen</a></code></li>
-<li><code><a title="SBA.utils.endLog" href="#SBA.utils.endLog">endLog</a></code></li>
-<li><code><a title="SBA.utils.initLog" href="#SBA.utils.initLog">initLog</a></code></li>
-<li><code><a title="SBA.utils.loadData" href="#SBA.utils.loadData">loadData</a></code></li>
-<li><code><a title="SBA.utils.saveData" href="#SBA.utils.saveData">saveData</a></code></li>
+<li><code><a title="src.SBA.utils.checkPythonVersion" href="#src.SBA.utils.checkPythonVersion">checkPythonVersion</a></code></li>
+<li><code><a title="src.SBA.utils.clearScreen" href="#src.SBA.utils.clearScreen">clearScreen</a></code></li>
+<li><code><a title="src.SBA.utils.endLog" href="#src.SBA.utils.endLog">endLog</a></code></li>
+<li><code><a title="src.SBA.utils.initLog" href="#src.SBA.utils.initLog">initLog</a></code></li>
+<li><code><a title="src.SBA.utils.loadData" href="#src.SBA.utils.loadData">loadData</a></code></li>
+<li><code><a title="src.SBA.utils.saveData" href="#src.SBA.utils.saveData">saveData</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="SBA.utils.RealExit" href="#SBA.utils.RealExit">RealExit</a></code></h4>
+<h4><code><a title="src.SBA.utils.RealExit" href="#src.SBA.utils.RealExit">RealExit</a></code></h4>
 </li>
 </ul>
 </li>

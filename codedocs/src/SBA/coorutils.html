@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>SBA.coorutils API documentation</title>
+<title>src.SBA.coorutils API documentation</title>
 <meta name="description" content="Utilities for handling coordinate" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>SBA.coorutils</code></h1>
+<h1 class="title">Module <code>src.SBA.coorutils</code></h1>
 </header>
 <section id="section-intro">
 <p>Utilities for handling coordinate</p>
@@ -148,13 +148,18 @@ def coorExprAnalysis(coor_expr: str, /, *, n_row: int = 99, n_column: int = 26) 
         &#34;&#34;&#34;
         Analysis the coordinate expression.
         
+        This function does NOT use regular expression.
+        However, to demonstrate a valid coordinate expression, here is a reference:
+        **ALL SPACES ARE DELETED FIRST, CASE-INSENSITIVE**
+        `/^(EMPTY|BUY|RESERVE)-[1-9][0-9]*-([1-9][0-9]?[A-Z]|[A-Z][1-9][0-9]?|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z]|[1-9][0-9]?[A-Z]:[A-Z][1-9][0-9]?|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z]|[1-9][0-9]?[A-Z]:[1-9][0-9]?[A-Z])$/i`  # NOQA: Line too long
+        
         If the coordinate expression represents a single seat,
-        returns a list containing single-seat coordinate
+        returns a list containing single-seat coordinate.
         
         If the coordinate expression represents two or more seats,
-        returns a list of two single-seat coordinates representing the start and end of an area
+        returns a list of two single-seat coordinates representing the start and end of an area.
         
-        Single seat coordinate means a tuple containing the row and column indexes respectively
+        Single-seat coordinate means a tuple containing the row and column indexes respectively.
         
         Assumes column coordinate starts from A to Z only.
         
@@ -309,6 +314,8 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
         &#34;&#34;&#34;
         Returns a list of coordinates which the coor_expr argument defines.
         
+        `coor_expr` is analyzed with coorExprAnalysis().
+        
         :param coor_expr: A coordinate expression
         :type coor_expr: str
         :param n_row: Number of row of the house
@@ -377,7 +384,7 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="SBA.coorutils.ExceptionLogger"><code class="name flex">
+<dt id="src.SBA.coorutils.ExceptionLogger"><code class="name flex">
 <span>def <span class="ident">ExceptionLogger</span></span>(<span>function: Callable) ‑> Callable</span>
 </code></dt>
 <dd>
@@ -399,7 +406,7 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
         return functionWithLogger</code></pre>
 </details>
 </dd>
-<dt id="SBA.coorutils.coorExprAnalysis"><code class="name flex">
+<dt id="src.SBA.coorutils.coorExprAnalysis"><code class="name flex">
 <span>def <span class="ident">coorExprAnalysis</span></span>(<span>*args, **kwargs) ‑> Any</span>
 </code></dt>
 <dd>
@@ -418,7 +425,7 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
                 raise exception</code></pre>
 </details>
 </dd>
-<dt id="SBA.coorutils.getCoorsFromCoorExpr"><code class="name flex">
+<dt id="src.SBA.coorutils.getCoorsFromCoorExpr"><code class="name flex">
 <span>def <span class="ident">getCoorsFromCoorExpr</span></span>(<span>*args, **kwargs) ‑> Any</span>
 </code></dt>
 <dd>
@@ -442,7 +449,7 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="SBA.coorutils.AlphabetCharacterInRowNumber"><code class="flex name class">
+<dt id="src.SBA.coorutils.AlphabetCharacterInRowNumber"><code class="flex name class">
 <span>class <span class="ident">AlphabetCharacterInRowNumber</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -458,19 +465,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.AlphabetCharacterInRowNumber.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.AlphabetCharacterInRowNumber.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.ColumnCoordinatesAtTwoSide"><code class="flex name class">
+<dt id="src.SBA.coorutils.ColumnCoordinatesAtTwoSide"><code class="flex name class">
 <span>class <span class="ident">ColumnCoordinatesAtTwoSide</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -486,19 +493,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.ColumnCoordinatesAtTwoSide.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.ColumnCoordinatesAtTwoSide.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.ColumnNumberOutOfRange"><code class="flex name class">
+<dt id="src.SBA.coorutils.ColumnNumberOutOfRange"><code class="flex name class">
 <span>class <span class="ident">ColumnNumberOutOfRange</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -514,19 +521,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.ColumnNumberOutOfRange.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.ColumnNumberOutOfRange.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.CoordinateExpressionException"><code class="flex name class">
+<dt id="src.SBA.coorutils.CoordinateExpressionException"><code class="flex name class">
 <span>class <span class="ident">CoordinateExpressionException</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -547,31 +554,31 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </ul>
 <h3>Subclasses</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.AlphabetCharacterInRowNumber" href="#SBA.coorutils.AlphabetCharacterInRowNumber">AlphabetCharacterInRowNumber</a></li>
-<li><a title="SBA.coorutils.ColumnCoordinatesAtTwoSide" href="#SBA.coorutils.ColumnCoordinatesAtTwoSide">ColumnCoordinatesAtTwoSide</a></li>
-<li><a title="SBA.coorutils.ColumnNumberOutOfRange" href="#SBA.coorutils.ColumnNumberOutOfRange">ColumnNumberOutOfRange</a></li>
-<li><a title="SBA.coorutils.CoordinatesWrongOrder" href="#SBA.coorutils.CoordinatesWrongOrder">CoordinatesWrongOrder</a></li>
-<li><a title="SBA.coorutils.EmptyCoordinate" href="#SBA.coorutils.EmptyCoordinate">EmptyCoordinate</a></li>
-<li><a title="SBA.coorutils.InvalidCharacter" href="#SBA.coorutils.InvalidCharacter">InvalidCharacter</a></li>
-<li><a title="SBA.coorutils.MoreThanOneColon" href="#SBA.coorutils.MoreThanOneColon">MoreThanOneColon</a></li>
-<li><a title="SBA.coorutils.NoColumnCoordinate" href="#SBA.coorutils.NoColumnCoordinate">NoColumnCoordinate</a></li>
-<li><a title="SBA.coorutils.NoEndingCoordinate" href="#SBA.coorutils.NoEndingCoordinate">NoEndingCoordinate</a></li>
-<li><a title="SBA.coorutils.NoRowCoordinate" href="#SBA.coorutils.NoRowCoordinate">NoRowCoordinate</a></li>
-<li><a title="SBA.coorutils.NoStartingCoordinate" href="#SBA.coorutils.NoStartingCoordinate">NoStartingCoordinate</a></li>
-<li><a title="SBA.coorutils.RowCoordinatesAtTwoSide" href="#SBA.coorutils.RowCoordinatesAtTwoSide">RowCoordinatesAtTwoSide</a></li>
-<li><a title="SBA.coorutils.RowNumberIsZero" href="#SBA.coorutils.RowNumberIsZero">RowNumberIsZero</a></li>
-<li><a title="SBA.coorutils.RowNumberOutOfRange" href="#SBA.coorutils.RowNumberOutOfRange">RowNumberOutOfRange</a></li>
-<li><a title="SBA.coorutils.SameCoordinates" href="#SBA.coorutils.SameCoordinates">SameCoordinates</a></li>
+<li><a title="src.SBA.coorutils.AlphabetCharacterInRowNumber" href="#src.SBA.coorutils.AlphabetCharacterInRowNumber">AlphabetCharacterInRowNumber</a></li>
+<li><a title="src.SBA.coorutils.ColumnCoordinatesAtTwoSide" href="#src.SBA.coorutils.ColumnCoordinatesAtTwoSide">ColumnCoordinatesAtTwoSide</a></li>
+<li><a title="src.SBA.coorutils.ColumnNumberOutOfRange" href="#src.SBA.coorutils.ColumnNumberOutOfRange">ColumnNumberOutOfRange</a></li>
+<li><a title="src.SBA.coorutils.CoordinatesWrongOrder" href="#src.SBA.coorutils.CoordinatesWrongOrder">CoordinatesWrongOrder</a></li>
+<li><a title="src.SBA.coorutils.EmptyCoordinate" href="#src.SBA.coorutils.EmptyCoordinate">EmptyCoordinate</a></li>
+<li><a title="src.SBA.coorutils.InvalidCharacter" href="#src.SBA.coorutils.InvalidCharacter">InvalidCharacter</a></li>
+<li><a title="src.SBA.coorutils.MoreThanOneColon" href="#src.SBA.coorutils.MoreThanOneColon">MoreThanOneColon</a></li>
+<li><a title="src.SBA.coorutils.NoColumnCoordinate" href="#src.SBA.coorutils.NoColumnCoordinate">NoColumnCoordinate</a></li>
+<li><a title="src.SBA.coorutils.NoEndingCoordinate" href="#src.SBA.coorutils.NoEndingCoordinate">NoEndingCoordinate</a></li>
+<li><a title="src.SBA.coorutils.NoRowCoordinate" href="#src.SBA.coorutils.NoRowCoordinate">NoRowCoordinate</a></li>
+<li><a title="src.SBA.coorutils.NoStartingCoordinate" href="#src.SBA.coorutils.NoStartingCoordinate">NoStartingCoordinate</a></li>
+<li><a title="src.SBA.coorutils.RowCoordinatesAtTwoSide" href="#src.SBA.coorutils.RowCoordinatesAtTwoSide">RowCoordinatesAtTwoSide</a></li>
+<li><a title="src.SBA.coorutils.RowNumberIsZero" href="#src.SBA.coorutils.RowNumberIsZero">RowNumberIsZero</a></li>
+<li><a title="src.SBA.coorutils.RowNumberOutOfRange" href="#src.SBA.coorutils.RowNumberOutOfRange">RowNumberOutOfRange</a></li>
+<li><a title="src.SBA.coorutils.SameCoordinates" href="#src.SBA.coorutils.SameCoordinates">SameCoordinates</a></li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.CoordinateExpressionException.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.CoordinateExpressionException.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.CoordinatesWrongOrder"><code class="flex name class">
+<dt id="src.SBA.coorutils.CoordinatesWrongOrder"><code class="flex name class">
 <span>class <span class="ident">CoordinatesWrongOrder</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -587,19 +594,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.CoordinatesWrongOrder.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.CoordinatesWrongOrder.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.EmptyCoordinate"><code class="flex name class">
+<dt id="src.SBA.coorutils.EmptyCoordinate"><code class="flex name class">
 <span>class <span class="ident">EmptyCoordinate</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -615,19 +622,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.EmptyCoordinate.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.EmptyCoordinate.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.InvalidCharacter"><code class="flex name class">
+<dt id="src.SBA.coorutils.InvalidCharacter"><code class="flex name class">
 <span>class <span class="ident">InvalidCharacter</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -643,19 +650,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.InvalidCharacter.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.InvalidCharacter.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.MoreThanOneColon"><code class="flex name class">
+<dt id="src.SBA.coorutils.MoreThanOneColon"><code class="flex name class">
 <span>class <span class="ident">MoreThanOneColon</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -671,19 +678,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.MoreThanOneColon.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.MoreThanOneColon.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.NoColumnCoordinate"><code class="flex name class">
+<dt id="src.SBA.coorutils.NoColumnCoordinate"><code class="flex name class">
 <span>class <span class="ident">NoColumnCoordinate</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -699,19 +706,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.NoColumnCoordinate.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.NoColumnCoordinate.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.NoEndingCoordinate"><code class="flex name class">
+<dt id="src.SBA.coorutils.NoEndingCoordinate"><code class="flex name class">
 <span>class <span class="ident">NoEndingCoordinate</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -727,19 +734,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.NoEndingCoordinate.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.NoEndingCoordinate.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.NoRowCoordinate"><code class="flex name class">
+<dt id="src.SBA.coorutils.NoRowCoordinate"><code class="flex name class">
 <span>class <span class="ident">NoRowCoordinate</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -755,19 +762,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.NoRowCoordinate.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.NoRowCoordinate.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.NoStartingCoordinate"><code class="flex name class">
+<dt id="src.SBA.coorutils.NoStartingCoordinate"><code class="flex name class">
 <span>class <span class="ident">NoStartingCoordinate</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -783,19 +790,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.NoStartingCoordinate.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.NoStartingCoordinate.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.RowCoordinatesAtTwoSide"><code class="flex name class">
+<dt id="src.SBA.coorutils.RowCoordinatesAtTwoSide"><code class="flex name class">
 <span>class <span class="ident">RowCoordinatesAtTwoSide</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -811,19 +818,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.RowCoordinatesAtTwoSide.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.RowCoordinatesAtTwoSide.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.RowNumberIsZero"><code class="flex name class">
+<dt id="src.SBA.coorutils.RowNumberIsZero"><code class="flex name class">
 <span>class <span class="ident">RowNumberIsZero</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -839,19 +846,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.RowNumberIsZero.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.RowNumberIsZero.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.RowNumberOutOfRange"><code class="flex name class">
+<dt id="src.SBA.coorutils.RowNumberOutOfRange"><code class="flex name class">
 <span>class <span class="ident">RowNumberOutOfRange</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -867,19 +874,19 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.RowNumberOutOfRange.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.RowNumberOutOfRange.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 </dd>
-<dt id="SBA.coorutils.SameCoordinates"><code class="flex name class">
+<dt id="src.SBA.coorutils.SameCoordinates"><code class="flex name class">
 <span>class <span class="ident">SameCoordinates</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
@@ -895,13 +902,13 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
+<li><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></li>
 <li>builtins.Exception</li>
 <li>builtins.BaseException</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.coorutils.SameCoordinates.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
+<dt id="src.SBA.coorutils.SameCoordinates.chinese_msg"><code class="name">var <span class="ident">chinese_msg</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -918,112 +925,112 @@ def getCoorsFromCoorExpr(coor_expr: str, /, *, n_row: int = 99, n_column: int = 
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="SBA" href="index.html">SBA</a></code></li>
+<li><code><a title="src.SBA" href="index.html">src.SBA</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="SBA.coorutils.ExceptionLogger" href="#SBA.coorutils.ExceptionLogger">ExceptionLogger</a></code></li>
-<li><code><a title="SBA.coorutils.coorExprAnalysis" href="#SBA.coorutils.coorExprAnalysis">coorExprAnalysis</a></code></li>
-<li><code><a title="SBA.coorutils.getCoorsFromCoorExpr" href="#SBA.coorutils.getCoorsFromCoorExpr">getCoorsFromCoorExpr</a></code></li>
+<li><code><a title="src.SBA.coorutils.ExceptionLogger" href="#src.SBA.coorutils.ExceptionLogger">ExceptionLogger</a></code></li>
+<li><code><a title="src.SBA.coorutils.coorExprAnalysis" href="#src.SBA.coorutils.coorExprAnalysis">coorExprAnalysis</a></code></li>
+<li><code><a title="src.SBA.coorutils.getCoorsFromCoorExpr" href="#src.SBA.coorutils.getCoorsFromCoorExpr">getCoorsFromCoorExpr</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="SBA.coorutils.AlphabetCharacterInRowNumber" href="#SBA.coorutils.AlphabetCharacterInRowNumber">AlphabetCharacterInRowNumber</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.AlphabetCharacterInRowNumber" href="#src.SBA.coorutils.AlphabetCharacterInRowNumber">AlphabetCharacterInRowNumber</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.AlphabetCharacterInRowNumber.chinese_msg" href="#SBA.coorutils.AlphabetCharacterInRowNumber.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.AlphabetCharacterInRowNumber.chinese_msg" href="#src.SBA.coorutils.AlphabetCharacterInRowNumber.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.ColumnCoordinatesAtTwoSide" href="#SBA.coorutils.ColumnCoordinatesAtTwoSide">ColumnCoordinatesAtTwoSide</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.ColumnCoordinatesAtTwoSide" href="#src.SBA.coorutils.ColumnCoordinatesAtTwoSide">ColumnCoordinatesAtTwoSide</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.ColumnCoordinatesAtTwoSide.chinese_msg" href="#SBA.coorutils.ColumnCoordinatesAtTwoSide.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.ColumnCoordinatesAtTwoSide.chinese_msg" href="#src.SBA.coorutils.ColumnCoordinatesAtTwoSide.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.ColumnNumberOutOfRange" href="#SBA.coorutils.ColumnNumberOutOfRange">ColumnNumberOutOfRange</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.ColumnNumberOutOfRange" href="#src.SBA.coorutils.ColumnNumberOutOfRange">ColumnNumberOutOfRange</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.ColumnNumberOutOfRange.chinese_msg" href="#SBA.coorutils.ColumnNumberOutOfRange.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.ColumnNumberOutOfRange.chinese_msg" href="#src.SBA.coorutils.ColumnNumberOutOfRange.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.CoordinateExpressionException" href="#SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.CoordinateExpressionException" href="#src.SBA.coorutils.CoordinateExpressionException">CoordinateExpressionException</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.CoordinateExpressionException.chinese_msg" href="#SBA.coorutils.CoordinateExpressionException.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.CoordinateExpressionException.chinese_msg" href="#src.SBA.coorutils.CoordinateExpressionException.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.CoordinatesWrongOrder" href="#SBA.coorutils.CoordinatesWrongOrder">CoordinatesWrongOrder</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.CoordinatesWrongOrder" href="#src.SBA.coorutils.CoordinatesWrongOrder">CoordinatesWrongOrder</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.CoordinatesWrongOrder.chinese_msg" href="#SBA.coorutils.CoordinatesWrongOrder.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.CoordinatesWrongOrder.chinese_msg" href="#src.SBA.coorutils.CoordinatesWrongOrder.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.EmptyCoordinate" href="#SBA.coorutils.EmptyCoordinate">EmptyCoordinate</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.EmptyCoordinate" href="#src.SBA.coorutils.EmptyCoordinate">EmptyCoordinate</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.EmptyCoordinate.chinese_msg" href="#SBA.coorutils.EmptyCoordinate.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.EmptyCoordinate.chinese_msg" href="#src.SBA.coorutils.EmptyCoordinate.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.InvalidCharacter" href="#SBA.coorutils.InvalidCharacter">InvalidCharacter</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.InvalidCharacter" href="#src.SBA.coorutils.InvalidCharacter">InvalidCharacter</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.InvalidCharacter.chinese_msg" href="#SBA.coorutils.InvalidCharacter.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.InvalidCharacter.chinese_msg" href="#src.SBA.coorutils.InvalidCharacter.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.MoreThanOneColon" href="#SBA.coorutils.MoreThanOneColon">MoreThanOneColon</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.MoreThanOneColon" href="#src.SBA.coorutils.MoreThanOneColon">MoreThanOneColon</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.MoreThanOneColon.chinese_msg" href="#SBA.coorutils.MoreThanOneColon.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.MoreThanOneColon.chinese_msg" href="#src.SBA.coorutils.MoreThanOneColon.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.NoColumnCoordinate" href="#SBA.coorutils.NoColumnCoordinate">NoColumnCoordinate</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.NoColumnCoordinate" href="#src.SBA.coorutils.NoColumnCoordinate">NoColumnCoordinate</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.NoColumnCoordinate.chinese_msg" href="#SBA.coorutils.NoColumnCoordinate.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.NoColumnCoordinate.chinese_msg" href="#src.SBA.coorutils.NoColumnCoordinate.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.NoEndingCoordinate" href="#SBA.coorutils.NoEndingCoordinate">NoEndingCoordinate</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.NoEndingCoordinate" href="#src.SBA.coorutils.NoEndingCoordinate">NoEndingCoordinate</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.NoEndingCoordinate.chinese_msg" href="#SBA.coorutils.NoEndingCoordinate.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.NoEndingCoordinate.chinese_msg" href="#src.SBA.coorutils.NoEndingCoordinate.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.NoRowCoordinate" href="#SBA.coorutils.NoRowCoordinate">NoRowCoordinate</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.NoRowCoordinate" href="#src.SBA.coorutils.NoRowCoordinate">NoRowCoordinate</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.NoRowCoordinate.chinese_msg" href="#SBA.coorutils.NoRowCoordinate.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.NoRowCoordinate.chinese_msg" href="#src.SBA.coorutils.NoRowCoordinate.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.NoStartingCoordinate" href="#SBA.coorutils.NoStartingCoordinate">NoStartingCoordinate</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.NoStartingCoordinate" href="#src.SBA.coorutils.NoStartingCoordinate">NoStartingCoordinate</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.NoStartingCoordinate.chinese_msg" href="#SBA.coorutils.NoStartingCoordinate.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.NoStartingCoordinate.chinese_msg" href="#src.SBA.coorutils.NoStartingCoordinate.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.RowCoordinatesAtTwoSide" href="#SBA.coorutils.RowCoordinatesAtTwoSide">RowCoordinatesAtTwoSide</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.RowCoordinatesAtTwoSide" href="#src.SBA.coorutils.RowCoordinatesAtTwoSide">RowCoordinatesAtTwoSide</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.RowCoordinatesAtTwoSide.chinese_msg" href="#SBA.coorutils.RowCoordinatesAtTwoSide.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.RowCoordinatesAtTwoSide.chinese_msg" href="#src.SBA.coorutils.RowCoordinatesAtTwoSide.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.RowNumberIsZero" href="#SBA.coorutils.RowNumberIsZero">RowNumberIsZero</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.RowNumberIsZero" href="#src.SBA.coorutils.RowNumberIsZero">RowNumberIsZero</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.RowNumberIsZero.chinese_msg" href="#SBA.coorutils.RowNumberIsZero.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.RowNumberIsZero.chinese_msg" href="#src.SBA.coorutils.RowNumberIsZero.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.RowNumberOutOfRange" href="#SBA.coorutils.RowNumberOutOfRange">RowNumberOutOfRange</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.RowNumberOutOfRange" href="#src.SBA.coorutils.RowNumberOutOfRange">RowNumberOutOfRange</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.RowNumberOutOfRange.chinese_msg" href="#SBA.coorutils.RowNumberOutOfRange.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.RowNumberOutOfRange.chinese_msg" href="#src.SBA.coorutils.RowNumberOutOfRange.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="SBA.coorutils.SameCoordinates" href="#SBA.coorutils.SameCoordinates">SameCoordinates</a></code></h4>
+<h4><code><a title="src.SBA.coorutils.SameCoordinates" href="#src.SBA.coorutils.SameCoordinates">SameCoordinates</a></code></h4>
 <ul class="">
-<li><code><a title="SBA.coorutils.SameCoordinates.chinese_msg" href="#SBA.coorutils.SameCoordinates.chinese_msg">chinese_msg</a></code></li>
+<li><code><a title="src.SBA.coorutils.SameCoordinates.chinese_msg" href="#src.SBA.coorutils.SameCoordinates.chinese_msg">chinese_msg</a></code></li>
 </ul>
 </li>
 </ul>

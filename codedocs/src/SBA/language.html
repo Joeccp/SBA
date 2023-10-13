@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>SBA.language API documentation</title>
+<title>src.SBA.language API documentation</title>
 <meta name="description" content="Language" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>SBA.language</code></h1>
+<h1 class="title">Module <code>src.SBA.language</code></h1>
 </header>
 <section id="section-intro">
 <p>Language</p>
@@ -172,7 +172,7 @@ def inputLang(english_message: str = &#39;&#39;, chinese_message: str = &#39;&#3
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="SBA.language.inputLang"><code class="name flex">
+<dt id="src.SBA.language.inputLang"><code class="name flex">
 <span>def <span class="ident">inputLang</span></span>(<span>english_message: str = '', chinese_message: str = '', /) ‑> str</span>
 </code></dt>
 <dd>
@@ -211,7 +211,7 @@ Position-only parameter.
         return ret</code></pre>
 </details>
 </dd>
-<dt id="SBA.language.loadLanguage"><code class="name flex">
+<dt id="src.SBA.language.loadLanguage"><code class="name flex">
 <span>def <span class="ident">loadLanguage</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -257,7 +257,7 @@ If the file does not exist, create one and set to ENGLISH</p>
         setLanguage(language_)  # type: ignore[arg-type] # language_ must be Literal[&#39;ENGLISH&#39;, &#39;CHINESE&#39;]</code></pre>
 </details>
 </dd>
-<dt id="SBA.language.printLang"><code class="name flex">
+<dt id="src.SBA.language.printLang"><code class="name flex">
 <span>def <span class="ident">printLang</span></span>(<span>english_message: str = '', chinese_message: str = '', /, **kwargs) ‑> None</span>
 </code></dt>
 <dd>
@@ -299,7 +299,7 @@ If the file does not exist, create one and set to ENGLISH</p>
                 print(chinese_message, **kwargs)</code></pre>
 </details>
 </dd>
-<dt id="SBA.language.setLanguage"><code class="name flex">
+<dt id="src.SBA.language.setLanguage"><code class="name flex">
 <span>def <span class="ident">setLanguage</span></span>(<span>language_: Literal['CHINESE', 'ENGLISH']) ‑> None</span>
 </code></dt>
 <dd>
@@ -356,15 +356,15 @@ If the file does not exist, create one and set to ENGLISH</p>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="SBA" href="index.html">SBA</a></code></li>
+<li><code><a title="src.SBA" href="index.html">src.SBA</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="SBA.language.inputLang" href="#SBA.language.inputLang">inputLang</a></code></li>
-<li><code><a title="SBA.language.loadLanguage" href="#SBA.language.loadLanguage">loadLanguage</a></code></li>
-<li><code><a title="SBA.language.printLang" href="#SBA.language.printLang">printLang</a></code></li>
-<li><code><a title="SBA.language.setLanguage" href="#SBA.language.setLanguage">setLanguage</a></code></li>
+<li><code><a title="src.SBA.language.inputLang" href="#src.SBA.language.inputLang">inputLang</a></code></li>
+<li><code><a title="src.SBA.language.loadLanguage" href="#src.SBA.language.loadLanguage">loadLanguage</a></code></li>
+<li><code><a title="src.SBA.language.printLang" href="#src.SBA.language.printLang">printLang</a></code></li>
+<li><code><a title="src.SBA.language.setLanguage" href="#src.SBA.language.setLanguage">setLanguage</a></code></li>
 </ul>
 </li>
 </ul>

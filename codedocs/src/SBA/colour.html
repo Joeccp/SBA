@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>SBA.colour API documentation</title>
+<title>src.SBA.colour API documentation</title>
 <meta name="description" content="Defines different colour code" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>SBA.colour</code></h1>
+<h1 class="title">Module <code>src.SBA.colour</code></h1>
 </header>
 <section id="section-intro">
 <p>Defines different colour code</p>
@@ -176,7 +176,7 @@ def loadColour() -&gt; None:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="SBA.colour.loadColour"><code class="name flex">
+<dt id="src.SBA.colour.loadColour"><code class="name flex">
 <span>def <span class="ident">loadColour</span></span>(<span>) ‑> None</span>
 </code></dt>
 <dd>
@@ -223,7 +223,7 @@ If the file does not exist, create one and set to DARK</p>
         setColour(colour_code)  # type: ignore[arg-type] # colour_code must be ColourCode</code></pre>
 </details>
 </dd>
-<dt id="SBA.colour.setColour"><code class="name flex">
+<dt id="src.SBA.colour.setColour"><code class="name flex">
 <span>def <span class="ident">setColour</span></span>(<span>colour_code: Literal['DARK', 'LIGHT']) ‑> None</span>
 </code></dt>
 <dd>
@@ -285,7 +285,7 @@ If the file does not exist, create one and set to DARK</p>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="SBA.colour.Colour"><code class="flex name class">
+<dt id="src.SBA.colour.Colour"><code class="flex name class">
 <span>class <span class="ident">Colour</span></span>
 </code></dt>
 <dd>
@@ -315,51 +315,51 @@ for printing coloured texts and background</p></div>
 </details>
 <h3>Class variables</h3>
 <dl>
-<dt id="SBA.colour.Colour.BLACK"><code class="name">var <span class="ident">BLACK</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.BLACK"><code class="name">var <span class="ident">BLACK</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.BLACK_BG"><code class="name">var <span class="ident">BLACK_BG</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.BLACK_BG"><code class="name">var <span class="ident">BLACK_BG</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.BLUE"><code class="name">var <span class="ident">BLUE</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.BLUE"><code class="name">var <span class="ident">BLUE</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.GREEN"><code class="name">var <span class="ident">GREEN</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.GREEN"><code class="name">var <span class="ident">GREEN</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.GREEN_BG"><code class="name">var <span class="ident">GREEN_BG</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.GREEN_BG"><code class="name">var <span class="ident">GREEN_BG</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.PURPLE"><code class="name">var <span class="ident">PURPLE</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.PURPLE"><code class="name">var <span class="ident">PURPLE</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.RED"><code class="name">var <span class="ident">RED</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.RED"><code class="name">var <span class="ident">RED</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.RED_BG"><code class="name">var <span class="ident">RED_BG</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.RED_BG"><code class="name">var <span class="ident">RED_BG</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.RESET"><code class="name">var <span class="ident">RESET</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.RESET"><code class="name">var <span class="ident">RESET</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.WHITE"><code class="name">var <span class="ident">WHITE</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.WHITE"><code class="name">var <span class="ident">WHITE</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.WHITE_BG"><code class="name">var <span class="ident">WHITE_BG</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.WHITE_BG"><code class="name">var <span class="ident">WHITE_BG</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="SBA.colour.Colour.YELLOW_BG"><code class="name">var <span class="ident">YELLOW_BG</span> : str</code></dt>
+<dt id="src.SBA.colour.Colour.YELLOW_BG"><code class="name">var <span class="ident">YELLOW_BG</span> : str</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -376,32 +376,32 @@ for printing coloured texts and background</p></div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="SBA" href="index.html">SBA</a></code></li>
+<li><code><a title="src.SBA" href="index.html">src.SBA</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="SBA.colour.loadColour" href="#SBA.colour.loadColour">loadColour</a></code></li>
-<li><code><a title="SBA.colour.setColour" href="#SBA.colour.setColour">setColour</a></code></li>
+<li><code><a title="src.SBA.colour.loadColour" href="#src.SBA.colour.loadColour">loadColour</a></code></li>
+<li><code><a title="src.SBA.colour.setColour" href="#src.SBA.colour.setColour">setColour</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="SBA.colour.Colour" href="#SBA.colour.Colour">Colour</a></code></h4>
+<h4><code><a title="src.SBA.colour.Colour" href="#src.SBA.colour.Colour">Colour</a></code></h4>
 <ul class="two-column">
-<li><code><a title="SBA.colour.Colour.BLACK" href="#SBA.colour.Colour.BLACK">BLACK</a></code></li>
-<li><code><a title="SBA.colour.Colour.BLACK_BG" href="#SBA.colour.Colour.BLACK_BG">BLACK_BG</a></code></li>
-<li><code><a title="SBA.colour.Colour.BLUE" href="#SBA.colour.Colour.BLUE">BLUE</a></code></li>
-<li><code><a title="SBA.colour.Colour.GREEN" href="#SBA.colour.Colour.GREEN">GREEN</a></code></li>
-<li><code><a title="SBA.colour.Colour.GREEN_BG" href="#SBA.colour.Colour.GREEN_BG">GREEN_BG</a></code></li>
-<li><code><a title="SBA.colour.Colour.PURPLE" href="#SBA.colour.Colour.PURPLE">PURPLE</a></code></li>
-<li><code><a title="SBA.colour.Colour.RED" href="#SBA.colour.Colour.RED">RED</a></code></li>
-<li><code><a title="SBA.colour.Colour.RED_BG" href="#SBA.colour.Colour.RED_BG">RED_BG</a></code></li>
-<li><code><a title="SBA.colour.Colour.RESET" href="#SBA.colour.Colour.RESET">RESET</a></code></li>
-<li><code><a title="SBA.colour.Colour.WHITE" href="#SBA.colour.Colour.WHITE">WHITE</a></code></li>
-<li><code><a title="SBA.colour.Colour.WHITE_BG" href="#SBA.colour.Colour.WHITE_BG">WHITE_BG</a></code></li>
-<li><code><a title="SBA.colour.Colour.YELLOW_BG" href="#SBA.colour.Colour.YELLOW_BG">YELLOW_BG</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.BLACK" href="#src.SBA.colour.Colour.BLACK">BLACK</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.BLACK_BG" href="#src.SBA.colour.Colour.BLACK_BG">BLACK_BG</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.BLUE" href="#src.SBA.colour.Colour.BLUE">BLUE</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.GREEN" href="#src.SBA.colour.Colour.GREEN">GREEN</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.GREEN_BG" href="#src.SBA.colour.Colour.GREEN_BG">GREEN_BG</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.PURPLE" href="#src.SBA.colour.Colour.PURPLE">PURPLE</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.RED" href="#src.SBA.colour.Colour.RED">RED</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.RED_BG" href="#src.SBA.colour.Colour.RED_BG">RED_BG</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.RESET" href="#src.SBA.colour.Colour.RESET">RESET</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.WHITE" href="#src.SBA.colour.Colour.WHITE">WHITE</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.WHITE_BG" href="#src.SBA.colour.Colour.WHITE_BG">WHITE_BG</a></code></li>
+<li><code><a title="src.SBA.colour.Colour.YELLOW_BG" href="#src.SBA.colour.Colour.YELLOW_BG">YELLOW_BG</a></code></li>
 </ul>
 </li>
 </ul>
