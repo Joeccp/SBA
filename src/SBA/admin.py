@@ -352,7 +352,7 @@ def checkTicketInformation() -> None:
 		ticket_count: int = 0
 		for ticket in House.tickets_table:
 			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
-			print(f"{ticket_no:<6} @{time} "
+			printLang(f"{ticket_no:<6} @{time} "
 			      f"House {house_no:<2} -- {movie:<50} ~"
 			      f"Seat<{row_index + 1}{chr(column_index + 65)}>",
 			      f"{ticket_no:<6} @{time} "
