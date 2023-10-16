@@ -188,7 +188,7 @@ def checkHousesInformation() -> None:
 		return
 	print()
 	logger.info("Waiting house number input")
-	house_num_str: str = inputLang("Select a house (Just hit enter to go back to the Control Panel):\n-> ",
+	house_num_str: str = inputLang("Select a house (Or hit Enter to go back to the Control Panel):\n-> ",
 	                               "請選擇電影院（或按 Enter 以返回控制面板）:\n-> ")
 	if house_num_str == '':
 		return
