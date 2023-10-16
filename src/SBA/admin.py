@@ -353,12 +353,12 @@ def checkTicketInformation() -> None:
 		for ticket in House.tickets_table:
 			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 			printLang(f"{ticket_no:<6} @{time} "
-			      	  f"House {house_no:<2} -- {movie:<50} ~"
-			      	  f"Seat<{row_index + 1}{chr(column_index + 65)}>",
-			      	  f"{ticket_no:<6} @{time} "
-			      	  f"電影院{house_no:<2} -- {movie:<50} ~"
-			      	  f"座位<{row_index + 1}{chr(column_index + 65)}>"
-			      	  )
+			          f"House {house_no:<2} -- {movie:<50} ~"
+			          f"Seat<{row_index + 1}{chr(column_index + 65)}>",
+			          f"{ticket_no:<6} @{time} "
+			          f"電影院{house_no:<2} -- {movie:<50} ~"
+			          f"座位<{row_index + 1}{chr(column_index + 65)}>"
+			          )
 			ticket_count += 1
 		if ticket_count == 0:
 			printLang("No ticket", "無電影票")
@@ -634,7 +634,7 @@ def deleteHouse() -> None:
 		logger.info("Removing this house")
 		del House.houses_table[house_num]
 		printLang("Success!", "成功！")
-		# No need House.house_num -= 1, as it is only for giving new house number
+	# No need House.house_num -= 1, as it is only for giving new house number
 	else:
 		logger.info("Confirmation failed")
 		printLang("ERROR: Invalid confirmation", "錯誤：無效確認")
@@ -950,7 +950,7 @@ def adminMode() -> None:
 			clearScreen()
 			printLang("CINEMA KIOSK SYSTEM", "電影售票系統")
 			printLang("CONTROL PANEL\n\n\n", "控制面板\n\n\n")
-
+		
 		else:
 			logger.info("Unknown mode code")
 			printLang(f"ERROR: Unknown mode code {mode}", f"錯誤：無效模式代碼——{mode}")
