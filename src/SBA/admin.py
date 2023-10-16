@@ -353,12 +353,12 @@ def checkTicketInformation() -> None:
 		for ticket in House.tickets_table:
 			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
 			printLang(f"{ticket_no:<6} @{time} "
-			      f"House {house_no:<2} -- {movie:<50} ~"
-			      f"Seat<{row_index + 1}{chr(column_index + 65)}>",
-			      f"{ticket_no:<6} @{time} "
-			      f"電影院{house_no:<2} -- {movie:<50} ~"
-			      f"座位<{row_index + 1}{chr(column_index + 65)}>"
-			      )
+			      	  f"House {house_no:<2} -- {movie:<50} ~"
+			      	  f"Seat<{row_index + 1}{chr(column_index + 65)}>",
+			      	  f"{ticket_no:<6} @{time} "
+			      	  f"電影院{house_no:<2} -- {movie:<50} ~"
+			      	  f"座位<{row_index + 1}{chr(column_index + 65)}>"
+			      	  )
 			ticket_count += 1
 		if ticket_count == 0:
 			printLang("No ticket", "無電影票")
