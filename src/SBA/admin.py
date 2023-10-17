@@ -82,10 +82,12 @@ def createHouse() -> None:
 	else:
 		house.movie = movie
 	logger.info(f"House {house.house_number}'s movie: {movie or '(None)'}")
-	adult_price_str: str = inputLang("Please enter the price for adults: $",
-	                                 "請輸入成人票價：$").strip().replace(" ", '')
+	adult_price_str: str = inputLang("Please enter the price for adults (default is $0): $",
+	                                 "請輸入成人票價（預設為 $0）：$").strip().replace(" ", '')
 	logger.info("Waiting adult price input")
-	if not adult_price_str.isdecimal():
+	if adult_price_str == '':
+		adult_price_str: str = '0'
+	elif not adult_price_str.isdecimal():
 		printLang("ERROR: Ticket price must be an integer",
 		          "錯誤：票價必需為整數")
 		printLang("House creation failed, exiting to Control Panel menu...",
@@ -93,10 +95,12 @@ def createHouse() -> None:
 		logger.info("Invalid number of adult price, going back to the control panel menu")
 		return
 	house.adult_price = int(adult_price_str)
-	child_price_str: str = inputLang("Please enter the price for children: $",
-	                                 "請輸入兒童票價：$").strip().replace(" ", '')
+	child_price_str: str = inputLang("Please enter the price for children (default is $0): $",
+	                                 "請輸入兒童票價（預設為 $0）：$").strip().replace(" ", '')
 	logger.info("Waiting children price input")
-	if not child_price_str.isdecimal():
+	if child_price_str == '':
+		child_price_str: str = '0'
+	elif not child_price_str.isdecimal():
 		printLang("ERROR: Ticket price must be an integer",
 		          "錯誤：票價必需為整數")
 		printLang("House creation failed, exiting to Control Panel menu...",
