@@ -113,7 +113,7 @@ class Test_House(TestCase):  # NOQA: disable 'all caps in class name' warning
 		self.assertEqual(House.get_n_tickets(), 12)
 		self.assertEqual(
 			House.searchTicket(2),
-			[2, "T00002", '2006-02-27T00:00:00', 1, "An Excellent Movie", 0, 1]
+			[2, "T00002", '2006-02-27T00:00:00', 1, "An Excellent Movie", 0, 1, 0]
 		)
 		self.assertEqual(House.searchTicket(0), None)
 		self.assertEqual(House.searchTicket(13), None)
