@@ -30,7 +30,8 @@ House_number: TypeAlias = int
 Movie: TypeAlias = str
 Row_number: TypeAlias = int  # Not to be confused with Row
 Column_number: TypeAlias = int
-Ticket: TypeAlias = tuple[Ticket_index, Ticket_number, Time, House_number, Movie, Row_number, Column_number]
+Price: TypeAlias = int
+Ticket: TypeAlias = tuple[Ticket_index, Ticket_number, Time, House_number, Movie, Row_number, Column_number, Price]
 
 
 class House:
@@ -47,6 +48,7 @@ class House:
 	houses_table: dict[int, Self] = {}
 	tickets_table: list[Ticket] = []
 	total_tickets: int = 0
+	total_revenue: int = 0
 	
 	def __init__(self, *, row_number: int, column_number: int) -> None:
 		"""
@@ -61,6 +63,9 @@ class House:
 		House.houses_table[self.house_number] = self
 		self.movie: str = ''
 		self.n_seat: int = self.n_row * self.n_column
+		self.house_revenue: int = 0
+		self.adult_price: Price = 0
+		self.child_price: Price = 0
 		logger: Logger = getLogger("House.__init__")
 		logger.info(f"House {self.house_number} is created -- {self.n_row}x{self.n_column}")
 	
@@ -117,6 +122,46 @@ class House:
 		          Colour.YELLOW_BG + Colour.BLACK + "! -- 保留座位" + normal_colour)
 		print()
 	
+	def printSeatingPlanWithSelectedSeat(self, selected_seat_list: list[tuple[int, int]]) -> None:  # pragma: no cover # skip coverage report -- IDK how to mock output # NOQA # line too long
+		"""Print the seating plan with selected seat"""
+		from .colour import normal_colour
+		
+		line_length: int = self.n_column * 2 + 1
+		printLang(f"{'[Screen Here]':^{line_length + 8}}",
+		          f"{'[銀幕在此]':^{line_length + 6}}")
+		print('    ' + '_' * line_length)
+		print('    |', end='')
+		for i in range(self.n_column):
+			print(column_colour + chr(i + 65) + normal_colour, end='|')
+		print()
+		print('    ' + '-' * line_length)
+		for row in range(self.n_row):
+			print(f'{row_colour}{row + 1:<2}{normal_colour}  |', end='')
+			for column in range(self.n_column):
+				if (row, column) in selected_seat_list:
+					print(Colour.CYAN_BG + Colour.BLACK + '?' + normal_colour, end='|')
+					continue
+				match self.seating_plan[row][column]:
+					case 0:
+						symbol = Colour.GREEN_BG + Colour.BLACK + ' ' + normal_colour
+					case 1:
+						symbol = Colour.RED_BG + Colour.BLACK + 'X' + normal_colour
+					case 2:
+						symbol = Colour.YELLOW_BG + Colour.BLACK + '!' + normal_colour
+				print(symbol, end='|')  # NOQA
+			print(f'  {row_colour}{row + 1:>2}{normal_colour}')
+			print('    ' + '-' * line_length)
+		print()
+		printLang(Colour.GREEN_BG + Colour.BLACK + "  -- Empty   " + normal_colour,
+		          Colour.GREEN_BG + Colour.BLACK + "  -- 可選座位" + normal_colour)
+		printLang(Colour.RED_BG + Colour.BLACK + "X -- Sold    " + normal_colour,
+		          Colour.RED_BG + Colour.BLACK + "X -- 已售座位" + normal_colour)
+		printLang(Colour.YELLOW_BG + Colour.BLACK + "! -- Reserved" + normal_colour,
+		          Colour.YELLOW_BG + Colour.BLACK + "! -- 保留座位" + normal_colour)
+		printLang(Colour.CYAN_BG + Colour.BLACK + "? -- Selected" + normal_colour,
+		          Colour.CYAN_BG + Colour.BLACK + "? -- 已選座位" + normal_colour)
+		print()
+	
 	@classmethod
 	def get_n_tickets(cls) -> int:
 		"""Returns the number of tickets sold in ALL houses"""
@@ -136,7 +181,7 @@ class House:
 		:param target_ticket_index: Ticket index with a valid format
 		:type target_ticket_index: int
 		:return: Ticket
-		:rtype: Optional[tuple[int, str, str, int, str, int, int]]
+		:rtype: Optional[tuple[int, str, str, int, str, int, int, int]]
 		"""
 		logger: Logger = getLogger("House.searchTicket")
 		logger.info(f"Searching ticket: {target_ticket_index}")

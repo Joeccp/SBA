@@ -82,6 +82,28 @@ def createHouse() -> None:
 	else:
 		house.movie = movie
 	logger.info(f"House {house.house_number}'s movie: {movie or '(None)'}")
+	adult_price_str: str = inputLang("Please enter the price for adults: $",
+	                                 "請輸入成人票價：$").strip().replace(" ", '')
+	logger.info("Waiting adult price input")
+	if not adult_price_str.isdecimal():
+		printLang("ERROR: Ticket price must be an integer",
+		          "錯誤：票價必需為整數")
+		printLang("House creation failed, exiting to Control Panel menu...",
+		          "電影院創建失敗，返回控制面板中......")
+		logger.info("Invalid number of adult price, going back to the control panel menu")
+		return
+	house.adult_price = int(adult_price_str)
+	child_price_str: str = inputLang("Please enter the price for children: $",
+	                                 "請輸入兒童票價：$").strip().replace(" ", '')
+	logger.info("Waiting children price input")
+	if not child_price_str.isdecimal():
+		printLang("ERROR: Ticket price must be an integer",
+		          "錯誤：票價必需為整數")
+		printLang("House creation failed, exiting to Control Panel menu...",
+		          "電影院創建失敗，返回控制面板中......")
+		logger.info("Invalid number of child price, going back to the control panel menu")
+		return
+	house.child_price = int(child_price_str)
 	printLang("Success!", "成功！")
 	saveData()
 
@@ -186,6 +208,7 @@ def checkHousesInformation() -> None:
 	else:
 		printLang("No house", "無電影院")
 		return
+	printLang(f"Total revenue: ${House.total_revenue}", f"總收益：${House.total_revenue}")
 	print()
 	logger.info("Waiting house number input")
 	house_num_str: str = inputLang("Select a house (Or hit Enter to go back to the Control Panel):\n-> ",
@@ -209,7 +232,15 @@ def checkHousesInformation() -> None:
 	printLang(f"House {house.house_number} is now playing: {house.movie}",
 	          f"電影院{house.house_number} 正在播映: {house.movie}")
 	house.printSeatingPlan()
-
+	print(f"{house.n_available}/{house.n_seat}")
+	printLang(f"House revenue: {house.house_revenue}\n"
+	          f"Adult price: ${house.adult_price}\n"
+	          f"Child price: ${house.child_price}",
+	          f"電影院收益：${house.house_revenue}\n"
+	          f"成人票價：${house.adult_price}\n"
+	          f"兒童票價：${house.child_price}\n"
+	          )
+	
 
 def seatStatusOverride() -> None:
 	"""
@@ -249,11 +280,12 @@ def seatStatusOverride() -> None:
 	                .replace('>', '')
 	                .replace('(', '')
 	                .replace(')', '')
+	                .replace('|', '')
+	                .replace('-', '')
 	                .replace('（', '')  # Same as above, but Chinese
 	                .replace('）', '')
 	                .replace('《', '')
 	                .replace('》', '')
-	                .replace('|', '')  # <-- This too? Really?
 	                .replace('—', '-')  # Chinese input
 	                )
 	if command == '':
@@ -300,7 +332,7 @@ def seatStatusOverride() -> None:
 		coor_list: list[Coor] = getCoorsFromCoorExpr(
 			coor_expr, n_row=house.n_row, n_column=house.n_column
 		)
-	except CoordinateExpressionException as error:  # NOQA
+	except CoordinateExpressionException as error:
 		logger.info(f'Invalid command: {error.__doc__}. '
 		            'Going back to the Control Panel menu')
 		printLang(f"ERROR: {error.__doc__}", f"錯誤：{error.chinese_msg}")
@@ -351,13 +383,13 @@ def checkTicketInformation() -> None:
 	if ticket_number == '':
 		ticket_count: int = 0
 		for ticket in House.tickets_table:
-			ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+			ticket_index, ticket_no, time, house_no, movie, row_index, column_index, price = ticket
 			printLang(f"{ticket_no:<6} @{time} "
-			          f"House {house_no:<2} -- {movie:<50} ~"
-			          f"Seat<{row_index + 1}{chr(column_index + 65)}>",
+			          f"House {house_no:<2} -- {movie:<25} ~"
+			          f"Seat<{row_index + 1}{chr(column_index + 65)}> ${price}",
 			          f"{ticket_no:<6} @{time} "
-			          f"電影院{house_no:<2} -- {movie:<50} ~"
-			          f"座位<{row_index + 1}{chr(column_index + 65)}>"
+			          f"電影院{house_no:<2} -- {movie:<25} ~"
+			          f"座位<{row_index + 1}{chr(column_index + 65)}> ${price}"
 			          )
 			ticket_count += 1
 		if ticket_count == 0:
@@ -405,7 +437,7 @@ def checkTicketInformation() -> None:
 			printLang("ERROR: No such ticket", "無此電影票")
 			logger.info("No such ticket, going back to the Control Panel menu")
 			return
-		ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+		ticket_index, ticket_no, time, house_no, movie, row_index, column_index, price = ticket
 		logger.info(f"Admin wants to check this ticket: {ticket}")
 		printLang(f"{ticket_no:<6} @{time} "
 		          f"House {house_no:<2} -- {movie:<50} ~"
@@ -474,7 +506,7 @@ def deleteTicket() -> None:
 		          "返回控制面板中......")
 		logger.info("Invalid ticket number, going back to the Control Panel menu")
 		return
-	ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+	ticket_index, ticket_no, time, house_no, movie, row_index, column_index, price = ticket
 	logger.info(f"Admin wants to delete this ticket: {ticket}")
 	printLang(f"{ticket_no:<6} @{time} "
 	          f"House {house_no:<2} -- {movie:<50} ~"

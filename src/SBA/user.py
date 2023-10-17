@@ -17,12 +17,12 @@
 
 from datetime import datetime
 from logging import getLogger, Logger
-from string import ascii_uppercase
 from time import sleep
 from typing import Optional
 from webbrowser import open as openWebBrowser
 
 from .colour import Colour, column_colour, row_colour
+from .coorutils import CoordinateExpressionException, getCoorsFromCoorExpr
 from .house import House, Ticket
 from .language import inputLang, printLang
 from .utils import clearScreen, saveData
@@ -49,8 +49,12 @@ def buyTicket() -> None:
 	total_available_house_count: int = 0
 	for house in House.houses_table.values():
 		if house.movie and house.n_available != 0:
-			printLang(f"House {house.house_number}: {house.movie:<50} {house.n_available}/{house.n_seat}",
-			          f"電影院{house.house_number}：{house.movie:<50} {house.n_available}/{house.n_seat}")
+			printLang(f"House {house.house_number}: {house.movie:<50} "
+			          f"{Colour.GREEN if house.n_available > 0 else Colour.RED}"
+			          f"{house.n_available}{normal_colour}/{house.n_seat}",
+			          f"電影院{house.house_number}：{house.movie:<50} "
+			          f"{Colour.GREEN if house.n_available > 0 else Colour.RED}"
+			          f"{house.n_available}{normal_colour}/{house.n_seat}")
 			total_available_house_count += 1
 	if total_available_house_count == 0:
 		if language == "ENGLISH":
@@ -82,82 +86,251 @@ def buyTicket() -> None:
 		logger.info("Invalid house number, going back to the user menu")
 		return
 	house: House = House.houses_table[house_num]
+	if house.movie == '':
+		if language == 'ENGLISH':
+			message = "ERROR: That house is not available"
+		else:
+			message = "錯誤：此電影院暫不開放"
+		logger.info("House not open, going back to the user menu")
+		return
 	logger.info(f"User selected house {house_num}")
+	
+	# Get number of adult tickets
+	get_adult_ticket_number_message: str = ''
+	while True:
+		clearScreen()
+		printLang("CINEMA KIOSK SYSTEM\n\n\n", "電影售票系統\n\n\n")
+		print(Colour.RED + get_adult_ticket_number_message + normal_colour + "\n\n\n")
+		printLang(f"House {house.house_number} is now playing: {house.movie}",
+		          f"電影院{house.house_number} 正在播映：{house.movie}")
+		printLang(f"Number of available seat{'s' if house.n_available > 1 else ''}: "
+		          f"{house.n_available}/{house.n_seat}",
+		          f"可選座位數：{house.n_available}/{house.n_seat}")
+		printLang(f"Price: ${house.adult_price}", f"成人票價：${house.adult_price}")
+		printLang(f"Child price: ${house.child_price}", f"兒童票價：${house.child_price}")
+		
+		house.printSeatingPlan()
+		
+		printLang("Please enter the number of adult ticket: ", "請輸入成人票的數量：")
+		adult_ticket_count_str: str = input('->').strip().replace(' ', '')
+		if not adult_ticket_count_str.isdecimal():
+			if language == 'ENGLISH':
+				get_adult_ticket_number_message: str = "ERROR: Number of tickets must be an integer"
+			else:
+				get_adult_ticket_number_message: str = "錯誤：數量必須爲數字"
+			continue
+		adult_ticket_count: int = int(adult_ticket_count_str)
+		if adult_ticket_count > house.n_available:
+			if language == 'ENGLISH':
+				get_adult_ticket_number_message: str = "ERROR: Number of tickets exceeds number of available seat"
+			else:
+				get_adult_ticket_number_message: str = "錯誤：電影票數量大於可選座位數量"
+			continue
+		
+		break
+	
+	# Get number of child tickets
+	get_child_ticket_number_message: str = ''
+	while True:
+		clearScreen()
+		printLang("CINEMA KIOSK SYSTEM\n\n\n", "電影售票系統\n\n\n")
+		print(Colour.RED + get_child_ticket_number_message + normal_colour + "\n\n\n")
+		printLang(f"House {house.house_number} is now playing: {house.movie}",
+		          f"電影院{house.house_number} 正在播映：{house.movie}")
+		printLang(f"Price: ${house.adult_price}", f"成人票價：${house.adult_price}")
+		printLang(f"Child price: ${house.child_price}", f"兒童票價：${house.child_price}")
+		house.printSeatingPlan()
+		
+		printLang(f"You had selected {adult_ticket_count} adult ticket{'s' if adult_ticket_count > 1 else ''}")
+		printLang("Please enter the number of child ticket: ", "請輸入兒童票的數量：")
+		child_ticket_count_str: str = input('->').strip().replace(' ', '')
+		if not child_ticket_count_str.isdecimal():
+			if language == 'ENGLISH':
+				get_child_ticket_number_message: str = "ERROR: Number of tickets must be an integer"
+			else:
+				get_child_ticket_number_message: str = "錯誤：數量必須爲數字"
+			continue
+		child_ticket_count: int = int(child_ticket_count_str)
+		total_ticket_number: int = adult_ticket_count + child_ticket_count
+		if total_ticket_number > house.n_available:
+			if language == 'ENGLISH':
+				get_child_ticket_number_message: str = "ERROR: Number of tickets exceeds number of available seat"
+			else:
+				get_child_ticket_number_message: str = "錯誤：電影票數量大於可選座位數量"
+			continue
+		
+		break
+	
+	# Confirm
 	clearScreen()
+	printLang("CINEMA KIOSK SYSTEM\n\n\n", "電影售票系統\n\n\n")
 	printLang(f"House {house.house_number} is now playing: {house.movie}",
 	          f"電影院{house.house_number} 正在播映：{house.movie}")
 	house.printSeatingPlan()
-	
-	printLang(
-		f"\nEnter the {row_colour}row{normal_colour} and {column_colour}column{normal_colour} number of the seat"
-		f"(or just hit Enter to go back to the main menu):",
-		f"\n請輸入座位的{row_colour}行數{normal_colour}和{column_colour}列數{normal_colour}"
-		f"（或按 Enter 以返回主頁面）"
-	)
-	logger.info("Waiting seat coordinate input")
-	coor: str = input("\n-> ").strip().upper().replace(" ", '')
-	if coor == '':
-		message = ''
-		logger.info("Empty coordinate, going back to the user menu")
-		return
-	if len(coor) == 1:
-		logger.info("Invalid coordinate, going back to the user menu")
-		if language == "ENGLISH":
-			message = "ERROR: Invalid format of the seat number"
-		else:
-			message = "錯誤：無效座位坐標格式"
-		return
-	if coor[-1] not in ascii_uppercase:
-		logger.info("Invalid coordinate, going back to the user menu")
-		if language == "ENGLISH":
-			message = f"ERROR: {column_colour}Column{normal_colour} index is not a character"
-		else:
-			message = f"錯誤：座位{column_colour}列數{normal_colour}必須是英文字母"
-		return
-	column_str: str = coor[-1]
-	column_int: int = ord(column_str) - 65
-	if column_int >= house.n_column:
-		logger.info("Invalid coordinate, going back to the user menu")
-		if language == "ENGLISH":
-			message = f"ERROR: Invalid {column_colour}column{normal_colour}"
-		else:
-			message = f"錯誤：無效座位{column_colour}行數{normal_colour}"
-		return
-	row_str: str = coor[:-1]
-	if len(row_str) > 2:
-		logger.info("Invalid coordinate, going back to the user menu")
-		if language == "ENGLISH":
-			message = f"ERROR: Impossible {row_colour}row{normal_colour} number"
-		else:
-			message = f"錯誤：不可能的{row_colour}行數{normal_colour}"
-		return
-	row_int: int = int(row_str) - 1
-	if house.seating_plan[row_int][column_int] != 0:
-		logger.info("Seat already sold, going back to the user menu")
-		if language == "ENGLISH":
-			message = "Sorry, the seat is not available"
-		else:
-			message = "抱歉，該座位不予發售"
-		return
-	house.seating_plan[row_int][column_int] = 1
-	House.total_tickets += 1
-	ticket_index: int = House.total_tickets
-	ticket_number: str = f"T{ticket_index:0>5}"
-	time: str = datetime.now().isoformat(timespec="seconds")
-	ticket: Ticket = (
-		ticket_index, ticket_number, time, house.house_number, house.movie, row_int, column_int
-	)
-	printLang("Your ticket:", "你的電影票如下：")
-	printLang(f"{ticket_number:<6} @{time}: "
-	          f"House {house.house_number:<2} -- {house.movie:<50} ~"
-	          f"Seat<{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}>",
-	          f"{ticket_number:<6} @{time}: "
-	          f"電影院{house.house_number:<2} -- {house.movie:<50} ~"
-	          f"座位<{row_colour}{row_int + 1}{column_colour}{chr(column_int + 65)}{normal_colour}>"
+	total_adult_price: int = house.adult_price * adult_ticket_count
+	total_child_price: int = house.child_price * child_ticket_count
+	total_price: int = total_adult_price + total_child_price
+	printLang(f"You have selected {total_ticket_number} seat{'s' if total_ticket_number else ''}\n"
+	          f"Number of adult{'s' if adult_ticket_count > 1 else ''}(${house.adult_price}): {adult_ticket_count}\n"
+	          f"Number of child{'ren' if child_ticket_count > 1 else ''}(${house.child_price}): {child_ticket_count}\n"
+	          f"Payment: ${total_adult_price}(adult) + ${total_child_price}(child) = ${total_price}",
+	          f"你已選擇了{total_ticket_number}張電影票\n"
+	          f"成人票（${house.adult_price}）：{adult_ticket_count}張\n"
+	          f"兒童票（${house.child_price}）：{child_ticket_count}張\n"
+	          f"應繳款項：${total_adult_price}（成人） + ${total_child_price}（兒童） = ${total_price}"
 	          )
-	logger.info("User has successfully bought a ticket")
-	logger.info(f"Ticket info: {ticket}")
-	House.tickets_table.append(ticket)
+	confirm: str = inputLang("Please confirm: [Y/n]\n", "請確認：[Y/n]\n").strip().upper()
+	if confirm != 'Y' and confirm != '':
+		if language == 'ENGLISH':
+			message = 'Confirmation failed. Purchase failed.'
+		else:
+			message = '確認失敗，取消購票。'
+		return
+	
+	# Select seat
+	selected_seat_list: list[tuple[int, int]] = []
+	select_ticket_message: str = ''
+	while True:
+		clearScreen()
+		printLang("CINEMA KIOSK SYSTEM\n\n\n", "電影售票系統\n\n\n")
+		print(Colour.RED + select_ticket_message + normal_colour + "\n\n\n")
+		printLang(f"House {house.house_number} is now playing: {house.movie}",
+		          f"電影院{house.house_number} 正在播映：{house.movie}")
+		house.printSeatingPlanWithSelectedSeat(selected_seat_list)
+		printLang(f"You have selected {total_ticket_number} seat{'s' if total_ticket_number else ''}\n"
+		          f"Number of adult{'s' if adult_ticket_count > 1 else ''}(${house.adult_price}): {adult_ticket_count}\n"
+		          f"Number of child{'ren' if child_ticket_count > 1 else ''}(${house.child_price}): {child_ticket_count}\n"
+		          f"Payment: ${total_adult_price}(adult) + ${total_child_price}(child) = ${total_price}",
+		          f"你已選擇了{total_ticket_number}張電影票\n"
+		          f"成人票（${house.adult_price}）：{adult_ticket_count}張\n"
+		          f"兒童票（${house.child_price}）：{child_ticket_count}張\n"
+		          f"應繳款項：${total_adult_price}（成人） + ${total_child_price}（兒童）= ${total_price}"
+		          )
+		selected_seat_count: int = len(selected_seat_list)
+		coor_expr: str = inputLang("Please enter (part of) the coordinate, "
+		                           f"You have brought {total_ticket_number} "
+		                           f"seat{'s' if total_ticket_number > 1 else ''}, "
+		                           f"selected {selected_seat_count} seat{'s' if len(selected_seat_list) > 1 else ''} "
+		                           f"and remains {total_ticket_number-selected_seat_count} "
+		                           f"seat{'s' if total_ticket_number-selected_seat_count > 1 else ''} to select "
+		                           "(Or hit Enter to go back to the menu)\n->",
+		                           "請輸入（部分）選擇的座位編號，"
+		                           f"你購買了{total_ticket_number}個座位，你選擇了{selected_seat_count}個座位，"
+		                           f"還剩下{total_ticket_number-selected_seat_count}"
+		                           "（或按 Enter 以返回主頁面）\n->").strip().replace(' ', '')
+		
+		if coor_expr == '':
+			message = ''
+			return
+		
+		try:
+			selected_seat_list.extend(getCoorsFromCoorExpr(coor_expr))
+		except CoordinateExpressionException as error:
+			if language == 'ENGLISH':
+				select_ticket_message = f"ERROR: {error.__doc__}"
+			else:
+				select_ticket_message = f"錯誤：{error.chinese_msg}"
+			continue
+	
+		# Remove repeated
+		selected_seat_list_no_repeat: set[tuple[int, int]] = set(selected_seat_list)
+		selected_seat_list: list[tuple[int, int]] = list(selected_seat_list_no_repeat)
+	
+		if len(selected_seat_list) > total_ticket_number:
+			if language == 'ENGLISH':
+				message = "ERROR: Selected too many seats"
+			else:
+				message = "錯誤：選擇了過多的座位"
+			return  # Return instead of continue, as buyer can't delete the selected seat
+		
+		# Check selected ticket
+		for row_index, column_index in selected_seat_list:
+			if house.seating_plan[row_index][column_index] != 0:
+				if language == 'ENGLISH':
+					message = f"ERROR: Seat {row_index+1}{chr(column_index+65)} is not available"
+				else:
+					message = f"錯誤：座位{row_index+1}{chr(column_index+65)}不供發售"
+				return  # Return instead of continue, as buyer can't delete the selected seat
+	
+		if len(selected_seat_list) == total_ticket_number:
+			break
+	
+	# Confirm
+	clearScreen()
+	printLang("CINEMA KIOSK SYSTEM\n\n\n", "電影售票系統\n\n\n")
+	printLang(f"House {house.house_number} is now playing: {house.movie}",
+	          f"電影院{house.house_number} 正在播映：{house.movie}")
+	house.printSeatingPlanWithSelectedSeat(selected_seat_list)
+	printLang(f"You have selected {total_ticket_number} seat{'s' if total_ticket_number else ''}\n"
+	          f"Number of adult{'s' if adult_ticket_count > 1 else ''}(${house.adult_price}): {adult_ticket_count}\n"
+	          f"Number of child{'ren' if child_ticket_count > 1 else ''}(${house.child_price}): {child_ticket_count}\n"
+	          f"Payment: ${total_adult_price}(adult) + ${total_child_price}(child) = ${total_price}",
+	          f"你已選擇了{total_ticket_number}張電影票\n"
+	          f"成人票（${house.adult_price}）：{adult_ticket_count}張\n"
+	          f"兒童票（${house.child_price}）：{child_ticket_count}張\n"
+	          f"應繳款項：${total_adult_price}（成人） + ${total_child_price}（兒童） = ${total_price}"
+	          )
+	confirm: str = inputLang("Please confirm: [Y/n]\n", "請確認：[Y/n]\n").strip().upper()
+	if confirm != 'Y' and confirm != '':
+		if language == 'ENGLISH':
+			message = 'Confirmation failed. Purchase failed.'
+		else:
+			message = '確認失敗，取消購票。'
+		return
+	
+	# Buy
+	# Child
+	clearScreen()
+	printLang("CINEMA KIOSK SYSTEM\n\n\n", "電影售票系統\n\n\n")
+	printLang(f"House {house.house_number} is now playing: {house.movie}",
+	          f"電影院{house.house_number} 正在播映：{house.movie}")
+	house.printSeatingPlanWithSelectedSeat(selected_seat_list)
+	printLang("Your ticket:", "你的電影票如下：")
+	for row_index, column_index in selected_seat_list[:child_ticket_count]:
+		house.seating_plan[row_index][column_index] = 1
+		House.total_tickets += 1
+		ticket_index: int = House.total_tickets
+		ticket_number: str = f"T{ticket_index:0>5}"
+		time: str = datetime.now().isoformat(timespec="seconds")
+		price: int = house.child_price
+		ticket: Ticket = (
+			ticket_index, ticket_number, time, house.house_number, house.movie, row_index, column_index, price
+		)
+		printLang(f"{ticket_number:<6} @{time}: "
+		          f"House {house.house_number:<2} -- {house.movie:<25} ~"
+		          f"Seat<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}> "
+		          f"${price}\n",
+		          f"{ticket_number:<6} @{time}: "
+		          f"電影院{house.house_number:<2} -- {house.movie:<25} ~"
+		          f"座位<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}> "
+		          f"${price}\n"
+		          )
+		House.tickets_table.append(ticket)
+		house.house_revenue += price
+		saveData()
+	for row_index, column_index in selected_seat_list[child_ticket_count:]:
+		house.seating_plan[row_index][column_index] = 1
+		House.total_tickets += 1
+		ticket_index: int = House.total_tickets
+		ticket_number: str = f"T{ticket_index:0>5}"
+		time: str = datetime.now().isoformat(timespec="seconds")
+		price: int = house.adult_price
+		ticket: Ticket = (
+			ticket_index, ticket_number, time, house.house_number, house.movie, row_index, column_index, price
+		)
+		printLang(f"{ticket_number:<6} @{time}: "
+		          f"House {house.house_number:<2} -- {house.movie:<25} ~"
+		          f"Seat<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}> "
+		          f"${price}\n",
+		          f"{ticket_number:<6} @{time}: "
+		          f"電影院{house.house_number:<2} -- {house.movie:<25} ~"
+		          f"座位<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}> "
+		          f"${price}\n"
+		          )
+		House.tickets_table.append(ticket)
+		house.house_revenue += price
+		saveData()
+	
 	saveData()
 	printLang("\n\nThank you for your purchase!", "\n\n感謝您的購買！")
 	inputLang("\nHit Enter to go back to the main menu", "按 Enter 以返回主頁面")
@@ -248,13 +421,15 @@ def checkTicket() -> None:
 		          "按 Enter 以返回主頁面")
 		message = ""
 		return
-	ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+	ticket_index, ticket_no, time, house_no, movie, row_index, column_index, price = ticket
 	printLang(f"{ticket_no:<6} @{time} "
-	          f"House {house_no:<2} -- {movie:<30} ~ "
-	          f"Seat<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>",
+	          f"House {house_no:<2} -- {movie:<25} ~ "
+	          f"Seat<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}> "
+	          f"${price}",
 	          f"{ticket_no:<6} @{time} "
-	          f"電影院{house_no:<2} -- {movie:<30} ~ "
-	          f"座位<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>"
+	          f"電影院{house_no:<2} -- {movie:<25} ~ "
+	          f"座位<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}> "
+	          f"${price}"
 	          )
 	print("\n\n")
 	inputLang("\nHit Enter to go back to the main menu", "按 Enter 以返回主頁面")
@@ -346,14 +521,16 @@ def ticketRefund() -> None:
 		          "按 Enter 以返回主頁面")
 		message = ""
 		return
-	ticket_index, ticket_no, time, house_no, movie, row_index, column_index = ticket
+	ticket_index, ticket_no, time, house_no, movie, row_index, column_index, price = ticket
 	logger.info(f"User want to delete this ticket: {ticket}")
 	printLang(f"{ticket_no:<6} @{time} "
-	          f"House {house_no:<2} -- {movie:<30} ~ "
-	          f"Seat<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>",
+	          f"House {house_no:<2} -- {movie:<25} ~ "
+	          f"Seat<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}> "
+	          f"${price}",
 	          f"{ticket_no:<6} @{time} "
-	          f"電影院{house_no:<2} -- {movie:<30} ~ "
-	          f"座位<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}>"
+	          f"電影院{house_no:<2} -- {movie:<25} ~ "
+	          f"座位<{row_colour}{row_index + 1}{column_colour}{chr(column_index + 65)}{normal_colour}> "
+	          f"${price}"
 	          )
 	printLang("\nAre you sure you want to get refund of this ticket? (y/N)",
 	          "\n你確定要為此電影票退款嗎？（y/N）")

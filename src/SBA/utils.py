@@ -96,7 +96,7 @@ def clearScreen() -> None:
 
 def saveData(*, print_log: bool = False) -> None:
 	"""
-	Save `House.houses_table` into `data/houses`,
+	Save `House.total_revenue` and `House.houses_table` into `data/houses`,
 	and save `House.total_tickets` and `House.tickets_table` into `data/tickets`
 	
 	:param print_log: Whether to print logs, it is for admin mode. Keyword-only parameter
@@ -139,7 +139,7 @@ def saveData(*, print_log: bool = False) -> None:
 	logger.debug(f"Full path = {full_path}")
 	with open(full_path, 'wb') as file:
 		# No need save House.n_house, count it later
-		dump(House.houses_table, file)
+		dump([House.total_revenue, House.houses_table], file)
 	
 	internalLog("Writing tickets data", "正在寫入電影票資料")
 	relative_path = "../../data/tickets"
@@ -159,7 +159,7 @@ def saveData(*, print_log: bool = False) -> None:
 
 def loadData(*, print_log: bool = False) -> None:
 	"""
-	Load `House.houses_table` from `data/houses`,
+	Load `House.total_revenue` and `House.houses_table` from `data/houses`,
 	and load `House.total_tickets` and `House.tickets_table` from `data/tickets`
 
 	:param print_log: Whether to print logs, it is for admin mode. Keyword-only parameter
@@ -193,7 +193,8 @@ def loadData(*, print_log: bool = False) -> None:
 		internalLog("Finding houses data", "正在尋找電影院資料")
 		with open(full_path, 'rb') as file:
 			data: dict = load(file)
-		House.houses_table = data
+		House.total_revenue = data[0]
+		House.houses_table = data[1]
 		House.n_House = len(House.houses_table)
 		internalLog("Houses data loaded", "已載入電影院資料")
 	except FileNotFoundError:

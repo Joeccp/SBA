@@ -45,6 +45,7 @@ class Colour:
 	BLACK: str = '\033[30m'
 	GREEN: str = '\033[1;32m'
 	WHITE: str = '\033[37m'
+	CYAN_BG: str = '\033[106m'
 	WHITE_BG: str = '\033[47m'
 	GREEN_BG: str = '\033[102m'
 	YELLOW_BG: str = '\033[103m'

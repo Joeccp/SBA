@@ -9,7 +9,7 @@ ignore =
     # Blank line contains whitespace, mainly for easier editing
     W293,
 
-max-line-length = 110
+max-line-length = 120
 
 per-file-ignores =
     # Import is separated because checks must be done before importing other modules,
