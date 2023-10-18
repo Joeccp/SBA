@@ -235,7 +235,7 @@ def buyTicket() -> None:
 		# Remove repeated
 		selected_seat_list_no_repeat: set[tuple[int, int]] = set(selected_seat_list)
 		selected_seat_list: list[tuple[int, int]] = list(selected_seat_list_no_repeat)
-		selected_seat_list: list[tuple[int, int]] = sorted(selected_seat_list, key=lambda tup: tup[0])
+		selected_seat_list: list[tuple[int, int]] = sorted(selected_seat_list, key=lambda tup: tup)
 	
 		if len(selected_seat_list) > total_ticket_number:
 			if language == 'ENGLISH':
