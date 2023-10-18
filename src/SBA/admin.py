@@ -82,9 +82,9 @@ def createHouse() -> None:
 	else:
 		house.movie = movie
 	logger.info(f"House {house.house_number}'s movie: {movie or '(None)'}")
+	logger.info("Waiting adult price input")
 	adult_price_str: str = inputLang("Please enter the price for adults (default is $0): $",
 	                                 "請輸入成人票價（預設為 $0）：$").strip().replace(" ", '')
-	logger.info("Waiting adult price input")
 	if adult_price_str == '':
 		adult_price_str: str = '0'
 	elif not adult_price_str.isdecimal():
@@ -95,9 +95,9 @@ def createHouse() -> None:
 		logger.info("Invalid number of adult price, going back to the control panel menu")
 		return
 	house.adult_price = int(adult_price_str)
+	logger.info("Waiting children price input")
 	child_price_str: str = inputLang("Please enter the price for children (default is $0): $",
 	                                 "請輸入兒童票價（預設為 $0）：$").strip().replace(" ", '')
-	logger.info("Waiting children price input")
 	if child_price_str == '':
 		child_price_str: str = '0'
 	elif not child_price_str.isdecimal():
@@ -158,6 +158,14 @@ def updateMovie() -> None:
 	printLang(f"{old_movie or '(None)'} --> {house.movie}",
 	          f"{old_movie or '（無）'} --> {house.movie}")
 	logger.info(f"Movie of House {house.house_number}: {old_movie or '(None)'} --> {house.movie}")
+
+	do_update_price: str == inputLang("Would you like to update the price too?",
+								      "你想更新此電影院的票價嗎？(Y/n)").strip().upper()
+	if do_clean_price != 'N':
+		pass
+		
+	
+
 	do_clean: str = inputLang("Would you like to clear all relevant data too? (y/N)",
 	                          "你想清除此電影院的所有相關資料嗎? (y/N)").strip().upper()
 	if do_clean == 'Y':
