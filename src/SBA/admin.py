@@ -112,14 +112,14 @@ def createHouse() -> None:
 	saveData()
 
 
-def updateMovie() -> None:
+def updateHouseAttributes() -> None:
 	"""
-	Admin mode 2: Update the movie of a house
+	Admin mode 2: Update house attributes
 
 	:return: None
 	"""
-	logger: Logger = getLogger("updateMovie")
-	logger.info("Admin Mode 2: Update the movie of a house")
+	logger: Logger = getLogger("updateHouseAttributes")
+	logger.info("Admin Mode 2: Update house attributes")
 	if house_list := House.houses_table.values():
 		printLang("House list:", "電影院列表：")
 		for house in house_list:
@@ -896,7 +896,7 @@ def adminMode() -> None:
 		printLang("\n"
 		          " 0: EXIT CONTROL PANEL\n"
 		          " 1: Create a new house\n"
-		          " 2: Update the movie of a house\n"
+		          " 2: Update house attributes\n"
 		          " 3: Save data\n"
 		          " 4: Load data\n"
 		          " 5: Check houses information\n"
@@ -914,7 +914,7 @@ def adminMode() -> None:
 		          "\n"
 		          " 0：退出控制面板\n"
 		          " 1：創建新電影院\n"
-		          " 2：更新電影名稱\n"
+		          " 2：更新電影院屬性\n"
 		          " 3：儲存資料\n"
 		          " 4：載入資料\n"
 		          " 5：查詢電影院資訊\n"
@@ -956,7 +956,7 @@ def adminMode() -> None:
 		
 		# Update the movie of a house
 		elif mode == '2':
-			updateMovie()
+			updateHouseAttributes()
 		
 		# Save data
 		elif mode == '3':
