@@ -158,20 +158,53 @@ def updateMovie() -> None:
 	printLang(f"{old_movie or '(None)'} --> {house.movie}",
 	          f"{old_movie or '（無）'} --> {house.movie}")
 	logger.info(f"Movie of House {house.house_number}: {old_movie or '(None)'} --> {house.movie}")
-
-	do_update_price: str == inputLang("Would you like to update the price too?",
-								      "你想更新此電影院的票價嗎？(Y/n)").strip().upper()
-	if do_clean_price != 'N':
-		pass
-		
 	
-
-	do_clean: str = inputLang("Would you like to clear all relevant data too? (y/N)",
-	                          "你想清除此電影院的所有相關資料嗎? (y/N)").strip().upper()
+	do_update_price: str = inputLang("Would you like to update the price too?",
+	                                 "你想更新此電影院的票價嗎？(Y/n)").strip().upper()
+	if do_update_price != 'N':
+		adult_price_str: str = inputLang(f"Please enter the price for adults "
+		                                 f"(default not to change as ${house.adult_price}): $",
+		                                 f"請輸入成人票價"
+		                                 f"（預設維持現價 ${house.adult_price}）：$").strip().replace(" ", '')
+		if adult_price_str == '':
+			adult_price_str: str = str(house.adult_price)
+		elif not adult_price_str.isdecimal():
+			printLang("ERROR: Ticket price must be an integer",
+			          "錯誤：票價必需為整數")
+			printLang("House creation failed, exiting to Control Panel menu...",
+			          "電影院創建失敗，返回控制面板中......")
+			logger.info("Invalid number of adult price, going back to the control panel menu")
+			return
+		house.adult_price = int(adult_price_str)
+		logger.info("Waiting children price input")
+		child_price_str: str = inputLang(f"Please enter the price for children "
+		                                 f"(default not to change as ${house.child_price}): $",
+		                                 f"請輸入兒童票價"
+		                                 f"（預設維持現價 ${house.child_price}）：$").strip().replace(" ", '')
+		if child_price_str == '':
+			child_price_str: str = str(house.child_price)
+		elif not child_price_str.isdecimal():
+			printLang("ERROR: Ticket price must be an integer",
+			          "錯誤：票價必需為整數")
+			printLang("House creation failed, exiting to Control Panel menu...",
+			          "電影院創建失敗，返回控制面板中......")
+			logger.info("Invalid number of child price, going back to the control panel menu")
+			return
+		house.child_price = int(child_price_str)
+	
+	do_reset_house_revenue: str = inputLang("Do you want to reset the house revenue counter to zero? (y/N)",
+	                                        "你想重設電影院收益數字爲零嗎？(y/N)").strip().upper()
+	if do_reset_house_revenue == 'N':
+		pass
+	else:
+		house.house_revenue = 0
+	
+	do_clean: str = inputLang("Would you like to clear all seats and tickets from this house too? (y/N)",
+	                          "你想清除此電影院的所有座位與電影票嗎? (y/N)").strip().upper()
 	if do_clean == 'Y':
 		logger.info("Admin wants to clear all relevant data")
 		printLang(f"Clearing all seat of house {house_num}",
-		          f"正在清除電影院{house_num} 的所有相關資料")
+		          f"正在清除電影院{house_num} 的所有座位")
 		house.clearPlan()
 		printLang("Success!", "成功！")
 		printLang("Deleting all related tickets", "正在刪除相關的電影票")
@@ -252,7 +285,7 @@ def checkHousesInformation() -> None:
 	          f"成人票價：${house.adult_price}\n"
 	          f"兒童票價：${house.child_price}\n"
 	          )
-	
+
 
 def seatStatusOverride() -> None:
 	"""
