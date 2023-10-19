@@ -220,7 +220,7 @@ def buyTicket() -> None:
 		                           "(Or hit Enter to go back to the menu)\n->",
 		                           "請輸入（部分）選擇的座位編號，"
 		                           f"你購買了{total_ticket_number}個座位，你選擇了{selected_seat_count}個座位，"
-		                           f"還剩下{total_ticket_number-selected_seat_count}"
+		                           f"你還需要選擇{total_ticket_number-selected_seat_count}個座位"
 		                           "（或按 Enter 以返回主頁面）\n->").strip().replace(' ', '')
 		
 		if coor_expr == '':
