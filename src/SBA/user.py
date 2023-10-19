@@ -161,6 +161,10 @@ def buyTicket() -> None:
 		
 		break
 	
+	if adult_ticket_count + child_ticket_count == 0:
+		message = ''
+		return
+	
 	# Confirm
 	clearScreen()
 	printLang("CINEMA KIOSK SYSTEM\n\n\n", "電影售票系統\n\n\n")
