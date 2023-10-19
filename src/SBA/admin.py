@@ -326,7 +326,6 @@ def seatStatusOverride() -> None:
 	                .replace('(', '')
 	                .replace(')', '')
 	                .replace('|', '')
-	                .replace('-', '')
 	                .replace('（', '')  # Same as above, but Chinese
 	                .replace('）', '')
 	                .replace('《', '')
