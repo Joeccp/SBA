@@ -30,7 +30,7 @@ This system should also provide an admin control panel,
 which allows admin to create and modify cinema houses and do seat operation.
 This system can be login as user and admin.
 
-### Inplementation analysis
+### Implementation analysis
 
 In terms of software engineering, the software needs:
 - A login system, using a local `toml` file. Passwords should be hashed.
