@@ -123,7 +123,7 @@ class House:
 		print()
 	
 	def printSeatingPlanWithSelectedSeat(self, selected_seat_list: list[tuple[int, int]]) -> None:  # pragma: no cover # skip coverage report -- IDK how to mock output # NOQA # line too long
-		"""Print the seating plan with selected seat"""
+		"""Print the seating plan with the selected seats shown in different colour"""
 		from .colour import normal_colour
 		
 		line_length: int = self.n_column * 2 + 1
