@@ -9,7 +9,7 @@ More staffs are required to handle more customers.
 There is often a shortage of manpower which leads to a low efficiency of ticket selling. 
 It is difficult to find suitable employees, and it involves cost of recruiting, human resource management, training, and most importantly, wage.
 Also, in order to see what movies are available, customers need to queue up and ask the staff one by one.
-It is also very difficult for customers to know which seats are available. They have to ask one by one, which leads to a extremely poor efficency.
+It is also very difficult for customers to know which seats are available. They have to ask one by one, which leads to a extremely poor efficiency.
 A long waiting time causes fewer customers willing to queue and purchase tickets.
 
 The Cost of production is high, efficiency is low. 
