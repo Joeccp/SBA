@@ -5,7 +5,7 @@
 ## Background
 
 Nowadays, the movie industry is rising, with more and more viewers and larger cinema.
-More staff are required to handle more customers.
+More staffs are required to handle more customers.
 There is often a shortage of manpower which leads to a low efficiency of ticket selling. 
 It is difficult to find suitable employees, and it involves cost of recruiting, human resource management, training, and most importantly, wage.
 Also, in order to see what movies are available, customers need to queue up and ask the staff one by one.
