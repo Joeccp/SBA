@@ -9,7 +9,7 @@ More staffs are required to handle more customers.
 There is often a shortage of manpower which leads to a low efficiency of ticket selling. 
 It is difficult to find suitable employees, and it involves cost of recruiting, human resource management, training, and most importantly, wage.
 Also, in order to see what movies are available, customers need to queue up and ask the staff one by one.
-It is also very difficult for customers to know which seats are available. They have to ask one by one, which leads to a extremely poor efficiency.
+It is also very difficult for customers to know which seats are available. They have to ask one by one, which leads to an extremely poor efficiency.
 A long waiting time causes fewer customers willing to queue and purchase tickets.
 
 The Cost of production is high, efficiency is low. 
@@ -21,22 +21,27 @@ Hence, this move kiosk system is born.
 
 ## Advantages
 
-We need a strong and stable automated cinema kiosk system,
-run by full-auto, and can handle many tasks.
+We need a strong and stable automated cinema kiosk system, 
+customers can operate the kiosk system without the assistance of staff, 
+the kiosk system should be able to handle many tasks.
 This system should be able to let customers see a list of available movies easily,
 customers should also be able to see the seating plan and purchase ticket.
 Moreover, customers should be able to check the information about their purchased tickets, and be able to get refund.
 
 This system should also provide an admin control panel, 
-which allows admin to create and modify cinema houses and do seat operation.
+which allows admin to create and modify cinema houses and do seat operations.
 This system can be login as user and admin.
+
+The advantages of using the cinema kiosk system are,
+customers can buy movie tickets faster. 
+Staff (administrator) can complete complex operations more efficiently.
 
 ### Implementation analysis
 
 In terms of software engineering, the software needs:
 - A login system, using a local `toml` file. Passwords should be hashed.
 - A `House` class, which represents a cinema house, and has the following attributes and methods:
-  - `n_row`, `n_column`, `n_seat`, `house_number`: `int`, representing number of rows and columns, number of seats, and the house number respectivly.
+  - `n_row`, `n_column`, `n_seat`, `house_number`: `int`, representing number of rows and columns, number of seats, and the house number respectively.
   - `seating_plan`: `list[list[int]]`, a 2D list which stores all status of the seat,
     - `0` = Empty, `1` = Sold, `2` = Reserved.
   - `movie`: `str`, the movie name of the currently playing movie
