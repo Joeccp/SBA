@@ -12,7 +12,7 @@ Also, in order to see what movies are available, customers need to queue up and 
 It is also very difficult for customers to know which seats are available. They have to ask one by one, which leads to a extremely poor efficency.
 A long waiting time causes fewer customers willing to queue and purchase tickets.
 
-Cost of production is high, efficiency is low. 
+The Cost of production is high, efficiency is low. 
 A more powerful solution is required.
 Hence, this move kiosk system is born.
 
