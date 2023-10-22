@@ -21,7 +21,8 @@ Hence, this move kiosk system is born.
 
 ## Advantages
 
-We need a strong and stable automated cinema kiosk system. Run by full-auto, can handle many tasks.
+We need a strong and stable automated cinema kiosk system,
+run by full-auto, and can handle many tasks.
 This system should be able to let customers see a list of available movies easily,
 customers should also be able to see the seating plan and purchase ticket.
 Moreover, customers should be able to check the information about their purchased tickets, and be able to get refund.
@@ -41,10 +42,15 @@ In terms of software engineering, the software needs:
   - `movie`: `str`, the movie name of the currently playing movie
   - `n_available`: `int`, number of available seats.
   - `printPlan(self)`: A function that pretty prints the seating plan.
-  - `clearPlan(self)`: Clear the seating plan.
-  - `n_tickets`: Class method, returns the number of tickets sold in all houses
-  - `searchTicket(cls, target_ticket_index: int)`: Searches the ticket with the given ticket index
+  - `clearPlan(self)`: A function that clears the seating plan.
+  - `adult_price`: `int`, movie ticket price for adults.
+  - `child_price`: `int`, movie ticket price for children.
+  - `house_revenue`: `int`, the house revenue.
+  - `n_tickets`: A class method, returns the number of tickets sold in all houses
+  - `searchTicket(cls, target_ticket_index: int)`: A class method. It searches the ticket with the given ticket index
     - 'ticket index' is a special format of a ticket number
+  - `total_tickets`: `int`, a class attribute that stores the total number of tickets sold, including those refunded tickets.
+  - `total_revenue`: `int`, a class attribute that stores the total revenue of all houses.
 - Data save and load function, which uses local `pickle` Python file.
   - `saveData()` and `loadData()`, functions that save and load local data.
 - `adminMode()` and `userMode()`, functions which encapsulate the admin mode and user mode.
