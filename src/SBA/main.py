@@ -43,9 +43,6 @@ from .user import userMode
 from .utils import clearScreen, initLog, loadData, RealExit
 
 
-exception_list: list[Exception] = []
-
-
 def main() -> None:
 	"""
 	The main program
@@ -70,7 +67,6 @@ def main() -> None:
 		:return: None
 		"""
 	
-		global exception_list
 		
 		try:
 		
@@ -131,7 +127,6 @@ def main() -> None:
 			raise error  # This should also not be caught by any try-except block
 		
 		except Exception as error:
-			exception_list.append(error)
 			
 			logger: Logger = getLogger("main._main.Exception_handler")
 			logger.critical(f"ERROR --- {error.__class__.__name__}")
