@@ -139,7 +139,7 @@ def saveData(*, print_log: bool = False) -> None:
 	logger.debug(f"Full path = {full_path}")
 	with open(full_path, 'wb') as file:
 		# No need save House.n_house, count it later
-		data: list[int, dict] = [House.total_revenue, House.houses_table]
+		data: list[int | dict] = [House.total_revenue, House.houses_table]
 		dump(data, file)
 	
 	internalLog("Writing tickets data", "正在寫入電影票資料")
