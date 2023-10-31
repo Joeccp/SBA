@@ -312,7 +312,9 @@ def buyTicket() -> None:
 		          )
 		House.tickets_table.append(ticket)
 		house.house_revenue += price
+		House.total_revenue += price
 		saveData()
+	# Adult
 	for row_index, column_index in selected_seat_list[child_ticket_count:]:
 		house.seating_plan[row_index][column_index] = 1
 		House.total_tickets += 1
@@ -334,6 +336,7 @@ def buyTicket() -> None:
 		          )
 		House.tickets_table.append(ticket)
 		house.house_revenue += price
+		House.total_revenue += price
 		saveData()
 	
 	saveData()

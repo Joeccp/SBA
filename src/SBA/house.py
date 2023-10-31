@@ -47,8 +47,8 @@ class House:
 	n_House: int = 0
 	houses_table: dict[int, Self] = {}
 	tickets_table: list[Ticket] = []
-	total_tickets: int = 0
 	total_revenue: int = 0
+	total_tickets: int = 0
 	
 	def __init__(self, *, row_number: int, column_number: int) -> None:
 		"""
@@ -231,6 +231,9 @@ class House:
 				logger.debug(f"min is now {min_}")
 	
 	# THE BELOW DUNDER METHODS ARE DEFINED FOR FUTURE USAGE ONLY, NOT IN USED
+	
+	def __str__(self) -> str:
+		return f"House {self.house_number}"
 
 	def __getitem__(self, key: int) -> Row:
 		"""
