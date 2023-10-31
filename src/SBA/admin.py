@@ -747,6 +747,7 @@ def clearAllData() -> None:
 		return
 	House.tickets_table = []
 	House.total_tickets = 0
+	House.total_revenue = 0
 	logger.info("Removed unsaved tickets data")
 	printLang("Successfully removed unsaved tickets data", "成功刪除未儲存的電影票資料")
 	try:

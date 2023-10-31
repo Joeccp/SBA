@@ -228,7 +228,7 @@ def buyTicket() -> None:
 			return
 		
 		try:
-			selected_seat_list.extend(getCoorsFromCoorExpr(coor_expr))
+			selected_seat_list.extend(getCoorsFromCoorExpr(coor_expr, n_row=house.n_row, n_column=house.n_column))
 		except CoordinateExpressionException as error:
 			if language == 'ENGLISH':
 				select_ticket_message = f"ERROR: {error.__doc__}"

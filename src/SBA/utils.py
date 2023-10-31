@@ -139,7 +139,8 @@ def saveData(*, print_log: bool = False) -> None:
 	logger.debug(f"Full path = {full_path}")
 	with open(full_path, 'wb') as file:
 		# No need save House.n_house, count it later
-		dump([House.total_revenue, House.houses_table], file)
+		data: list[int, dict] = [House.total_revenue, House.houses_table]
+		dump(data, file)
 	
 	internalLog("Writing tickets data", "正在寫入電影票資料")
 	relative_path = "../../data/tickets"
@@ -191,14 +192,20 @@ def loadData(*, print_log: bool = False) -> None:
 	logger.debug(f"Full path = {full_path}")
 	try:
 		internalLog("Finding houses data", "正在尋找電影院資料")
-		with open(full_path, 'rb') as file:
-			data: dict = load(file)
+		try:
+			with open(full_path, 'rb') as file:
+				data: dict = load(file)
+		except EOFError:
+			internalLog("No houses data found", "電影院資料爲空")
+			raise EOFError
 		House.total_revenue = data[0]
 		House.houses_table = data[1]
 		House.n_House = len(House.houses_table)
 		internalLog("Houses data loaded", "已載入電影院資料")
 	except FileNotFoundError:
 		internalLog("No houses data found", "無電影院資料")
+	except EOFError:
+		pass
 	
 	relative_path = "../../data/tickets"
 	full_path = path.join(absolute_path, relative_path)
