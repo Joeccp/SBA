@@ -196,7 +196,7 @@ def loadData(*, print_log: bool = False) -> None:
 			with open(full_path, 'rb') as file:
 				data: dict = load(file)
 		except EOFError:
-			internalLog("No houses data found", "電影院資料爲空")
+			internalLog("Houses data is empty", "電影院資料爲空")
 			raise EOFError
 		House.total_revenue = data[0]
 		House.houses_table = data[1]
@@ -212,13 +212,19 @@ def loadData(*, print_log: bool = False) -> None:
 	logger.debug(f"Full path = {full_path}")
 	try:
 		internalLog("Finding tickets data", "正在尋找電影票資料")
-		with open(full_path, 'rb') as file:
-			data: dict = load(file)
+		try:
+			with open(full_path, 'rb') as file:
+				data: dict = load(file)
+		except EOFError:
+			internalLog("Tickets data is empty", "電影票資料爲空")
+			raise EOFError
 		House.total_tickets = data[0]
 		House.tickets_table = data[1]
 		internalLog("Tickets data loaded", "已載入電影票資料")
 	except FileNotFoundError:
 		internalLog("No tickets data found", "無電影票資料")
+	except EOFError:
+		pass
 	
 	internalLog("Loading colour scheme", "正在載入配色設定")
 	loadColour()
