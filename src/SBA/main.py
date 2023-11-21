@@ -40,7 +40,7 @@ from .colour import loadColour
 from .language import loadLanguage
 from .login import login
 from .user import userMode
-from .utils import clearScreen, initLog, loadData, RealExit
+from .utils import clearScreen, initLog, loadData, ProgramForcedExit
 
 
 def main() -> None:
@@ -112,9 +112,9 @@ def main() -> None:
 			logger.info("Confirmation failed. Restarting the program")
 			_main()
 
-		except RealExit as error:
-			logger: Logger = getLogger("main._main.RealExit_handler")
-			logger.error("Forced exit --- RealExit")
+		except ProgramForcedExit as error:
+			logger: Logger = getLogger("main._main.ProgramForcedExit")
+			logger.error("ProgramForcedExit")
 			logger.info("TRACEBACK STARTS")
 			for error_message_line in format_exception(error):
 				error_message_line: str = error_message_line.strip()

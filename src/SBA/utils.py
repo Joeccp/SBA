@@ -28,14 +28,15 @@ from .house import House
 from .language import loadLanguage, printLang, setLanguage
 
 
-class RealExit(Exception):
+class ProgramForcedExit(Exception):
 	"""
-	This exception is raised when you really want to quit
+	This exception is raised when you really want to quit, but not Admin Exit
 	i.e. Not an unexpected program crash
 	
 	This exception should be handled specially in main.main()
 	
-	Do NOT use exit() or quit() or even os._exit(), they can't be treated specifically (in this program)
+	Do NOT use exit() or quit() or even os._exit() for this purpose,
+	they can't be treated specifically (in this program)
 	"""
 	
 	def __init__(self, message: str = "") -> None:
@@ -62,13 +63,13 @@ def checkPythonVersion() -> None:
 		logger.critical("I am running on Python %s!", major_version)
 		logger.critical("QUITTING THE PROGRAM: Python version lower than Python 3.11")
 		err_msg: str = "This program does not support Python 2"
-		raise RealExit(err_msg)
+		raise ProgramForcedExit(err_msg)
 	elif minor_version < 11:
 		logger.critical("I am running on Python 3.%s!", minor_version)
 		logger.critical("QUITTING THE PROGRAM: Python version lower than Python 3.11")
 		err_msg: str = "Unsupported old Python version (" + str(major_version) + "." + str(
 			minor_version) + "), please use Python 3.11 or newer"
-		raise RealExit(err_msg)
+		raise ProgramForcedExit(err_msg)
 
 
 def clearScreen() -> None:
