@@ -159,9 +159,9 @@ def updateHouseAttributes() -> None:
 	          f"{old_movie or '（無）'} --> {house.movie}")
 	logger.info(f"Movie of House {house.house_number}: {old_movie or '(None)'} --> {house.movie}")
 	
-	do_update_price: str = inputLang("Would you like to update the price too?(Y/n)",
+	do_update_price: str = inputLang("Would you like to update the price too?(y/N)",
 	                                 "你想更新此電影院的票價嗎？(Y/n)").strip().upper()
-	if do_update_price != 'N':
+	if do_update_price == 'Y':
 		adult_price_str: str = inputLang(f"Please enter the price for adults "
 		                                 f"(default not to change as ${house.adult_price}): $",
 		                                 f"請輸入成人票價"
