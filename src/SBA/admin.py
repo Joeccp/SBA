@@ -1044,8 +1044,8 @@ def adminMode() -> None:
 			printLang("CONTROL PANEL\n\n\n", "控制面板\n\n\n")
 		
 		else:
-			logger.info("Unknown mode code")
-			printLang(f"ERROR: Unknown mode code {mode}", f"錯誤：無效模式代碼——{mode}")
+			logger.info("Unknown mode number")
+			printLang(f"ERROR: Unknown mode number {mode}", f"錯誤：無效模式代碼——{mode}")
 			if mode.startswith('0'):
 				printLang("Did you accidentally enter any leading zeros?",
 				          "你可能輸入了不需要的前置零")
