@@ -696,13 +696,17 @@ def deleteHouse() -> None:
 		house.clearPlan()
 		printLang("Deleting all related tickets", "正在刪除所有相關的電影票")
 		logger.info("Deleting all related tickets")
+		tickets_to_be_removed: list[Ticket] = []
 		n_tickets_removed: int = 0
 		for ticket in House.tickets_table:
 			ticket_index, ticket_number, time, house_number, *other_information = ticket
 			if house_number == house.house_number:
-				logger.info(f"Deleting {ticket_number}, ticket info: {ticket}")
-				House.tickets_table.remove(ticket)
-				n_tickets_removed += 1
+				tickets_to_be_removed.append(ticket)
+		for ticket in tickets_to_be_removed:
+			ticket_index, ticket_number, *other_information = ticket
+			logger.info(f"Deleting {ticket_number}, ticket info: {ticket}")
+			House.tickets_table.remove(ticket)
+			n_tickets_removed += 1
 		printLang(f"Removed {n_tickets_removed} ticket{'s' if n_tickets_removed > 1 else ''}",
 		          f"刪除了{n_tickets_removed}張電影票")
 		logger.info(f"Removed {n_tickets_removed} ticket{'s' if n_tickets_removed > 1 else ''}")
