@@ -198,7 +198,6 @@ def loadData(*, print_log: bool = False) -> None:
 		except EOFError:
 			internalLog("Houses data is empty", "電影院資料爲空")
 			raise EOFError
-		breakpoint()
 		House.total_revenue = data[0]
 		House.houses_table = data[1]
 		House.n_House = data[2]
