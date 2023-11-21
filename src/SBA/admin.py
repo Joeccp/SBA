@@ -698,9 +698,9 @@ def deleteHouse() -> None:
 		logger.info("Deleting all related tickets")
 		n_tickets_removed: int = 0
 		for ticket in House.tickets_table:
-			ticket_index, ticket_num, *other_information = ticket
-			if house_num == house.house_number:
-				logger.info(f"Deleting {ticket_num}, ticket info: {ticket}")
+			ticket_index, ticket_number, time, house_number, *other_information = ticket
+			if house_number == house.house_number:
+				logger.info(f"Deleting {ticket_number}, ticket info: {ticket}")
 				House.tickets_table.remove(ticket)
 				n_tickets_removed += 1
 		printLang(f"Removed {n_tickets_removed} ticket{'s' if n_tickets_removed > 1 else ''}",
