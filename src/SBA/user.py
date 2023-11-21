@@ -546,6 +546,7 @@ def ticketRefund() -> None:
 	confirm: str = input("-> ").strip().upper()
 	if confirm == 'Y':
 		House.houses_table[house_no].seating_plan[row_index][column_index] = 0
+		House.total_revenue -= price
 		House.tickets_table.remove(ticket)
 		logger.info("Ticket deleted")
 		saveData()
