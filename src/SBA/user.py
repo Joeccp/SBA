@@ -246,7 +246,7 @@ def buyTicket() -> None:
 				message = "ERROR: Selected too many seats"
 			else:
 				message = "錯誤：選擇了過多的座位"
-			return  # Return instead of continue, as buyer can't delete the selected seat
+			return  # Return instead of continue, as buyer can't deselect a selected seat
 		
 		# Check selected ticket
 		for row_index, column_index in selected_seat_list:
@@ -255,7 +255,7 @@ def buyTicket() -> None:
 					message = f"ERROR: Seat {row_index+1}{chr(column_index+65)} is not available"
 				else:
 					message = f"錯誤：座位{row_index+1}{chr(column_index+65)}不供發售"
-				return  # Return instead of continue, as buyer can't delete the selected seat
+				return  # Return instead of continue, as buyer can't deselect a selected seat
 	
 		if len(selected_seat_list) == total_ticket_number:
 			break
