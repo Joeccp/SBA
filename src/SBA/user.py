@@ -608,6 +608,11 @@ def userMode() -> None:
 		)
 		logger.info("Waiting mode code input")
 		mode: str = input("-> ").strip()
+		
+		if mode == '':
+			message = ''
+			continue
+		
 		if not mode.isdecimal():
 			if language == "ENGLISH":
 				message = "ERROR: Mode number should be a decimal number."
