@@ -462,7 +462,7 @@ def checkTicketInformation() -> None:
 			return
 		if not ticket_number[1:].isdecimal():
 			printLang("ERROR: Invalid ticket number -- "
-			          "ticket number should ba a single character 'T' followed by decimal numbers",
+			          "ticket number should be a single character 'T' followed by decimal numbers",
 			          "錯誤：無效電影票號碼——電影票號碼由「T」開始然後是數字")
 			printLang("Going back to the Control Panel menu...",
 			          "返回控制面板中......")
@@ -529,7 +529,7 @@ def deleteTicket() -> None:
 		return
 	if not ticket_number[1:].isdecimal():
 		printLang("ERROR: Invalid ticket number -- "
-		          "ticket number should ba a single character 'T' followed by decimal numbers",
+		          "ticket number should be a single character 'T' followed by decimal numbers",
 		          "錯誤：無效電影票號碼——電影票號碼由「T」開始然後是數字")
 		printLang("Going back to the Control Panel menu...",
 		          "返回控制面板中......")
