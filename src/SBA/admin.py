@@ -491,11 +491,12 @@ def checkTicketInformation() -> None:
 		ticket_index, ticket_no, time, house_no, movie, row_index, column_index, price = ticket
 		logger.info(f"Admin wants to check this ticket: {ticket}")
 		printLang(f"{ticket_no:<6} @{time} "
-		          f"House {house_no:<2} -- {movie:<50} ~"
-		          f"Seat<{row_index + 1}{chr(column_index + 65)}>",
+		          f"House {house_no:<2} -- {movie:<25} ~"
+		          f"Seat<{row_index + 1}{chr(column_index + 65)}> ${price}",
 		          f"{ticket_no:<6} @{time} "
-		          f"電影院{house_no:<2} -- {movie:<50} ~"
-		          f"座位<{row_index + 1}{chr(column_index + 65)}>")
+		          f"電影院{house_no:<2} -- {movie:<25} ~"
+		          f"座位<{row_index + 1}{chr(column_index + 65)}> ${price}"
+		          )
 	printLang(f"TOTAL: {House.get_n_tickets()} ticket{'s' if House.get_n_tickets() > 1 else ''} active, "
 	          f"{House.total_tickets} ticket{'s' if House.total_tickets > 1 else ''} were created.",
 	          f"纍計：{House.get_n_tickets()}張電影票有效，曾有{House.total_tickets}張電影票存在過。")
