@@ -215,7 +215,7 @@ def updateHouseAttributes() -> None:
 			if house_no == house.house_number:
 				House.tickets_table.remove(ticket)
 				n_tickets_removed += 1
-		print(f"Removed {n_tickets_removed} tickets", f"刪除了{n_tickets_removed}張電影票")
+		printLang(f"Removed {n_tickets_removed} tickets", f"刪除了{n_tickets_removed}張電影票")
 		logger.info(f"Removed {n_tickets_removed} tickets")
 		saveData()
 		return
