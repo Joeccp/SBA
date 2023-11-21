@@ -485,7 +485,7 @@ def checkTicketInformation() -> None:
 		ticket_index: int = int(ticket_number[1:])
 		ticket: Optional[Ticket] = House.searchTicket(ticket_index)
 		if ticket is None:
-			printLang("ERROR: No such ticket", "無此電影票")
+			printLang("No such ticket", "無此電影票")
 			logger.info("No such ticket, going back to the Control Panel menu")
 			return
 		ticket_index, ticket_no, time, house_no, movie, row_index, column_index, price = ticket
@@ -553,7 +553,7 @@ def deleteTicket() -> None:
 	ticket_index: int = int(ticket_number[1:])
 	ticket: Optional[Ticket] = House.searchTicket(ticket_index)
 	if ticket is None:
-		printLang("ERROR: No such ticket", "無此電影票")
+		printLang("No such ticket", "無此電影票")
 		printLang("Going back to the Control Panel menu...",
 		          "返回控制面板中......")
 		logger.info("Invalid ticket number, going back to the Control Panel menu")
