@@ -138,7 +138,7 @@ def saveData(*, print_log: bool = False) -> None:
 	full_path = path.join(absolute_path, relative_path)
 	logger.debug(f"Full path = {full_path}")
 	with open(full_path, 'wb') as file:
-		data: list[int | dict | int] = [House.total_revenue, House.houses_table, House.n_House]
+		data: list[int | dict] = [House.total_revenue, House.houses_table, House.n_House]
 		dump(data, file)
 	
 	internalLog("Writing tickets data", "正在寫入電影票資料")
@@ -146,7 +146,7 @@ def saveData(*, print_log: bool = False) -> None:
 	full_path = path.join(absolute_path, relative_path)
 	logger.debug(f"Full path = {full_path}")
 	with open(full_path, 'wb') as file:
-		data = [House.total_tickets, House.tickets_table]
+		data: list[int] = [House.total_tickets, House.tickets_table]
 		dump(data, file)
 	
 	internalLog("Writing colour scheme setting", "正在寫入顔色設定")
