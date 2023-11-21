@@ -194,10 +194,17 @@ def updateHouseAttributes() -> None:
 	
 	do_reset_house_revenue: str = inputLang("Do you want to reset the house revenue counter to zero? (y/N)",
 	                                        "你想重設電影院收益數字爲零嗎？(y/N)").strip().upper()
-	if do_reset_house_revenue == 'N':
+	if do_reset_house_revenue == 'N' or do_reset_house_revenue == '':
 		pass
-	else:
+	elif do_reset_house_revenue == 'Y':
 		house.house_revenue = 0
+	else:
+		printLang("ERROR: Invalid confirmation, did not clean all data as default",
+		          "錯誤：無效確認，預設沒有清除所有相關資料")
+		saveData()
+		printLang("Going back to the Control Panel menu...",
+		          "返回控制面板中......")
+		return
 	
 	do_clean: str = inputLang("Would you like to clear all seats and tickets from this house too? (y/N)",
 	                          "你想清除此電影院的所有座位與電影票嗎? (y/N)").strip().upper()
@@ -219,7 +226,7 @@ def updateHouseAttributes() -> None:
 		logger.info(f"Removed {n_tickets_removed} tickets")
 		saveData()
 		return
-	elif do_clean == 'N':
+	elif do_clean == 'N' or do_clean == '':
 		print("OK")
 		saveData()
 		printLang("Going back to the Control Panel menu...",
