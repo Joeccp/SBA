@@ -399,7 +399,7 @@ def checkTicket() -> None:
 	if not ticket_number[1:].isdecimal():
 		if language == "ENGLISH":
 			message = ("ERROR: Invalid ticket number -- "
-			           "ticket number should ba a single character 'T' followed by decimal numbers")
+			           "ticket number should be a single character 'T' followed by decimal numbers")
 		else:
 			message = "錯誤：無效電影票號碼——電影票號碼由「T」開始然後是數字"
 		logger.info("Invalid ticket number, going back to the user menu")
