@@ -138,8 +138,7 @@ def saveData(*, print_log: bool = False) -> None:
 	full_path = path.join(absolute_path, relative_path)
 	logger.debug(f"Full path = {full_path}")
 	with open(full_path, 'wb') as file:
-		# No need save House.n_house, count it later
-		data: list[int | dict] = [House.total_revenue, House.houses_table]
+		data: list[int | dict | int] = [House.total_revenue, House.houses_table, House.n_House]
 		dump(data, file)
 	
 	internalLog("Writing tickets data", "正在寫入電影票資料")
@@ -147,7 +146,8 @@ def saveData(*, print_log: bool = False) -> None:
 	full_path = path.join(absolute_path, relative_path)
 	logger.debug(f"Full path = {full_path}")
 	with open(full_path, 'wb') as file:
-		dump([House.total_tickets, House.tickets_table], file)
+		data = [House.total_tickets, House.tickets_table]
+		dump(data, file)
 	
 	internalLog("Writing colour scheme setting", "正在寫入顔色設定")
 	setColour(colour_mode)
@@ -194,12 +194,14 @@ def loadData(*, print_log: bool = False) -> None:
 		internalLog("Finding houses data", "正在尋找電影院資料")
 		try:
 			with open(full_path, 'rb') as file:
-				data: dict = load(file)
+				data: list = load(file)
 		except EOFError:
 			internalLog("Houses data is empty", "電影院資料爲空")
 			raise EOFError
+		breakpoint()
 		House.total_revenue = data[0]
 		House.houses_table = data[1]
+		House.n_House = data[2]
 		House.n_House = len(House.houses_table)
 		internalLog("Houses data loaded", "已載入電影院資料")
 	except FileNotFoundError:
