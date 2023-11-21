@@ -591,7 +591,7 @@ def clearHouseSeats() -> None:
 			printLang(f"House {house.house_number} is closed",
 			          f"電影院{house.house_number}已關閉")
 	logger.info("Waiting house number input")
-	house_num_str: str = inputLang("Enter the house number of a house which you would like to empty:\n-> "
+	house_num_str: str = inputLang("Enter the house number of a house which you would like to empty:\n-> ",
 	                               "請輸入你想清空的電影院的號碼：\n->").strip()
 	if not house_num_str.isdecimal():
 		logger.info("Invalid house number, going back to the Control Panel menu")
