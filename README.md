@@ -64,12 +64,6 @@ Run this package using Python via `cmd`/`powershell` with the `-m` flag, or dire
 (Or the `__main__` file if you cannot see the file extension.)
 5. Ta-da!
 
-
-
-# Report
-A rough SBA report can be found [here](report/REPORT.md). NOT THE FINAL VERSION. Work in progress.
-
-
 ## Documentations
 
 *Documentation is only available in English.*
@@ -95,7 +89,7 @@ A rough SBA report can be found [here](report/REPORT.md). NOT THE FINAL VERSION.
 - ![Static Badge](https://img.shields.io/badge/Code_Documents-pink) 
 A rough [code documents](codedocs/src/index.html) generated with [pdoc](https://pdoc3.github.io/pdoc/).
 FOR REFERENCE ONLY.
-
+- [Self evaluation](self_evaluation.md)
 ---
 
 Copyright © 2023 Joe Chau, Licensed under the 
