@@ -90,6 +90,7 @@ Run this package using Python via `cmd`/`powershell` with the `-m` flag, or dire
 A rough [code documents](codedocs/src/index.html) generated with [pdoc](https://pdoc3.github.io/pdoc/).
 FOR REFERENCE ONLY.
 - [Self evaluation](self_evaluation.md)
+- [Directory tree](directory_tree.txt)
 ---
 
 Copyright © 2023 Joe Chau, Licensed under the 
