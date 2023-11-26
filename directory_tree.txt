@@ -1,0 +1,106 @@
+SBA/
+│
+├── .github/
+│   │
+│   └── workflows/
+│       └── tests.yml
+│
+│
+├── _includes/
+│   └── head-custom.html
+│
+├── codedocs/
+│   │
+│   └── src/
+│       │
+│       ├── SBA/
+│       │   ├── admin.html
+│       │   ├── colour.html
+│       │   ├── coorutils.html
+│       │   ├── house.html
+│       │   ├── index.html
+│       │   ├── language.html
+│       │   ├── login.html
+│       │   ├── main.html
+│       │   ├── user.html
+│       │   └── utils.html
+│       │
+│       └── index.html
+│
+│
+├── data/
+│   ├── README.md
+│   └── accounts.toml
+│
+├── docs/
+│   ├── colour.md
+│   ├── controlPanel.md
+│   ├── dataStorage.md
+│   ├── house.md
+│   ├── language.md
+│   ├── login.md
+│   ├── logs.md
+│   ├── seatStatusOverride.md
+│   └── ticket.md
+│
+├── images/
+│   │
+│   ├── docs/
+│   │   ├── colour_scheme_example_dark.png
+│   │   ├── colour_scheme_example_light.png
+│   │   ├── control_panel_menu.png
+│   │   ├── control_panel_mode_6.png
+│   │   └── github_release_assets.png
+│   │
+│   ├── report/
+│   │   └── Main_Flow_Chart.jpg
+│   │
+│   └── site/
+│       ├── Beautiful_Night_By_Joe_Chau_(C)_2023_CC_BY_4.0.jpg
+│       ├── QR_CODE_main_page.png
+│       └── favicon.ico
+│
+│
+├── logs/
+│   └── README.md
+│
+├── src/
+│   │
+│   ├── SBA/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── colour.py
+│   │   ├── coorutils.py
+│   │   ├── house.py
+│   │   ├── language.py
+│   │   ├── login.py
+│   │   ├── main.py
+│   │   ├── py.typed
+│   │   ├── user.py
+│   │   └── utils.py
+│   │
+│   └── __init__.py
+│
+├── tests/
+│   ├── __init__.py
+│   ├── test_coorutils.py
+│   └── test_house.py
+│
+├── .flake8
+├── .gitignore
+├── .mypy.ini
+├── 404.html
+├── LICENSE
+├── NOTICE
+├── README.md
+├── __easter_egg.py
+├── __init__.py
+├── __main__.py
+├── _config.yml
+├── directory_tree.txt
+├── pyproject.toml
+├── requirements_dev.txt
+├── self_evaluation.md
+├── setup.cfg
+├── setup.py
+└── tox.ini
