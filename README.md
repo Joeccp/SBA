@@ -66,7 +66,13 @@ Run this package using Python via `cmd`/`powershell` with the `-m` flag, or dire
 
 ## Documentations
 
-***PLEASE REFER TO THE [REPORT](SBA_Report_PUBLIC_RELEASE.pdf) FOR THE UPDATED DOCUMENTATION***
+***PLEASE REFER TO THE REPORT FOR THE UPDATED DOCUMENTATION***
+
+### Update on 27/12/2024:
+
+The report is removed. Feel free to contact me for more information.
+
+### The original, not up-to-date online documentation:
 
 *Documentation is only available in English.*
 *文檔僅提供英文版。*
@@ -93,7 +99,6 @@ A rough [code documents](codedocs/src/index.html) generated with [pdoc](https://
 FOR REFERENCE ONLY.
 - [Self evaluation](self_evaluation.md)
 - [Directory tree](directory_tree.txt)
-- [REPORT](SBA_Report_PUBLIC_RELEASE.pdf)
 ---
 
 Copyright © 2023 Joe Chau, Licensed under the 
